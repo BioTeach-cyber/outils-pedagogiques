@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Transfert lit → fauteuil</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; }
+    h1 { color: #2e7d32; text-align: center; }
+
+    .progress-bar { display: flex; justify-content: space-between; margin-bottom: 30px; }
+    .progress-step {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #ddd; display: flex; align-items: center;
+      justify-content: center; font-weight: bold; color: white;
+    }
+    .progress-step.active { background: #2e7d32; }
+    .progress-step.done { background: #81c784; }
+
+    .etape { display: none; }
+    .etape.active { display: block; }
+
+    .etape-titre { font-size: 1.4em; color: #2e7d32; margin-bottom: 15px; }
+    ul { line-height: 2em; }
+    .vigilance {
+      background: #fff3e0; padding: 12px;
+      border-left: 4px solid #ff9800; margin-top: 20px;
+      border-radius: 4px;
+    }
+
+    .boutons { margin-top: 30px; display: flex; gap: 15px; }
+    button {
+      padding: 12px 25px; font-size: 1em;
+      border: none; border-radius: 6px; cursor: pointer;
+    }
+    #btn-suivant { background: #2e7d32; color: white; }
+    #btn-precedent { background: #ddd; color: #333; }
+    #btn-precedent:disabled { opacity: 0.3; }
+
+    .fin { display: none; text-align: center; }
+    .fin h2 { color: #2e7d32; font-size: 2em; }
+  </style>
+</head>
+<body>
+
+<h1>🛏️ Transfert lit → fauteuil</h1>
+
+<div class="progress-bar">
+  <div class="progress-step active" id="p1">1</div>
+  <div class="progress-step" id="p2">2</div>
+  <div class="progress-step" id="p3">3</div>
+  <div class="progress-step" id="p4">4</div>
+  <div class="progress-step" id="p5">5</div>
+</div>
+
+<div class="etape active" id="etape1">
+  <div class="etape-titre">Étape 1 — Préparer l'environnement</div>
+  <ul>
+    <li>Placer le fauteuil à 45° du lit</li>
+    <li>Verrouiller les roues du fauteuil</li>
+    <li>Retirer les repose-pieds</li>
+  </ul>
+  <div class="vigilance">⚠️ Vérifier que le frein du lit est activé</div>
+</div>
+
+<div class="etape" id="etape2">
+  <div class="etape-titre">Étape 2 — Installer le patient en bord de lit</div>
+  <ul>
+    <li>Relever la tête de lit</li>
+    <li>Aider le patient à s'asseoir</li>
+    <li>Laisser le patient reprendre son équilibre</li>
+  </ul>
+  <div class="vigilance">⚠️ Observer les signes d'hypotension orthostatique</div>
+</div>
+
+<div class="etape" id="etape3">
+  <div class="etape-titre">Étape 3 — Mise en position debout</div>
+  <ul>
+    <li>Placer les pieds du patient au sol</li>
+    <li>Se positionner face au patient</li>
+    <li>Saisir le patient par la ceinture ou sous les bras</li>
+    <li>Aider le patient à se lever sur le temps 3</li>
+  </ul>
+  <div class="vigilance">⚠️ Ne jamais tirer sur les bras du patient</div>
+</div>
+
+<div class="etape" id="etape4">
+  <div class="etape-titre">Étape 4 — Pivot et installation dans le fauteuil</div>
+  <ul>
+    <li>Faire pivoter le patient vers le fauteuil</li>
+    <li>Accompagner la descente</li>
+    <li>Installer confortablement le patient</li>
+  </ul>
+  <div class="vigilance">⚠️ S'assurer que les fesses touchent bien le fond du fauteuil</div>
+</div>
+
+<div class="etape" id="etape5">
+  <div class="etape-titre">Étape 5 — Finalisation</div>
+  <ul>
+    <li>Remettre les repose-pieds</li>
+    <li>Installer les pieds du patient</li>
+    <li>Vérifier le confort du patient</li>
+    <li>Tracer le transfert dans le dossier</li>
+  </ul>
+  <div class="vigilance">⚠️ Demander au patient s'il se sent bien</div>
+</div>
+
+<div class="fin" id="fin">
+  <h2>✅ Protocole terminé !</h2>
+  <p>Vous maîtrisez le transfert lit → fauteuil</p>
+  <button onclick="recommencer()">🔄 Recommencer</button>
+</div>
+
+<div class="boutons">
+  <button id="btn-precedent" onclick="changerEtape(-1)" disabled>← Précédent</button>
+  <button id="btn-suivant" onclick="changerEtape(1)">Suivant →</button>
+</div>
+
+<script>
+  let etapeActuelle = 1;
+  const totalEtapes = 5;
+
+  function changerEtape(direction) {
+    document.getElementById('etape' + etapeActuelle).classList.remove('active');
+    document.getElementById('p' + etapeActuelle).classList.remove('active');
+    document.getElementById('p' + etapeActuelle).classList.add('done');
+
+    etapeActuelle += direction;
+
+    if (etapeActuelle > totalEtapes) {
+      document.querySelector('.boutons').style.display = 'none';
+      document.getElementById('fin').style.display = 'block';
+      return;
+    }
+
+    if (direction === -1) {
+      document.getElementById('p' + etapeActuelle).classList.remove('done');
+    }
+
+    document.getElementById('etape' + etapeActuelle).classList.add('active');
+    document.getElementById('p' + etapeActuelle).classList.add('active');
+    document.getElementById('btn-precedent').disabled = etapeActuelle === 1;
+  }
+
+  function recommencer() {
+    for (let i = 1; i <= totalEtapes; i++) {
+      document.getElementById('etape' + i).classList.remove('active');
+      document.getElementById('p' + i).classList.remove('active', 'done');
+    }
+    etapeActuelle = 1;
+    document.getElementById('etape1').classList.add('active');
+    document.getElementById('p1').classList.add('active');
+    document.querySelector('.boutons').style.display = 'flex';
+    document.getElementById('fin').style.display = 'none';
+    document.getElementById('btn-precedent').disabled = true;
+  }
+</script>
+
+</body>
+</html>
