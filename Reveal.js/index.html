@@ -6,96 +6,222 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css">
   <style>
-    .slide-content { font-size: 0.8em; }
-    .etape-num { color: #2e7d32; font-size: 1.5em; font-weight: bold; }
-    .vigilance { background: #fff3e0; padding: 10px; border-left: 4px solid #ff9800; margin-top: 15px; }
+    .reveal h2 { color: #2e7d32; }
+    .reveal h3 { color: #1565c0; }
+    .etape-num {
+      display: inline-block;
+      background: #2e7d32;
+      color: white;
+      border-radius: 50%;
+      width: 50px; height: 50px;
+      line-height: 50px;
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .vigilance {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 10px 15px;
+      margin-top: 15px;
+      font-size: 0.85em;
+    }
+    .fragment-list li { margin: 8px 0; }
+    .progress-bar {
+      position: fixed;
+      bottom: 0; left: 0;
+      height: 5px;
+      background: #2e7d32;
+    }
   </style>
 </head>
 <body>
-  <div class="reveal">
-    <div class="slides">
+<div class="reveal">
+  <div class="slides">
 
+    <!-- SLIDE TITRE -->
+    <section>
+      <h2>🛏️ → 🪑</h2>
+      <h2>Transfert lit → fauteuil</h2>
+      <p>Protocole étape par étape</p>
+      <p style="color:#999; font-size:0.7em;">
+        Naviguez avec → pour avancer<br>
+        Naviguez avec ↓ pour les détails
+      </p>
+    </section>
+
+    <!-- ÉTAPE 1 : slides verticales pour les détails -->
+    <section>
       <section>
-        <h2>🛏️ Transfert lit → fauteuil</h2>
-        <p>Protocole de transfert d'un patient</p>
-        <p><em>Naviguez avec les flèches →</em></p>
+        <div class="etape-num">1</div>
+        <h3>Préparer l'environnement</h3>
+        <p style="color:#999; font-size:0.7em;">↓ pour voir les détails</p>
       </section>
-
       <section>
-        <div class="slide-content">
-          <div class="etape-num">Étape 1</div>
-          <h3>Préparer l'environnement</h3>
-          <ul>
-            <li>Placer le fauteuil à 45° du lit</li>
-            <li>Verrouiller les roues du fauteuil</li>
-            <li>Retirer les repose-pieds</li>
-          </ul>
-          <div class="vigilance">⚠️ Vérifier que le frein du lit est activé</div>
+        <h3>🪑 Positionner le fauteuil</h3>
+        <ul class="fragment-list">
+          <li class="fragment">Placer le fauteuil à <strong>45°</strong> du lit</li>
+          <li class="fragment">Du côté du membre <strong>le plus fort</strong></li>
+          <li class="fragment">Verrouiller les <strong>deux roues</strong></li>
+          <li class="fragment">Retirer les <strong>repose-pieds</strong></li>
+        </ul>
+      </section>
+      <section>
+        <h3>🛏️ Préparer le lit</h3>
+        <ul class="fragment-list">
+          <li class="fragment">Activer le <strong>frein du lit</strong></li>
+          <li class="fragment">Régler la hauteur à niveau des <strong>genoux du patient</strong></li>
+          <li class="fragment">Écarter les <strong>barrières de lit</strong></li>
+        </ul>
+        <div class="fragment vigilance">
+          ⚠️ Ne jamais laisser le patient seul à ce moment
         </div>
       </section>
+    </section>
 
+    <!-- ÉTAPE 2 -->
+    <section>
       <section>
-        <div class="slide-content">
-          <div class="etape-num">Étape 2</div>
-          <h3>Installer le patient en bord de lit</h3>
-          <ul>
-            <li>Relever la tête de lit</li>
-            <li>Aider le patient à s'asseoir</li>
-            <li>Laisser le patient reprendre son équilibre</li>
-          </ul>
-          <div class="vigilance">⚠️ Observer les signes d'hypotension orthostatique</div>
+        <div class="etape-num">2</div>
+        <h3>Asseoir le patient en bord de lit</h3>
+        <p style="color:#999; font-size:0.7em;">↓ pour voir les détails</p>
+      </section>
+      <section>
+        <h3>🧍 Mise en position</h3>
+        <ul class="fragment-list">
+          <li class="fragment">Relever la tête de lit à <strong>90°</strong></li>
+          <li class="fragment">Tourner le patient <strong>sur le côté</strong></li>
+          <li class="fragment">Faire <strong>descendre les jambes</strong> hors du lit</li>
+          <li class="fragment">Aider à <strong>redresser le buste</strong></li>
+        </ul>
+      </section>
+      <section>
+        <h3>⏱️ Pause obligatoire</h3>
+        <p>Laisser le patient <strong>assis 1 à 2 minutes</strong></p>
+        <div class="fragment vigilance">
+          ⚠️ Observer : vertiges, pâleur, sueurs = signes d'hypotension orthostatique
+        </div>
+        <div class="fragment vigilance">
+          ⚠️ Demander au patient comment il se sent avant de continuer
         </div>
       </section>
+    </section>
 
+    <!-- ÉTAPE 3 -->
+    <section>
       <section>
-        <div class="slide-content">
-          <div class="etape-num">Étape 3</div>
-          <h3>Mise en position debout</h3>
-          <ul>
-            <li>Placer les pieds du patient au sol</li>
-            <li>Se positionner face au patient</li>
-            <li>Saisir le patient par la ceinture ou sous les bras</li>
-            <li>Aider le patient à se lever sur le temps 3</li>
-          </ul>
-          <div class="vigilance">⚠️ Ne jamais tirer sur les bras du patient</div>
+        <div class="etape-num">3</div>
+        <h3>Préparer le transfert</h3>
+        <p style="color:#999; font-size:0.7em;">↓ pour voir les détails</p>
+      </section>
+      <section>
+        <h3>👟 Chausser le patient</h3>
+        <ul class="fragment-list">
+          <li class="fragment">Mettre les <strong>chaussures antidérapantes</strong></li>
+          <li class="fragment">Vérifier que les pieds sont <strong>bien à plat au sol</strong></li>
+        </ul>
+      </section>
+      <section>
+        <h3>🤝 Positionnement soignant</h3>
+        <ul class="fragment-list">
+          <li class="fragment">Se placer <strong>face au patient</strong></li>
+          <li class="fragment">Pieds écartés, <strong>genoux fléchis</strong></li>
+          <li class="fragment">Ceinture de transfert si disponible</li>
+          <li class="fragment">Demander au patient de <strong>poser les mains sur vos épaules</strong></li>
+        </ul>
+        <div class="fragment vigilance">
+          ⚠️ Ne jamais saisir sous les aisselles
         </div>
       </section>
+    </section>
 
+    <!-- ÉTAPE 4 -->
+    <section>
       <section>
-        <div class="slide-content">
-          <div class="etape-num">Étape 4</div>
-          <h3>Pivot et installation dans le fauteuil</h3>
-          <ul>
-            <li>Faire pivoter le patient vers le fauteuil</li>
-            <li>Accompagner la descente</li>
-            <li>Installer confortablement le patient</li>
-          </ul>
-          <div class="vigilance">⚠️ S'assurer que les fesses touchent bien le fond du fauteuil</div>
+        <div class="etape-num">4</div>
+        <h3>Effectuer le transfert</h3>
+        <p style="color:#999; font-size:0.7em;">↓ pour voir les détails</p>
+      </section>
+      <section>
+        <h3>🚀 Le mouvement</h3>
+        <ul class="fragment-list">
+          <li class="fragment">Annoncer le mouvement : <strong>"On se lève ensemble"</strong></li>
+          <li class="fragment">Aider à <strong>se lever</strong> en douceur</li>
+          <li class="fragment">Faire <strong>pivoter</strong> vers le fauteuil</li>
+          <li class="fragment">Vérifier l'alignement avec le fauteuil</li>
+        </ul>
+      </section>
+      <section>
+        <h3>🪑 L'assise</h3>
+        <ul class="fragment-list">
+          <li class="fragment">Demander au patient de <strong>sentir le fauteuil</strong> derrière lui</li>
+          <li class="fragment">Descendre <strong>lentement et en contrôle</strong></li>
+          <li class="fragment">Ne pas laisser tomber le patient dans le fauteuil</li>
+        </ul>
+        <div class="fragment vigilance">
+          ⚠️ Garder le dos droit durant tout le mouvement
         </div>
       </section>
+    </section>
 
+    <!-- ÉTAPE 5 -->
+    <section>
       <section>
-        <div class="slide-content">
-          <div class="etape-num">Étape 5</div>
-          <h3>Finalisation</h3>
-          <ul>
-            <li>Remettre les repose-pieds</li>
-            <li>Installer les pieds du patient</li>
-            <li>Vérifier le confort du patient</li>
-            <li>Tracer le transfert dans le dossier</li>
-          </ul>
-          <div class="vigilance">⚠️ Demander au patient s'il se sent bien</div>
+        <div class="etape-num">5</div>
+        <h3>Installer confortablement</h3>
+        <p style="color:#999; font-size:0.7em;">↓ pour voir les détails</p>
+      </section>
+      <section>
+        <h3>✅ Vérifications finales</h3>
+        <ul class="fragment-list">
+          <li class="fragment">Replacer les <strong>repose-pieds</strong></li>
+          <li class="fragment">Vérifier l'<strong>alignement du bassin</strong></li>
+          <li class="fragment">Installer la <strong>tablette ou sonnette</strong> à portée</li>
+          <li class="fragment">Demander si le patient est <strong>confortable</strong></li>
+        </ul>
+      </section>
+      <section>
+        <h3>📋 Traçabilité</h3>
+        <ul class="fragment-list">
+          <li class="fragment">Noter l'heure du transfert</li>
+          <li class="fragment">Noter le comportement du patient</li>
+          <li class="fragment">Signaler tout incident à l'équipe</li>
+        </ul>
+        <div class="fragment vigilance">
+          ✅ Protocole terminé
         </div>
       </section>
+    </section>
 
-      <section>
-        <h2>✅ Protocole terminé</h2>
-        <p>Vous maîtrisez le transfert lit → fauteuil</p>
-      </section>
+    <!-- SLIDE RÉCAP -->
+    <section>
+      <h2>📋 Récapitulatif</h2>
+      <ol>
+        <li class="fragment">Préparer l'environnement</li>
+        <li class="fragment">Asseoir en bord de lit</li>
+        <li class="fragment">Préparer le transfert</li>
+        <li class="fragment">Effectuer le transfert</li>
+        <li class="fragment">Installer confortablement</li>
+      </ol>
+      <div class="fragment" style="margin-top:20px; color:#2e7d32; font-weight:bold;">
+        La sécurité du patient ET du soignant est prioritaire à chaque étape ✅
+      </div>
+    </section>
 
-    </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
-  <script>Reveal.initialize();</script>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    transition: 'slide',
+    transitionSpeed: 'default',
+    controls: true,
+    progress: true,
+    center: true,
+    fragments: true
+  });
+</script>
 </body>
 </html>
