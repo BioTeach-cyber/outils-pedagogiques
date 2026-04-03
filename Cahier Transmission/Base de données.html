@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cahier de transmissions — Les Quatre Saisons</title>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+    }
+
+    header {
+      background: #2b6cb0;
+      color: white;
+      padding: 1.5rem 2rem;
+    }
+
+    header h1 { font-size: 1.4rem; }
+    header p  { font-size: 0.9rem; opacity: 0.85; margin-top: 0.25rem; }
+
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* FILTRES */
+    .filtres {
+      background: white;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+
+    .filtre-groupe {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .filtre-groupe label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #718096;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .filtre-groupe select {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: #f7fafc;
+      cursor: pointer;
+    }
+
+    .btn-reset {
+      padding: 0.5rem 1.2rem;
+      background: #e2e8f0;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: #4a5568;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-reset:hover { background: #cbd5e0; }
+
+    /* COMPTEUR */
+    .compteur {
+      font-size: 0.88rem;
+      color: #718096;
+      margin-bottom: 1rem;
+    }
+    .compteur span { font-weight: 700; color: #2b6cb0; }
+
+    /* CARTES */
+    .carte {
+      background: white;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-left: 5px solid #90cdf4;
+      transition: transform 0.15s;
+    }
+    .carte:hover { transform: translateX(4px); }
+    .carte.urgente { border-left-color: #fc8181; background: #fff5f5; }
+
+    .carte-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .carte-resident {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #2d3748;
+    }
+
+    .carte-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .badge {
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-soin        { background: #bee3f8; color: #2c5282; }
+    .badge-alimentation{ background: #c6f6d5; color: #22543d; }
+    .badge-comportement{ background: #fefcbf; color: #744210; }
+    .badge-social      { background: #e9d8fd; color: #44337a; }
+    .badge-urgence     { background: #fc8181; color: #7b341e; }
+
+    .carte-datetime {
+      font-size: 0.8rem;
+      color: #a0aec0;
+    }
+
+    .carte-contenu {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #4a5568;
+    }
+
+    .carte-auteur {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #a0aec0;
+      font-style: italic;
+    }
+
+    /* VIDE */
+    .vide {
+      text-align: center;
+      padding: 3rem;
+      color: #a0aec0;
+      font-size: 1rem;
+    }
+
+    /* CHAMBRE */
+    .carte-chambre {
+      font-size: 0.8rem;
+      color: #718096;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📋 Cahier de transmissions</h1>
+  <p id="sous-titre">Chargement...</p>
+</header>
+
+<div class="container">
+
+  <div x-data="app()" x-init="init()">
+
+    <!-- FILTRES -->
+    <div class="filtres">
+
+      <div class="filtre-groupe">
+        <label>Résident(e)</label>
+        <select x-model="filtreResident">
+          <option value="">Tous les résidents</option>
+          <template x-for="r in residents" :key="r">
+            <option :value="r" x-text="r"></option>
+          </template>
+        </select>
+      </div>
+
+      <div class="filtre-groupe">
+        <label>Catégorie</label>
+        <select x-model="filtreCategorie">
+          <option value="">Toutes les catégories</option>
+          <template x-for="c in categories" :key="c">
+            <option :value="c" x-text="c.charAt(0).toUpperCase() + c.slice(1)"></option>
+          </template>
+        </select>
+      </div>
+
+      <div class="filtre-groupe">
+        <label>Urgences</label>
+        <select x-model="filtreUrgence">
+          <option value="">Toutes</option>
+          <option value="oui">Urgentes uniquement</option>
+          <option value="non">Non urgentes uniquement</option>
+        </select>
+      </div>
+
+      <button class="btn-reset" @click="reset()">🔄 Réinitialiser</button>
+
+    </div>
+
+    <!-- COMPTEUR -->
+    <p class="compteur">
+      <span x-text="transmissionsFiltrees.length"></span>
+      transmission(s) affichée(s)
+    </p>
+
+    <!-- LISTE -->
+    <template x-if="transmissionsFiltrees.length === 0">
+      <div class="vide">Aucune transmission ne correspond à vos filtres.</div>
+    </template>
+
+    <template x-for="t in transmissionsFiltrees" :key="t.id">
+      <div class="carte" :class="{ urgente: t.urgence }">
+
+        <div class="carte-header">
+          <div>
+            <div class="carte-resident" x-text="t.resident"></div>
+            <div class="carte-chambre">Chambre <span x-text="t.chambre"></span></div>
+          </div>
+          <div class="carte-meta">
+            <span
+              class="badge"
+              :class="{
+                'badge-soin'        : t.categorie === 'soin',
+                'badge-alimentation': t.categorie === 'alimentation',
+                'badge-comportement': t.categorie === 'comportement',
+                'badge-social'      : t.categorie === 'social'
+              }"
+              x-text="t.categorie.charAt(0).toUpperCase() + t.categorie.slice(1)"
+            ></span>
+            <template x-if="t.urgence">
+              <span class="badge badge-urgence">⚠️ Urgent</span>
+            </template>
+            <span class="carte-datetime" x-text="t.date + ' — ' + t.heure"></span>
+          </div>
+        </div>
+
+        <div class="carte-contenu" x-text="t.contenu"></div>
+        <div class="carte-auteur">✍️ <span x-text="t.auteur"></span></div>
+
+      </div>
+    </template>
+
+  </div>
+</div>
+
+<script>
+function app() {
+  return {
+    transmissions: [],
+    filtreResident: '',
+    filtreCategorie: '',
+    filtreUrgence: '',
+
+    get residents() {
+      return [...new Set(this.transmissions.map(t => t.resident))].sort();
+    },
+
+    get categories() {
+      return [...new Set(this.transmissions.map(t => t.categorie))].sort();
+    },
+
+    get transmissionsFiltrees() {
+      return this.transmissions.filter(t => {
+        const okResident  = !this.filtreResident  || t.resident  === this.filtreResident;
+        const okCategorie = !this.filtreCategorie || t.categorie === this.filtreCategorie;
+        const okUrgence   =
+          !this.filtreUrgence ||
+          (this.filtreUrgence === 'oui' && t.urgence) ||
+          (this.filtreUrgence === 'non' && !t.urgence);
+        return okResident && okCategorie && okUrgence;
+      });
+    },
+
+    reset() {
+      this.filtreResident  = '';
+      this.filtreCategorie = '';
+      this.filtreUrgence   = '';
+    },
+
+    async init() {
+      // ← Remplacez l'URL par votre fichier GitHub raw
+      const url = 'transmissions.json';
+      try {
+        const res  = await fetch(url);
+        const data = await res.json();
+        this.transmissions = data.transmissions;
+        document.getElementById('sous-titre').textContent =
+          data.etablissement + ' — ' + data.service;
+      } catch(e) {
+        document.getElementById('sous-titre').textContent =
+          'Erreur de chargement des données.';
+        console.error(e);
+      }
+    }
+  }
+}
+</script>
+
+</body>
+</html>
