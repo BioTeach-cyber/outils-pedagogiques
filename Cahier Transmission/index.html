@@ -232,7 +232,7 @@
 
 <header>
   <h1>📋 Tableau de bord — Ressources pédagogiques</h1>
-  <p>Bac Pro SAPAT — CAPa SAPVER — Usage enseignant</p>
+  <p>Bac Pro SAPAT — Usage enseignant</p>
 </header>
 
 <div class="container" x-data="dashboard()">
@@ -376,11 +376,17 @@ function dashboard() {
 
     rechercher() {
       const mot = this.motCle.trim().toLowerCase();
+      this.resultats = this.transmissions.filter(t =>
+    (t.contenu && t.contenu.toLowerCase().includes(mot)) ||
+    (t.resident && t.resident.toLowerCase().includes(mot)) ||
+    (t.categorie && t.categorie.toLowerCase().includes(mot)) ||
+    (t.auteur && t.auteur.toLowerCase().includes(mot))
+);
       if (!mot) return;
       this.motCleActif    = this.motCle.trim();
       this.rechercheLancee = true;
       this.resultats = this.toutesTransmissions.filter(t =>
-        t.transmission.toLowerCase().includes(mot) ||
+        t.contenu.toLowerCase() ||
         t.resident.toLowerCase().includes(mot)     ||
         t.categorie.toLowerCase().includes(mot)
       );
