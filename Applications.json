@@ -47,6 +47,22 @@
     "date_creation": "2025-01",
     "auteur": "Moi"
   },
+    {
+    "id": "physique-01",
+    "titre": "Niveaux d'Organisation de l'Univers",
+    "description": "Simulation pour comprendre les dimensions dans l'Univers.",
+    "matiere": "Physique-Chimie",
+    "module": "Collège",
+    "theme": "Univers",
+    "niveaux": ["4ème"],
+    "tags": ["Univers", "Dimension", "Galaxie", "Système", "Solaire", "Planète"],
+    "url": "Physique-Chimie/niveaux-organisation-univers.html",
+    "emoji": "⚗️",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/...",
+    "statut": "brouillon",
+    "date_creation": "2025-01",
+    "auteur": "Moi"
+  },
   {
     "id": "sound-01",
     "titre": "Les fréquences sonores",

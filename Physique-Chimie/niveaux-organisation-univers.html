@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Niveaux d'Organisation de l'Univers</title>
+  <style>
+    /* ========== RESET & BASE ========== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a2e;
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      background: rgba(255,255,255,0.05);
+      padding: 10px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    header h1 {
+      font-size: 1.1em;
+      letter-spacing: 2px;
+      color: #a0d8ef;
+      text-transform: uppercase;
+    }
+
+    /* ========== BARRE DE PROGRESSION ========== */
+    #progress-bar-container {
+      width: 100%;
+      padding: 6px 20px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    #progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    #progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #a0d8ef, #f7c59f);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    /* ========== ZONE PRINCIPALE ========== */
+    #main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    /* ========== CARTE DU NIVEAU ========== */
+    #card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 20px 30px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* Emoji / icône du niveau */
+    #level-emoji {
+      font-size: 4em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* Numéro et nom */
+    #level-number {
+      font-size: 0.75em;
+      color: #a0d8ef;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 4px;
+    }
+
+    #level-name {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #f7c59f;
+      margin-bottom: 4px;
+    }
+
+    #level-example {
+      font-size: 1em;
+      color: #cce8ff;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    #level-scale {
+      display: inline-block;
+      background: rgba(160, 216, 239, 0.15);
+      border: 1px solid #a0d8ef;
+      border-radius: 20px;
+      padding: 3px 14px;
+      font-size: 0.8em;
+      color: #a0d8ef;
+      margin-bottom: 10px;
+    }
+
+    #level-description {
+      font-size: 0.9em;
+      line-height: 1.6;
+      color: #ddeeff;
+    }
+
+    /* ========== INDICATEUR DE NIVEAUX (pastilles) ========== */
+    #dots {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 400px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .dot.active {
+      background: #f7c59f;
+      transform: scale(1.4);
+      border-color: #f7c59f;
+    }
+
+    .dot.visited {
+      background: rgba(160, 216, 239, 0.5);
+    }
+
+    /* ========== BOUTONS ========== */
+    #controls {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    button {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-size: 0.95em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #btn-prev { border-color: #a0d8ef; }
+    #btn-next { border-color: #f7c59f; background: rgba(247, 197, 159, 0.15); }
+
+    #level-counter {
+      font-size: 0.85em;
+      color: rgba(255,255,255,0.5);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      text-align: center;
+      padding: 6px;
+      font-size: 0.65em;
+      color: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔭 Les niveaux d'organisation de l'Univers</h1>
+</header>
+
+<div id="progress-bar-container">
+  <div id="progress-bar">
+    <div id="progress-fill" style="width:0%"></div>
+  </div>
+</div>
+
+<div id="main">
+
+  <!-- Pastilles de navigation -->
+  <div id="dots"></div>
+
+  <!-- Carte principale -->
+  <div id="card">
+    <span id="level-emoji"></span>
+    <div id="level-number"></div>
+    <div id="level-name"></div>
+    <div id="level-example"></div>
+    <div id="level-scale"></div>
+    <p id="level-description"></p>
+  </div>
+
+  <!-- Boutons -->
+  <div id="controls">
+    <button id="btn-prev" onclick="navigate(-1)">◀ Plus grand</button>
+    <span id="level-counter"></span>
+    <button id="btn-next" onclick="navigate(1)">Plus petit ▶</button>
+  </div>
+
+</div>
+
+<footer>Application pédagogique — Classe de 4ème</footer>
+
+<script>
+  // ============================================================
+  //  DONNÉES DES NIVEAUX
+  // ============================================================
+  const levels = [
+    {
+      emoji: "🌌",
+      name: "L'Univers",
+      example: "Tout ce qui existe",
+      scale: "~93 milliards d'années-lumière",
+      description:
+        "L'Univers est l'ensemble de tout ce qui existe : toute la matière, l'énergie, l'espace et le temps. " +
+        "Il contient des milliards de galaxies. Il est né il y a environ 13,8 milliards d'années lors du Big Bang."
+    },
+    {
+      emoji: "🌀",
+      name: "La Galaxie",
+      example: "La Voie Lactée",
+      scale: "~100 000 années-lumière",
+      description:
+        "Une galaxie est un immense regroupement d'étoiles, de gaz et de poussières maintenu par la gravité. " +
+        "Notre galaxie s'appelle la Voie Lactée. Elle contient environ 200 à 400 milliards d'étoiles !"
+    },
+    {
+      emoji: "☀️",
+      name: "Le Système Stellaire",
+      example: "Le Système Solaire",
+      scale: "~9 milliards de km",
+      description:
+        "Un système stellaire est composé d'une étoile (comme le Soleil) entourée de planètes, " +
+        "de lunes, d'astéroïdes et de comètes qui gravitent autour d'elle. " +
+        "Notre étoile s'appelle le Soleil."
+    },
+    {
+      emoji: "🌍",
+      name: "La Planète",
+      example: "La Terre",
+      scale: "~12 700 km de diamètre",
+      description:
+        "Une planète est un corps céleste qui tourne autour d'une étoile. " +
+        "La Terre est notre planète. C'est la seule connue à abriter la vie. " +
+        "Elle possède une atmosphère, de l'eau liquide et un champ magnétique."
+    },
+    {
+      emoji: "🗺️",
+      name: "Le Continent",
+      example: "L'Europe, l'Afrique...",
+      scale: "Quelques milliers de km",
+      description:
+        "Les continents sont les grandes étendues de terres émergées à la surface de la Terre. " +
+        "Il en existe 5 à 7 selon les définitions. Chaque continent regroupe des pays, des paysages et des êtres vivants très variés."
+    },
+    {
+      emoji: "🏡",
+      name: "Le Paysage / La Région",
+      example: "Une vallée, une plaine, une côte",
+      scale: "Quelques dizaines à centaines de km",
+      description:
+        "À cette échelle, on observe des paysages façonnés par la géologie et les êtres vivants. " +
+        "On distingue des reliefs, des cours d'eau, des forêts, des villes... " +
+        "C'est le territoire que l'on peut parcourir en voiture en quelques heures."
+    },
+    {
+      emoji: "🌳",
+      name: "L'Écosystème",
+      example: "Une forêt, un étang, une prairie",
+      scale: "Quelques mètres à quelques km",
+      description:
+        "Un écosystème est l'ensemble formé par un milieu de vie (sol, eau, air...) " +
+        "et tous les êtres vivants qui y habitent et interagissent entre eux. " +
+        "Chaque être vivant a un rôle dans l'écosystème."
+    },
+    {
+      emoji: "🧍",
+      name: "L'Être Vivant",
+      example: "Un humain, un arbre, un champignon",
+      scale: "Quelques mm à plusieurs mètres",
+      description:
+        "Un être vivant est une entité capable de se nourrir, de grandir, de se reproduire et de réagir à son environnement. " +
+        "Il est organisé en différents systèmes (digestif, nerveux, respiratoire...) qui travaillent ensemble."
+    },
+    {
+      emoji: "❤️",
+      name: "L'Organe",
+      example: "Le cœur, le cerveau, le poumon",
+      scale: "Quelques cm à une vingtaine de cm",
+      description:
+        "Un organe est une partie du corps qui remplit une fonction précise. " +
+        "Le cœur pompe le sang, les poumons permettent de respirer, " +
+        "le cerveau contrôle l'ensemble du corps. Les organes sont formés de tissus."
+    },
+    {
+      emoji: "🧫",
+      name: "La Cellule",
+      example: "Cellule sanguine, neurone, cellule musculaire",
+      scale: "~0,01 à 0,1 mm",
+      description:
+        "La cellule est la plus petite unité de base du vivant. " +
+        "Elle est si petite qu'on ne peut la voir qu'au microscope. " +
+        "Notre corps en contient environ 37 000 milliards ! Chaque cellule possède un noyau et une membrane."
+    },
+    {
+      emoji: "🧬",
+      name: "La Molécule",
+      example: "L'ADN, les protéines, l'eau (H₂O)",
+      scale: "~0,000001 mm",
+      description:
+        "Les molécules sont des assemblages d'atomes liés entre eux. " +
+        "L'ADN est une molécule géante qui contient toutes les informations génétiques de l'être vivant. " +
+        "L'eau est une molécule simple formée de 2 atomes d'hydrogène et 1 atome d'oxygène."
+    },
+    {
+      emoji: "⚛️",
+      name: "L'Atome",
+      example: "Carbone (C), Oxygène (O), Hydrogène (H)",
+      scale: "~0,0000001 mm",
+      description:
+        "L'atome est le plus petit constituant de la matière. " +
+        "Il est composé d'un noyau central entouré d'électrons. " +
+        "Tout ce qui nous entoure — les pierres, l'eau, l'air, notre corps — est fait d'atomes !"
+    }
+  ];
+
+  // ============================================================
+  //  ÉTAT
+  // ============================================================
+  let current = 0;
+  const visited = new Set();
+
+  // ============================================================
+  //  INITIALISATION
+  // ============================================================
+  function init() {
+    const dotsContainer = document.getElementById("dots");
+    levels.forEach((_, i) => {
+      const dot = document.createElement("div");
+      dot.classList.add("dot");
+      dot.setAttribute("title", levels[i].name);
+      dot.addEventListener("click", () => goTo(i));
+      dotsContainer.appendChild(dot);
+    });
+    goTo(0);
+  }
+
+  // ============================================================
+  //  AFFICHAGE D'UN NIVEAU
+  // ============================================================
+  function goTo(index) {
+    current = index;
+    visited.add(index);
+
+    const lvl = levels[index];
+
+    // Mise à jour du contenu
+    document.getElementById("level-emoji").textContent       = lvl.emoji;
+    document.getElementById("level-number").textContent      = `Niveau ${index + 1} / ${levels.length}`;
+    document.getElementById("level-name").textContent        = lvl.name;
+    document.getElementById("level-example").textContent     = `Exemple : ${lvl.example}`;
+    document.getElementById("level-scale").textContent       = `📏 ${lvl.scale}`;
+    document.getElementById("level-description").textContent = lvl.description;
+    document.getElementById("level-counter").textContent     = `${index + 1} / ${levels.length}`;
+
+    // Barre de progression
+    const pct = (index / (levels.length - 1)) * 100;
+    document.getElementById("progress-fill").style.width = pct + "%";
+
+    // Pastilles
+    document.querySelectorAll(".dot").forEach((dot, i) => {
+      dot.classList.remove("active", "visited");
+      if (i === index)       dot.classList.add("active");
+      else if (visited.has(i)) dot.classList.add("visited");
+    });
+
+    // Boutons
+    document.getElementById("btn-prev").disabled = (index === 0);
+    document.getElementById("btn-next").disabled = (index === levels.length - 1);
+
+    // Relance l'animation de la carte
+    const card = document.getElementById("card");
+    card.style.animation = "none";
+    card.offsetHeight; // reflow
+    card.style.animation = "fadeIn 0.5s ease";
+  }
+
+  // ============================================================
+  //  NAVIGATION
+  // ============================================================
+  function navigate(direction) {
+    const next = current + direction;
+    if (next >= 0 && next < levels.length) goTo(next);
+  }
+
+  // Navigation clavier
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") navigate(1);
+    if (e.key === "ArrowLeft"  || e.key === "ArrowUp")   navigate(-1);
+  });
+
+  // Lancement
+  init();
+</script>
+</body>
+</html>
