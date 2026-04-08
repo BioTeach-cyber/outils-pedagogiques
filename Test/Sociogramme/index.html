@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Relations EHPAD</title>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            background: #f5f5f5; 
+        }
+        #filtres { 
+            padding: 10px; 
+            background: white; 
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-tous        { background: #555; color: white; }
+        .btn-resident    { background: #e67e22; color: white; }
+        .btn-personnel   { background: #2980b9; color: white; }
+        .btn-famille     { background: #27ae60; color: white; }
+        #reseau { 
+            width: 100%; 
+            height: 85vh; 
+            border: 1px solid #ddd;
+            background: white;
+        }
+        #info-bulle {
+            position: fixed;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            display: none;
+            font-size: 13px;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- FILTRES -->
+<div id="filtres">
+    <button class="btn-tous"      onclick="filtrer('tous')">👥 Tous</button>
+    <button class="btn-resident"  onclick="filtrer('resident')">🧓 Résidents</button>
+    <button class="btn-personnel" onclick="filtrer('personnel')">👩‍⚕️ Personnel</button>
+    <button class="btn-famille"   onclick="filtrer('famille')">👨‍👩‍👧 Familles</button>
+</div>
+
+<!-- GRAPHE -->
+<div id="reseau"></div>
+
+<!-- INFO BULLE -->
+<div id="info-bulle"></div>
+
+<script>
+
+// ============================================================
+// DONNÉES - Personnages
+// ============================================================
+const tousLesNœuds = [
+    // Résidents
+    { id: 1, label: "Marie\n82 ans",    groupe: "resident",  
+      info: "Marie Dupont, 82 ans\nRésidente depuis 2021\nAncienne institutrice" },
+    { id: 2, label: "Jeanne\n78 ans",   groupe: "resident",  
+      info: "Jeanne Martin, 78 ans\nRésidente depuis 2022\nAncienn couturière" },
+    { id: 3, label: "Robert\n85 ans",   groupe: "resident",  
+      info: "Robert Leroy, 85 ans\nRésident depuis 2020\nAncien agriculteur" },
+
+    // Personnel
+    { id: 4, label: "Paul\nAide-soignant",  groupe: "personnel", 
+      info: "Paul Dupont\nAide-soignant\nFils de Marie (résident n°1)" },
+    { id: 5, label: "Sophie\nInfirmière",   groupe: "personnel", 
+      info: "Sophie Bernard\nInfirmière référente\nEn poste depuis 5 ans" },
+    { id: 6, label: "Claire\nASH",          groupe: "personnel", 
+      info: "Claire Petit\nAgent de service\nEn poste depuis 2 ans" },
+
+    // Familles
+    { id: 7, label: "Lucie\nFille de Jeanne",  groupe: "famille", 
+      info: "Lucie Martin\nFille de Jeanne\nVisite tous les dimanches" },
+    { id: 8, label: "Marc\nFils de Robert",    groupe: "famille", 
+      info: "Marc Leroy\nFils de Robert\nReferent familial" },
+];
+
+// ============================================================
+// DONNÉES - Relations
+// ============================================================
+const tousLesLiens = [
+    // Liens familiaux
+    { from: 1, to: 4,  label: "Mère / Fils",      color: "#e67e22" },
+    { from: 2, to: 7,  label: "Mère / Fille",     color: "#e67e22" },
+    { from: 3, to: 8,  label: "Père / Fils",       color: "#e67e22" },
+
+    // Liens professionnels
+    { from: 4, to: 1,  label: "Prend en soin",    color: "#2980b9" },
+    { from: 5, to: 1,  label: "Suit",             color: "#2980b9" },
+    { from: 5, to: 2,  label: "Suit",             color: "#2980b9" },
+    { from: 5, to: 3,  label: "Suit",             color: "#2980b9" },
+    { from: 6, to: 2,  label: "Accompagne",       color: "#2980b9" },
+
+    // Liens sociaux entre résidents
+    { from: 1, to: 2,  label: "Amies",            color: "#27ae60" },
+    { from: 2, to: 3,  label: "Voisins de chambre", color: "#27ae60" },
+
+    // Liens famille / personnel
+    { from: 7, to: 5,  label: "Interlocutrice",   color: "#8e44ad" },
+    { from: 8, to: 5,  label: "Interlocutrice",   color: "#8e44ad" },
+];
+
+// ============================================================
+// COULEURS par groupe
+// ============================================================
+const couleurs = {
+    resident:  { background: "#f39c12", border: "#e67e22" },
+    personnel: { background: "#3498db", border: "#2980b9" },
+    famille:   { background: "#2ecc71", border: "#27ae60" },
+};
+
+// ============================================================
+// CONSTRUCTION DU GRAPHE
+// ============================================================
+function construireGraphe(groupeFiltré) {
+
+    const nœudsFiltres = tousLesNœuds
+        .filter(n => groupeFiltré === "tous" || n.groupe === groupeFiltré)
+        .map(n => ({
+            ...n,
+            color: couleurs[n.groupe],
+            font: { color: "#333", size: 13 },
+            shape: "ellipse",
+            size: 30,
+        }));
+
+    const idVisibles = new Set(nœudsFiltres.map(n => n.id));
+
+    const liensFiltrés = tousLesLiens
+        .filter(l => idVisibles.has(l.from) && idVisibles.has(l.to))
+        .map(l => ({
+            ...l,
+            font: { size: 11, color: "#555" },
+            arrows: { to: { enabled: false } },
+        }));
+
+    const container = document.getElementById("reseau");
+    const data = {
+        nodes: new vis.DataSet(nœudsFiltres),
+        edges: new vis.DataSet(liensFiltrés),
+    };
+    const options = {
+        physics: {
+            stabilization: true,
+            barnesHut: { gravitationalConstant: -3000 }
+        },
+        interaction: {
+            hover: true,
+            tooltipDelay: 200,
+        },
+    };
+
+    const network = new vis.Network(container, data, options);
+
+    // Info bulle au clic
+    network.on("click", function(params) {
+        const bulle = document.getElementById("info-bulle");
+        if (params.nodes.length > 0) {
+            const nœud = tousLesNœuds.find(n => n.id === params.nodes[0]);
+            if (nœud) {
+                bulle.innerText = nœud.info;
+                bulle.style.display = "block";
+                bulle.style.left = (params.event.center.x + 15) + "px";
+                bulle.style.top  = (params.event.center.y + 15) + "px";
+            }
+        } else {
+            bulle.style.display = "none";
+        }
+    });
+}
+
+// ============================================================
+// FILTRE
+// ============================================================
+function filtrer(groupe) {
+    construireGraphe(groupe);
+}
+
+// Chargement initial
+construireGraphe("tous");
+
+</script>
+</body>
+</html>

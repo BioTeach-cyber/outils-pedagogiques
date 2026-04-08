@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur de Fréquence Sonore</title>
+    <style>
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d2ff, #a200ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1em;
+        }
+
+        /* ========== LAYOUT PRINCIPAL ========== */
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* ========== CARTES ========== */
+        .card {
+            background: rgba(255,255,255,0.07);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card h2 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #00d2ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* ========== CONTRÔLES ========== */
+        .control-group {
+            margin-bottom: 25px;
+        }
+
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .control-group label span.value-display {
+            background: linear-gradient(90deg, #00d2ff, #a200ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            font-size: 1.1em;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255,255,255,0.15);
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d2ff, #a200ff);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+            transition: transform 0.2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        /* ========== BOUTONS ========== */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #00d2ff, #0080ff);
+            color: white;
+        }
+
+        .btn-play:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+        }
+
+        .btn-stop:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 65, 108, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ========== FORMES D'ONDE ========== */
+        .wave-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .wave-btn {
+            padding: 12px 8px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            font-size: 0.85em;
+        }
+
+        .wave-btn:hover {
+            border-color: #00d2ff;
+            background: rgba(0, 210, 255, 0.1);
+        }
+
+        .wave-btn.active {
+            border-color: #00d2ff;
+            background: linear-gradient(135deg, rgba(0,210,255,0.3), rgba(162,0,255,0.3));
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .wave-icon {
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* ========== NOTES MUSICALES ========== */
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .note-btn {
+            padding: 10px 5px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            font-size: 0.8em;
+        }
+
+        .note-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .note-btn .note-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .note-btn .note-freq {
+            font-size: 0.75em;
+            color: rgba(255,255,255,0.6);
+            display: block;
+        }
+
+        /* ========== VISUALISEUR ========== */
+        #waveCanvas {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            display: block;
+        }
+
+        /* ========== INFOS SONORES ========== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-box {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-box .info-value {
+            font-size: 1.4em;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00d2ff, #a200ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-box .info-label {
+            font-size: 0.75em;
+            color: rgba(255,255,255,0.6);
+            margin-top: 5px;
+        }
+
+        /* ========== SPECTRE AUDIBLE ========== */
+        .spectrum-bar {
+            position: relative;
+            height: 40px;
+            background: linear-gradient(90deg,
+                #4B0082 0%,
+                #0000FF 12%,
+                #00BFFF 20%,
+                #00FF00 35%,
+                #FFFF00 55%,
+                #FF8C00 75%,
+                #FF0000 90%,
+                #8B0000 100%
+            );
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow: visible;
+        }
+
+        .spectrum-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7em;
+            color: rgba(255,255,255,0.6);
+            margin-top: 5px;
+        }
+
+        .freq-cursor {
+            position: absolute;
+            top: -8px;
+            width: 4px;
+            height: 56px;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 0 10px white;
+            transform: translateX(-50%);
+            transition: left 0.1s;
+            pointer-events: none;
+        }
+
+        .freq-zone-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.7em;
+            font-weight: bold;
+            color: rgba(0,0,0,0.8);
+            pointer-events: none;
+        }
+
+        /* ========== MESSAGE PÉDAGOGIQUE ========== */
+        .pedagogy-box {
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .pedagogy-box .pedagogy-title {
+            font-weight: bold;
+            color: #00d2ff;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ========== INDICATEUR ACTIF ========== */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 10px;
+        }
+
+        .status-indicator.playing {
+            background: rgba(0, 255, 100, 0.15);
+            border: 1px solid rgba(0, 255, 100, 0.4);
+            color: #00ff64;
+        }
+
+        .status-indicator.stopped {
+            background: rgba(255, 65, 108, 0.15);
+            border: 1px solid rgba(255, 65, 108, 0.4);
+            color: #ff416c;
+        }
+
+        .pulse {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .card.full-width {
+                grid-column: 1;
+            }
+            .wave-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🎵 Simulateur de Fréquence Sonore</h1>
+    <p>Explore les sons, les fréquences et les formes d'ondes</p>
+</header>
+
+<div class="main-container">
+
+    <!-- CARTE : CONTRÔLES PRINCIPAUX -->
+    <div class="card">
+        <h2>🎛️ Contrôles du son</h2>
+
+        <!-- Fréquence -->
+        <div class="control-group">
+            <label>
+                Fréquence
+                <span class="value-display" id="freqDisplay">440 Hz</span>
+            </label>
+            <input type="range" id="freqSlider"
+                   min="20" max="20000" value="440" step="1">
+        </div>
+
+        <!-- Volume -->
+        <div class="control-group">
+            <label>
+                Volume
+                <span class="value-display" id="volDisplay">50 %</span>
+            </label>
+            <input type="range" id="volSlider"
+                   min="0" max="100" value="50" step="1">
+        </div>
+
+        <!-- Boutons play/stop -->
+        <div class="btn-group">
+            <button class="btn btn-play" id="playBtn" onclick="playSound()">
+                ▶ Jouer le son
+            </button>
+            <button class="btn btn-stop" id="stopBtn" onclick="stopSound()" disabled>
+                ■ Arrêter
+            </button>
+        </div>
+
+        <!-- Statut -->
+        <div id="statusIndicator" class="status-indicator stopped">
+            <div class="pulse"></div>
+            <span id="statusText">Son arrêté</span>
+        </div>
+
+        <!-- Infos calculées -->
+        <div class="info-grid">
+            <div class="info-box">
+                <div class="info-value" id="freqVal">440</div>
+                <div class="info-label">Fréquence (Hz)</div>
+            </div>
+            <div class="info-box">
+                <div class="info-value" id="periodVal">2,27</div>
+                <div class="info-label">Période (ms)</div>
+            </div>
+            <div class="info-box">
+                <div class="info-value" id="lambdaVal">77,9</div>
+                <div class="info-label">Longueur d'onde (cm)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARTE : FORME D'ONDE -->
+    <div class="card">
+        <h2>〰️ Forme d'onde</h2>
+
+        <div class="wave-selector">
+            <div class="wave-btn active" onclick="setWaveType('sine', this)">
+                <span class="wave-icon">∿</span>
+                Sinusoïde
+            </div>
+            <div class="wave-btn" onclick="setWaveType('square', this)">
+                <span class="wave-icon">⊓</span>
+                Carrée
+            </div>
+            <div class="wave-btn" onclick="setWaveType('triangle', this)">
+                <span class="wave-icon">△</span>
+                Triangle
+            </div>
+            <div class="wave-btn" onclick="setWaveType('sawtooth', this)">
+                <span class="wave-icon">⋰</span>
+                Dent de scie
+            </div>
+        </div>
+
+        <!-- Visualiseur oscilloscope -->
+        <h2 style="margin-top: 20px;">📊 Oscilloscope</h2>
+        <canvas id="waveCanvas"></canvas>
+
+        <!-- Message pédagogique -->
+        <div class="pedagogy-box" id="waveInfo">
+            <div class="pedagogy-title">💡 À savoir</div>
+            <div id="waveInfoText">
+                La <strong>sinusoïde</strong> est la forme d'onde la plus pure.
+                Elle correspond à un son simple, sans harmoniques.
+                C'est la forme naturelle des vibrations sonores.
+            </div>
+        </div>
+    </div>
+
+    <!-- CARTE : SPECTRE AUDIBLE -->
+    <div class="card full-width">
+        <h2>👂 Spectre des fréquences audibles</h2>
+
+        <div class="spectrum-bar" id="spectrumBar">
+            <div class="freq-cursor" id="freqCursor"></div>
+            <span class="freq-zone-label" style="left: 5%;">Infrason</span>
+            <span class="freq-zone-label" style="left: 18%;">Grave</span>
+            <span class="freq-zone-label" style="left: 42%;">Médium</span>
+            <span class="freq-zone-label" style="left: 68%;">Aigu</span>
+            <span class="freq-zone-label" style="left: 88%;">Ultrason</span>
+        </div>
+        <div class="spectrum-labels">
+            <span>20 Hz</span>
+            <span>200 Hz</span>
+            <span>1 kHz</span>
+            <span>5 kHz</span>
+            <span>20 kHz</span>
+        </div>
+
+        <div class="pedagogy-box" id="freqZoneInfo">
+            <div class="pedagogy-title">📍 Zone de fréquence</div>
+            <div id="freqZoneText">
+                Déplace le curseur pour explorer le spectre sonore !
+            </div>
+        </div>
+    </div>
+
+    <!-- CARTE : NOTES MUSICALES -->
+    <div class="card full-width">
+        <h2>🎹 Notes musicales</h2>
+        <p style="color: rgba(255,255,255,0.6); font-size:0.85em; margin-bottom: 15px;">
+            Clique sur une note pour régler automatiquement la fréquence correspondante.
+        </p>
+        <div class="notes-grid" id="notesGrid"></div>
+    </div>
+
+</div>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+    // =========================================================
+    // VARIABLES GLOBALES
+    // =========================================================
+    let audioCtx = null;
+    let oscillator = null;
+    let gainNode = null;
+    let isPlaying = false;
+    let currentWaveType = 'sine';
+    let animationFrameId = null;
+    let analyser = null;
+    let dataArray = null;
+    let canvasCtx = null;
+    const canvas = document.getElementById('waveCanvas');
+
+    // =========================================================
+    // DONNÉES DES NOTES MUSICALES
+    // =========================================================
+    const notes = [
+        { name: 'Do3',  freq: 130.81 },
+        { name: 'Ré3',  freq: 146.83 },
+        { name: 'Mi3',  freq: 164.81 },
+        { name: 'Fa3',  freq: 174.61 },
+        { name: 'Sol3', freq: 196.00 },
+        { name: 'La3',  freq: 220.00 },
+        { name: 'Si3',  freq: 246.94 },
+        { name: 'Do4',  freq: 261.63 },
+        { name: 'Ré4',  freq: 293.66 },
+        { name: 'Mi4',  freq: 329.63 },
+        { name: 'Fa4',  freq: 349.23 },
+        { name: 'Sol4', freq: 392.00 },
+        { name: 'La4',  freq: 440.00 },
+        { name: 'Si4',  freq: 493.88 },
+        { name: 'Do5',  freq: 523.25 },
+        { name: 'Ré5',  freq: 587.33 },
+        { name: 'Mi5',  freq: 659.25 },
+        { name: 'Fa5',  freq: 698.46 },
+        { name: 'Sol5', freq: 783.99 },
+        { name: 'La5',  freq: 880.00 },
+        { name: 'Si5',  freq: 987.77 },
+        { name: 'Do6',  freq: 1046.50 },
+    ];
+
+    // Infos par forme d'onde
+    const waveInfos = {
+        sine:     "La <strong>sinusoïde</strong> est la forme d'onde la plus pure. Elle correspond à un son simple, sans harmoniques. C'est la forme naturelle des vibrations sonores.",
+        square:   "L'onde <strong>carrée</strong> est riche en harmoniques impaires. Elle sonne \"électronique\" ou \"synthétique\". On la retrouve dans les vieux jeux vidéo (8-bit).",
+        triangle: "L'onde <strong>triangle</strong> est plus douce que l'onde carrée. Elle contient des harmoniques impaires mais avec moins d'intensité. Son timbre est proche d'une flûte.",
+        sawtooth: "L'onde en <strong>dent de scie</strong> contient toutes les harmoniques. Elle sonne \"brillant\" ou \"agressif\". On l'utilise souvent pour imiter des cordes ou des cuivres."
+    };
+
+    // =========================================================
+    // INITIALISATION DES NOTES
+    // =========================================================
+    function buildNotesGrid() {
+        const grid = document.getElementById('notesGrid');
+        notes.forEach(note => {
+            const btn = document.createElement('div');
+            btn.className = 'note-btn';
+            btn.innerHTML = `
+                <span class="note-name">${note.name}</span>
+                <span class="note-freq">${note.freq} Hz</span>
+            `;
+            btn.addEventListener('click', () => {
+                setFrequency(note.freq);
+            });
+            grid.appendChild(btn);
+        });
+    }
+
+    // =========================================================
+    // MISE À JOUR DE LA FRÉQUENCE DEPUIS UN CLIC DE NOTE
+    // =========================================================
+    function setFrequency(freq) {
+        const slider = document.getElementById('freqSlider');
+        slider.value = freq;
+        updateFreqDisplay(freq);
+        if (isPlaying && oscillator) {
+            oscillator.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.01);
+        }
+    }
+
+    // =========================================================
+    // MISE À JOUR AFFICHAGE FRÉQUENCE
+    // =========================================================
+    function updateFreqDisplay(freq) {
+        document.getElementById('freqDisplay').textContent = freq >= 1000
+            ? (freq / 1000).toFixed(2) + ' kHz'
+            : Math.round(freq) + ' Hz';
+
+        document.getElementById('freqVal').textContent = freq >= 1000
+            ? (freq / 1000).toFixed(2) + ' kHz'
+            : Math.round(freq) + ' Hz';
+
+        // Période en ms
+        const period = (1 / freq) * 1000;
+        document.getElementById('periodVal').textContent = period < 1
+            ? period.toFixed(3) + ' ms'
+            : period.toFixed(2) + ' ms';
+
+        // Longueur d'onde (v=340 m/s dans l'air)
+        const lambda = 340 / freq;
+        document.getElementById('lambdaVal').textContent = lambda >= 1
+            ? lambda.toFixed(2) + ' m'
+            : (lambda * 100).toFixed(1) + ' cm';
+
+        // Curseur sur le spectre
+        updateSpectrumCursor(freq);
+
+        // Info zone
+        updateFreqZoneInfo(freq);
+    }
+
+    // =========================================================
+    // CURSEUR SPECTRE
+    // =========================================================
+    function updateSpectrumCursor(freq) {
+        const cursor = document.getElementById('freqCursor');
+        // Échelle logarithmique entre 20 et 20000 Hz
+        const minLog = Math.log10(20);
+        const maxLog = Math.log10(20000);
+        const posLog = Math.log10(Math.max(20, Math.min(20000, freq)));
+        const percent = ((posLog - minLog) / (maxLog - minLog)) * 100;
+        cursor.style.left = percent + '%';
+    }
+
+    // =========================================================
+    // INFO ZONE DE FRÉQUENCE
+    // =========================================================
+    function updateFreqZoneInfo(freq) {
+        const box = document.getElementById('freqZoneText');
+        let message = '';
+
+        if (freq < 20) {
+            message = `<strong>${Math.round(freq)} Hz</strong> → C'est un <strong>infrason</strong>. L'oreille humaine ne peut pas l'entendre, mais le corps peut le ressentir. Les éléphants et les baleines communiquent avec des infrasons.`;
+        } else if (freq < 300) {
+            message = `<strong>${Math.round(freq)} Hz</strong> → C'est un son <strong>grave</strong>. On l'entend dans les basses d'un haut-parleur, la voix d'un homme, ou les sons de tonnerre.`;
+        } else if (freq < 3000) {
+            message = `<strong>${Math.round(freq)} Hz</strong> → C'est un son <strong>médium</strong>. La voix humaine et la majorité des instruments se situent dans cette plage.`;
+        } else if (freq < 20000) {
+            message = `<strong>${Math.round(freq)} Hz</strong> → C'est un son <strong>aigu</strong>. On le retrouve dans les sifflements, les cymbales, ou les voix de soprano.`;
+        } else {
+            message = `<strong>${Math.round(freq)} Hz</strong> → C'est un <strong>ultrason</strong>. Inaudible pour l'humain, mais perçu par les chauves-souris et les chiens. Utilisé en imagerie médicale (échographie).`;
+        }
+
+        box.innerHTML = message;
+    }
+
+    // =========================================================
+    // CHANGEMENT FORME D'ONDE
+    // =========================================================
+    function setWaveType(type, el) {
+        currentWaveType = type;
+
+        // Mise à jour boutons
+        document.querySelectorAll('.wave-btn').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+
+        // Mise à jour oscillateur si actif
+        if (isPlaying && oscillator) {
+            oscillator.type = type;
+        }
+
+        // Mise à jour info pédagogique
+        document.getElementById('waveInfoText').innerHTML = waveInfos[type];
+    }
+
+    // =========================================================
+    // JOUER LE SON
+    // =========================================================
+    function playSound() {
+        if (isPlaying) return;
+
+        // Création du contexte audio
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Oscillateur
+        oscillator = audioCtx.createOscillator();
+        oscillator.type = currentWaveType;
+        oscillator.frequency.value = parseFloat(document.getElementById('freqSlider').value);
+
+        // Gain (volume)
+        gainNode = audioCtx.createGain();
+        gainNode.gain.value = parseFloat(document.getElementById('volSlider').value) / 100 * 0.5;
+
+        // Analyseur pour visualisation
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+        // Connexion : oscillateur → analyser → gain → sortie
+        oscillator.connect(analyser);
+        analyser.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start();
+        isPlaying = true;
+
+        // UI
+        document.getElementById('playBtn').disabled = true;
+        document.getElementById('stopBtn').disabled = false;
+        const si = document.getElementById('statusIndicator');
+        si.classList.remove('stopped');
+        si.classList.add('playing');
+        document.getElementById('statusText').textContent = 'Son en cours de lecture...';
+
+        // Visualisation
+        drawWave();
+    }
+
+    // =========================================================
+    // ARRÊTER LE SON
+    // =========================================================
+    function stopSound() {
+        if (!isPlaying) return;
+
+        gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+        setTimeout(() => {
+            oscillator.stop();
+            oscillator.disconnect();
+            gainNode.disconnect();
+            audioCtx.close();
+            isPlaying = false;
+            oscillator = null;
+            gainNode = null;
+            analyser = null;
+
+            cancelAnimationFrame(animationFrameId);
+            clearCanvas();
+
+            document.getElementById('playBtn').disabled = false;
+            document.getElementById('stopBtn').disabled = true;
+            const si = document.getElementById('statusIndicator');
+            si.classList.remove('playing');
+            si.classList.add('stopped');
+            document.getElementById('statusText').textContent = 'Son arrêté';
+        }, 100);
+    }
+
+    // =========================================================
+    // VISUALISATION OSCILLOSCOPE
+    // =========================================================
+    function drawWave() {
+        if (!analyser) return;
+
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        canvasCtx = canvas.getContext('2d');
+
+        function draw() {
+            if (!analyser) return;
+            animationFrameId = requestAnimationFrame(draw);
+
+            analyser.getByteTimeDomainData(dataArray);
+
+            canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Fond
+            canvasCtx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Ligne centrale
+            canvasCtx.strokeStyle = 'rgba(255,255,255,0.1)';
+            canvasCtx.lineWidth = 1;
+            canvasCtx.beginPath();
+            canvasCtx.moveTo(0, canvas.height / 2);
+            canvasCtx.lineTo(canvas.width, canvas.height / 2);
+            canvasCtx.stroke();
+
+            // Onde
+            const gradient = canvasCtx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop(0, '#00d2ff');
+            gradient.addColorStop(1, '#a200ff');
+            canvasCtx.strokeStyle = gradient;
+            canvasCtx.lineWidth = 2.5;
+            canvasCtx.beginPath();
+
+            const sliceWidth = canvas.width / dataArray.length;
+            let x = 0;
+
+            for (let i = 0; i < dataArray.length; i++) {
+                const v = dataArray[i] / 128.0;
+                const y = (v * canvas.height) / 2;
+                if (i === 0) {
+                    canvasCtx.moveTo(x, y);
+                } else {
+                    canvasCtx.lineTo(x, y);
+                }
+                x += sliceWidth;
+            }
+
+            canvasCtx.lineTo(canvas.width, canvas.height / 2);
+            canvasCtx.stroke();
+        }
+
+        draw();
+    }
+
+    function clearCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.stroke();
+    }
+
+    // =========================================================
+    // ÉCOUTEURS D'ÉVÉNEMENTS
+    // =========================================================
+    document.getElementById('freqSlider').addEventListener('input', function() {
+        const freq = parseFloat(this.value);
+        updateFreqDisplay(freq);
+        if (isPlaying && oscillator) {
+            oscillator.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.01);
+        }
+    });
+
+    document.getElementById('volSlider').addEventListener('input', function() {
+        const vol = parseFloat(this.value);
+        document.getElementById('volDisplay').textContent = vol + ' %';
+        if (isPlaying && gainNode) {
+            gainNode.gain.setTargetAtTime(vol / 100 * 0.5, audioCtx.currentTime, 0.01);
+        }
+    });
+
+    // =========================================================
+    // INITIALISATION
+    // =========================================================
+    buildNotesGrid();
+    updateFreqDisplay(440);
+    updateSpectrumCursor(440);
+
+    // Initialisation canvas
+    window.addEventListener('load', () => {
+        clearCanvas();
+    });
+    window.addEventListener('resize', () => {
+        clearCanvas();
+    });
+</script>
+
+</body>
+</html>

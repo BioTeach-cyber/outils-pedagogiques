@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Transfert lit → fauteuil</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    /* BARRE DE PROGRESSION GLOBALE */
+    #barre-globale {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 8px;
+      background: #e0e0e0;
+      z-index: 100;
+    }
+    #barre-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2e7d32, #66bb6a);
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    /* HEADER */
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-top: 8px;
+    }
+    header h1 { font-size: 1.4em; }
+    #statut-global {
+      font-size: 0.9em;
+      margin-top: 5px;
+      opacity: 0.85;
+    }
+
+    /* CONTENEUR PRINCIPAL */
+    #app { max-width: 700px; margin: 0 auto; padding: 20px; }
+
+    /* CARTE ÉTAPE */
+    .etape-carte {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .etape-carte.completee {
+      opacity: 0.6;
+      transform: scale(0.98);
+    }
+    .etape-carte.active {
+      box-shadow: 0 4px 20px rgba(46,125,50,0.3);
+      border: 2px solid #2e7d32;
+    }
+    .etape-carte.verrouilee {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* HEADER DE CARTE */
+    .carte-header {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      cursor: pointer;
+      background: #fafafa;
+      border-bottom: 1px solid #eee;
+    }
+    .etape-carte.active .carte-header { background: #e8f5e9; }
+    .etape-carte.completee .carte-header { background: #e8f5e9; }
+
+    .num-cercle {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: #bdbdbd;
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold;
+      font-size: 1.1em;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .etape-carte.active .num-cercle { background: #2e7d32; }
+    .etape-carte.completee .num-cercle { background: #66bb6a; }
+
+    .carte-titre {
+      flex: 1;
+      margin-left: 15px;
+    }
+    .carte-titre h3 { font-size: 1em; color: #333; }
+    .carte-titre .sous-titre { font-size: 0.8em; color: #888; margin-top: 2px; }
+
+    .badge-statut {
+      font-size: 0.75em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #e0e0e0;
+      color: #666;
+    }
+    .etape-carte.active .badge-statut { background: #2e7d32; color: white; }
+    .etape-carte.completee .badge-statut { background: #66bb6a; color: white; }
+
+    /* CORPS DE CARTE */
+    .carte-corps {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+    }
+    .etape-carte.active .carte-corps {
+      max-height: 600px;
+      padding: 20px;
+    }
+
+    /* CHECKLIST */
+    .checklist { list-style: none; margin: 10px 0; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li.coche { color: #bbb; text-decoration: line-through; }
+
+    .check-box {
+      width: 22px; height: 22px;
+      border: 2px solid #bdbdbd;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-right: 12px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      margin-top: 1px;
+    }
+    .checklist li.coche .check-box {
+      background: #66bb6a;
+      border-color: #66bb6a;
+      color: white;
+    }
+
+    /* VIGILANCE */
+    .vigilance {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 10px 15px;
+      margin: 10px 0;
+      font-size: 0.85em;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* MINI BARRE ÉTAPE */
+    .mini-progress {
+      background: #e0e0e0;
+      height: 4px;
+      border-radius: 2px;
+      margin: 10px 0;
+    }
+    .mini-progress-fill {
+      height: 100%;
+      background: #2e7d32;
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+
+    /* BOUTON VALIDER */
+    .btn-valider {
+      width: 100%;
+      padding: 12px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .btn-valider:hover { background: #1b5e20; }
+    .btn-valider:disabled { background: #bdbdbd; cursor: not-allowed; }
+
+    /* ÉCRAN FIN */
+    #ecran-fin {
+      display: none;
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    #ecran-fin h2 { color: #2e7d32; font-size: 1.8em; }
+    #ecran-fin p { color: #666; margin: 10px 0; }
+    .btn-recommencer {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="barre-globale"><div id="barre-fill"></div></div>
+
+<header>
+  <h1>🛏️ → 🪑 Transfert lit → fauteuil</h1>
+  <div id="statut-global">Étape 1 sur 5</div>
+</header>
+
+<div id="app">
+
+  <!-- ÉTAPE 1 -->
+  <div class="etape-carte active" id="carte-1">
+    <div class="carte-header" onclick="toggleCarte(1)">
+      <div class="num-cercle">1</div>
+      <div class="carte-titre">
+        <h3>Préparer l'environnement</h3>
+        <div class="sous-titre">Fauteuil, lit, matériel</div>
+      </div>
+      <span class="badge-statut">En cours</span>
+    </div>
+    <div class="carte-corps">
+      <div class="mini-progress"><div class="mini-progress-fill" id="mini-1" style="width:0%"></div></div>
+      <ul class="checklist" id="list-1">
+        <li onclick="cocherItem(this, 1)"><div class="check-box">✓</div>Placer le fauteuil à 45° du lit</li>
+        <li onclick="cocherItem(this, 1)"><div class="check-box">✓</div>Du côté du membre le plus fort</li>
+        <li onclick="cocherItem(this, 1)"><div class="check-box">✓</div>Verrouiller les deux roues du fauteuil</li>
+        <li onclick="cocherItem(this, 1)"><div class="check-box">✓</div>Retirer les repose-pieds</li>
+        <li onclick="cocherItem(this, 1)"><div class="check-box">✓</div>Activer le frein du lit</li>
+        <li onclick="cocherItem(this, 1)"><div class="check-box">✓</div>Régler la hauteur du lit au niveau des genoux</li>
+      </ul>
+      <div class="vigilance">⚠️ Ne jamais laisser le patient seul à ce stade</div>
+      <button class="btn-valider" id="btn-1" onclick="validerEtape(1)" disabled>Valider l'étape →</button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 2 -->
+  <div class="etape-carte verrouilee" id="carte-2">
+    <div class="carte-header" onclick="toggleCarte(2)">
+      <div class="num-cercle">2</div>
+      <div class="carte-titre">
+        <h3>Asseoir le patient en bord de lit</h3>
+        <div class="sous-titre">Mise en position assise</div>
+      </div>
+      <span class="badge-statut">En attente</span>
+    </div>
+    <div class="carte-corps">
+      <div class="mini-progress"><div class="mini-progress-fill" id="mini-2" style="width:0%"></div></div>
+      <ul class="checklist" id="list-2">
+        <li onclick="cocherItem(this, 2)"><div class="check-box">✓</div>Relever la tête de lit à 90°</li>
+        <li onclick="cocherItem(this, 2)"><div class="check-box">✓</div>Tourner le patient sur le côté</li>
+        <li onclick="cocherItem(this, 2)"><div class="check-box">✓</div>Faire descendre les jambes hors du lit</li>
+        <li onclick="cocherItem(this, 2)"><div class="check-box">✓</div>Aider à redresser le buste</li>
+        <li onclick="cocherItem(this, 2)"><div class="check-box">✓</div>Laisser assis 1 à 2 minutes</li>
+      </ul>
+      <div class="vigilance">⚠️ Observer : vertiges, pâleur, sueurs (hypotension orthostatique)</div>
+      <button class="btn-valider" id="btn-2" onclick="validerEtape(2)" disabled>Valider l'étape →</button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 3 -->
+  <div class="etape-carte verrouilee" id="carte-3">
+    <div class="carte-header" onclick="toggleCarte(3)">
+      <div class="num-cercle">3</div>
+      <div class="carte-titre">
+        <h3>Préparer le transfert</h3>
+        <div class="sous-titre">Chaussage et positionnement soignant</div>
+      </div>
+      <span class="badge-statut">En attente</span>
+    </div>
+    <div class="carte-corps">
+      <div class="mini-progress"><div class="mini-progress-fill" id="mini-3" style="width:0%"></div></div>
+      <ul class="checklist" id="list-3">
+        <li onclick="cocherItem(this, 3)"><div class="check-box">✓</div>Mettre les chaussures antidérapantes</li>
+        <li onclick="cocherItem(this, 3)"><div class="check-box">✓</div>Vérifier pieds bien à plat au sol</li>
+        <li onclick="cocherItem(this, 3)"><div class="check-box">✓</div>Se placer face au patient</li>
+        <li onclick="cocherItem(this, 3)"><div class="check-box">✓</div>Pieds écartés, genoux fléchis</li>
+        <li onclick="cocherItem(this, 3)"><div class="check-box">✓</div>Installer la ceinture de transfert si disponible</li>
+      </ul>
+      <div class="vigilance">⚠️ Ne jamais saisir le patient sous les aisselles</div>
+      <button class="btn-valider" id="btn-3" onclick="validerEtape(3)" disabled>Valider l'étape →</button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 4 -->
+  <div class="etape-carte verrouilee" id="carte-4">
+    <div class="carte-header" onclick="toggleCarte(4)">
+      <div class="num-cercle">4</div>
+      <div class="carte-titre">
+        <h3>Effectuer le transfert</h3>
+        <div class="sous-titre">Lever, pivot, assise</div>
+      </div>
+      <span class="badge-statut">En attente</span>
+    </div>
+    <div class="carte-corps">
+      <div class="mini-progress"><div class="mini-progress-fill" id="mini-4" style="width:0%"></div></div>
+      <ul class="checklist" id="list-4">
+        <li onclick="cocherItem(this, 4)"><div class="check-box">✓</div>Annoncer le mouvement au patient</li>
+        <li onclick="cocherItem(this, 4)"><div class="check-box">✓</div>Aider à se lever en douceur</li>
+        <li onclick="cocherItem(this, 4)"><div class="check-box">✓</div>Faire pivoter vers le fauteuil</li>
+        <li onclick="cocherItem(this, 4)"><div class="check-box">✓</div>Vérifier l'alignement avec le fauteuil</li>
+        <li onclick="cocherItem(this, 4)"><div class="check-box">✓</div>Descendre lentement et en contrôle</li>
+      </ul>
+      <div class="vigilance">⚠️ Garder le dos droit durant tout le mouvement</div>
+      <button class="btn-valider" id="btn-4" onclick="validerEtape(4)" disabled>Valider l'étape →</button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 5 -->
+  <div class="etape-carte verrouilee" id="carte-5">
+    <div class="carte-header" onclick="toggleCarte(5)">
+      <div class="num-cercle">5</div>
+      <div class="carte-titre">
+        <h3>Installer et tracer</h3>
+        <div class="sous-titre">Confort et traçabilité</div>
+      </div>
+      <span class="badge-statut">En attente</span>
+    </div>
+    <div class="carte-corps">
+      <div class="mini-progress"><div class="mini-progress-fill" id="mini-5" style="width:0%"></div></div>
+      <ul class="checklist" id="list-5">
+        <li onclick="cocherItem(this, 5)"><div class="check-box">✓</div>Replacer les repose-pieds</li>
+        <li onclick="cocherItem(this, 5)"><div class="check-box">✓</div>Vérifier l'alignement du bassin</li>
+        <li onclick="cocherItem(this, 5)"><div class="check-box">✓</div>Installer sonnette à portée</li>
+        <li onclick="cocherItem(this, 5)"><div class="check-box">✓</div>Demander si le patient est confortable</li>
+        <li onclick="cocherItem(this, 5)"><div class="check-box">✓</div>Noter l'heure et le comportement du patient</li>
+        <li onclick="cocherItem(this, 5)"><div class="check-box">✓</div>Signaler tout incident à l'équipe</li>
+      </ul>
+      <button class="btn-valider" id="btn-5" onclick="validerEtape(5)" disabled>Terminer le protocole ✅</button>
+    </div>
+  </div>
+
+  <!-- ÉCRAN FIN -->
+  <div id="ecran-fin">
+    <div style="font-size:3em">🎉</div>
+    <h2>Protocole terminé !</h2>
+    <p>Toutes les étapes ont été réalisées et validées.</p>
+    <p style="font-size:0.85em; color:#888;">N'oubliez pas de compléter la traçabilité dans le dossier patient.</p>
+    <button class="btn-recommencer" onclick="recommencer()">🔄 Recommencer</button>
+  </div>
+
+</div>
+
+<script>
+  const nbItems = { 1:6, 2:5, 3:5, 4:5, 5:6 };
+  const totalEtapes = 5;
+  let etapeActive = 1;
+
+  function cocherItem(li, numEtape) {
+    li.classList.toggle('coche');
+    mettreAJourMiniProgress(numEtape);
+    verifierBouton(numEtape);
+  }
+
+  function mettreAJourMiniProgress(n) {
+    const items = document.querySelectorAll(`#list-${n} li`);
+    const cochees = document.querySelectorAll(`#list-${n} li.coche`).length;
+    const pct = (cochees / items.length) * 100;
+    document.getElementById(`mini-${n}`).style.width = pct + '%';
+  }
+
+  function verifierBouton(n) {
+    const items = document.querySelectorAll(`#list-${n} li`);
+    const cochees = document.querySelectorAll(`#list-${n} li.coche`).length;
+    document.getElementById(`btn-${n}`).disabled = (cochees < items.length);
+  }
+
+  function validerEtape(n) {
+    const carte = document.getElementById(`carte-${n}`);
+    carte.classList.remove('active');
+    carte.classList.add('completee');
+    carte.querySelector('.badge-statut').textContent = '✅ Terminé';
+
+    if (n < totalEtapes) {
+      const suivante = document.getElementById(`carte-${n+1}`);
+      suivante.classList.remove('verrouilee');
+      suivante.classList.add('active');
+      suivante.querySelector('.badge-statut').textContent = 'En cours';
+      etapeActive = n + 1;
+      suivante.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      document.getElementById('ecran-fin').style.display = 'block';
+      document.getElementById('ecran-fin').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    mettreAJourBarreGlobale();
+  }
+
+  function mettreAJourBarreGlobale() {
+    const completees = document.querySelectorAll('.etape-carte.completee').length;
+    const pct = (completees / totalEtapes) * 100;
+    document.getElementById('barre-fill').style.width = pct + '%';
+    document.getElementById('statut-global').textContent =
+      completees < totalEtapes
+        ? `Étape ${completees + 1} sur ${totalEtapes}`
+        : 'Protocole terminé ✅';
+  }
+
+  function toggleCarte(n) {
+    // Permet de rouvrir une étape complétée pour vérification
+    const carte = document.getElementById(`carte-${n}`);
+    if (carte.classList.contains('completee')) {
+      carte.classList.toggle('active');
+    }
+  }
+
+  function recommencer() {
+    location.reload();
+  }
+</script>
+</body>
+</html>
