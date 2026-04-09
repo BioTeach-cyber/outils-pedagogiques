@@ -1,0 +1,34 @@
+[
+  {
+    "id": "Strucutre-01",
+    "titre": "EHPAD - Les Esprits Libre",
+    "description": "",
+    "module": "",
+    "niveaux": ["BacProSAPAT"],
+    "type": "",
+    "public": ["Personnes Agées"],
+    "tags": [],
+    "url": "",
+    "emoji": "⚗️",
+    "image": "",
+    "statut": "",
+    "date_creation": "",
+    "auteur": ""
+  },
+    {
+    "id": "Structure-02",
+    "titre": "Centre Hospitalier - Chopper",
+    "description": "",
+    "module": "",
+    "niveaux": ["Bac Pro SAPAT"],
+    "type": "",
+    "public": ["Tous Personnes"],
+    "tags": [],
+    "url": "",
+    "emoji": "⚗️",
+    "image": "",
+    "statut": "",
+    "date_creation": "",
+    "auteur": ""
+  }
+]

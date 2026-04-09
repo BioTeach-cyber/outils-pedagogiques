@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minuteur d'évaluation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            color: #eee;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #a0a0c0;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        /* ===================== COLONNES DÉCORATIVES ===================== */
+        .deco-column {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 18vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px 0;
+            pointer-events: none;
+            z-index: 5;
+            gap: 0;
+        }
+
+        .deco-column.left  { left: 0; }
+        .deco-column.right { right: 0; }
+
+        /* Barre verticale centrale dans chaque colonne */
+        .deco-column::before {
+            content: '';
+            position: absolute;
+            top: 5%;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            background: linear-gradient(180deg,
+                transparent 0%,
+                #0f3460 15%,
+                #e94560 50%,
+                #0f3460 85%,
+                transparent 100%
+            );
+            opacity: 0.6;
+        }
+
+        /* ---- Icônes fixes dans les colonnes ---- */
+        .deco-icon {
+            font-size: 2rem;
+            opacity: 0.25;
+            transition: opacity 1s, transform 1s;
+            position: relative;
+            z-index: 2;
+            animation: iconPulse 4s ease-in-out infinite;
+        }
+
+        .deco-icon:nth-child(odd)  { animation-delay: 0s; }
+        .deco-icon:nth-child(even) { animation-delay: 2s; }
+
+        @keyframes iconPulse {
+            0%, 100% { opacity: 0.2; transform: scale(1);    }
+            50%       { opacity: 0.5; transform: scale(1.15); }
+        }
+
+        /* ---- Jauge verticale dans chaque colonne ---- */
+        .deco-gauge-container {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 35vh;
+            background: #0f3460;
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        .deco-gauge-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, #e94560, #f39c12, #27ae60);
+            border-radius: 10px;
+            transition: height 1s linear;
+        }
+
+        /* ---- Compteur de temps côté ---- */
+        .deco-side-time {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #a0a0c0;
+            text-align: center;
+            white-space: nowrap;
+            writing-mode: vertical-rl;
+            opacity: 0.6;
+            z-index: 3;
+        }
+
+        /* ---- Cercles décoratifs animés ---- */
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid #e94560;
+            opacity: 0;
+            animation: decoCircleAnim 6s ease-in-out infinite;
+        }
+
+        @keyframes decoCircleAnim {
+            0%   { opacity: 0;   transform: scale(0.5); }
+            30%  { opacity: 0.3; transform: scale(1);   }
+            70%  { opacity: 0.3; transform: scale(1);   }
+            100% { opacity: 0;   transform: scale(1.4); }
+        }
+
+        /* ---- Barres horizontales décoratives ---- */
+        .deco-bar {
+            position: absolute;
+            height: 2px;
+            border-radius: 2px;
+            opacity: 0;
+            animation: decoBarAnim 3s ease-in-out infinite;
+        }
+
+        .deco-column.left  .deco-bar { right: 0; left: 10%; }
+        .deco-column.right .deco-bar { left: 0; right: 10%; }
+
+        @keyframes decoBarAnim {
+            0%   { opacity: 0;   width: 0%;   }
+            40%  { opacity: 0.6; width: 80%;  }
+            70%  { opacity: 0.6; width: 80%;  }
+            100% { opacity: 0;   width: 0%;   }
+        }
+
+        /* ===================== CONFIG PANEL ===================== */
+        #config-panel {
+            background: #16213e;
+            border: 1px solid #0f3460;
+            border-radius: 16px;
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 380px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            z-index: 10;
+            position: relative;
+        }
+
+        .config-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 6px;
+        }
+
+        .config-group label {
+            font-size: 0.85rem;
+            color: #a0a0c0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .config-group input {
+            background: #0f3460;
+            border: 1px solid #1a5276;
+            border-radius: 8px;
+            color: #eee;
+            font-size: 1.2rem;
+            padding: 10px 14px;
+            outline: none;
+            transition: border 0.3s;
+            width: 100%;
+        }
+
+        .config-group input:focus { border-color: #e94560; }
+
+        #btn-start {
+            margin-top: 10px;
+            background: linear-gradient(135deg, #e94560, #0f3460);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 14px 40px;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.2s;
+            width: 100%;
+        }
+
+        #btn-start:hover { opacity: 0.85; transform: scale(1.02); }
+
+        /* ===================== TIMER PANEL ===================== */
+        #timer-panel {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .status-text {
+            font-size: 1.1rem;
+            color: #a0a0c0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            min-height: 28px;
+        }
+
+        /* ---- Cercle SVG ---- */
+        .circle-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .circle-container svg { transform: rotate(-90deg); }
+        .circle-bg { fill: none; stroke: #0f3460; stroke-width: 14; }
+
+        .circle-progress {
+            fill: none;
+            stroke: #e94560;
+            stroke-width: 14;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s linear, stroke 2s ease;
+        }
+
+        .circle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        #time-display {
+            font-size: 3.8rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #e0e0e0;
+            font-variant-numeric: tabular-nums;
+            transition: color 2s ease;
+        }
+
+        #time-label {
+            font-size: 0.8rem;
+            color: #a0a0c0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* ---- Barre de progression ---- */
+        .progress-bar-container {
+            width: 300px;
+            background: #0f3460;
+            border-radius: 20px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #e94560, #c0392b);
+            border-radius: 20px;
+            transition: width 1s linear, background 2s ease;
+        }
+
+        #current-time    { font-size: 1.3rem; color: #a0a0c0; letter-spacing: 3px; }
+        #end-time-display{ font-size: 0.85rem; color: #a0a0c0; letter-spacing: 1px; }
+
+        #btn-reset {
+            margin-top: 6px;
+            background: transparent;
+            border: 1px solid #e94560;
+            border-radius: 10px;
+            color: #e94560;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 28px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        #btn-reset:hover { background: #e94560; color: #fff; }
+
+        #waiting-text {
+            font-size: 1rem;
+            color: #a0a0c0;
+            letter-spacing: 2px;
+            text-align: center;
+            line-height: 2;
+        }
+
+        .finished .circle-progress  { stroke: #27ae60 !important; }
+        .finished #progress-bar     { background: linear-gradient(90deg, #27ae60, #1e8449) !important; }
+        .finished #time-display     { color: #27ae60 !important; }
+
+        /* ===================== MOTS MOTIVANTS ===================== */
+        .motivating-word {
+            position: fixed;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            pointer-events: none;
+            opacity: 0;
+            animation: wordFloat 4s ease-in-out forwards;
+            text-shadow: 0 0 24px currentColor, 0 0 40px currentColor;
+            z-index: 20;
+        }
+
+        @keyframes wordFloat {
+            0%   { opacity: 0; transform: translateY(0)   scale(0.6) rotate(-3deg); }
+            20%  { opacity: 1; transform: translateY(-20px) scale(1.1) rotate(1deg);  }
+            70%  { opacity: 1; transform: translateY(-40px) scale(1)   rotate(-1deg); }
+            100% { opacity: 0; transform: translateY(-80px) scale(0.85) rotate(2deg); }
+        }
+
+        /* ===================== PARTICULES ===================== */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: particleAnim linear forwards;
+            z-index: 6;
+        }
+
+        @keyframes particleAnim {
+            0%   { opacity: 0.9; transform: translateY(0)   rotate(0deg)   scale(1);   }
+            100% { opacity: 0;   transform: translateY(-120px) rotate(720deg) scale(0.2); }
+        }
+
+        /* ===================== FLASH NOTIFICATION ===================== */
+        #flash-notif {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.7);
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: #fff;
+            font-size: 2.4rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 22px 60px;
+            border-radius: 50px;
+            box-shadow: 0 0 60px rgba(243,156,18,0.7), 0 0 120px rgba(243,156,18,0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            z-index: 300;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        #flash-notif.show {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+
+        #flash-notif .flash-sub {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-top: 4px;
+            opacity: 0.85;
+        }
+
+        /* ===================== PULSE RING ===================== */
+        .pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 3px solid currentColor;
+            opacity: 0;
+            animation: pulseRing 1s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes pulseRing {
+            0%   { opacity: 0.9; transform: translate(-50%,-50%) scale(0.95); }
+            100% { opacity: 0;   transform: translate(-50%,-50%) scale(1.45); }
+        }
+
+        /* ===================== ÉTOILES DE FOND ===================== */
+        .star {
+            position: fixed;
+            border-radius: 50%;
+            background: #fff;
+            animation: starTwinkle ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.05; transform: scale(1);    }
+            50%       { opacity: 0.35; transform: scale(1.5);  }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =================== ÉTOILES FOND =================== -->
+    <div id="stars-container"></div>
+
+    <!-- =================== COLONNES DÉCORATIVES =================== -->
+    <!-- Gauche -->
+    <div class="deco-column left" id="deco-left">
+        <div class="deco-icon">📚</div>
+        <div class="deco-icon">✏️</div>
+        <div class="deco-icon">🔬</div>
+        <div class="deco-icon">🌿</div>
+        <div class="deco-icon">💡</div>
+        <div class="deco-icon">📐</div>
+        <div class="deco-icon">🧬</div>
+        <div class="deco-icon">🌱</div>
+        <div class="deco-gauge-container">
+            <div class="deco-gauge-fill" id="gauge-left" style="height:100%"></div>
+        </div>
+        <div class="deco-side-time" id="side-time-left">--:--</div>
+    </div>
+
+    <!-- Droite -->
+    <div class="deco-column right" id="deco-right">
+        <div class="deco-icon">🧪</div>
+        <div class="deco-icon">📊</div>
+        <div class="deco-icon">🖥️</div>
+        <div class="deco-icon">🌍</div>
+        <div class="deco-icon">⚗️</div>
+        <div class="deco-icon">📝</div>
+        <div class="deco-icon">🔭</div>
+        <div class="deco-icon">💻</div>
+        <div class="deco-gauge-container">
+            <div class="deco-gauge-fill" id="gauge-right" style="height:100%"></div>
+        </div>
+        <div class="deco-side-time" id="side-time-right">--:--</div>
+    </div>
+
+    <!-- Flash notification -->
+    <div id="flash-notif"></div>
+
+    <h1>⏱ Minuteur d'évaluation</h1>
+    <p class="subtitle">Lycée agricole</p>
+
+    <!-- =================== CONFIG =================== -->
+    <div id="config-panel">
+        <div class="config-group">
+            <label>🕐 Heure de début du devoir</label>
+            <input type="time" id="input-start" value="08:00">
+        </div>
+        <div class="config-group">
+            <label>⏳ Durée de l'évaluation (minutes)</label>
+            <input type="number" id="input-duration" min="1" max="300" value="60">
+        </div>
+        <button id="btn-start" onclick="setupTimer()">Lancer la configuration</button>
+    </div>
+
+    <!-- =================== TIMER =================== -->
+    <div id="timer-panel">
+        <div class="status-text" id="status-text">En attente du début...</div>
+
+        <div class="circle-container" id="circle-container">
+            <svg width="300" height="300" viewBox="0 0 300 300">
+                <circle class="circle-bg" cx="150" cy="150" r="130"/>
+                <circle class="circle-progress" id="circle-prog"
+                    cx="150" cy="150" r="130"
+                    stroke-dasharray="816.8"
+                    stroke-dashoffset="0"/>
+            </svg>
+            <div class="circle-text">
+                <div id="time-display">00:00</div>
+                <div id="time-label">restant</div>
+            </div>
+        </div>
+
+        <div class="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <div id="current-time">--:--:--</div>
+        <div id="end-time-display">Fin prévue : --:--</div>
+        <div id="waiting-text"></div>
+        <button id="btn-reset" onclick="resetTimer()">↩ Reconfigurer</button>
+    </div>
+
+    <script>
+        // ─────────────────────────────────────────────
+        //  CONSTANTES
+        // ─────────────────────────────────────────────
+        const CIRCUMFERENCE = 2 * Math.PI * 130; // ≈ 816.8
+
+        const COLOR_STOPS = [
+            { ratio: 1.00, r: 39,  g: 174, b: 96  },
+            { ratio: 0.60, r: 241, g: 196, b: 15  },
+            { ratio: 0.30, r: 230, g: 126, b: 34  },
+            { ratio: 0.00, r: 192, g: 57,  b: 43  },
+        ];
+
+        const MOTIVATING_WORDS = [
+            { text: "Courage !",         color: "#f1c40f" },
+            { text: "Tu peux le faire !", color: "#2ecc71" },
+            { text: "Concentre-toi !",   color: "#3498db" },
+            { text: "Bravo !",           color: "#e74c3c" },
+            { text: "Continue !",        color: "#9b59b6" },
+            { text: "Excellent !",       color: "#1abc9c" },
+            { text: "Persévère !",       color: "#e67e22" },
+            { text: "Super !",           color: "#f39c12" },
+            { text: "En avant !",        color: "#27ae60" },
+            { text: "Vas-y !",           color: "#e94560" },
+            { text: "Ne lâche pas !",    color: "#00bcd4" },
+            { text: "Tu y es presque !", color: "#ff5722" },
+        ];
+
+        // ─────────────────────────────────────────────
+        //  ÉTAT
+        // ─────────────────────────────────────────────
+        let timerInterval    = null;
+        let wordInterval     = null;
+        let particleInterval = null;
+        let barInterval      = null;
+        let totalSeconds     = 0;
+        let startTimestamp   = null;
+        let endTimestamp     = null;
+        let phase            = 'waiting';
+        let halfPingSent     = false;
+        let quarterPingSent  = false;
+        let flashTimeout     = null;
+
+        // ─────────────────────────────────────────────
+        //  ÉTOILES DE FOND
+        // ─────────────────────────────────────────────
+        (function createStars() {
+            const container = document.getElementById('stars-container');
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 2.5 + 0.5;
+                star.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    left:${Math.random()*100}vw;
+                    top:${Math.random()*100}vh;
+                    animation-duration:${Math.random()*4+2}s;
+                    animation-delay:${Math.random()*4}s;
+                `;
+                container.appendChild(star);
+            }
+        })();
+
+        // ─────────────────────────────────────────────
+        //  BARRES DÉCORATIVES ANIMÉES
+        // ─────────────────────────────────────────────
+        function startDecoAnimations() {
+            const colLeft  = document.getElementById('deco-left');
+            const colRight = document.getElementById('deco-right');
+
+            function spawnBar(col, isLeft) {
+                const bar  = document.createElement('div');
+                bar.className = 'deco-bar';
+                const hue = Math.floor(Math.random() * 360);
+                const topPct = Math.random() * 80 + 5;
+                const dur    = Math.random() * 2 + 2;
+                bar.style.cssText = `
+                    top:${topPct}%;
+                    background: hsl(${hue},80%,65%);
+                    box-shadow: 0 0 8px hsl(${hue},80%,65%);
+                    animation-duration:${dur}s;
+                    animation-delay:${Math.random()*2}s;
+                `;
+                col.appendChild(bar);
+                setTimeout(() => bar.remove(), (dur + 2.5) * 1000);
+            }
+
+            function spawnDecoCircle(col) {
+                const circ = document.createElement('div');
+                circ.className = 'deco-circle';
+                const size = Math.random() * 60 + 20;
+                const hue  = Math.floor(Math.random() * 360);
+                const dur  = Math.random() * 4 + 4;
+                circ.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    top:${Math.random()*80+5}%;
+                    left:${Math.random()*60+15}%;
+                    border-color: hsl(${hue},80%,55%);
+                    box-shadow: 0 0 10px hsl(${hue},80%,55%);
+                    animation-duration:${dur}s;
+                    animation-delay:${Math.random()*2}s;
+                `;
+                col.appendChild(circ);
+                setTimeout(() => circ.remove(), (dur + 2) * 1000);
+            }
+
+            barInterval = setInterval(() => {
+                if (phase === 'waiting' || phase === 'running') {
+                    spawnBar(colLeft, true);
+                    spawnBar(colRight, false);
+                    spawnDecoCircle(colLeft);
+                    spawnDecoCircle(colRight);
+                }
+            }, 1200);
+        }
+
+        // ─────────────────────────────────────────────
+        //  SETUP
+        // ─────────────────────────────────────────────
+        function setupTimer() {
+            const startInput  = document.getElementById('input-start').value;
+            const durationMin = parseInt(document.getElementById('input-duration').value);
+
+            if (!startInput || isNaN(durationMin) || durationMin < 1) {
+                alert("Veuillez renseigner une heure de début et une durée valides.");
+                return;
+            }
+
+            const now = new Date();
+            const [sh, sm] = startInput.split(':').map(Number);
+
+            startTimestamp = new Date(now);
+            startTimestamp.setHours(sh, sm, 0, 0);
+            endTimestamp   = new Date(startTimestamp.getTime() + durationMin * 60 * 1000);
+            totalSeconds   = durationMin * 60;
+            halfPingSent   = false;
+            quarterPingSent= false;
+
+            document.getElementById('config-panel').style.display   = 'none';
+            document.getElementById('timer-panel').style.display     = 'flex';
+            document.getElementById('end-time-display').textContent  = 'Fin prévue : ' + formatHHMM(endTimestamp);
+            document.getElementById('circle-prog').style.strokeDasharray = CIRCUMFERENCE;
+
+            updateTimer();
+            timerInterval    = setInterval(updateTimer, 500);
+            wordInterval     = setInterval(spawnMotivatingWord, 7000);
+            particleInterval = setInterval(spawnParticles, 1800);
+            startDecoAnimations();
+        }
+
+        // ─────────────────────────────────────────────
+        //  BOUCLE PRINCIPALE
+        // ─────────────────────────────────────────────
+        function updateTimer() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = formatHHMMSS(now);
+
+            // Mise à jour des temps dans les colonnes
+            document.getElementById('side-time-left').textContent  = formatHHMM(now);
+            document.getElementById('side-time-right').textContent = formatHHMM(now);
+
+            if (now < startTimestamp) {
+                if (phase !== 'waiting') phase = 'waiting';
+                const waitSec = Math.ceil((startTimestamp - now) / 1000);
+                document.getElementById('status-text').textContent  = '⏳ Début dans ' + formatMMSS(waitSec);
+                document.getElementById('waiting-text').textContent = 'Le devoir commence à ' + formatHHMM(startTimestamp);
+                document.getElementById('time-display').textContent = formatHHMM(startTimestamp);
+                document.getElementById('time-label').textContent   = 'heure de début';
+                setCircle(1);
+                setColor(1);
+                document.getElementById('progress-bar').style.width = '100%';
+                setGauges(1);
+
+            } else if (now >= startTimestamp && now < endTimestamp) {
+                if (phase !== 'running') {
+                    phase = 'running';
+                    document.getElementById('waiting-text').textContent = '';
+                    document.getElementById('time-label').textContent   = 'restant';
+                    document.getElementById('timer-panel').classList.remove('finished');
+                }
+
+                const remainingSeconds = Math.ceil((endTimestamp - now) / 1000);
+                const ratio = remainingSeconds / totalSeconds;
+
+                document.getElementById('status-text').textContent = '✏️ Évaluation en cours';
+                document.getElementById('time-display').textContent = formatMMSS(remainingSeconds);
+                setCircle(ratio);
+                setColor(ratio);
+                document.getElementById('progress-bar').style.width = (ratio * 100) + '%';
+                setGauges(ratio);
+
+                if (!halfPingSent && ratio <= 0.5) {
+                    halfPingSent = true;
+                    pingSound(880, 0.18);
+                    setTimeout(() => pingSound(1100, 0.14), 300);
+                    showFlash("⏰ Mi-temps !", "Plus que la moitié du temps !", "#f39c12", "#e67e22");
+                    spawnPulseRing("#f39c12");
+                }
+
+                if (!quarterPingSent && ratio <= 0.25) {
+                    quarterPingSent = true;
+                    pingSound(1320, 0.18);
+                    setTimeout(() => pingSound(1320, 0.15), 300);
+                    setTimeout(() => pingSound(1600, 0.12), 600);
+                    showFlash("⚠️ Dernier quart !", "Il reste 25% du temps !", "#e74c3c", "#c0392b");
+                    spawnPulseRing("#e74c3c");
+                }
+
+            } else {
+                if (phase !== 'finished') {
+                    phase = 'finished';
+                    clearInterval(timerInterval);
+                    clearInterval(wordInterval);
+                    clearInterval(particleInterval);
+                    clearInterval(barInterval);
+                    document.getElementById('status-text').textContent  = '✅ Temps écoulé !';
+                    document.getElementById('time-display').textContent  = '00:00';
+                    document.getElementById('time-label').textContent    = 'terminé';
+                    document.getElementById('waiting-text').textContent  = '';
+                    document.getElementById('timer-panel').classList.add('finished');
+                    setCircle(0);
+                    document.getElementById('progress-bar').style.width = '0%';
+                    setGauges(0);
+                }
+            }
+        }
+
+        // ─────────────────────────────────────────────
+        //  JAUGES LATÉRALES
+        // ─────────────────────────────────────────────
+        function setGauges(ratio) {
+            const h = (ratio * 100) + '%';
+            document.getElementById('gauge-left').style.height  = h;
+            document.getElementById('gauge-right').style.height = h;
+        }
+
+        // ─────────────────────────────────────────────
+        //  CERCLE & COULEUR
+        // ─────────────────────────────────────────────
+        function setCircle(ratio) {
+            document.getElementById('circle-prog').style.strokeDashoffset =
+                CIRCUMFERENCE * (1 - ratio);
+        }
+
+        function setColor(ratio) {
+            const c   = interpolateColor(ratio);
+            const hex = rgbToHex(c.r, c.g, c.b);
+            const hexDark = rgbToHex(
+                Math.max(0, c.r - 40),
+                Math.max(0, c.g - 40),
+                Math.max(0, c.b - 40)
+            );
+            document.getElementById('circle-prog').style.stroke = hex;
+            document.getElementById('time-display').style.color = hex;
+            document.getElementById('progress-bar').style.background =
+                `linear-gradient(90deg, ${hex}, ${hexDark})`;
+            // Sync couleur des jauges
+            document.getElementById('gauge-left').style.background  =
+                `linear-gradient(180deg, ${hexDark}, ${hex}, #27ae60)`;
+            document.getElementById('gauge-right').style.background =
+                `linear-gradient(180deg, ${hexDark}, ${hex}, #27ae60)`;
+        }
+
+        function interpolateColor(ratio) {
+            let lower = COLOR_STOPS[COLOR_STOPS.length - 1];
+            let upper = COLOR_STOPS[0];
+            for (let i = 0; i < COLOR_STOPS.length - 1; i++) {
+                if (ratio <= COLOR_STOPS[i].ratio && ratio >= COLOR_STOPS[i+1].ratio) {
+                    upper = COLOR_STOPS[i];
+                    lower = COLOR_STOPS[i+1];
+                    break;
+                }
+            }
+            const range = upper.ratio - lower.ratio;
+            const t     = range === 0 ? 0 : (ratio - lower.ratio) / range;
+            return {
+                r: Math.round(lower.r + (upper.r - lower.r) * t),
+                g: Math.round(lower.g + (upper.g - lower.g) * t),
+                b: Math.round(lower.b + (upper.b - lower.b) * t),
+            };
+        }
+
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(v => v.toString(16).padStart(2,'0')).join('');
+        }
+
+        // ─────────────────────────────────────────────
+        //  SON TING
+        // ─────────────────────────────────────────────
+        function pingSound(freq, duration, delay = 0) {
+            try {
+                const ctx  = new (window.AudioContext || window.webkitAudioContext)();
+                const osc  = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+                gain.gain.setValueAtTime(0.45, ctx.currentTime + delay);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + duration);
+                osc.start(ctx.currentTime + delay);
+                osc.stop(ctx.currentTime  + delay + duration + 0.05);
+            } catch(e) {}
+        }
+
+        // ─────────────────────────────────────────────
+        //  FLASH NOTIFICATION
+        // ─────────────────────────────────────────────
+        function showFlash(title, subtitle, color1, color2) {
+            const el = document.getElementById('flash-notif');
+            el.innerHTML = title + '<span class="flash-sub">' + subtitle + '</span>';
+            el.style.background  = `linear-gradient(135deg, ${color1}, ${color2})`;
+            el.style.boxShadow   = `0 0 80px ${color1}99, 0 0 160px ${color1}44`;
+            el.classList.add('show');
+            if (flashTimeout) clearTimeout(flashTimeout);
+            flashTimeout = setTimeout(() => el.classList.remove('show'), 5000);
+        }
+
+        // ─────────────────────────────────────────────
+        //  PULSE RING
+        // ─────────────────────────────────────────────
+        function spawnPulseRing(color) {
+            const container = document.getElementById('circle-container');
+            for (let i = 0; i < 4; i++) {
+                setTimeout(() => {
+                    const ring = document.createElement('div');
+                    ring.className   = 'pulse-ring';
+                    ring.style.color = color;
+                    ring.style.borderColor = color;
+                    ring.style.boxShadow = `0 0 20px ${color}`;
+                    container.appendChild(ring);
+                    setTimeout(() => ring.remove(), 1100);
+                }, i * 280);
+            }
+        }
+
+        // ─────────────────────────────────────────────
+        //  MOTS MOTIVANTS
+        // ─────────────────────────────────────────────
+        function spawnMotivatingWord() {
+            if (phase !== 'running') return;
+            const word = MOTIVATING_WORDS[Math.floor(Math.random() * MOTIVATING_WORDS.length)];
+            const el   = document.createElement('div');
+            el.className   = 'motivating-word';
+            el.textContent = word.text;
+            el.style.color = word.color;
+
+            // Toujours dans les colonnes latérales
+            const side = Math.random() < 0.5 ? 'left' : 'right';
+            if (side === 'left') {
+                el.style.left = (Math.random() * 12 + 1) + 'vw';
+            } else {
+                el.style.right = (Math.random() * 12 + 1) + 'vw';
+            }
+            el.style.top = (Math.random() * 55 + 15) + 'vh';
+
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 4200);
+        }
+
+        // ─────────────────────────────────────────────
+        //  PARTICULES
+        // ─────────────────────────────────────────────
+        function spawnParticles() {
+            if (phase !== 'running') return;
+            const count = 8;
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const el   = document.createElement('div');
+                    el.className = 'particle';
+                    const size = Math.random() * 12 + 4;
+                    const hue  = Math.floor(Math.random() * 360);
+                    const side = Math.random() < 0.5 ? 'left' : 'right';
+                    const dur  = Math.random() * 2 + 1.5;
+                    el.style.cssText = `
+                        width:${size}px; height:${size}px;
+                        background:hsl(${hue},85%,65%);
+                        box-shadow:0 0 10px hsl(${hue},85%,65%);
+                        ${side}:${Math.random()*14}vw;
+                        top:${Math.random()*80+10}vh;
+                        animation-duration:${dur}s;
+                    `;
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), dur * 1000 + 100);
+                }, i * 180);
+            }
+        }
+
+        // ─────────────────────────────────────────────
+        //  RESET
+        // ─────────────────────────────────────────────
+        function resetTimer() {
+            clearInterval(timerInterval);
+            clearInterval(wordInterval);
+            clearInterval(particleInterval);
+            clearInterval(barInterval);
+            timerInterval = wordInterval = particleInterval = barInterval = null;
+            phase = 'waiting';
+            halfPingSent = quarterPingSent = false;
+
+            document.getElementById('timer-panel').style.display = 'none';
+            document.getElementById('timer-panel').classList.remove('finished');
+            document.getElementById('circle-prog').style.stroke = '#e94560';
+            document.getElementById('progress-bar').style.background =
+                'linear-gradient(90deg, #e94560, #c0392b)';
+            document.getElementById('config-panel').style.display = 'flex';
+            document.getElementById('flash-notif').classList.remove('show');
+        }
+
+        // ─────────────────────────────────────────────
+        //  UTILITAIRES
+        // ─────────────────────────────────────────────
+        function formatMMSS(secs) {
+            return String(Math.floor(secs/60)).padStart(2,'0') + ':' +
+                   String(secs % 60).padStart(2,'0');
+        }
+        function formatHHMMSS(d) { return d.toTimeString().slice(0,8); }
+        function formatHHMM(d)   { return d.toTimeString().slice(0,5); }
+    </script>
+</body>
+</html>

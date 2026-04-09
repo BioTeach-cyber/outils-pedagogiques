@@ -1,261 +1,445 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mes applications pédagogiques</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ressources Pédagogiques</title>
+  <script src="https://kit.fontawesome.com/f6d42ea8e9.js" crossorigin="anonymous"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f4f6f8;
-      color: #333;
+      background: #f4f6f9;
+      color: #2c2c2c;
     }
 
     header {
       background: #2c3e50;
       color: white;
-      padding: 2rem;
+      padding: 20px 40px;
       text-align: center;
     }
 
-    header h1 { font-size: 1.8rem; margin-bottom: 0.3rem; }
-    header p { opacity: 0.7; font-size: 0.95rem; }
+    header h1 { font-size: 1.8rem; }
+    header p { font-size: 0.95rem; opacity: 0.8; margin-top: 5px; }
 
+    main { padding: 30px 40px; max-width: 1400px; margin: auto; }
+
+    /* ===== SECTION ===== */
+    .section { margin-bottom: 60px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-left: 5px solid #2c3e50;
+      padding-left: 15px;
+    }
+
+    .section-header h2 { font-size: 1.4rem; color: #2c3e50; }
+    .section-header span { font-size: 1.6rem; }
+
+    /* ===== FILTRES ===== */
     .filtres {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
-      padding: 1.5rem 2rem;
+      gap: 10px;
+      margin-bottom: 20px;
       background: white;
-      border-bottom: 1px solid #ddd;
-      align-items: center;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
 
-    .filtres input, .filtres select {
-      padding: 0.5rem 0.8rem;
+    .filtres input,
+    .filtres select {
+      padding: 8px 12px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 0.9rem;
-      background: #fafafa;
+      background: #fff;
     }
 
     .filtres input { flex: 1; min-width: 200px; }
 
+    /* ===== GRILLE DE VIGNETTES ===== */
     .grille {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
     }
 
-    .carte {
+    /* ===== VIGNETTE ===== */
+    .vignette {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
       overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .carte:hover {
+    .vignette:hover {
       transform: translateY(-4px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     }
 
-    .carte-image {
+    .vignette img {
       width: 100%;
-      height: 160px;
-      object-fit: contain;  /* ✅ proportions respectées, pas de recadrage */
-      background: #e8ecf0;  /* fond visible si l'image ne remplit pas tout */
+      height: 140px;
+      object-fit: contain;
+      background: #e0e0e0;
     }
 
-    .carte-image-placeholder {
-      width: 100%;
-      height: 160px;
-      background: #e8ecf0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      color: #aaa;
-    }
-
-    .carte-corps {
-      padding: 1rem;
+    .vignette-body {
+      padding: 12px;
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 6px;
     }
 
-    .carte-titre {
-      font-size: 1.1rem;
-      font-weight: 600;
+    .vignette-body h3 {
+      font-size: 1rem;
       color: #2c3e50;
     }
 
-    .carte-description {
-      font-size: 0.85rem;
-      color: #666;
+    .vignette-body p {
+      font-size: 0.82rem;
+      color: #555;
       flex: 1;
     }
 
-    .badges {
+    .vignette-meta {
       display: flex;
-      gap: 0.5rem;
       flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
     }
 
     .badge {
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
+      background: #eef0f3;
+      color: #444;
+      font-size: 0.72rem;
+      padding: 3px 8px;
       border-radius: 20px;
-      font-weight: 500;
     }
 
-    .badge-matiere { background: #dbeafe; color: #1e40af; }
-    .badge-niveau  { background: #dcfce7; color: #166534; }
+    .badge.matiere { background: #d6eaf8; color: #1a5276; }
+    .badge.niveau  { background: #d5f5e3; color: #1e8449; }
+    .badge.module  { background: #fdebd0; color: #784212; }
+    .badge.public  { background: #f9ebea; color: #922b21; }
+    .badge.type    { background: #e8daef; color: #6c3483; }
 
-    .carte-lien {
-      display: inline-block;
-      margin-top: 0.5rem;
-      padding: 0.5rem 1rem;
+    .vignette-footer {
+      padding: 10px 12px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .vignette-footer a {
+      display: block;
+      text-align: center;
       background: #2c3e50;
       color: white;
-      border-radius: 6px;
       text-decoration: none;
+      padding: 7px;
+      border-radius: 6px;
       font-size: 0.85rem;
-      text-align: center;
       transition: background 0.2s;
     }
 
-    .carte-lien:hover { background: #3d5166; }
+    .vignette-footer a:hover { background: #1a252f; }
 
-    .aucun-resultat {
-      grid-column: 1 / -1;
+    .statut-brouillon { opacity: 0.55; }
+
+    .empty-msg {
+      color: #888;
+      font-style: italic;
+      font-size: 0.9rem;
+      padding: 10px 0;
+    }
+
+    footer {
       text-align: center;
-      color: #999;
-      font-size: 1rem;
-      padding: 3rem;
+      padding: 20px;
+      font-size: 0.8rem;
+      color: #aaa;
+      border-top: 1px solid #e0e0e0;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1><i class="fas fa-chalkboard-teacher"></i> Mes applications pédagogiques</h1>
-  <p>Cliquez sur une application pour l'ouvrir</p>
+  <h1>📚 Ressources Pédagogiques</h1>
+  <p>Applications interactives, outils et structures virtuelles</p>
 </header>
 
-<div class="filtres">
-  <input type="text" id="recherche" placeholder="🔍 Rechercher une application...">
-  <select id="filtreMatiere">
-    <option value="">Toutes les matières</option>
-  </select>
-  <select id="filtreNiveau">
-    <option value="">Tous les niveaux</option>
-  </select>
-  <select id="filtreModule">  <!-- ✅ Ajout -->
-    <option value="">Tous les modules</option>
-  </select>
-</div>
+<main>
 
+  <!-- ========== SECTION 1 : APPLICATIONS ========== -->
+  <section class="section" id="section-applications">
+    <div class="section-header">
+      <span>🎓</span>
+      <h2>Applications interactives</h2>
+    </div>
 
-<div class="grille" id="grille"></div>
+    <div class="filtres">
+      <input type="text" id="search-app" placeholder="🔍 Rechercher une application..." />
+      <select id="filtre-matiere">
+        <option value="">Toutes les matières</option>
+      </select>
+      <select id="filtre-niveau">
+        <option value="">Tous les niveaux</option>
+      </select>
+    </div>
+
+    <div class="grille" id="grille-applications"></div>
+  </section>
+
+  <!-- ========== SECTION 2 : OUTILS ========== -->
+  <section class="section" id="section-outils">
+    <div class="section-header">
+      <span>🛠️</span>
+      <h2>Outils pédagogiques transversaux</h2>
+    </div>
+    <div class="grille" id="grille-outils"></div>
+  </section>
+
+  <!-- ========== SECTION 3 : STRUCTURES ========== -->
+  <section class="section" id="section-structures">
+    <div class="section-header">
+      <span>🏫</span>
+      <h2>Structures virtuelles</h2>
+    </div>
+
+    <div class="filtres">
+      <input type="text" id="search-struct" placeholder="🔍 Rechercher une structure..." />
+      <select id="filtre-niveau-struct">
+        <option value="">Tous les niveaux</option>
+      </select>
+      <select id="filtre-module-struct">
+        <option value="">Tous les modules</option>
+      </select>
+      <select id="filtre-public-struct">
+        <option value="">Tous les publics</option>
+      </select>
+    </div>
+
+    <div class="grille" id="grille-structures"></div>
+  </section>
+
+</main>
+
+<footer>
+  Ressources pédagogiques — Lycée Professionnel Agricole
+</footer>
 
 <script>
-  let applications = [];
+// =========================================================
+// UTILITAIRES
+// =========================================================
 
-  fetch('applications.json')
-    .then(r => r.json())
-    .then(data => {
-      applications = data;
-      peuplerFiltres(data);
-      afficher(data);
-    })
-    .catch(() => {
-      document.getElementById('grille').innerHTML =
-        '<p class="aucun-resultat"><i class="fas fa-exclamation-triangle"></i> Impossible de charger applications.json</p>';
-    });
-
-function peuplerFiltres(data) {
-  const matieres = [...new Set(data.map(a => a.matiere))].sort();
-  const niveaux  = [...new Set(data.flatMap(a => a.niveaux))].sort();
-  const modules  = [...new Set(data.map(a => a.module))].sort(); // ✅ Ajout
-
-  const selM = document.getElementById('filtreMatiere');
-  const selN = document.getElementById('filtreNiveau');
-  const selMod = document.getElementById('filtreModule'); // ✅ Ajout
-
-  matieres.forEach(m   => selM.innerHTML   += `<option value="${m}">${m}</option>`);
-  niveaux.forEach(n    => selN.innerHTML   += `<option value="${n}">${n}</option>`);
-  modules.forEach(mod  => selMod.innerHTML += `<option value="${mod}">${mod}</option>`); // ✅ Ajout
+function imgOuPlaceholder(image, emoji) {
+  if (image) {
+    return `<img src="${image}" alt="" onerror="this.style.display='none'" />`;
+  }
+  return `<div style="width:100%;height:140px;background:#e8ecf0;display:flex;align-items:center;justify-content:center;font-size:3rem;">${emoji || '📄'}</div>`;
 }
 
+function badges(items, classe) {
+  if (!items) return '';
+  const liste = Array.isArray(items) ? items : [items];
+  return liste.map(i => `<span class="badge ${classe}">${i}</span>`).join('');
+}
 
-function afficher(data) {
-  const grille = document.getElementById('grille');
-  grille.innerHTML = '';
-
-  if (data.length === 0) {
-    grille.innerHTML = '<p class="aucun-resultat"><i class="fas fa-search"></i> Aucune application trouvée</p>';
-    return;
-  }
-
-  data.forEach((app, index) => {
-    const placeholderId = `placeholder-${index}`; // ✅ ID unique
-
-    const vignette = app.image
-      ? `<img class="carte-image" src="${app.image}" alt="${app.titre}" 
-            onerror="this.style.display='none';document.getElementById('${placeholderId}').style.display='flex'">
-         <div class="carte-image-placeholder" id="${placeholderId}" style="display:none">${app.emoji || '📁'}</div>`
-      : `<div class="carte-image-placeholder">${app.emoji || '📁'}</div>`;
-
-    grille.innerHTML += `
-      <div class="carte">
-        ${vignette}
-        <div class="carte-corps">
-          <div class="carte-titre">${app.titre}</div>
-          <div class="badges">
-            <span class="badge badge-matiere">${app.matiere}</span>
-            ${app.niveaux.map(n => `<span class="badge badge-niveau">${n}</span>`).join('')} <!-- ✅ boucle sur niveaux -->
-          </div>
-          <div class="carte-description">${app.description}</div>
-          <a class="carte-lien" href="${app.url}" target="_blank">
-            <i class="fas fa-external-link-alt"></i> Ouvrir
-          </a>
-        </div>
-      </div>`;
+function peuplerSelect(selectId, valeurs) {
+  const sel = document.getElementById(selectId);
+  valeurs.forEach(v => {
+    const opt = document.createElement('option');
+    opt.value = v; opt.textContent = v;
+    sel.appendChild(opt);
   });
 }
 
-function filtrer() {
-  const texte   = document.getElementById('recherche').value.toLowerCase();
-  const matiere = document.getElementById('filtreMatiere').value;
-  const niveau  = document.getElementById('filtreNiveau').value;
-  const module_ = document.getElementById('filtreModule').value; // ✅ Ajout
-
-  const resultat = applications.filter(a =>
-    (!matiere  || a.matiere === matiere) &&
-    (!niveau   || a.niveaux.includes(niveau)) &&
-    (!module_  || a.module === module_) && // ✅ Ajout
-    (!texte    || a.titre.toLowerCase().includes(texte) || a.description.toLowerCase().includes(texte))
-  );
-
-  afficher(resultat);
+function extraireUniques(data, champ) {
+  const set = new Set();
+  data.forEach(item => {
+    const val = item[champ];
+    if (Array.isArray(val)) val.forEach(v => set.add(v));
+    else if (val) set.add(val);
+  });
+  return [...set].sort();
 }
 
+// =========================================================
+// APPLICATIONS
+// =========================================================
 
+let dataApplications = [];
 
-document.getElementById('recherche').addEventListener('input', filtrer);
-document.getElementById('filtreMatiere').addEventListener('change', filtrer);
-document.getElementById('filtreNiveau').addEventListener('change', filtrer);
-document.getElementById('filtreModule').addEventListener('change', filtrer); // ✅ Ajout
+async function chargerApplications() {
+  const res = await fetch('applications.json');
+  dataApplications = await res.json();
+
+  peuplerSelect('filtre-matiere', extraireUniques(dataApplications, 'matiere'));
+  peuplerSelect('filtre-niveau',  extraireUniques(dataApplications, 'niveaux'));
+
+  afficherApplications();
+
+  document.getElementById('search-app').addEventListener('input', afficherApplications);
+  document.getElementById('filtre-matiere').addEventListener('change', afficherApplications);
+  document.getElementById('filtre-niveau').addEventListener('change', afficherApplications);
+}
+
+function afficherApplications() {
+  const search  = document.getElementById('search-app').value.toLowerCase();
+  const matiere = document.getElementById('filtre-matiere').value;
+  const niveau  = document.getElementById('filtre-niveau').value;
+
+  const filtrees = dataApplications.filter(app => {
+    if (app.statut === 'brouillon') return false;
+    const texte = (app.titre + app.description + (app.tags||[]).join(' ')).toLowerCase();
+    if (search  && !texte.includes(search)) return false;
+    if (matiere && app.matiere !== matiere) return false;
+    if (niveau  && !(app.niveaux||[]).includes(niveau)) return false;
+    return true;
+  });
+
+  const grille = document.getElementById('grille-applications');
+  if (filtrees.length === 0) {
+    grille.innerHTML = '<p class="empty-msg">Aucune application trouvée.</p>';
+    return;
+  }
+
+  grille.innerHTML = filtrees.map(app => `
+    <div class="vignette">
+      ${imgOuPlaceholder(app.image, app.emoji)}
+      <div class="vignette-body">
+        <h3>${app.emoji || ''} ${app.titre}</h3>
+        <p>${app.description}</p>
+        <div class="vignette-meta">
+          ${badges(app.matiere, 'matiere')}
+          ${badges(app.niveaux, 'niveau')}
+          ${badges(app.module,  'module')}
+        </div>
+      </div>
+      <div class="vignette-footer">
+        <a href="${app.url}" target="_blank">Ouvrir ↗</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// =========================================================
+// OUTILS
+// =========================================================
+
+async function chargerOutils() {
+  const res = await fetch('Outils-Pedagogiques/Outils-Pedagogique.json');
+  const data = await res.json();
+
+  const grille = document.getElementById('grille-outils');
+  const visibles = data.filter(o => o.statut !== 'brouillon');
+
+  if (visibles.length === 0) {
+    grille.innerHTML = '<p class="empty-msg">Aucun outil disponible.</p>';
+    return;
+  }
+
+  grille.innerHTML = visibles.map(outil => `
+    <div class="vignette">
+      ${imgOuPlaceholder(outil.image, outil.emoji)}
+      <div class="vignette-body">
+        <h3>${outil.emoji || ''} ${outil.titre}</h3>
+        <p>${outil.description}</p>
+        <div class="vignette-meta">
+          ${badges(outil.tags, '')}
+        </div>
+      </div>
+      <div class="vignette-footer">
+        <a href="${outil.url}" target="_blank">Ouvrir ↗</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// =========================================================
+// STRUCTURES
+// =========================================================
+
+let dataStructures = [];
+
+async function chargerStructures() {
+  const res = await fetch('Structures virutelles/Structures.json');
+  dataStructures = await res.json();
+
+  peuplerSelect('filtre-niveau-struct', extraireUniques(dataStructures, 'niveaux'));
+  peuplerSelect('filtre-module-struct', extraireUniques(dataStructures, 'module'));
+  peuplerSelect('filtre-public-struct', extraireUniques(dataStructures, 'public'));
+
+  afficherStructures();
+
+  document.getElementById('search-struct').addEventListener('input', afficherStructures);
+  document.getElementById('filtre-niveau-struct').addEventListener('change', afficherStructures);
+  document.getElementById('filtre-module-struct').addEventListener('change', afficherStructures);
+  document.getElementById('filtre-public-struct').addEventListener('change', afficherStructures);
+}
+
+function afficherStructures() {
+  const search = document.getElementById('search-struct').value.toLowerCase();
+  const niveau = document.getElementById('filtre-niveau-struct').value;
+  const module = document.getElementById('filtre-module-struct').value;
+  const pub    = document.getElementById('filtre-public-struct').value;
+
+  const filtrees = dataStructures.filter(s => {
+    if (s.statut === 'brouillon') return false;
+    const texte = (s.titre + s.description + (s.tags||[]).join(' ')).toLowerCase();
+    if (search && !texte.includes(search)) return false;
+    if (niveau && !(s.niveaux||[]).includes(niveau)) return false;
+    if (module && s.module !== module) return false;
+    if (pub    && !(s.public||[]).includes(pub)) return false;
+    return true;
+  });
+
+  const grille = document.getElementById('grille-structures');
+  if (filtrees.length === 0) {
+    grille.innerHTML = '<p class="empty-msg">Aucune structure trouvée.</p>';
+    return;
+  }
+
+  grille.innerHTML = filtrees.map(s => `
+    <div class="vignette">
+      ${imgOuPlaceholder(s.image, s.emoji)}
+      <div class="vignette-body">
+        <h3>${s.emoji || ''} ${s.titre}</h3>
+        <p>${s.description}</p>
+        <div class="vignette-meta">
+          ${badges(s.niveaux, 'niveau')}
+          ${badges(s.module,  'module')}
+          ${badges(s.type,    'type')}
+          ${badges(s.public,  'public')}
+        </div>
+      </div>
+      <div class="vignette-footer">
+        <a href="${s.url}" target="_blank">Ouvrir ↗</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// =========================================================
+// INIT
+// =========================================================
+
+chargerApplications();
+chargerOutils();
+chargerStructures();
+
 </script>
-
 </body>
 </html>

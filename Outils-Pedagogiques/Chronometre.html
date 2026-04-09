@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronomètre</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #2a2a2a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #main-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #school-link {
+            display: block;
+            margin-bottom: 20px;
+            color: #7abbc7;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        #school-link:hover {
+            color: #039a9f;
+            text-shadow: 0 0 12px #039a9f88;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 6px;
+            color: #f0f0f0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #a0a0c0;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        /* ── Cercle ── */
+        .circle-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin-bottom: 10px;
+        }
+
+        .circle-container svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: #1e1e3a;
+            stroke-width: 14;
+        }
+
+        .circle-progress {
+            fill: none;
+            stroke: url(#progressGradient);
+            stroke-width: 14;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.25s linear;
+        }
+
+        #time-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        #time-main {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f0f0f0;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px #039a9f66;
+        }
+
+        #phase-label {
+            font-size: 0.8rem;
+            color: #7abbc7;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* ── Barre ── */
+        .progress-bar-container {
+            width: 320px;
+            height: 10px;
+            background: #1e1e3a;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #039a9f, #7abbc7, #028a85);
+            background-size: 200% 100%;
+            animation: gradientShift 4s linear infinite;
+            border-radius: 5px;
+            transition: width 0.25s linear;
+        }
+
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* ── Boutons ── */
+        .btn-row {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+        }
+
+        #btn-start-stop {
+            background: linear-gradient(135deg, #039a9f, #028a85);
+            color: #fff;
+            box-shadow: 0 4px 15px #039a9f55;
+        }
+        #btn-start-stop:hover {
+            background: linear-gradient(135deg, #04b8be, #039a9f);
+            transform: translateY(-2px);
+        }
+
+        #btn-lap {
+            background: #2e2e4e;
+            color: #7abbc7;
+            border: 1px solid #7abbc755;
+        }
+        #btn-lap:hover:not(:disabled) {
+            background: #3a3a60;
+            transform: translateY(-2px);
+        }
+        #btn-lap:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        #btn-reset {
+            background: #1e1e3a;
+            color: #a0a0c0;
+            border: 1px solid #a0a0c033;
+        }
+        #btn-reset:hover {
+            background: #2a2a4a;
+            transform: translateY(-2px);
+        }
+
+        /* ── Laps ── */
+        #laps-section {
+            width: 360px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        #laps-section::-webkit-scrollbar { width: 5px; }
+        #laps-section::-webkit-scrollbar-track { background: #1e1e3a; border-radius: 3px; }
+        #laps-section::-webkit-scrollbar-thumb { background: #039a9f88; border-radius: 3px; }
+
+        .lap-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: #7abbc7;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0 6px 8px;
+            border-bottom: 1px solid #2e2e4e;
+            margin-bottom: 6px;
+        }
+
+        .lap-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            background: #1e1e3a;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            border-left: 3px solid #039a9f44;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .lap-item:hover { background: #26264a; }
+
+        .lap-num   { color: #a0a0c0; min-width: 70px; }
+        .lap-split { color: #f0f0f0; font-weight: 600; min-width: 80px; text-align: center; }
+        .lap-total { color: #7abbc7; min-width: 80px; text-align: right; }
+
+        /* ── Encouragements ── */
+        .encouragement {
+            position: fixed;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #7abbc7;
+            text-shadow: 0 0 10px #039a9f88;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            animation: floatMsg 3.5s ease forwards;
+        }
+
+        @keyframes floatMsg {
+            0%   { opacity: 0; transform: translateY(0px); }
+            15%  { opacity: 1; }
+            80%  { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-40px); }
+        }
+
+        /* ── Logo ── */
+        #logo-img {
+            width: 60px;
+            margin-bottom: 10px;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<div id="main-content">
+    <a href="#" id="school-link">Lycée Agricole</a>
+    <img id="logo-img" src="logo.png" alt="Logo établissement"
+         onerror="this.style.display='none'">
+
+    <h1>Chronomètre</h1>
+    <p class="subtitle">Mesure du temps</p>
+
+    <!-- Cercle -->
+    <div class="circle-container">
+        <svg viewBox="0 0 300 300">
+            <defs>
+                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stop-color="#039a9f"/>
+                    <stop offset="50%"  stop-color="#7abbc7"/>
+                    <stop offset="100%" stop-color="#028a85"/>
+                </linearGradient>
+            </defs>
+            <circle class="circle-bg"       cx="150" cy="150" r="130"/>
+            <circle class="circle-progress" cx="150" cy="150" r="130"
+                    id="circle-prog"
+                    stroke-dasharray="816.81"
+                    stroke-dashoffset="816.81"/>
+        </svg>
+        <div id="time-display">
+            <div id="time-main">00:00</div>
+            <div id="phase-label">prêt</div>
+        </div>
+    </div>
+
+    <!-- Barre -->
+    <div class="progress-bar-container">
+        <div id="bar-fill"></div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="btn-row">
+        <button id="btn-start-stop" onclick="toggleStartStop()">▶ Démarrer</button>
+        <button id="btn-lap"        onclick="recordLap()" disabled>⚑ Tour</button>
+        <button id="btn-reset"      onclick="resetChronos()">↩ Reset</button>
+    </div>
+
+    <!-- Tours -->
+    <div id="laps-section">
+        <div class="lap-header" id="lap-header" style="display:none">
+            <span>Tour</span>
+            <span>Temps tour</span>
+            <span>Total</span>
+        </div>
+        <div id="laps-container"></div>
+    </div>
+</div>
+
+<script>
+// ─── CONSTANTES ──────────────────────────────────────────
+const CIRCUMFERENCE = 2 * Math.PI * 130; // ≈ 816.81
+const CYCLE_MS      = 60 * 1000;         // cercle tourne sur 60s
+
+// ─── ÉTAT ────────────────────────────────────────────────
+let running    = false;
+let startTime  = null;   // timestamp de départ (ou de reprise corrigé)
+let elapsed    = 0;      // ms accumulées avant la dernière pause
+let laps       = [];
+let lapStartMs = 0;
+let rafId      = null;
+
+// ─── PARTICULES ──────────────────────────────────────────
+const canvas = document.getElementById('particles-canvas');
+const ctx    = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function randomParticle() {
+    return {
+        x:    Math.random() * canvas.width,
+        y:    Math.random() * canvas.height,
+        r:    Math.random() * 2 + 0.5,
+        dx:   (Math.random() - 0.5) * 0.4,
+        dy:   (Math.random() - 0.5) * 0.4,
+        alpha: Math.random() * 0.5 + 0.1
+    };
+}
+
+for (let i = 0; i < 90; i++) particles.push(randomParticle());
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(122,187,199,${p.alpha})`;
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width)  p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ─── ENCOURAGEMENTS ──────────────────────────────────────
+const MESSAGES = [
+    "Beau travail !","Continue !","Super rythme !","En forme !",
+    "Vas-y !","Bravo !","Courage !","Tu gères !","Parfait !","Top chrono !"
+];
+
+function showEncouragement() {
+    const msg  = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
+    const el   = document.createElement('div');
+    el.className   = 'encouragement';
+    el.textContent = msg;
+    el.style.left  = Math.random() * 70 + 10 + 'vw';
+    el.style.top   = Math.random() * 70 + 10 + 'vh';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3600);
+}
+
+let encourageInterval = null;
+function startEncouragements() {
+    encourageInterval = setInterval(showEncouragement, 8000);
+}
+function stopEncouragements() {
+    clearInterval(encourageInterval);
+    encourageInterval = null;
+}
+
+// ─── SON TING ────────────────────────────────────────────
+function pingSound(freq, duration, delay = 0) {
+    try {
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc  = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.connect(gain);
+        gain.connect(actx.destination);
+        osc.type      = 'sine';
+        osc.frequency.setValueAtTime(freq, actx.currentTime + delay);
+        gain.gain.setValueAtTime(0.4, actx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + delay + duration);
+        osc.start(actx.currentTime + delay);
+        osc.stop(actx.currentTime + delay + duration + 0.05);
+    } catch(e) {}
+}
+
+function lapPing() {
+    pingSound(660, 0.15);
+    setTimeout(() => pingSound(880, 0.2), 160);
+}
+
+// ─── AFFICHAGE ───────────────────────────────────────────
+function msToDisplay(ms) {
+    const totalSec = Math.floor(ms / 1000);
+    const h  = Math.floor(totalSec / 3600);
+    const m  = Math.floor((totalSec % 3600) / 60);
+    const s  = totalSec % 60;
+    if (h > 0) {
+        return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+    return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function updateDisplay(ms) {
+    document.getElementById('time-main').textContent = msToDisplay(ms);
+
+    // Cercle : cycle de 60s
+    const cyclePos  = (ms % CYCLE_MS) / CYCLE_MS;
+    const offset    = CIRCUMFERENCE * (1 - cyclePos);
+    document.getElementById('circle-prog').style.strokeDashoffset = offset;
+
+    // Barre : même cycle
+    document.getElementById('bar-fill').style.width = (cyclePos * 100) + '%';
+}
+
+// ─── BOUCLE RAF ───────────────────────────────────────────
+function tick() {
+    if (!running) return;
+    const now   = Date.now();
+    const total = elapsed + (now - startTime);
+    updateDisplay(total);
+    rafId = requestAnimationFrame(tick);
+}
+
+// ─── DÉMARRER / PAUSE ────────────────────────────────────
+function toggleStartStop() {
+    const btn = document.getElementById('btn-start-stop');
+
+    if (!running) {
+        // Démarrer ou reprendre
+        running   = true;
+        startTime = Date.now();
+        if (laps.length === 0 && elapsed === 0) lapStartMs = 0;
+        btn.textContent = '⏸ Pause';
+        document.getElementById('phase-label').textContent = 'en cours';
+        document.getElementById('btn-lap').disabled = false;
+        startEncouragements();
+        rafId = requestAnimationFrame(tick);
+    } else {
+        // Pause
+        running  = false;
+        elapsed += Date.now() - startTime;
+        cancelAnimationFrame(rafId);
+        btn.textContent = '▶ Reprendre';
+        document.getElementById('phase-label').textContent = 'pause';
+        stopEncouragements();
+    }
+}
+
+// ─── TOUR ────────────────────────────────────────────────
+function recordLap() {
+    const totalMs = elapsed + (running ? Date.now() - startTime : 0);
+    const splitMs = totalMs - lapStartMs;
+    lapStartMs    = totalMs;
+
+    laps.push({ split: splitMs, total: totalMs });
+    lapPing();
+
+    document.getElementById('lap-header').style.display = 'flex';
+    renderLaps();
+}
+
+function renderLaps() {
+    const container = document.getElementById('laps-container');
+    container.innerHTML = '';
+
+    [...laps].reverse().forEach((lap, ri) => {
+        const i   = laps.length - 1 - ri;
+        const div = buildLapDiv(i, lap);
+        container.appendChild(div);
+    });
+}
+
+function buildLapDiv(i, lap) {
+    const div = document.createElement('div');
+    div.className = 'lap-item';
+    div.innerHTML = `
+        <span class="lap-num">Tour ${i + 1}</span>
+        <span class="lap-split">${msToDisplay(lap.split)}</span>
+        <span class="lap-total">${msToDisplay(lap.total)}</span>
+    `;
+    return div;
+}
+
+// ─── RESET ───────────────────────────────────────────────
+function resetChronos() {
+    cancelAnimationFrame(rafId);
+    running    = false;
+    startTime  = null;
+    elapsed    = 0;
+    laps       = [];
+    lapStartMs = 0;
+    stopEncouragements();
+
+    document.getElementById('time-main').textContent         = '00:00';
+    document.getElementById('phase-label').textContent       = 'prêt';
+    document.getElementById('btn-start-stop').textContent    = '▶ Démarrer';
+    document.getElementById('btn-lap').disabled              = true;
+    document.getElementById('circle-prog').style.strokeDashoffset = CIRCUMFERENCE;
+    document.getElementById('bar-fill').style.width          = '0%';
+    document.getElementById('laps-container').innerHTML      = '';
+    document.getElementById('lap-header').style.display      = 'none';
+}
+</script>
+
+</body>
+</html>
