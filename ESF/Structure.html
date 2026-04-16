@@ -492,7 +492,7 @@
     // ============================================
 
     // ⚠️ REMPLACE PAR L'URL DE TON DÉPLOIEMENT GOOGLE APPS SCRIPT
-    const GAS_URL = 'https://script.google.com/macros/s/XXXXXXXXXXXXXXXXX/exec';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbw7QiMNWULE9Rkst6-y2hWdb-zrF_k9sO6Z7z5ii_rx-sT9CuNfre0riPTmNayf8Cc6/exec';
 
     const LEVEL_NAMES = {
       1: 'Vrai / Faux',
@@ -520,25 +520,46 @@
       isWaiting: false
     };
 
-    // ============================================
+        // ============================================
     // COMMUNICATION AVEC GOOGLE APPS SCRIPT
     // ============================================
 
     async function callGAS(params) {
       try {
-        const response = await fetch(GAS_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify(params)
-        });
-        const text = await response.text();
-        // GAS redirige, fetch suit la redirection et renvoie du JSON en texte
-        try {
-          return JSON.parse(text);
-        } catch (e) {
-          // Parfois la réponse est du JSON stringifié 2 fois
-          return JSON.parse(JSON.parse(text));
+        // Construire l'URL avec paramètres GET
+        var url = new URL(GAS_URL);
+        
+        // Ajouter chaque paramètre
+        // Les objets et tableaux sont sérialisés en JSON string
+        for (var key in params) {
+          var value = params[key];
+          if (typeof value === 'object') {
+            url.searchParams.append(key, JSON.stringify(value));
+          } else {
+            url.searchParams.append(key, value);
+          }
         }
+
+        var response = await fetch(url.toString(), {
+          method: 'GET',
+          redirect: 'follow'
+        });
+
+        var text = await response.text();
+
+        // Parser le résultat
+        try {
+          var data = JSON.parse(text);
+          // Parfois GAS double-encode le JSON
+          if (typeof data === 'string') {
+            data = JSON.parse(data);
+          }
+          return data;
+        } catch (e) {
+          console.error('Erreur parsing JSON:', text.substring(0, 200));
+          return { error: true, message: 'Réponse invalide du serveur.' };
+        }
+
       } catch (error) {
         console.error('Erreur appel GAS:', error);
         return { error: true, message: 'Erreur de communication avec le serveur.' };
