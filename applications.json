@@ -78,5 +78,21 @@
     "statut": "publié",
     "date_creation": "2025-01",
     "auteur": "Moi"
+  },
+    {
+    "id": "ESF-01",
+    "titre": "Orientation vers strucutres",
+    "description": "",
+    "matiere": "ESF",
+    "module": "Bac Pro SAPAT",
+    "theme": "Territoire",
+    "niveaux": ["Seconde"],
+    "tags": ["", "", ""],
+    "url": "ESF/Structure.html",
+    "emoji": "🔬",
+    "image": "https://img.freepik.com/vecteurs-libre/cellule-vegetale-membrane-cellulaire_1308-15415.jpg",
+    "statut": "publié",
+    "date_creation": "2025-01",
+    "auteur": "Moi"
   }
 ]
