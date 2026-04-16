@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orientation Structures - Jeu SAPAT</title>
+  <style>
+    /* ============ RESET & BASE ============ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+
+    /* ============ ÉCRAN D'ACCUEIL ============ */
+    #welcome-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #welcome-screen h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #f9d423, #ff4e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    #welcome-screen .subtitle {
+      font-size: 1.1em;
+      color: #aaa;
+      margin-bottom: 30px;
+    }
+
+    .rules-box {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 25px 30px;
+      max-width: 600px;
+      width: 100%;
+      margin-bottom: 30px;
+      text-align: left;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .rules-box h2 {
+      color: #f9d423;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+    }
+
+    .rules-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .rules-box li {
+      padding: 8px 0;
+      padding-left: 30px;
+      position: relative;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+
+    .rules-box li::before {
+      content: attr(data-icon);
+      position: absolute;
+      left: 0;
+      font-size: 1.1em;
+    }
+
+    .player-name-input {
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 1.1em;
+      width: 300px;
+      max-width: 90%;
+      text-align: center;
+      margin-bottom: 20px;
+      transition: border-color 0.3s;
+    }
+
+    .player-name-input:focus {
+      outline: none;
+      border-color: #f9d423;
+    }
+
+    .player-name-input::placeholder {
+      color: #888;
+    }
+
+    .btn-start {
+      padding: 16px 50px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #f9d423, #ff4e50);
+      color: #1a1a2e;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(249, 212, 35, 0.3);
+    }
+
+    .btn-start:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(249, 212, 35, 0.5);
+    }
+
+    /* ============ ÉCRAN DE JEU ============ */
+    #game-screen {
+      display: none;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Header avec stats */
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .player-info {
+      font-size: 1em;
+      color: #ccc;
+    }
+
+    .player-info strong {
+      color: #f9d423;
+    }
+
+    /* Étoiles de niveau */
+    .stars-container {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .star {
+      font-size: 1.8em;
+      transition: all 0.4s ease;
+      filter: grayscale(100%) brightness(0.4);
+    }
+
+    .star.active {
+      filter: grayscale(0%) brightness(1);
+      animation: starPop 0.4s ease;
+    }
+
+    @keyframes starPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+
+    .streak-info {
+      display: flex;
+      gap: 15px;
+      font-size: 0.9em;
+    }
+
+    .streak-good {
+      color: #4ade80;
+    }
+
+    .streak-bad {
+      color: #f87171;
+    }
+
+    /* Indicateur de niveau */
+    .level-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.85em;
+      margin-bottom: 15px;
+    }
+
+    .level-1 { background: #22c55e33; color: #4ade80; border: 1px solid #4ade8055; }
+    .level-2 { background: #3b82f633; color: #60a5fa; border: 1px solid #60a5fa55; }
+    .level-3 { background: #f59e0b33; color: #fbbf24; border: 1px solid #fbbf2455; }
+    .level-4 { background: #ef444433; color: #f87171; border: 1px solid #f8717155; }
+    .level-5 { background: #a855f733; color: #c084fc; border: 1px solid #c084fc55; }
+
+    /* Zone de question */
+    .question-card {
+      background: rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 20px;
+    }
+
+    .context-box {
+      background: rgba(255,255,255,0.05);
+      border-left: 4px solid #f9d423;
+      padding: 18px 20px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 22px;
+      line-height: 1.7;
+      font-size: 1em;
+    }
+
+    .context-label {
+      font-size: 0.8em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #f9d423;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 1.15em;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    /* Boutons Vrai/Faux */
+    .vf-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .btn-vf {
+      padding: 16px 50px;
+      font-size: 1.15em;
+      border: 2px solid;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+      background: transparent;
+    }
+
+    .btn-vrai {
+      border-color: #4ade80;
+      color: #4ade80;
+    }
+
+    .btn-vrai:hover {
+      background: #4ade8022;
+      transform: translateY(-2px);
+    }
+
+    .btn-faux {
+      border-color: #f87171;
+      color: #f87171;
+    }
+
+    .btn-faux:hover {
+      background: #f8717122;
+      transform: translateY(-2px);
+    }
+
+    /* Boutons QCM */
+    .qcm-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn-qcm {
+      padding: 16px 20px;
+      font-size: 1em;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 14px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.05);
+      color: #e0e0e0;
+      transition: all 0.3s;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .btn-qcm:hover {
+      border-color: #60a5fa;
+      background: rgba(96, 165, 250, 0.1);
+      transform: translateY(-1px);
+    }
+
+    /* Zone de réponse écrite */
+    .answer-area {
+      width: 100%;
+    }
+
+    .answer-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-size: 1em;
+      margin-bottom: 10px;
+      transition: border-color 0.3s;
+    }
+
+    .answer-input:focus {
+      outline: none;
+      border-color: #f9d423;
+    }
+
+    .answer-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-size: 1em;
+      min-height: 120px;
+      resize: vertical;
+      font-family: inherit;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      transition: border-color 0.3s;
+    }
+
+    .answer-textarea:focus {
+      outline: none;
+      border-color: #f9d423;
+    }
+
+    .btn-validate {
+      padding: 14px 40px;
+      font-size: 1.05em;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 5px;
+    }
+
+    .btn-validate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-validate:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Feedback */
+    .feedback-box {
+      padding: 22px 25px;
+      border-radius: 16px;
+      margin-top: 20px;
+      animation: fadeIn 0.4s ease;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feedback-correct {
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+
+    .feedback-correct .feedback-title {
+      color: #4ade80;
+    }
+
+    .feedback-incorrect {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+    }
+
+    .feedback-incorrect .feedback-title {
+      color: #f87171;
+    }
+
+    .feedback-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .feedback-text {
+      color: #ccc;
+      font-size: 0.95em;
+    }
+
+    .btn-next {
+      padding: 14px 40px;
+      font-size: 1.05em;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f9d423, #ff4e50);
+      color: #1a1a2e;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: all 0.3s;
+    }
+
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(249, 212, 35, 0.4);
+    }
+
+    /* Chargement */
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      gap: 20px;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255,255,255,0.1);
+      border-top-color: #f9d423;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      color: #aaa;
+      font-size: 0.95em;
+    }
+
+    /* Score final */
+    .score-display {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .score-display .score-number {
+      font-size: 2em;
+      font-weight: bold;
+      color: #f9d423;
+    }
+
+    /* Level transition */
+    .level-change-notice {
+      text-align: center;
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin-top: 10px;
+      font-weight: bold;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .level-up {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+
+    .level-down {
+      background: rgba(239, 68, 68, 0.12);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.3);
+    }
+
+    /* Compteur de questions */
+    .question-counter {
+      text-align: center;
+      color: #888;
+      font-size: 0.85em;
+      margin-bottom: 15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #welcome-screen h1 {
+        font-size: 1.8em;
+      }
+
+      .qcm-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .vf-buttons {
+        flex-direction: column;
+      }
+
+      .btn-vf {
+        padding: 14px 30px;
+      }
+
+      .game-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .question-card {
+        padding: 20px;
+      }
+    }
+
+    /* Structures reference panel */
+    .structures-toggle {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .structures-toggle-btn {
+      width: 100%;
+      padding: 12px 20px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 0.9em;
+      cursor: pointer;
+      text-align: left;
+      transition: color 0.3s;
+    }
+
+    .structures-toggle-btn:hover {
+      color: #f9d423;
+    }
+
+    .structures-list {
+      display: none;
+      padding: 0 20px 15px;
+      column-count: 2;
+      column-gap: 20px;
+      font-size: 0.85em;
+      color: #999;
+      line-height: 1.8;
+    }
+
+    .structures-list.open {
+      display: block;
+    }
+
+    /* Historique */
+    .history-bar {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .history-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .history-dot.correct {
+      background: #4ade80;
+      box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+    }
+
+    .history-dot.incorrect {
+      background: #f87171;
+      box-shadow: 0 0 8px rgba(248, 113, 113, 0.4);
+    }
+
+    .history-dot.empty {
+      background: rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ ÉCRAN D'ACCUEIL ============ -->
+  <div id="welcome-screen">
+    <h1>🏛️ Orientation Structures</h1>
+    <p class="subtitle">Jeu d'entraînement SAPAT - Structures du territoire</p>
+
+    <div class="rules-box">
+      <h2>📋 Règles du jeu</h2>
+      <ul>
+        <li data-icon="⭐">Il y a <strong>5 niveaux</strong> représentés par des étoiles.</li>
+        <li data-icon="✅">3 bonnes réponses de suite = tu montes d'un niveau !</li>
+        <li data-icon="❌">2 mauvaises réponses de suite = tu redescends d'un niveau.</li>
+        <li data-icon="1️⃣">Niveau 1 : Vrai ou Faux</li>
+        <li data-icon="2️⃣">Niveau 2 : QCM (4 choix)</li>
+        <li data-icon="3️⃣">Niveau 3 : Réponse écrite</li>
+        <li data-icon="4️⃣">Niveau 4 : Réponse écrite + justification</li>
+        <li data-icon="5️⃣">Niveau 5 : Question complexe + justification approfondie</li>
+      </ul>
+    </div>
+
+    <input type="text" class="player-name-input" id="player-name" placeholder="Ton prénom..." maxlength="30" />
+    <button class="btn-start" onclick="startGame()">🚀 Commencer</button>
+  </div>
+
+  <!-- ============ ÉCRAN DE JEU ============ -->
+  <div id="game-screen">
+
+    <!-- Header -->
+    <div class="game-header">
+      <div class="player-info">👤 <strong id="display-name"></strong></div>
+      <div class="stars-container" id="stars-container">
+        <span class="star active" id="star-1">⭐</span>
+        <span class="star" id="star-2">⭐</span>
+        <span class="star" id="star-3">⭐</span>
+        <span class="star" id="star-4">⭐</span>
+        <span class="star" id="star-5">⭐</span>
+      </div>
+      <div class="streak-info">
+        <span class="streak-good">✅ <span id="good-streak">0</span></span>
+        <span class="streak-bad">❌ <span id="bad-streak">0</span></span>
+      </div>
+      <div class="score-display">
+        Score : <span class="score-number" id="total-score">0</span>
+      </div>
+    </div>
+
+    <!-- Historique visuel -->
+    <div class="history-bar" id="history-bar"></div>
+
+    <!-- Compteur de questions -->
+    <div class="question-counter" id="question-counter"></div>
+
+    <!-- Aide-mémoire structures -->
+    <div class="structures-toggle">
+      <button class="structures-toggle-btn" onclick="toggleStructures()">
+        📖 Afficher / Masquer la liste des structures
+      </button>
+      <div class="structures-list" id="structures-list">
+        Crèche • Petite crèche • Grande crèche • Très grande crèche •
+        Microcrèche • MAM • Assistante maternelle à domicile •
+        EHPAD • MARPA • École • ALSH •
+        Résidence service • Résidence autonomie •
+        Foyer de vie • Foyer d'accueil médicalisé •
+        MAS • IME (DIME)
+      </div>
+    </div>
+
+    <!-- Zone de question -->
+    <div id="question-area">
+      <!-- Contenu dynamique -->
+    </div>
+
+  </div>
+
+  <script>
+    // ============ ÉTAT DU JEU ============
+    let gameState = {
+      playerName: '',
+      currentLevel: 1,
+      goodStreak: 0,
+      badStreak: 0,
+      totalScore: 0,
+      questionNumber: 0,
+      history: [],
+      currentQuestion: null,
+      previousStructures: [],
+      isLoading: false
+    };
+
+    const LEVEL_NAMES = {
+      1: 'Vrai / Faux',
+      2: 'QCM',
+      3: 'Réponse écrite',
+      4: 'Réponse + Justification',
+      5: 'Expert'
+    };
+
+    const LEVEL_POINTS = {
+      1: 10,
+      2: 20,
+      3: 35,
+      4: 50,
+      5: 75
+    };
+
+    // ============ FONCTIONS UI ============
+
+    function startGame() {
+      const name = document.getElementById('player-name').value.trim();
+      if (!name) {
+        document.getElementById('player-name').style.borderColor = '#f87171';
+        document.getElementById('player-name').placeholder = 'Entre ton prénom !';
+        return;
+      }
+      gameState.playerName = name;
+      document.getElementById('display-name').textContent = name;
+      document.getElementById('welcome-screen').style.display = 'none';
+      document.getElementById('game-screen').style.display = 'block';
+      loadQuestion();
+    }
+
+    // Entrée clavier pour le nom
+    document.getElementById('player-name').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') startGame();
+    });
+
+    function toggleStructures() {
+      document.getElementById('structures-list').classList.toggle('open');
+    }
+
+    function updateUI() {
+      // Étoiles
+      for (let i = 1; i <= 5; i++) {
+        const star = document.getElementById(`star-${i}`);
+        if (i <= gameState.currentLevel) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      }
+
+      // Streaks
+      document.getElementById('good-streak').textContent = gameState.goodStreak;
+      document.getElementById('bad-streak').textContent = gameState.badStreak;
+      document.getElementById('total-score').textContent = gameState.totalScore;
+
+      // Compteur
+      document.getElementById('question-counter').textContent =
+        `Question n°${gameState.questionNumber} — Niveau ${gameState.currentLevel} : ${LEVEL_NAMES[gameState.currentLevel]}`;
+
+      // Historique
+      const bar = document.getElementById('history-bar');
+      bar.innerHTML = '';
+      const recent = gameState.history.slice(-20);
+      recent.forEach(h => {
+        const dot = document.createElement('div');
+        dot.className = `history-dot ${h ? 'correct' : 'incorrect'}`;
+        bar.appendChild(dot);
+      });
+    }
+
+    // ============ CHARGEMENT DE QUESTION ============
+
+    function loadQuestion() {
+      if (gameState.isLoading) return;
+      gameState.isLoading = true;
+      gameState.questionNumber++;
+
+      updateUI();
+
+      document.getElementById('question-area').innerHTML = `
+        <div class="question-card">
+          <div class="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Génération de la question en cours...</div>
+          </div>
+        </div>
+      `;
+
+      google.script.run
+        .withSuccessHandler(onQuestionReceived)
+        .withFailureHandler(onError)
+        .generateQuestion(gameState.currentLevel, gameState.previousStructures.slice(-5));
+    }
+
+    function onQuestionReceived(jsonString) {
+      gameState.isLoading = false;
+
+      try {
+        const data = JSON.parse(jsonString);
+
+        if (data.error) {
+          showError(data.message);
+          return;
+        }
+
+        gameState.currentQuestion = data;
+
+        // Stocker la structure pour éviter les répétitions
+        const struct = data.bonne_reponse || data.structure_correcte || '';
+        if (struct) {
+          gameState.previousStructures.push(struct);
+          if (gameState.previousStructures.length > 8) {
+            gameState.previousStructures.shift();
+          }
+        }
+
+        renderQuestion(data);
+
+      } catch (e) {
+        showError('Erreur de parsing : ' + e.message);
+      }
+    }
+
+    function onError(error) {
+      gameState.isLoading = false;
+      showError(error.message || 'Erreur inconnue');
+    }
+
+    function showError(msg) {
+      document.getElementById('question-area').innerHTML = `
+        <div class="question-card">
+          <div class="feedback-box feedback-incorrect">
+            <div class="feedback-title">⚠️ Erreur</div>
+            <div class="feedback-text">${msg}</div>
+          </div>
+          <button class="btn-next" onclick="loadQuestion()" style="margin-top:15px;">🔄 Réessayer</button>
+        </div>
+      `;
+    }
+
+    // ============ RENDU DE QUESTION ============
+
+    function renderQuestion(data) {
+      const level = gameState.currentLevel;
+      let html = `<div class="question-card">`;
+      html += `<span class="level-badge level-${level}">Niveau ${level} — ${LEVEL_NAMES[level]}</span>`;
+
+      // Contexte
+      html += `
+        <div class="context-box">
+          <div class="context-label">📋 Contexte professionnel</div>
+          ${data.contexte}
+        </div>
+      `;
+
+      switch (level) {
+        case 1:
+          html += renderLevel1(data);
+          break;
+        case 2:
+          html += renderLevel2(data);
+          break;
+        case 3:
+          html += renderLevel3(data);
+          break;
+        case 4:
+          html += renderLevel4(data);
+          break;
+        case 5:
+          html += renderLevel5(data);
+          break;
+      }
+
+      html += `<div id="feedback-zone"></div>`;
+      html += `</div>`;
+
+      document.getElementById('question-area').innerHTML = html;
+    }
+
+    function renderLevel1(data) {
+      return `
+        <div class="question-text">${data.affirmation}</div>
+        <div class="vf-buttons">
+          <button class="btn-vf btn-vrai" onclick="answerVF(true)">✅ VRAI</button>
+          <button class="btn-vf btn-faux" onclick="answerVF(false)">❌ FAUX</button>
+        </div>
+      `;
+    }
+
+    function renderLevel2(data) {
+      // Mélanger les choix
+      const shuffled = [...data.choix].sort(() => Math.random() - 0.5);
+      let html = `<div class="question-text">${data.question}</div>`;
+      html += `<div class="qcm-buttons">`;
+      shuffled.forEach(choix => {
+        html += `<button class="btn-qcm" onclick="answerQCM('${choix.replace(/'/g, "\\'")}')">${choix}</button>`;
+      });
+      html += `</div>`;
+      return html;
+    }
+
+    function renderLevel3(data) {
+      return `
+        <div class="question-text">${data.question}</div>
+        <div class="answer-area">
+          <input type="text" class="answer-input" id="answer-input" 
+            placeholder="Écris le nom de la structure..." 
+            onkeypress="if(event.key==='Enter')submitOpen()" />
+          <button class="btn-validate" id="btn-submit" onclick="submitOpen()">📨 Valider</button>
+        </div>
+      `;
+    }
+
+    function renderLevel4(data) {
+      return `
+        <div class="question-text">${data.question}</div>
+        <div class="answer-area">
+          <input type="text" class="answer-input" id="answer-input" 
+            placeholder="Nom de la structure..." />
+          <textarea class="answer-textarea" id="answer-justification" 
+            placeholder="Justifie ton choix ici..."></textarea>
+          <button class="btn-validate" id="btn-submit" onclick="submitOpenJustified()">📨 Valider</button>
+        </div>
+      `;
+    }
+
+    function renderLevel5(data) {
+      return `
+        <div class="question-text">${data.question}</div>
+        <div class="answer-area">
+          <input type="text" class="answer-input" id="answer-input" 
+            placeholder="Nom de la structure..." />
+          <textarea class="answer-textarea" id="answer-justification" 
+            placeholder="Justifie ton choix et explique pourquoi une autre structure ne convient pas..."></textarea>
+          <button class="btn-validate" id="btn-submit" onclick="submitOpenJustified()">📨 Valider</button>
+        </div>
+      `;
+    }
+
+    // ============ GESTION DES RÉPONSES ============
+
+    function answerVF(answer) {
+      const data = gameState.currentQuestion;
+      const correct = (answer === data.bonne_reponse);
+      showFeedback(correct, data.explication, data.structure_correcte);
+    }
+
+    function answerQCM(choix) {
+      const data = gameState.currentQuestion;
+      const correct = (choix === data.bonne_reponse);
+      showFeedback(correct, data.explication, data.bonne_reponse);
+    }
+
+    function submitOpen() {
+      const input = document.getElementById('answer-input').value.trim();
+      if (!input) return;
+
+      const data = gameState.currentQuestion;
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.textContent = '⏳ Correction...';
+
+      // Vérification locale simple pour le niveau 3
+      const answer = input.toLowerCase();
+      const accepted = [
+        data.bonne_reponse.toLowerCase(),
+        ...(data.mots_cles_acceptes || []).map(m => m.toLowerCase())
+      ];
+
+      let correct = false;
+      for (const a of accepted) {
+        if (answer.includes(a) || a.includes(answer)) {
+          correct = true;
+          break;
+        }
+      }
+
+      showFeedback(correct, data.explication, data.bonne_reponse);
+    }
+
+    function submitOpenJustified() {
+      const input = document.getElementById('answer-input').value.trim();
+      const justification = document.getElementById('answer-justification').value.trim();
+
+      if (!input) {
+        document.getElementById('answer-input').style.borderColor = '#f87171';
+        return;
+      }
+
+      if (!justification || justification.length < 15) {
+        document.getElementById('answer-justification').style.borderColor = '#f87171';
+        document.getElementById('answer-justification').placeholder =
+          'Ta justification doit être plus développée (au moins 2-3 phrases)...';
+        return;
+      }
+
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.textContent = '⏳ Correction en cours...';
+
+      const fullAnswer = `Structure : ${input}. Justification : ${justification}`;
+
+      google.script.run
+        .withSuccessHandler(function(resultJson) {
+          try {
+            const result = JSON.parse(resultJson);
+            const correct = result.correct;
+            const feedback = result.feedback_eleve || gameState.currentQuestion.explication_complete;
+            showFeedback(correct, feedback, gameState.currentQuestion.bonne_reponse);
+          } catch(e) {
+            showFeedback(false, gameState.currentQuestion.explication_complete, gameState.currentQuestion.bonne_reponse);
+          }
+        })
+        .withFailureHandler(function() {
+          // Fallback : vérification locale
+          const answer = input.toLowerCase();
+          const data = gameState.currentQuestion;
+          const accepted = [
+            data.bonne_reponse.toLowerCase(),
+            ...(data.mots_cles_acceptes || []).map(m => m.toLowerCase())
+          ];
+          let correct = accepted.some(a => answer.includes(a) || a.includes(answer));
+          showFeedback(correct, data.explication_complete, data.bonne_reponse);
+        })
+        .evaluateOpenAnswer(gameState.currentLevel, gameState.currentQuestion, fullAnswer);
+    }
+
+    // ============ FEEDBACK & PROGRESSION ============
+
+    function showFeedback(correct, explanation, correctAnswer) {
+      // Désactiver tous les boutons
+      document.querySelectorAll('.btn-vf, .btn-qcm, .btn-validate').forEach(b => b.disabled = true);
+
+      // Mettre à jour les streaks
+      if (correct) {
+        gameState.goodStreak++;
+        gameState.badStreak = 0;
+        gameState.totalScore += LEVEL_POINTS[gameState.currentLevel];
+      } else {
+        gameState.badStreak++;
+        gameState.goodStreak = 0;
+      }
+
+      gameState.history.push(correct);
+
+      // Vérifier changement de niveau
+      let levelChange = null;
+      if (gameState.goodStreak >= 3 && gameState.currentLevel < 5) {
+        gameState.currentLevel++;
+        gameState.goodStreak = 0;
+        gameState.badStreak = 0;
+        levelChange = 'up';
+      } else if (gameState.badStreak >= 2 && gameState.currentLevel > 1) {
+        gameState.currentLevel--;
+        gameState.goodStreak = 0;
+        gameState.badStreak = 0;
+        levelChange = 'down';
+      }
+
+      updateUI();
+
+      // Afficher le feedback
+      let feedbackHtml = `
+        <div class="feedback-box ${correct ? 'feedback-correct' : 'feedback-incorrect'}">
+          <div class="feedback-title">${correct ? '🎉 Bonne réponse !' : '😕 Ce n\'est pas la bonne réponse...'}</div>
+          ${!correct ? `<div class="feedback-text" style="margin-bottom:8px;"><strong>La bonne réponse était :</strong> ${correctAnswer}</div>` : ''}
+          <div class="feedback-text">${explanation}</div>
+        </div>
+      `;
+
+      if (levelChange === 'up') {
+        feedbackHtml += `
+          <div class="level-change-notice level-up">
+            ⬆️ Bravo ! Tu passes au niveau ${gameState.currentLevel} : ${LEVEL_NAMES[gameState.currentLevel]} !
+          </div>
+        `;
+      } else if (levelChange === 'down') {
+        feedbackHtml += `
+          <div class="level-change-notice level-down">
+            ⬇️ Tu redescends au niveau ${gameState.currentLevel} : ${LEVEL_NAMES[gameState.currentLevel]}. Courage !
+          </div>
+        `;
+      }
+
+      feedbackHtml += `<button class="btn-next" onclick="loadQuestion()">➡️ Question suivante</button>`;
+
+      document.getElementById('feedback-zone').innerHTML = feedbackHtml;
+    }
+  </script>
+
+</body>
+</html>
