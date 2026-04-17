@@ -3,612 +3,1333 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portail Pédagogique – Lycée Le Cleusmeur</title>
-  <script src="https://kit.fontawesome.com/f6d42ea8e9.js" crossorigin="anonymous"></script>
+  <title>Portail Pédagogique – Le Cleusmeur</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f6f9;
-      color: #2c2c2c;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6f8;
+      color: #494949;
+      min-height: 100vh;
     }
 
-    /* ===== HEADER ===== */
-    header {
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== HEADER GÉNÉRAL ===== */
+    #main-header {
       background: #494949;
-      color: white;
-      padding: 1rem 2rem;
+      color: #fff;
+      padding: 16px 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .header-left h1 { font-size: 1.4rem; }
-    .header-left p  { font-size: 0.85rem; opacity: 0.7; margin-top: 0.2rem; }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-logo-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+      box-shadow: 0 0 0 2px #ffffff55;
+    }
+    .header-logo-circle:hover { box-shadow: 0 0 0 3px #fff; }
+    .header-logo-circle img { width: 46px; height: 46px; object-fit: contain; }
+
+    .header-etab-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.01em;
+    }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: white;
-      flex-shrink: 0;
+      gap: 20px;
     }
 
-    .header-right:hover .lycee-nom { text-decoration: underline; }
-
-    .lycee-nom {
-      font-size: 0.9rem;
-      font-weight: 600;
+    .header-portail-text {
       text-align: right;
-      line-height: 1.3;
-      max-width: 160px;
+      color: #e8f0f8;
+    }
+    .header-portail-text .portail-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .header-portail-text .portail-sub {
+      font-size: 0.82rem;
+      color: #c8dced;
     }
 
-    .logo-cercle {
-      width: 52px;
-      height: 52px;
+    .header-qr-circle {
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      background: white;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       flex-shrink: 0;
-      border: 2px solid rgba(255,255,255,0.4);
-    }
-
-    .logo-cercle img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-    }
-
-    /* ===== BARRE DE FILTRES ===== */
-    #filtres {
-      background: white;
-      padding: 0.75rem 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      border-bottom: 1px solid #ddd;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-    }
-
-    #filtres input,
-    #filtres select {
-      padding: 0.45rem 0.7rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      background: #f9f9f9;
-    }
-
-    #filtres input { flex: 1; min-width: 180px; }
-
-    #btn-reset {
-      padding: 0.45rem 1rem;
-      background: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 6px;
       cursor: pointer;
-      font-size: 0.85rem;
+      transition: box-shadow 0.2s;
+      box-shadow: 0 0 0 2px #ffffff55;
+    }
+    .header-qr-circle a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .header-qr-circle:hover { box-shadow: 0 0 0 3px #fff; }
+    .header-qr-circle img { width: 38px; height: 38px; object-fit: contain; }
+
+    /* ===== MAIN CONTENT ===== */
+    #main-content {
+      max-width: 1400px;
+      margin: 32px auto;
+      padding: 0 24px 48px;
     }
 
-    #btn-reset:hover { background: #c0392b; }
-
-    /* ===== MAIN ===== */
-    main { padding: 2rem; }
-
-    /* ===== SECTION DÉPLIANTE ===== */
-    .section-bloc {
-      margin-bottom: 2.5rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    /* ===== SECTION CATÉGORIE ===== */
+    .categorie-section {
+      margin-bottom: 36px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(44,95,138,0.08);
       overflow: hidden;
     }
 
-    .section-header {
+    .categorie-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.5rem;
+      gap: 0;
+      background: #2c5f8a;
+      padding: 0;
       cursor: pointer;
       user-select: none;
-      border-bottom: 3px solid transparent;
-      transition: background 0.2s;
+      min-height: 64px;
     }
+    .categorie-header:hover { background: #245278; }
 
-    .section-header:hover { background: #f0f3f6; }
-
-    .section-header.apps    { border-color: #803977; }
-    .section-header.outils  { border-color: #e63f01; }
-    .section-header.structs { border-color: #028a85; }
-
-    .section-header-left {
+    .categorie-header-left {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-    }
-
-    .section-header-left i {
-      font-size: 1.3rem;
-    }
-
-    .section-header.apps    i { color: #803977; }
-    .section-header.outils  i { color: #e63f01; }
-    .section-header.structs i { color: #028a85; }
-
-    .section-header h2 {
-      font-size: 1.15rem;
-      color: #2c3e50;
-    }
-
-    .section-header .badge {
-      font-size: 0.75rem;
-      background: #eee;
-      color: #666;
-      border-radius: 20px;
-      padding: 0.15rem 0.6rem;
-      margin-left: 0.5rem;
-    }
-
-    .fleche {
-      font-size: 1rem;
-      color: #888;
-      transition: transform 0.3s;
-    }
-
-    .section-bloc.ferme .fleche { transform: rotate(-90deg); }
-
-    /* ===== CONTENU DE SECTION ===== */
-    .section-contenu {
-      padding: 1.5rem;
-    }
-
-    .section-bloc.ferme .section-contenu { display: none; }
-
-    /* ===== GRILLE DE CARTES ===== */
-    .grille {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-
-    /* ===== CARTE ===== */
-    .carte {
-      background: #f9f9f9;
-      border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .carte-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .carte:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-    }
-
-    .carte.cachee { display: none; }
-
-    .carte-icone {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      color: white;
+      gap: 14px;
+      padding: 14px 20px;
       flex-shrink: 0;
     }
 
-    .carte-icone img {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
+    .categorie-icon svg {
+      width: 32px;
+      height: 32px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 1.8;
     }
 
-    .carte-icone.apps    { background: #ffffff; }
-    .carte-icone.outils  { background: #ffffff; }
-    .carte-icone.structs { background: #ffffff; }
-    .carte-icone img     { width: 28px; height: 28px; object-fit: contain; }
-
-    .carte-titre {
+    .categorie-title {
+      font-size: 1.15rem;
       font-weight: 700;
-      font-size: 0.95rem;
+      color: #fff;
+      white-space: nowrap;
     }
 
-    .carte-desc {
-      font-size: 0.8rem;
-      color: #666;
+    .categorie-arrow {
+      margin-left: 10px;
+      transition: transform 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    .categorie-arrow svg {
+      width: 20px; height: 20px;
+      stroke: #fff; fill: none; stroke-width: 2.2;
+    }
+    .categorie-section.collapsed .categorie-arrow { transform: rotate(-90deg); }
+
+    /* Filtres dans le header */
+    .categorie-filters {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      flex-wrap: wrap;
       flex: 1;
     }
 
-    .carte-tags {
+    .filter-group {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-top: 0.3rem;
+      align-items: center;
+      gap: 6px;
     }
 
-    .tag {
-      font-size: 0.7rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 20px;
-      background: #e8f0fe;
-      color: #2c5fad;
+    .filter-group label {
+      font-size: 0.78rem;
+      color: #c8dced;
+      font-weight: 600;
+      white-space: nowrap;
     }
 
-    .carte-niveaux {
-      font-size: 0.72rem;
-      color: #999;
+    .filter-group select {
+      font-size: 0.82rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: none;
+      background: #fff;
+      color: #494949;
+      cursor: pointer;
+      outline: none;
+      max-width: 160px;
     }
+    .filter-group select:focus { box-shadow: 0 0 0 2px #7ab3d4; }
 
-    .carte-image {
-      width: 100%;
-      border-radius: 8px;
+    .filter-reset-btn {
+      background: #e8f0f8;
+      color: #2c5f8a;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .filter-reset-btn:hover { background: #c8dced; }
+
+    /* ===== CORPS DE LA SECTION ===== */
+    .categorie-body {
+      padding: 24px;
+      transition: max-height 0.4s ease, opacity 0.3s;
       overflow: hidden;
-      aspect-ratio: 16 / 9;
+    }
+    .categorie-section.collapsed .categorie-body {
+      max-height: 0 !important;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
-    .carte-image img {
+    /* ===== GRILLE DE CARTES ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* ===== CARTE ===== */
+    .card {
+      background: #f9fbfd;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(44,95,138,0.10);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+      border: 1px solid #e2eaf2;
+    }
+    .card:hover {
+      box-shadow: 0 4px 18px rgba(44,95,138,0.18);
+      transform: translateY(-2px);
+    }
+
+    /* Vignette 16/9 */
+    .card-image-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #dde8f0;
+      flex-shrink: 0;
+    }
+    .card-image-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-
-
-    /* ===== BOUTON AFFICHER PLUS ===== */
-    .btn-plus-wrap {
-      text-align: center;
-      margin-top: 1rem;
+    .card-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #dde8f0, #c8dced);
+    }
+    .card-image-placeholder svg {
+      width: 48px; height: 48px;
+      stroke: #7ab3d4; fill: none; stroke-width: 1.4;
     }
 
-    .btn-plus {
-      padding: 0.5rem 1.5rem;
-      border: 2px solid #2c3e50;
-      background: transparent;
-      color: #2c3e50;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.85rem;
+    /* Corps de la carte */
+    .card-body {
+      padding: 14px 16px 12px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .card-title-row img.card-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .card-title-row .card-icon-placeholder svg {
+      width: 24px; height: 24px;
+      stroke: #7ab3d4; fill: none; stroke-width: 1.8;
+    }
+    .card-title {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: #2c5f8a;
+      line-height: 1.3;
+    }
+
+    /* Description tronquée */
+    .card-description-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .card-description {
+      font-size: 0.84rem;
+      color: #494949;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-description.expanded {
+      display: block;
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+    }
+
+    .btn-read-more {
+      background: none;
+      border: none;
+      color: #2c5f8a;
+      font-size: 0.78rem;
       font-weight: 600;
-      transition: all 0.2s;
+      cursor: pointer;
+      padding: 2px 0;
+      margin-top: 2px;
+      text-decoration: underline;
+      display: none;
+    }
+    .btn-read-more.visible { display: inline-block; }
+
+    /* Champs supplémentaires */
+    .card-meta {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid #e2eaf2;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .card-meta-item {
+      font-size: 0.78rem;
+      color: #6a8fa8;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    .card-meta-item .meta-label {
+      font-weight: 700;
+      color: #2c5f8a;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .btn-plus:hover {
-      background: #2c3e50;
-      color: white;
+    /* Lien de la carte */
+    .card-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 6px 14px;
+      background: #2c5f8a;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .card-link-btn:hover { background: #245278; }
+    .card-link-btn svg {
+      width: 14px; height: 14px;
+      stroke: #fff; fill: none; stroke-width: 2;
     }
 
-    .btn-plus.cache { display: none; }
+    /* Statut badge */
+    .card-statut-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border-radius: 20px;
+      padding: 2px 10px;
+      margin-bottom: 6px;
+      align-self: flex-start;
+      letter-spacing: 0.03em;
+    }
+    .statut-publie  { background: #d4edda; color: #276b3a; }
+    .statut-brouillon { background: #fff3cd; color: #856404; }
+    .statut-archive { background: #e2e3e5; color: #4a4a4a; }
+    .statut-default { background: #e2eaf2; color: #2c5f8a; }
 
-    /* ===== MESSAGE VIDE ===== */
-    .msg-vide {
-      color: #aaa;
+    /* Bouton Voir plus */
+    .voir-plus-wrap {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .btn-voir-plus {
+      background: #2c5f8a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 32px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-voir-plus:hover { background: #245278; }
+
+    /* Aucun résultat */
+    .no-result {
+      color: #7ab3d4;
       font-style: italic;
       font-size: 0.9rem;
-      padding: 0.5rem 0;
+      padding: 12px 0;
     }
 
+    /* ===== MODALE DESCRIPTION ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(30,50,70,0.45);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 520px;
+      width: 100%;
+      padding: 28px 28px 22px;
+      box-shadow: 0 8px 40px rgba(44,95,138,0.22);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.25s;
+    }
+    .modal-overlay.active .modal-box { transform: translateY(0); }
+    .modal-close {
+      position: absolute;
+      top: 14px; right: 16px;
+      background: none; border: none;
+      font-size: 1.4rem; cursor: pointer;
+      color: #7ab3d4;
+      line-height: 1;
+    }
+    .modal-close:hover { color: #2c5f8a; }
+    .modal-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #2c5f8a;
+      margin-bottom: 12px;
+      padding-right: 24px;
+    }
+    .modal-description {
+      font-size: 0.9rem;
+      color: #494949;
+      line-height: 1.65;
+    }
+
+    /* ===== MODALE QR CODE ===== */
+    #qr-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(30,50,70,0.45);
+      z-index: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    #qr-modal-overlay.active { opacity: 1; pointer-events: all; }
+    #qr-modal-box {
+      background: #fff;
+      border-radius: 14px;
+      padding: 32px 36px 24px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(44,95,138,0.22);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.25s;
+    }
+    #qr-modal-overlay.active #qr-modal-box { transform: translateY(0); }
+    #qr-modal-box h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2c5f8a;
+      margin-bottom: 18px;
+    }
+    #qr-modal-box p {
+      font-size: 0.78rem;
+      color: #7ab3d4;
+      margin-top: 14px;
+    }
+    #qr-code-canvas { margin: 0 auto; }
+
+    .qr-modal-box {
+      max-width: 300px;
+      text-align: center;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .qr-modal-box h3 {
+      font-size: 1rem;
+      color: #494949;
+    }
+
+    #qr-modal-canvas canvas {
+      width: 200px !important;
+      height: 200px !important;
+    }
+    .qr-modal-box {
+      max-width: 320px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    #qr-modal-img {
+      width: 250px;
+      height: 250px;
+    }
+
+
+    /* ===== PANNEAU ENGRENAGE ===== */
+    #settings-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 400;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #2c5f8a;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 14px rgba(44,95,138,0.30);
+      transition: background 0.2s, transform 0.3s;
+    }
+    #settings-btn:hover { background: #245278; }
+    #settings-btn.open { transform: rotate(60deg); }
+    #settings-btn svg {
+      width: 24px; height: 24px;
+      stroke: #fff; fill: none; stroke-width: 1.8;
+    }
+
+    #settings-panel {
+      position: fixed;
+      bottom: 88px;
+      right: 28px;
+      z-index: 400;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(44,95,138,0.20);
+      padding: 20px 22px;
+      min-width: 240px;
+      display: none;
+      border: 1px solid #e2eaf2;
+    }
+    #settings-panel.open { display: block; }
+    #settings-panel h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #2c5f8a;
+      margin-bottom: 14px;
+      border-bottom: 1px solid #e2eaf2;
+      padding-bottom: 8px;
+    }
+    .settings-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 12px;
+    }
+    .settings-item label {
+      font-size: 0.83rem;
+      color: #494949;
+      cursor: pointer;
+    }
+
+    /* Toggle switch */
+    .toggle-switch {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #c8dced;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 14px; height: 14px;
+      left: 3px; top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .toggle-switch input:checked + .toggle-slider { background: #2c5f8a; }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(16px); }
+
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 600px) {
-      header { flex-direction: column; align-items: flex-start; }
-      .header-right { align-self: flex-end; }
-      .lycee-nom { display: none; }
+    @media (max-width: 640px) {
+      #main-header { padding: 12px 14px; }
+      .header-etab-name { font-size: 0.97rem; }
+      .header-portail-text .portail-title { font-size: 0.88rem; }
+      .header-portail-text .portail-sub { font-size: 0.72rem; }
+      #main-content { padding: 0 10px 32px; }
+      .categorie-body { padding: 14px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
-<header>
+<!-- ===== HEADER GÉNÉRAL ===== -->
+<header id="main-header">
   <div class="header-left">
-    <h1><i class="fas fa-graduation-cap"></i> Portail Pédagogique</h1>
-    <p>Ressources interactives pour la classe</p>
+    <a href="https://lyceecleusmeur.net/" target="_blank" rel="noopener" class="header-logo-circle" title="Site de l'établissement">
+      <img src="assets/icones/logo.svg" alt="Logo Le Cleusmeur" />
+    </a>
+    <span class="header-etab-name">Le Cleusmeur</span>
   </div>
-
-  <a class="header-right" href="https://lyceecleusmeur.net/" target="_blank" title="Site du lycée Le Cleusmeur">
-    <span class="lycee-nom">Lycée Le Cleusmeur<br><small style="font-weight:400;opacity:0.8">Lesneven</small></span>
-    <div class="logo-cercle">
-      <img src="assets/icones/Logo_alone.svg" alt="Logo lycée Le Cleusmeur" />
+  <div class="header-right">
+    <div class="header-portail-text">
+      <div class="portail-title">Portail Pédagogique</div>
+      <div class="portail-sub">Ressources numériques pour l'enseignement</div>
     </div>
-  </a>
+      <div class="header-qr-circle" id="qr-open-btn" title="Afficher le QR Code">
+        <img src="assets/icones/QRCode.svg" alt="QR Code" width="40" height="40"/>
+      </div>
+    </div>
+  </div>
 </header>
 
-<!-- ===== FILTRES ===== -->
-<div id="filtres">
-  <input type="text" id="recherche" placeholder="🔍 Rechercher...">
-  <select id="filtre-matiere">
-    <option value="">Toutes les matières</option>
-    <option value="Biologie">Biologie</option>
-    <option value="Biologie Humaine">Biologie Humaine</option>
-    <option value="Ecologie">Écologie</option>
-    <option value="Physique-Chimie">Physique-Chimie</option>
-    <option value="Informatique">Informatique</option>
-    <option value="SNT">SNT</option>
-    <option value="TIM">TIM</option>
-    <option value="Transversal">Transversal</option>
-  </select>
-  <select id="filtre-niveau">
-    <option value="">Tous les niveaux</option>
-    <option value="4ème">4ème</option>
-    <option value="3ème">3ème</option>
-    <option value="CAPa SAPVER">CAPa SAPVER</option>
-    <option value="Bac Pro SAPAT">Bac Pro SAPAT</option>
-  </select>
-  <select id="filtre-type">
-    <option value="">Tous les types</option>
-    <option value="application">Applications</option>
-    <option value="outil">Outils pédagogiques</option>
-    <option value="structure">Structures pédagogiques</option>
-  </select>
-  <button id="btn-reset"><i class="fas fa-times"></i> Réinitialiser</button>
-</div>
-
 <!-- ===== CONTENU PRINCIPAL ===== -->
-<main>
-  <!-- SECTION OUTILS -->
-  <div class="section-bloc" id="bloc-outils">
-    <div class="section-header outils" onclick="toggleSection('bloc-outils')">
-      <div class="section-header-left">
-        <img src="assets\icones\Outils.gif" , style="width:32px; height:32px; vertical-align:middle;" alt="Outils">
-        <h2>Outils pédagogiques <span class="badge" id="badge-outils">0</span></h2>
-      </div>
-      <i class="fas fa-chevron-down fleche"></i>
-    </div>
-    <div class="section-contenu">
-      <div class="grille" id="grille-outils"></div>
-      <div class="btn-plus-wrap">
-        <button class="btn-plus cache" id="btn-plus-outils" onclick="afficherPlus('outils')">
-          <i class="fas fa-plus"></i> Afficher plus
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION APPLICATIONS -->
-  <div class="section-bloc" id="bloc-apps">
-    <div class="section-header apps" onclick="toggleSection('bloc-apps')">
-      <div class="section-header-left">
-        <img src="assets\icones\Applications.gif" , style="width:32px; height:32px; vertical-align:middle;" alt="Applications">
-        <h2>Applications interactives <span class="badge" id="badge-apps">0</span></h2>
-      </div>
-      <i class="fas fa-chevron-down fleche"></i>
-    </div>
-    <div class="section-contenu">
-      <div class="grille" id="grille-apps"></div>
-      <div class="btn-plus-wrap">
-        <button class="btn-plus cache" id="btn-plus-apps" onclick="afficherPlus('apps')">
-          <i class="fas fa-plus"></i> Afficher plus
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION STRUCTURES -->
-  <div class="section-bloc" id="bloc-structs">
-    <div class="section-header structs" onclick="toggleSection('bloc-structs')">
-      <div class="section-header-left">
-        <img src="assets\icones\Structures.gif" , style="width:32px; height:32px; vertical-align:middle;" alt="Structures">
-        <h2>Structures pédagogiques <span class="badge" id="badge-structs">0</span></h2>
-      </div>
-      <i class="fas fa-chevron-down fleche"></i>
-    </div>
-    <div class="section-contenu">
-      <div class="grille" id="grille-structs"></div>
-      <div class="btn-plus-wrap">
-        <button class="btn-plus cache" id="btn-plus-structs" onclick="afficherPlus('structs')">
-          <i class="fas fa-plus"></i> Afficher plus
-        </button>
-      </div>
-    </div>
-  </div>
-
+<main id="main-content">
+  <!-- Les sections sont générées dynamiquement par JS -->
+  <div id="sections-container"></div>
 </main>
 
+<!-- ===== MODALE DESCRIPTION ===== -->
+<div class="modal-overlay" id="desc-modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="desc-modal-close" aria-label="Fermer">×</button>
+    <div class="modal-title" id="desc-modal-title"></div>
+    <div class="modal-description" id="desc-modal-body"></div>
+  </div>
+</div>
+
+<!-- MODALE QRCODE -->
+<div class="modal-overlay" id="qr-modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-box qr-modal-box">
+    <button class="modal-close" id="qr-modal-close" aria-label="Fermer">×</button>
+    <h3>Scanner pour accéder au portail</h3>
+    <img src="assets/icones/QRCode.svg" alt="QR Code du portail" id="qr-modal-img"/>
+  </div>
+</div>
+
+
+
+<!-- ===== BOUTON ENGRENAGE ===== -->
+<button id="settings-btn" title="Paramètres d'affichage" aria-label="Paramètres">
+  <!-- Icône engrenage SVG -->
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33
+             1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33
+             l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4
+             h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06
+             A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51
+             a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9
+             a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+  </svg>
+</button>
+
+<!-- ===== PANNEAU PARAMÈTRES ===== -->
+<div id="settings-panel">
+  <h4>Champs affichés sur les cartes</h4>
+  <!-- Généré dynamiquement -->
+</div>
+
 <script>
-  // ── Configuration ────────────────────────────────────────────────────
-  const VIGNETTES_INIT = 6;
-  const VIGNETTES_STEP = 6;
+// ============================================================
+// CONFIGURATION
+// ============================================================
+const JSON_URL = 'applications.json';
+const CARDS_PER_PAGE = 6;
 
-  const SECTIONS = {
-    apps:    { grille: 'grille-apps',    badge: 'badge-apps',    btnPlus: 'btn-plus-apps'    },
-    outils:  { grille: 'grille-outils',  badge: 'badge-outils',  btnPlus: 'btn-plus-outils'  },
-    structs: { grille: 'grille-structs', badge: 'badge-structs', btnPlus: 'btn-plus-structs' },
-  };
+// Champs affichables sous la description (label : clé JSON)
+const META_FIELDS = [
+  { key: 'discipline',    label: 'Discipline'    },
+  { key: 'module',        label: 'Module'        },
+  { key: 'public',        label: 'Public'        },
+  { key: 'formation',     label: 'Formation'     },
+  { key: 'tags',          label: 'Tags'          },
+  { key: 'statut',        label: 'Statut'        },
+  { key: 'date_creation', label: 'Date'          },
+  { key: 'auteur',        label: 'Auteur'        },
+];
 
-  const TYPE_MAP = {
-    apps:    'application',
-    outils:  'outil',
-    structs: 'structure',
-  };
+// Filtres par catégorie (clés JSON)
+const CATEGORY_FILTERS = {
+  'Outils':       [],
+  'Applications': ['formation', 'discipline', 'module'],
+  'Structure':    ['public'],
+};
 
-  // Stock global
-  let donnees = { apps: [], outils: [], structs: [] };
-  let visibles = { apps: VIGNETTES_INIT, outils: VIGNETTES_INIT, structs: VIGNETTES_INIT };
+// Icônes SVG inline pour chaque catégorie
+const CATEGORY_ICONS = {
+  'Outils': `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77
+             a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91
+             a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+  </svg>`,
+  'Applications': `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+    <line x1="8" y1="21" x2="16" y2="21"/>
+    <line x1="12" y1="17" x2="12" y2="21"/>
+  </svg>`,
+  'Structure': `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+  </svg>`,
+};
 
-  // ── Chargement JSON ──────────────────────────────────────────────────
-  async function charger() {
-    const res  = await fetch('applications.json');
-    const tout = await res.json();
+// Icône placeholder pour image manquante
+const IMG_PLACEHOLDER_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+  <circle cx="8.5" cy="8.5" r="1.5"/>
+  <polyline points="21 15 16 10 5 21"/>
+</svg>`;
 
-    donnees.apps    = tout.filter(e => e.categorie === 'application');
-    donnees.outils  = tout.filter(e => e.categorie === 'outil');
-    donnees.structs = tout.filter(e => e.categorie === 'structure');
+// Icône placeholder pour icône de carte manquante
+const ICON_PLACEHOLDER_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="12" r="10"/>
+  <line x1="12" y1="8" x2="12" y2="12"/>
+  <line x1="12" y1="16" x2="12.01" y2="16"/>
+</svg>`;
 
-    rendreTout(donnees);
+// ============================================================
+// ÉTAT GLOBAL
+// ============================================================
+let allData = [];
+let visibleCounts = {}; // { catégorie: nombre de cartes visibles }
+let activeFilters = {}; // { catégorie: { champ: valeur } }
+let fieldSettings = {}; // { clé: bool }
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Paramètres
+  loadSettings();
+  buildSettingsPanel();
+
+  // Chargement des données JSON
+  fetch(JSON_URL)
+    .then(r => r.json())
+    .then(data => {
+      allData = data;
+      renderAll();
+    })
+    .catch(err => {
+      document.getElementById('sections-container').innerHTML =
+        `<p style="color:#c0392b;padding:24px;">Erreur de chargement du fichier JSON : ${err.message}</p>`;
+    });
+
+  // Engrenage (paramètres)
+  document.getElementById('settings-btn').addEventListener('click', toggleSettingsPanel);
+
+  // Bouton QR Code (header)
+  document.getElementById('qr-open-btn').addEventListener('click', openQRModal);
+
+  // Fermeture modale description
+  document.getElementById('desc-modal-close').addEventListener('click', closeDescModal);
+  document.getElementById('desc-modal-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('desc-modal-overlay')) closeDescModal();
+  });
+
+  // Fermeture modale QR
+  document.getElementById('qr-modal-close').addEventListener('click', closeQRModal);
+  document.getElementById('qr-modal-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('qr-modal-overlay')) closeQRModal();
+  });
+
+});
+
+
+// ============================================================
+// RENDU PRINCIPAL
+// ============================================================
+function renderAll() {
+  const categories = ['Outils', 'Applications', 'Structure'];
+  const container = document.getElementById('sections-container');
+  container.innerHTML = '';
+
+  categories.forEach(cat => {
+    if (!visibleCounts[cat]) visibleCounts[cat] = CARDS_PER_PAGE;
+    if (!activeFilters[cat]) activeFilters[cat] = {};
+    const items = allData.filter(d => d.categorie === cat);
+    container.appendChild(buildSection(cat, items));
+  });
+}
+
+// ============================================================
+// CONSTRUCTION D'UNE SECTION
+// ============================================================
+function buildSection(cat, items) {
+  const section = document.createElement('div');
+  section.className = 'categorie-section';
+  section.dataset.cat = cat;
+
+  // --- HEADER ---
+  const header = document.createElement('div');
+  header.className = 'categorie-header';
+  header.addEventListener('click', e => {
+    // Ne pas toggle si clic sur un select ou bouton filtre
+    if (e.target.closest('select') || e.target.closest('.filter-reset-btn')) return;
+    section.classList.toggle('collapsed');
+  });
+
+  // Gauche : icône + titre + flèche
+  const headerLeft = document.createElement('div');
+  headerLeft.className = 'categorie-header-left';
+
+  const iconWrap = document.createElement('div');
+  iconWrap.className = 'categorie-icon';
+  iconWrap.innerHTML = CATEGORY_ICONS[cat] || CATEGORY_ICONS['Outils'];
+
+  const titleEl = document.createElement('span');
+  titleEl.className = 'categorie-title';
+  titleEl.textContent = cat;
+
+  const arrowEl = document.createElement('span');
+  arrowEl.className = 'categorie-arrow';
+  arrowEl.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <polyline points="6 9 12 15 18 9"/>
+  </svg>`;
+
+  headerLeft.appendChild(iconWrap);
+  headerLeft.appendChild(titleEl);
+  headerLeft.appendChild(arrowEl);
+  header.appendChild(headerLeft);
+
+  // Filtres
+  const filterKeys = CATEGORY_FILTERS[cat] || [];
+  if (filterKeys.length > 0) {
+    const filtersDiv = document.createElement('div');
+    filtersDiv.className = 'categorie-filters';
+
+    filterKeys.forEach(key => {
+      const values = getUniqueValues(items, key);
+      if (values.length === 0) return;
+
+      const group = document.createElement('div');
+      group.className = 'filter-group';
+
+      const lbl = document.createElement('label');
+      lbl.textContent = capitalize(key) + ' :';
+      lbl.htmlFor = `filter-${cat}-${key}`;
+
+      const sel = document.createElement('select');
+      sel.id = `filter-${cat}-${key}`;
+      sel.dataset.cat = cat;
+      sel.dataset.key = key;
+
+      const optAll = document.createElement('option');
+      optAll.value = '';
+      optAll.textContent = 'Tous';
+      sel.appendChild(optAll);
+
+      values.forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v;
+        opt.textContent = v;
+        if (activeFilters[cat][key] === v) opt.selected = true;
+        sel.appendChild(opt);
+      });
+
+      sel.addEventListener('change', e => {
+        e.stopPropagation();
+        activeFilters[cat][key] = sel.value;
+        visibleCounts[cat] = CARDS_PER_PAGE;
+        refreshSection(cat);
+      });
+
+      group.appendChild(lbl);
+      group.appendChild(sel);
+      filtersDiv.appendChild(group);
+    });
+
+    // Bouton réinitialiser
+    const resetBtn = document.createElement('button');
+    resetBtn.className = 'filter-reset-btn';
+    resetBtn.textContent = '✕ Réinitialiser';
+    resetBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      activeFilters[cat] = {};
+      visibleCounts[cat] = CARDS_PER_PAGE;
+      refreshSection(cat);
+    });
+    filtersDiv.appendChild(resetBtn);
+    header.appendChild(filtersDiv);
   }
 
-  // ── Rendu complet ────────────────────────────────────────────────────
-  function rendreTout(data) {
-    rendreSection('apps',    data.apps);
-    rendreSection('outils',  data.outils);
-    rendreSection('structs', data.structs);
+  section.appendChild(header);
+
+  // --- BODY ---
+  const body = document.createElement('div');
+  body.className = 'categorie-body';
+  body.dataset.cat = cat;
+  section.appendChild(body);
+
+  // Remplir le body
+  fillBody(body, cat, items);
+
+  return section;
+}
+
+// ============================================================
+// REMPLISSAGE DU BODY
+// ============================================================
+function fillBody(body, cat, items) {
+  body.innerHTML = '';
+
+  // Appliquer les filtres
+  const filtered = applyFilters(items, cat);
+
+  const grid = document.createElement('div');
+  grid.className = 'cards-grid';
+
+  const visible = visibleCounts[cat] || CARDS_PER_PAGE;
+  const toShow = filtered.slice(0, visible);
+
+  if (toShow.length === 0) {
+    const noRes = document.createElement('p');
+    noRes.className = 'no-result';
+    noRes.textContent = 'Aucune ressource ne correspond aux filtres sélectionnés.';
+    body.appendChild(noRes);
+    return;
   }
 
-  // ── Rendu d'une section ──────────────────────────────────────────────
-  function rendreSection(cle, items) {
-    const grille  = document.getElementById(SECTIONS[cle].grille);
-    const badge   = document.getElementById(SECTIONS[cle].badge);
-    const btnPlus = document.getElementById(SECTIONS[cle].btnPlus);
+  toShow.forEach(item => {
+    grid.appendChild(buildCard(item));
+  });
 
-    grille.innerHTML = '';
-    badge.textContent = items.length;
+  body.appendChild(grid);
 
-    if (items.length === 0) {
-      grille.innerHTML = '<p class="msg-vide">Aucune ressource trouvée.</p>';
-      btnPlus.classList.add('cache');
+  // Bouton Voir plus
+  if (filtered.length > visible) {
+    const wrap = document.createElement('div');
+    wrap.className = 'voir-plus-wrap';
+    const btn = document.createElement('button');
+    btn.className = 'btn-voir-plus';
+    const remaining = filtered.length - visible;
+    btn.textContent = `Voir plus (${remaining} restant${remaining > 1 ? 's' : ''})`;
+    btn.addEventListener('click', () => {
+      visibleCounts[cat] += CARDS_PER_PAGE;
+      refreshSection(cat);
+    });
+    wrap.appendChild(btn);
+    body.appendChild(wrap);
+  }
+}
+
+// ============================================================
+// CONSTRUCTION D'UNE CARTE
+// ============================================================
+function buildCard(item) {
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  // --- Vignette ---
+  const imgWrap = document.createElement('div');
+  imgWrap.className = 'card-image-wrap';
+  if (item.image) {
+    const img = document.createElement('img');
+    img.src = item.image;
+    img.alt = item.titre || '';
+    img.loading = 'lazy';
+    img.onerror = () => {
+      imgWrap.innerHTML = `<div class="card-image-placeholder">${IMG_PLACEHOLDER_SVG}</div>`;
+    };
+    imgWrap.appendChild(img);
+  } else {
+    imgWrap.innerHTML = `<div class="card-image-placeholder">${IMG_PLACEHOLDER_SVG}</div>`;
+  }
+  card.appendChild(imgWrap);
+
+  // --- Corps ---
+  const body = document.createElement('div');
+  body.className = 'card-body';
+
+  // Titre + icône
+  const titleRow = document.createElement('div');
+  titleRow.className = 'card-title-row';
+  if (item.icone) {
+    const ico = document.createElement('img');
+    ico.className = 'card-icon';
+    ico.src = item.icone;
+    ico.alt = '';
+    ico.width = 24;
+    ico.height = 24;
+    ico.onerror = () => {
+      const ph = document.createElement('span');
+      ph.className = 'card-icon-placeholder';
+      ph.innerHTML = ICON_PLACEHOLDER_SVG;
+      ico.replaceWith(ph);
+    };
+    titleRow.appendChild(ico);
+  } else {
+    const ph = document.createElement('span');
+    ph.className = 'card-icon-placeholder';
+    ph.innerHTML = ICON_PLACEHOLDER_SVG;
+    titleRow.appendChild(ph);
+  }
+  const titleEl = document.createElement('span');
+  titleEl.className = 'card-title';
+  titleEl.textContent = item.titre || '(Sans titre)';
+  titleRow.appendChild(titleEl);
+  body.appendChild(titleRow);
+
+  // Description
+  const descWrap = document.createElement('div');
+  descWrap.className = 'card-description-wrap';
+
+  const desc = document.createElement('div');
+  desc.className = 'card-description';
+  desc.textContent = item.description || '';
+  descWrap.appendChild(desc);
+
+  const btnMore = document.createElement('button');
+  btnMore.className = 'btn-read-more';
+  btnMore.textContent = 'Lire plus';
+  descWrap.appendChild(btnMore);
+  body.appendChild(descWrap);
+
+  // Vérifier si description est tronquée (après insertion dans le DOM)
+  // On utilise un MutationObserver ou on fait ça via un flag
+  // On va gérer ça avec un requestAnimationFrame après ajout au DOM
+  card._descEl = desc;
+  card._btnMore = btnMore;
+  card._item = item;
+
+  btnMore.addEventListener('click', () => {
+    openDescModal(item.titre, item.description);
+  });
+
+  // Lien
+  if (item.url) {
+    const linkBtn = document.createElement('a');
+    linkBtn.className = 'card-link-btn';
+    linkBtn.href = item.url;
+    linkBtn.target = '_blank';
+    linkBtn.rel = 'noopener';
+    linkBtn.innerHTML = `Accéder <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/>
+      <polyline points="12 5 19 12 12 19"/></svg>`;
+    body.appendChild(linkBtn);
+  }
+
+  // Méta-données
+  const metaDiv = buildMeta(item);
+  body.appendChild(metaDiv);
+
+  card.appendChild(body);
+
+  // Vérification troncature après rendu
+  setTimeout(() => checkTruncation(desc, btnMore), 50);
+
+  return card;
+}
+
+function checkTruncation(descEl, btnEl) {
+  if (descEl.scrollHeight > descEl.clientHeight + 2) {
+    btnEl.classList.add('visible');
+  }
+}
+
+// ============================================================
+// MÉTA-DONNÉES DE LA CARTE
+// ============================================================
+function buildMeta(item) {
+  const metaDiv = document.createElement('div');
+  metaDiv.className = 'card-meta';
+
+  META_FIELDS.forEach(field => {
+    if (!fieldSettings[field.key]) return;
+    const val = item[field.key];
+    if (!val || (Array.isArray(val) && val.length === 0)) return;
+
+    // Statut : badge
+    if (field.key === 'statut') {
+      const badge = document.createElement('span');
+      badge.className = 'card-statut-badge ' + getStatutClass(val);
+      badge.textContent = val;
+      metaDiv.appendChild(badge);
       return;
     }
 
-    items.forEach((item, index) => {
-      const carte = creerCarte(item, cle);
-      if (index >= visibles[cle]) carte.classList.add('cachee');
-      grille.appendChild(carte);
-    });
+    const row = document.createElement('div');
+    row.className = 'card-meta-item';
 
-    if (items.length > visibles[cle]) {
-      btnPlus.classList.remove('cache');
-    } else {
-      btnPlus.classList.add('cache');
-    }
-  }
+    const lbl = document.createElement('span');
+    lbl.className = 'meta-label';
+    lbl.textContent = field.label + ' :';
 
-  // ── Création d'une carte ─────────────────────────────────────────────
-function creerCarte(item, cle) {
-    const a = document.createElement('a');
-    a.className = 'carte';
-    a.href = item.url || '#';
-    if (item.url) a.target = '_blank';
+    const val2 = document.createElement('span');
+    val2.textContent = Array.isArray(val) ? val.join(', ') : val;
 
-    // ── Image de la carte ──────────────────────────────────────────
-    const imageDiv = document.createElement('div');
-    imageDiv.className = 'carte-image';
-    if (item.image) {
-      imageDiv.innerHTML = `<img src="${item.image}" alt="">`;
-    }
-
-    // ── Ligne : icône + titre ──────────────────────────────────────
-    const headerDiv = document.createElement('div');
-    headerDiv.className = 'carte-header';
-
-    const iconeDiv = document.createElement('div');
-    iconeDiv.className = `carte-icone ${cle}`;
-    if (item.icone && item.icone.startsWith('fa')) {
-      iconeDiv.innerHTML = `<i class="${item.icone}"></i>`;
-    } else if (item.icone) {
-      iconeDiv.innerHTML = `<img src="${item.icone}" alt="">`;
-    } else {
-      iconeDiv.innerHTML = `<i class="fas fa-file"></i>`;
-    }
-
-    const titre = document.createElement('div');
-    titre.className = 'carte-titre';
-    titre.textContent = item.titre || 'Sans titre';
-
-    headerDiv.append(iconeDiv, titre);
-
-    // ── Reste de la carte ──────────────────────────────────────────
-    const desc = document.createElement('div');
-    desc.className = 'carte-desc';
-    desc.textContent = item.description || '';
-
-    const tagsDiv = document.createElement('div');
-    tagsDiv.className = 'carte-tags';
-    (item.tags || []).forEach(t => {
-      const span = document.createElement('span');
-      span.className = 'tag';
-      span.textContent = t;
-      tagsDiv.appendChild(span);
-    });
-
-    const niveaux = document.createElement('div');
-    niveaux.className = 'carte-niveaux';
-    if (item.niveaux && item.niveaux.length) {
-      niveaux.textContent = item.niveaux.join(' · ');
-    }
-
-    a.append(imageDiv, headerDiv, desc, tagsDiv, niveaux);
-    return a;
-  }
-
-
-  // ── Afficher plus ────────────────────────────────────────────────────
-  function afficherPlus(cle) {
-    visibles[cle] += VIGNETTES_STEP;
-    rendreSection(cle, filtrerDonnees(cle));
-  }
-
-  // ── Toggle section dépliante ─────────────────────────────────────────
-  function toggleSection(id) {
-    document.getElementById(id).classList.toggle('ferme');
-  }
-
-  // ── Filtrage ─────────────────────────────────────────────────────────
-  function filtrerDonnees(cle) {
-    const recherche = document.getElementById('recherche').value.toLowerCase().trim();
-    const matiere   = document.getElementById('filtre-matiere').value;
-    const niveau    = document.getElementById('filtre-niveau').value;
-    const type      = document.getElementById('filtre-type').value;
-
-    return donnees[cle].filter(e => {
-      const texte       = [e.titre, e.description, ...(e.tags || [])].join(' ').toLowerCase();
-      const okRecherche = !recherche || texte.includes(recherche);
-      const okMatiere   = !matiere   || e.matiere === matiere;
-      const okNiveau    = !niveau    || (e.niveaux && e.niveaux.includes(niveau));
-      const okType      = !type      || e.type === TYPE_MAP[cle];
-      return okRecherche && okMatiere && okNiveau && okType;
-    });
-  }
-
-  function filtrer() {
-    visibles = { apps: VIGNETTES_INIT, outils: VIGNETTES_INIT, structs: VIGNETTES_INIT };
-    rendreSection('apps',    filtrerDonnees('apps'));
-    rendreSection('outils',  filtrerDonnees('outils'));
-    rendreSection('structs', filtrerDonnees('structs'));
-  }
-
-  // ── Écouteurs ────────────────────────────────────────────────────────
-  document.getElementById('recherche').addEventListener('input',       filtrer);
-  document.getElementById('filtre-matiere').addEventListener('change', filtrer);
-  document.getElementById('filtre-niveau').addEventListener('change',  filtrer);
-  document.getElementById('filtre-type').addEventListener('change',    filtrer);
-
-  document.getElementById('btn-reset').addEventListener('click', () => {
-    document.getElementById('recherche').value      = '';
-    document.getElementById('filtre-matiere').value = '';
-    document.getElementById('filtre-niveau').value  = '';
-    document.getElementById('filtre-type').value    = '';
-    visibles = { apps: VIGNETTES_INIT, outils: VIGNETTES_INIT, structs: VIGNETTES_INIT };
-    rendreTout(donnees);
+    row.appendChild(lbl);
+    row.appendChild(val2);
+    metaDiv.appendChild(row);
   });
 
-  // ── Lancement ────────────────────────────────────────────────────────
-  charger();
+  return metaDiv;
+}
+
+function getStatutClass(statut) {
+  if (!statut) return 'statut-default';
+  const s = statut.toLowerCase();
+  if (s.includes('publi')) return 'statut-publie';
+  if (s.includes('brouillon')) return 'statut-brouillon';
+  if (s.includes('archiv')) return 'statut-archive';
+  return 'statut-default';
+}
+
+// ============================================================
+// RAFRAÎCHISSEMENT D'UNE SECTION (après filtre / voir plus)
+// ============================================================
+function refreshSection(cat) {
+  const body = document.querySelector(`.categorie-body[data-cat="${cat}"]`);
+  if (!body) return;
+  const items = allData.filter(d => d.categorie === cat);
+  fillBody(body, cat, items);
+
+  // Resync les selects
+  const filterKeys = CATEGORY_FILTERS[cat] || [];
+  filterKeys.forEach(key => {
+    const sel = document.getElementById(`filter-${cat}-${key}`);
+    if (sel) sel.value = activeFilters[cat][key] || '';
+  });
+}
+
+// ============================================================
+// FILTRES
+// ============================================================
+function applyFilters(items, cat) {
+  const filters = activeFilters[cat] || {};
+  return items.filter(item => {
+    return Object.entries(filters).every(([key, val]) => {
+      if (!val) return true;
+      const itemVal = item[key];
+      if (Array.isArray(itemVal)) return itemVal.includes(val);
+      return itemVal === val;
+    });
+  });
+}
+
+function getUniqueValues(items, key) {
+  const set = new Set();
+  items.forEach(item => {
+    const v = item[key];
+    if (Array.isArray(v)) v.forEach(x => { if (x) set.add(x); });
+    else if (v) set.add(v);
+  });
+  return [...set].sort();
+}
+
+// ============================================================
+// MODALE DESCRIPTION
+// ============================================================
+function openDescModal(title, description) {
+  document.getElementById('desc-modal-title').textContent = title || '';
+  document.getElementById('desc-modal-body').textContent = description || '';
+  document.getElementById('desc-modal-overlay').classList.add('active');
+}
+
+function closeDescModal() {
+  document.getElementById('desc-modal-overlay').classList.remove('active');
+}
+
+// ============================================================
+// QRCODE
+// ============================================================
+let qrModalGenerated = false;
+
+function openQRModal() {
+  document.getElementById('qr-modal-overlay').classList.add('active'); // ← 'active' pas 'open'
+  document.body.style.overflow = 'hidden';
+}
+
+function closeQRModal() {
+  document.getElementById('qr-modal-overlay').classList.remove('active'); // ← 'active' pas 'open'
+  document.body.style.overflow = '';
+}
+
+// Fermeture avec la touche Échap
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeQRModal();
+});
+
+
+// ============================================================
+// PANNEAU PARAMÈTRES
+// ============================================================
+function buildSettingsPanel() {
+  const panel = document.getElementById('settings-panel');
+  panel.querySelector('h4').textContent = 'Champs affichés sur les cartes';
+
+  META_FIELDS.forEach(field => {
+    const item = document.createElement('div');
+    item.className = 'settings-item';
+
+    const lbl = document.createElement('label');
+    lbl.htmlFor = `toggle-${field.key}`;
+    lbl.textContent = field.label;
+
+    const toggleWrap = document.createElement('label');
+    toggleWrap.className = 'toggle-switch';
+
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.id = `toggle-${field.key}`;
+    input.checked = fieldSettings[field.key] !== false
+      ? (fieldSettings[field.key] === true)
+      : false;
+    // Par défaut : tous désactivés sauf si sauvegardé
+    input.checked = fieldSettings[field.key] === true;
+
+    input.addEventListener('change', () => {
+      fieldSettings[field.key] = input.checked;
+      saveSettings();
+      // Rafraîchir toutes les sections
+      ['Outils', 'Applications', 'Structure'].forEach(cat => refreshSection(cat));
+    });
+
+    const slider = document.createElement('span');
+    slider.className = 'toggle-slider';
+
+    toggleWrap.appendChild(input);
+    toggleWrap.appendChild(slider);
+
+    item.appendChild(lbl);
+    item.appendChild(toggleWrap);
+    panel.appendChild(item);
+  });
+}
+
+function toggleSettingsPanel() {
+  const btn = document.getElementById('settings-btn');
+  const panel = document.getElementById('settings-panel');
+  btn.classList.toggle('open');
+  panel.classList.toggle('open');
+}
+
+// ============================================================
+// PERSISTANCE (localStorage)
+// ============================================================
+function loadSettings() {
+  try {
+    const saved = localStorage.getItem('portail-field-settings');
+    if (saved) {
+      fieldSettings = JSON.parse(saved);
+    } else {
+      META_FIELDS.forEach(f => { fieldSettings[f.key] = false; });
+    }
+  } catch(e) {
+    META_FIELDS.forEach(f => { fieldSettings[f.key] = false; });
+  }
+}
+
+function saveSettings() {
+  try {
+    localStorage.setItem('portail-field-settings', JSON.stringify(fieldSettings));
+  } catch(e) { /* silencieux */ }
+}
+
+// ============================================================
+// UTILITAIRES
+// ============================================================
+function capitalize(str) {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 </script>
-
-
 </body>
 </html>
