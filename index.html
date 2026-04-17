@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ressources Pédagogiques</title>
+  <title>Portail Pédagogique – Lycée Le Cleusmeur</title>
   <script src="https://kit.fontawesome.com/f6d42ea8e9.js" crossorigin="anonymous"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,432 +14,601 @@
       color: #2c2c2c;
     }
 
+    /* ===== HEADER ===== */
     header {
-      background: #2c3e50;
+      background: #494949;
       color: white;
-      padding: 20px 40px;
-      text-align: center;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    header h1 { font-size: 1.8rem; }
-    header p { font-size: 0.95rem; opacity: 0.8; margin-top: 5px; }
+    .header-left h1 { font-size: 1.4rem; }
+    .header-left p  { font-size: 0.85rem; opacity: 0.7; margin-top: 0.2rem; }
 
-    main { padding: 30px 40px; max-width: 1400px; margin: auto; }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: white;
+      flex-shrink: 0;
+    }
 
-    /* ===== SECTION ===== */
-    .section { margin-bottom: 60px; }
+    .header-right:hover .lycee-nom { text-decoration: underline; }
+
+    .lycee-nom {
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: right;
+      line-height: 1.3;
+      max-width: 160px;
+    }
+
+    .logo-cercle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.4);
+    }
+
+    .logo-cercle img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    /* ===== BARRE DE FILTRES ===== */
+    #filtres {
+      background: white;
+      padding: 0.75rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    #filtres input,
+    #filtres select {
+      padding: 0.45rem 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      background: #f9f9f9;
+    }
+
+    #filtres input { flex: 1; min-width: 180px; }
+
+    #btn-reset {
+      padding: 0.45rem 1rem;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    #btn-reset:hover { background: #c0392b; }
+
+    /* ===== MAIN ===== */
+    main { padding: 2rem; }
+
+    /* ===== SECTION DÉPLIANTE ===== */
+    .section-bloc {
+      margin-bottom: 2.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
 
     .section-header {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      border-left: 5px solid #2c3e50;
-      padding-left: 15px;
-    }
-
-    .section-header h2 { font-size: 1.4rem; color: #2c3e50; }
-    .section-header span { font-size: 1.6rem; }
-
-    /* ===== FILTRES ===== */
-    .filtres {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    }
-
-    .filtres input,
-    .filtres select {
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      background: #fff;
-    }
-
-    .filtres input { flex: 1; min-width: 200px; }
-
-    /* ===== GRILLE DE VIGNETTES ===== */
-    .grille {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    /* ===== VIGNETTE ===== */
-    .vignette {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .vignette:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-    }
-
-    .vignette img {
-      width: 100%;
-      height: 140px;
-      object-fit: contain;
-      background: #e0e0e0;
-    }
-
-    .vignette-body {
-      padding: 12px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .vignette-body h3 {
-      font-size: 1rem;
-      color: #2c3e50;
-    }
-
-    .vignette-body p {
-      font-size: 0.82rem;
-      color: #555;
-      flex: 1;
-    }
-
-    .vignette-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 6px;
-    }
-
-    .badge {
-      background: #eef0f3;
-      color: #444;
-      font-size: 0.72rem;
-      padding: 3px 8px;
-      border-radius: 20px;
-    }
-
-    .badge.matiere { background: #d6eaf8; color: #1a5276; }
-    .badge.niveau  { background: #d5f5e3; color: #1e8449; }
-    .badge.module  { background: #fdebd0; color: #784212; }
-    .badge.public  { background: #f9ebea; color: #922b21; }
-    .badge.type    { background: #e8daef; color: #6c3483; }
-
-    .vignette-footer {
-      padding: 10px 12px;
-      border-top: 1px solid #f0f0f0;
-    }
-
-    .vignette-footer a {
-      display: block;
-      text-align: center;
-      background: #2c3e50;
-      color: white;
-      text-decoration: none;
-      padding: 7px;
-      border-radius: 6px;
-      font-size: 0.85rem;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 3px solid transparent;
       transition: background 0.2s;
     }
 
-    .vignette-footer a:hover { background: #1a252f; }
+    .section-header:hover { background: #f0f3f6; }
 
-    .statut-brouillon { opacity: 0.55; }
+    .section-header.apps    { border-color: #803977; }
+    .section-header.outils  { border-color: #e63f01; }
+    .section-header.structs { border-color: #028a85; }
 
-    .empty-msg {
-      color: #888;
-      font-style: italic;
-      font-size: 0.9rem;
-      padding: 10px 0;
+    .section-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
+    .section-header-left i {
+      font-size: 1.3rem;
+    }
+
+    .section-header.apps    i { color: #803977; }
+    .section-header.outils  i { color: #e63f01; }
+    .section-header.structs i { color: #028a85; }
+
+    .section-header h2 {
+      font-size: 1.15rem;
+      color: #2c3e50;
+    }
+
+    .section-header .badge {
+      font-size: 0.75rem;
+      background: #eee;
+      color: #666;
+      border-radius: 20px;
+      padding: 0.15rem 0.6rem;
+      margin-left: 0.5rem;
+    }
+
+    .fleche {
+      font-size: 1rem;
+      color: #888;
+      transition: transform 0.3s;
+    }
+
+    .section-bloc.ferme .fleche { transform: rotate(-90deg); }
+
+    /* ===== CONTENU DE SECTION ===== */
+    .section-contenu {
+      padding: 1.5rem;
+    }
+
+    .section-bloc.ferme .section-contenu { display: none; }
+
+    /* ===== GRILLE DE CARTES ===== */
+    .grille {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ===== CARTE ===== */
+    .carte {
+      background: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .carte-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .carte:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .carte.cachee { display: none; }
+
+    .carte-icone {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .carte-icone img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .carte-icone.apps    { background: #ffffff; }
+    .carte-icone.outils  { background: #ffffff; }
+    .carte-icone.structs { background: #ffffff; }
+    .carte-icone img     { width: 28px; height: 28px; object-fit: contain; }
+
+    .carte-titre {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .carte-desc {
       font-size: 0.8rem;
+      color: #666;
+      flex: 1;
+    }
+
+    .carte-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      background: #e8f0fe;
+      color: #2c5fad;
+    }
+
+    .carte-niveaux {
+      font-size: 0.72rem;
+      color: #999;
+    }
+
+    .carte-image {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+    }
+
+    .carte-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+
+    /* ===== BOUTON AFFICHER PLUS ===== */
+    .btn-plus-wrap {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .btn-plus {
+      padding: 0.5rem 1.5rem;
+      border: 2px solid #2c3e50;
+      background: transparent;
+      color: #2c3e50;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-plus:hover {
+      background: #2c3e50;
+      color: white;
+    }
+
+    .btn-plus.cache { display: none; }
+
+    /* ===== MESSAGE VIDE ===== */
+    .msg-vide {
       color: #aaa;
-      border-top: 1px solid #e0e0e0;
-      margin-top: 40px;
+      font-style: italic;
+      font-size: 0.9rem;
+      padding: 0.5rem 0;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      header { flex-direction: column; align-items: flex-start; }
+      .header-right { align-self: flex-end; }
+      .lycee-nom { display: none; }
     }
   </style>
 </head>
 <body>
 
+<!-- ===== HEADER ===== -->
 <header>
-  <h1>📚 Ressources Pédagogiques</h1>
-  <p>Applications interactives, outils et structures virtuelles</p>
+  <div class="header-left">
+    <h1><i class="fas fa-graduation-cap"></i> Portail Pédagogique</h1>
+    <p>Ressources interactives pour la classe</p>
+  </div>
+
+  <a class="header-right" href="https://lyceecleusmeur.net/" target="_blank" title="Site du lycée Le Cleusmeur">
+    <span class="lycee-nom">Lycée Le Cleusmeur<br><small style="font-weight:400;opacity:0.8">Lesneven</small></span>
+    <div class="logo-cercle">
+      <img src="assets/icones/Logo_alone.svg" alt="Logo lycée Le Cleusmeur" />
+    </div>
+  </a>
 </header>
 
+<!-- ===== FILTRES ===== -->
+<div id="filtres">
+  <input type="text" id="recherche" placeholder="🔍 Rechercher...">
+  <select id="filtre-matiere">
+    <option value="">Toutes les matières</option>
+    <option value="Biologie">Biologie</option>
+    <option value="Biologie Humaine">Biologie Humaine</option>
+    <option value="Ecologie">Écologie</option>
+    <option value="Physique-Chimie">Physique-Chimie</option>
+    <option value="Informatique">Informatique</option>
+    <option value="SNT">SNT</option>
+    <option value="TIM">TIM</option>
+    <option value="Transversal">Transversal</option>
+  </select>
+  <select id="filtre-niveau">
+    <option value="">Tous les niveaux</option>
+    <option value="4ème">4ème</option>
+    <option value="3ème">3ème</option>
+    <option value="CAPa SAPVER">CAPa SAPVER</option>
+    <option value="Bac Pro SAPAT">Bac Pro SAPAT</option>
+  </select>
+  <select id="filtre-type">
+    <option value="">Tous les types</option>
+    <option value="application">Applications</option>
+    <option value="outil">Outils pédagogiques</option>
+    <option value="structure">Structures pédagogiques</option>
+  </select>
+  <button id="btn-reset"><i class="fas fa-times"></i> Réinitialiser</button>
+</div>
+
+<!-- ===== CONTENU PRINCIPAL ===== -->
 <main>
-
-  <!-- ========== SECTION 1 : APPLICATIONS ========== -->
-  <section class="section" id="section-applications">
-    <div class="section-header">
-      <span>🎓</span>
-      <h2>Applications interactives</h2>
+  <!-- SECTION OUTILS -->
+  <div class="section-bloc" id="bloc-outils">
+    <div class="section-header outils" onclick="toggleSection('bloc-outils')">
+      <div class="section-header-left">
+        <img src="assets\icones\Outils.gif" , style="width:32px; height:32px; vertical-align:middle;" alt="Outils">
+        <h2>Outils pédagogiques <span class="badge" id="badge-outils">0</span></h2>
+      </div>
+      <i class="fas fa-chevron-down fleche"></i>
     </div>
-
-    <div class="filtres">
-      <input type="text" id="search-app" placeholder="🔍 Rechercher une application..." />
-      <select id="filtre-matiere">
-        <option value="">Toutes les matières</option>
-      </select>
-      <select id="filtre-niveau">
-        <option value="">Tous les niveaux</option>
-      </select>
+    <div class="section-contenu">
+      <div class="grille" id="grille-outils"></div>
+      <div class="btn-plus-wrap">
+        <button class="btn-plus cache" id="btn-plus-outils" onclick="afficherPlus('outils')">
+          <i class="fas fa-plus"></i> Afficher plus
+        </button>
+      </div>
     </div>
+  </div>
 
-    <div class="grille" id="grille-applications"></div>
-  </section>
-
-  <!-- ========== SECTION 2 : OUTILS ========== -->
-  <section class="section" id="section-outils">
-    <div class="section-header">
-      <span>🛠️</span>
-      <h2>Outils pédagogiques transversaux</h2>
+  <!-- SECTION APPLICATIONS -->
+  <div class="section-bloc" id="bloc-apps">
+    <div class="section-header apps" onclick="toggleSection('bloc-apps')">
+      <div class="section-header-left">
+        <img src="assets\icones\Applications.gif" , style="width:32px; height:32px; vertical-align:middle;" alt="Applications">
+        <h2>Applications interactives <span class="badge" id="badge-apps">0</span></h2>
+      </div>
+      <i class="fas fa-chevron-down fleche"></i>
     </div>
-    <div class="grille" id="grille-outils"></div>
-  </section>
-
-  <!-- ========== SECTION 3 : STRUCTURES ========== -->
-  <section class="section" id="section-structures">
-    <div class="section-header">
-      <span>🏫</span>
-      <h2>Structures virtuelles</h2>
+    <div class="section-contenu">
+      <div class="grille" id="grille-apps"></div>
+      <div class="btn-plus-wrap">
+        <button class="btn-plus cache" id="btn-plus-apps" onclick="afficherPlus('apps')">
+          <i class="fas fa-plus"></i> Afficher plus
+        </button>
+      </div>
     </div>
+  </div>
 
-    <div class="filtres">
-      <input type="text" id="search-struct" placeholder="🔍 Rechercher une structure..." />
-      <select id="filtre-niveau-struct">
-        <option value="">Tous les niveaux</option>
-      </select>
-      <select id="filtre-module-struct">
-        <option value="">Tous les modules</option>
-      </select>
-      <select id="filtre-public-struct">
-        <option value="">Tous les publics</option>
-      </select>
+  <!-- SECTION STRUCTURES -->
+  <div class="section-bloc" id="bloc-structs">
+    <div class="section-header structs" onclick="toggleSection('bloc-structs')">
+      <div class="section-header-left">
+        <img src="assets\icones\Structures.gif" , style="width:32px; height:32px; vertical-align:middle;" alt="Structures">
+        <h2>Structures pédagogiques <span class="badge" id="badge-structs">0</span></h2>
+      </div>
+      <i class="fas fa-chevron-down fleche"></i>
     </div>
-
-    <div class="grille" id="grille-structures"></div>
-  </section>
+    <div class="section-contenu">
+      <div class="grille" id="grille-structs"></div>
+      <div class="btn-plus-wrap">
+        <button class="btn-plus cache" id="btn-plus-structs" onclick="afficherPlus('structs')">
+          <i class="fas fa-plus"></i> Afficher plus
+        </button>
+      </div>
+    </div>
+  </div>
 
 </main>
 
-<footer>
-  Ressources pédagogiques — Lycée Professionnel Agricole
-</footer>
-
 <script>
-// =========================================================
-// UTILITAIRES
-// =========================================================
+  // ── Configuration ────────────────────────────────────────────────────
+  const VIGNETTES_INIT = 6;
+  const VIGNETTES_STEP = 6;
 
-function imgOuPlaceholder(image, emoji) {
-  if (image) {
-    return `<img src="${image}" alt="" onerror="this.style.display='none'" />`;
-  }
-  return `<div style="width:100%;height:140px;background:#e8ecf0;display:flex;align-items:center;justify-content:center;font-size:3rem;">${emoji || '📄'}</div>`;
-}
+  const SECTIONS = {
+    apps:    { grille: 'grille-apps',    badge: 'badge-apps',    btnPlus: 'btn-plus-apps'    },
+    outils:  { grille: 'grille-outils',  badge: 'badge-outils',  btnPlus: 'btn-plus-outils'  },
+    structs: { grille: 'grille-structs', badge: 'badge-structs', btnPlus: 'btn-plus-structs' },
+  };
 
-function badges(items, classe) {
-  if (!items) return '';
-  const liste = Array.isArray(items) ? items : [items];
-  return liste.map(i => `<span class="badge ${classe}">${i}</span>`).join('');
-}
+  const TYPE_MAP = {
+    apps:    'application',
+    outils:  'outil',
+    structs: 'structure',
+  };
 
-function peuplerSelect(selectId, valeurs) {
-  const sel = document.getElementById(selectId);
-  valeurs.forEach(v => {
-    const opt = document.createElement('option');
-    opt.value = v; opt.textContent = v;
-    sel.appendChild(opt);
-  });
-}
+  // Stock global
+  let donnees = { apps: [], outils: [], structs: [] };
+  let visibles = { apps: VIGNETTES_INIT, outils: VIGNETTES_INIT, structs: VIGNETTES_INIT };
 
-function extraireUniques(data, champ) {
-  const set = new Set();
-  data.forEach(item => {
-    const val = item[champ];
-    if (Array.isArray(val)) val.forEach(v => set.add(v));
-    else if (val) set.add(val);
-  });
-  return [...set].sort();
-}
+  // ── Chargement JSON ──────────────────────────────────────────────────
+  async function charger() {
+    const res  = await fetch('applications.json');
+    const tout = await res.json();
 
-// =========================================================
-// APPLICATIONS
-// =========================================================
+    donnees.apps    = tout.filter(e => e.categorie === 'application');
+    donnees.outils  = tout.filter(e => e.categorie === 'outil');
+    donnees.structs = tout.filter(e => e.categorie === 'structure');
 
-let dataApplications = [];
-
-async function chargerApplications() {
-  const res = await fetch('applications.json');
-  dataApplications = await res.json();
-
-  peuplerSelect('filtre-matiere', extraireUniques(dataApplications, 'matiere'));
-  peuplerSelect('filtre-niveau',  extraireUniques(dataApplications, 'niveaux'));
-
-  afficherApplications();
-
-  document.getElementById('search-app').addEventListener('input', afficherApplications);
-  document.getElementById('filtre-matiere').addEventListener('change', afficherApplications);
-  document.getElementById('filtre-niveau').addEventListener('change', afficherApplications);
-}
-
-function afficherApplications() {
-  const search  = document.getElementById('search-app').value.toLowerCase();
-  const matiere = document.getElementById('filtre-matiere').value;
-  const niveau  = document.getElementById('filtre-niveau').value;
-
-  const filtrees = dataApplications.filter(app => {
-    if (app.statut === 'brouillon') return false;
-    const texte = (app.titre + app.description + (app.tags||[]).join(' ')).toLowerCase();
-    if (search  && !texte.includes(search)) return false;
-    if (matiere && app.matiere !== matiere) return false;
-    if (niveau  && !(app.niveaux||[]).includes(niveau)) return false;
-    return true;
-  });
-
-  const grille = document.getElementById('grille-applications');
-  if (filtrees.length === 0) {
-    grille.innerHTML = '<p class="empty-msg">Aucune application trouvée.</p>';
-    return;
+    rendreTout(donnees);
   }
 
-  grille.innerHTML = filtrees.map(app => `
-    <div class="vignette">
-      ${imgOuPlaceholder(app.image, app.emoji)}
-      <div class="vignette-body">
-        <h3>${app.emoji || ''} ${app.titre}</h3>
-        <p>${app.description}</p>
-        <div class="vignette-meta">
-          ${badges(app.matiere, 'matiere')}
-          ${badges(app.niveaux, 'niveau')}
-          ${badges(app.module,  'module')}
-        </div>
-      </div>
-      <div class="vignette-footer">
-        <a href="${app.url}" target="_blank">Ouvrir ↗</a>
-      </div>
-    </div>
-  `).join('');
-}
-
-// =========================================================
-// OUTILS
-// =========================================================
-
-async function chargerOutils() {
-  const res = await fetch('Outils-Pedagogiques/Outils-Pedagogique.json');
-  const data = await res.json();
-
-  const grille = document.getElementById('grille-outils');
-  const visibles = data.filter(o => o.statut !== 'brouillon');
-
-  if (visibles.length === 0) {
-    grille.innerHTML = '<p class="empty-msg">Aucun outil disponible.</p>';
-    return;
+  // ── Rendu complet ────────────────────────────────────────────────────
+  function rendreTout(data) {
+    rendreSection('apps',    data.apps);
+    rendreSection('outils',  data.outils);
+    rendreSection('structs', data.structs);
   }
 
-  grille.innerHTML = visibles.map(outil => `
-    <div class="vignette">
-      ${imgOuPlaceholder(outil.image, outil.emoji)}
-      <div class="vignette-body">
-        <h3>${outil.emoji || ''} ${outil.titre}</h3>
-        <p>${outil.description}</p>
-        <div class="vignette-meta">
-          ${badges(outil.tags, '')}
-        </div>
-      </div>
-      <div class="vignette-footer">
-        <a href="${outil.url}" target="_blank">Ouvrir ↗</a>
-      </div>
-    </div>
-  `).join('');
-}
+  // ── Rendu d'une section ──────────────────────────────────────────────
+  function rendreSection(cle, items) {
+    const grille  = document.getElementById(SECTIONS[cle].grille);
+    const badge   = document.getElementById(SECTIONS[cle].badge);
+    const btnPlus = document.getElementById(SECTIONS[cle].btnPlus);
 
-// =========================================================
-// STRUCTURES
-// =========================================================
+    grille.innerHTML = '';
+    badge.textContent = items.length;
 
-let dataStructures = [];
+    if (items.length === 0) {
+      grille.innerHTML = '<p class="msg-vide">Aucune ressource trouvée.</p>';
+      btnPlus.classList.add('cache');
+      return;
+    }
 
-async function chargerStructures() {
-  const res = await fetch('Structures virutelles/Structures.json');
-  dataStructures = await res.json();
+    items.forEach((item, index) => {
+      const carte = creerCarte(item, cle);
+      if (index >= visibles[cle]) carte.classList.add('cachee');
+      grille.appendChild(carte);
+    });
 
-  peuplerSelect('filtre-niveau-struct', extraireUniques(dataStructures, 'niveaux'));
-  peuplerSelect('filtre-module-struct', extraireUniques(dataStructures, 'module'));
-  peuplerSelect('filtre-public-struct', extraireUniques(dataStructures, 'public'));
+    if (items.length > visibles[cle]) {
+      btnPlus.classList.remove('cache');
+    } else {
+      btnPlus.classList.add('cache');
+    }
+  }
 
-  afficherStructures();
+  // ── Création d'une carte ─────────────────────────────────────────────
+function creerCarte(item, cle) {
+    const a = document.createElement('a');
+    a.className = 'carte';
+    a.href = item.url || '#';
+    if (item.url) a.target = '_blank';
 
-  document.getElementById('search-struct').addEventListener('input', afficherStructures);
-  document.getElementById('filtre-niveau-struct').addEventListener('change', afficherStructures);
-  document.getElementById('filtre-module-struct').addEventListener('change', afficherStructures);
-  document.getElementById('filtre-public-struct').addEventListener('change', afficherStructures);
-}
+    // ── Image de la carte ──────────────────────────────────────────
+    const imageDiv = document.createElement('div');
+    imageDiv.className = 'carte-image';
+    if (item.image) {
+      imageDiv.innerHTML = `<img src="${item.image}" alt="">`;
+    }
 
-function afficherStructures() {
-  const search = document.getElementById('search-struct').value.toLowerCase();
-  const niveau = document.getElementById('filtre-niveau-struct').value;
-  const module = document.getElementById('filtre-module-struct').value;
-  const pub    = document.getElementById('filtre-public-struct').value;
+    // ── Ligne : icône + titre ──────────────────────────────────────
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'carte-header';
 
-  const filtrees = dataStructures.filter(s => {
-    if (s.statut === 'brouillon') return false;
-    const texte = (s.titre + s.description + (s.tags||[]).join(' ')).toLowerCase();
-    if (search && !texte.includes(search)) return false;
-    if (niveau && !(s.niveaux||[]).includes(niveau)) return false;
-    if (module && s.module !== module) return false;
-    if (pub    && !(s.public||[]).includes(pub)) return false;
-    return true;
+    const iconeDiv = document.createElement('div');
+    iconeDiv.className = `carte-icone ${cle}`;
+    if (item.icone && item.icone.startsWith('fa')) {
+      iconeDiv.innerHTML = `<i class="${item.icone}"></i>`;
+    } else if (item.icone) {
+      iconeDiv.innerHTML = `<img src="${item.icone}" alt="">`;
+    } else {
+      iconeDiv.innerHTML = `<i class="fas fa-file"></i>`;
+    }
+
+    const titre = document.createElement('div');
+    titre.className = 'carte-titre';
+    titre.textContent = item.titre || 'Sans titre';
+
+    headerDiv.append(iconeDiv, titre);
+
+    // ── Reste de la carte ──────────────────────────────────────────
+    const desc = document.createElement('div');
+    desc.className = 'carte-desc';
+    desc.textContent = item.description || '';
+
+    const tagsDiv = document.createElement('div');
+    tagsDiv.className = 'carte-tags';
+    (item.tags || []).forEach(t => {
+      const span = document.createElement('span');
+      span.className = 'tag';
+      span.textContent = t;
+      tagsDiv.appendChild(span);
+    });
+
+    const niveaux = document.createElement('div');
+    niveaux.className = 'carte-niveaux';
+    if (item.niveaux && item.niveaux.length) {
+      niveaux.textContent = item.niveaux.join(' · ');
+    }
+
+    a.append(imageDiv, headerDiv, desc, tagsDiv, niveaux);
+    return a;
+  }
+
+
+  // ── Afficher plus ────────────────────────────────────────────────────
+  function afficherPlus(cle) {
+    visibles[cle] += VIGNETTES_STEP;
+    rendreSection(cle, filtrerDonnees(cle));
+  }
+
+  // ── Toggle section dépliante ─────────────────────────────────────────
+  function toggleSection(id) {
+    document.getElementById(id).classList.toggle('ferme');
+  }
+
+  // ── Filtrage ─────────────────────────────────────────────────────────
+  function filtrerDonnees(cle) {
+    const recherche = document.getElementById('recherche').value.toLowerCase().trim();
+    const matiere   = document.getElementById('filtre-matiere').value;
+    const niveau    = document.getElementById('filtre-niveau').value;
+    const type      = document.getElementById('filtre-type').value;
+
+    return donnees[cle].filter(e => {
+      const texte       = [e.titre, e.description, ...(e.tags || [])].join(' ').toLowerCase();
+      const okRecherche = !recherche || texte.includes(recherche);
+      const okMatiere   = !matiere   || e.matiere === matiere;
+      const okNiveau    = !niveau    || (e.niveaux && e.niveaux.includes(niveau));
+      const okType      = !type      || e.type === TYPE_MAP[cle];
+      return okRecherche && okMatiere && okNiveau && okType;
+    });
+  }
+
+  function filtrer() {
+    visibles = { apps: VIGNETTES_INIT, outils: VIGNETTES_INIT, structs: VIGNETTES_INIT };
+    rendreSection('apps',    filtrerDonnees('apps'));
+    rendreSection('outils',  filtrerDonnees('outils'));
+    rendreSection('structs', filtrerDonnees('structs'));
+  }
+
+  // ── Écouteurs ────────────────────────────────────────────────────────
+  document.getElementById('recherche').addEventListener('input',       filtrer);
+  document.getElementById('filtre-matiere').addEventListener('change', filtrer);
+  document.getElementById('filtre-niveau').addEventListener('change',  filtrer);
+  document.getElementById('filtre-type').addEventListener('change',    filtrer);
+
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    document.getElementById('recherche').value      = '';
+    document.getElementById('filtre-matiere').value = '';
+    document.getElementById('filtre-niveau').value  = '';
+    document.getElementById('filtre-type').value    = '';
+    visibles = { apps: VIGNETTES_INIT, outils: VIGNETTES_INIT, structs: VIGNETTES_INIT };
+    rendreTout(donnees);
   });
 
-  const grille = document.getElementById('grille-structures');
-  if (filtrees.length === 0) {
-    grille.innerHTML = '<p class="empty-msg">Aucune structure trouvée.</p>';
-    return;
-  }
-
-  grille.innerHTML = filtrees.map(s => `
-    <div class="vignette">
-      ${imgOuPlaceholder(s.image, s.emoji)}
-      <div class="vignette-body">
-        <h3>${s.emoji || ''} ${s.titre}</h3>
-        <p>${s.description}</p>
-        <div class="vignette-meta">
-          ${badges(s.niveaux, 'niveau')}
-          ${badges(s.module,  'module')}
-          ${badges(s.type,    'type')}
-          ${badges(s.public,  'public')}
-        </div>
-      </div>
-      <div class="vignette-footer">
-        <a href="${s.url}" target="_blank">Ouvrir ↗</a>
-      </div>
-    </div>
-  `).join('');
-}
-
-// =========================================================
-// INIT
-// =========================================================
-
-chargerApplications();
-chargerOutils();
-chargerStructures();
-
+  // ── Lancement ────────────────────────────────────────────────────────
+  charger();
 </script>
+
+
 </body>
 </html>

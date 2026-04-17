@@ -1,98 +1,284 @@
 [
   {
-    "id": "bio-cellule-01",
-    "titre": "La cellule végétale",
-    "description": "Exploration interactive des organites de la cellule végétale.",
+    "id": "app-001",
+    "categorie": "application",
+    "titre": "La cellule vivante",
+    "description": "Une application interactive pour explorer la structure d'une cellule animale et végétale.",
     "matiere": "Biologie",
-    "module": "S1 - Le vivant",
-    "theme": "La cellule",
-    "niveaux": ["4ème", "3ème"],
-    "tags": ["cellule", "organites", "végétal", "microscopie"],
-    "url": "biologie/cellule-vegetale/index.html",
-    "emoji": "🔬",
-    "image": "https://img.freepik.com/vecteurs-libre/cellule-vegetale-membrane-cellulaire_1308-15415.jpg",
+    "module": "La cellule",
+    "theme": "Structure cellulaire",
+    "niveaux": [
+      "3ème",
+      "CAP"
+    ],
+    "tags": [
+      "cellule",
+      "biologie",
+      "interactif"
+    ],
+    "url": "https://exemple.fr/cellule",
+    "emoji": "🧬",
+    "image": "",
     "statut": "publié",
-    "date_creation": "2025-01",
+    "date_creation": "2024-01-10",
     "auteur": "Moi"
   },
   {
-    "id": "snt-reseaux-01",
-    "titre": "Les réseaux informatiques",
-    "description": "Simulation visuelle du fonctionnement d'un réseau local.",
+    "id": "app-002",
+    "categorie": "application",
+    "titre": "Le système digestif",
+    "description": "Visualisation animée du trajet des aliments dans le corps humain.",
+    "matiere": "Biologie Humaine",
+    "module": "Nutrition",
+    "theme": "Digestion",
+    "niveaux": [
+      "Bac Pro SAPAT",
+      "CAP SAPVER"
+    ],
+    "tags": [
+      "digestion",
+      "corps humain",
+      "animation"
+    ],
+    "url": "https://exemple.fr/digestion",
+    "emoji": "🫀",
+    "image": "",
+    "statut": "publié",
+    "date_creation": "2024-02-14",
+    "auteur": "Moi"
+  },
+  {
+    "id": "app-003",
+    "categorie": "application",
+    "titre": "Clé de détermination des arbres",
+    "description": "Identifiez les espèces d'arbres à partir de leurs feuilles, écorces et fruits.",
+    "matiere": "Ecologie",
+    "module": "Biodiversité",
+    "theme": "Identification des espèces",
+    "niveaux": [
+      "4ème",
+      "3ème",
+      "Bac Pro SAPAT"
+    ],
+    "tags": [
+      "arbres",
+      "identification",
+      "biodiversité"
+    ],
+    "url": "https://exemple.fr/arbres",
+    "emoji": "🌳",
+    "image": "",
+    "statut": "publié",
+    "date_creation": "2024-03-05",
+    "auteur": "Moi"
+  },
+  {
+    "id": "app-004",
+    "categorie": "application",
+    "titre": "Simulateur de circuits électriques",
+    "description": "Créez et testez des circuits électriques simples en ligne.",
+    "matiere": "Physique-Chimie",
+    "module": "Electricité",
+    "theme": "Circuits en série et en dérivation",
+    "niveaux": [
+      "4ème",
+      "3ème"
+    ],
+    "tags": [
+      "électricité",
+      "circuit",
+      "simulation"
+    ],
+    "url": "https://exemple.fr/circuits",
+    "emoji": "⚡",
+    "image": "",
+    "statut": "publié",
+    "date_creation": "2024-03-20",
+    "auteur": "Moi"
+  },
+  {
+    "id": "app-005",
+    "categorie": "application",
+    "titre": "Initiation au HTML",
+    "description": "Apprenez les bases du HTML avec des exercices interactifs en ligne.",
     "matiere": "TIM",
-    "module": "M2 - Internet",
-    "theme": "Les réseaux",
-    "niveaux": ["Bac Pro SAPAT"],
-    "tags": ["réseau", "internet", "IP", "routeur"],
-    "url": "snt/reseaux/index.html",
-    "emoji": "🌐",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/...",
+    "module": "Web",
+    "theme": "Langages du web",
+    "niveaux": [
+      "Bac Pro SAPAT",
+      "CAP SAPVER"
+    ],
+    "tags": [
+      "HTML",
+      "web",
+      "code"
+    ],
+    "url": "https://exemple.fr/html",
+    "emoji": "💻",
+    "image": "",
     "statut": "publié",
-    "date_creation": "2025-01",
+    "date_creation": "2024-04-01",
     "auteur": "Moi"
   },
   {
-    "id": "chimie-ph-01",
-    "titre": "L'échelle de pH",
-    "description": "Simulation pour comprendre l'acidité et la basicité des solutions.",
-    "matiere": "Physique-Chimie",
-    "module": "M3 - Les solutions",
-    "theme": "Le pH",
-    "niveaux": ["4ème", "CAPa SAPVER"],
-    "tags": ["pH", "acide", "base", "solution"],
-    "url": "physique-chimie/ph/index.html",
-    "emoji": "⚗️",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/...",
-    "statut": "brouillon",
-    "date_creation": "2025-01",
-    "auteur": "Moi"
-  },
-    {
-    "id": "physique-01",
-    "titre": "Niveaux d'Organisation de l'Univers",
-    "description": "Simulation pour comprendre les dimensions dans l'Univers.",
-    "matiere": "Physique-Chimie",
-    "module": "Collège",
-    "theme": "Univers",
-    "niveaux": ["4ème"],
-    "tags": ["Univers", "Dimension", "Galaxie", "Système", "Solaire", "Planète"],
-    "url": "Physique-Chimie/niveaux-organisation-univers.html",
-    "emoji": "⚗️",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/...",
-    "statut": "brouillon",
-    "date_creation": "2025-01",
+    "id": "outil-001",
+    "categorie": "outil",
+    "titre": "Minuteur de classe",
+    "description": "Un minuteur simple et visuel pour gérer les temps d'activité en classe.",
+    "tags": [
+      "temps",
+      "gestion",
+      "classe"
+    ],
+    "url": "https://exemple.fr/minuteur",
+    "emoji": "⏱️",
+    "image": "",
+    "statut": "publié",
+    "date_creation": "2024-01-05",
     "auteur": "Moi"
   },
   {
-    "id": "sound-01",
-    "titre": "Les fréquences sonores",
-    "description": "Exploration interactive des changements de fréquence du son sur ce que nous entendons.",
-    "matiere": "Physique-Chimie",
-    "module": "Collège",
-    "theme": "Le son",
-    "niveaux": ["3ème"],
-    "tags": ["sound", "vibration", "fréquence"],
-    "url": "Physique-Chimie/les-frequences-sonore.html",
-    "emoji": "🔬",
-    "image": "https://img.freepik.com/vecteurs-libre/cellule-vegetale-membrane-cellulaire_1308-15415.jpg",
+    "id": "outil-002",
+    "categorie": "outil",
+    "titre": "Générateur de groupes",
+    "description": "Formez des groupes d'élèves aléatoirement en quelques clics.",
+    "tags": [
+      "groupes",
+      "aléatoire",
+      "organisation"
+    ],
+    "url": "https://exemple.fr/groupes",
+    "emoji": "assets/icones/Structure.gif",
+    "image": "assets/images/Structure.jpg",
     "statut": "publié",
-    "date_creation": "2025-01",
+    "date_creation": "2024-01-12",
     "auteur": "Moi"
   },
-    {
-    "id": "ESF-01",
-    "titre": "Orientation vers strucutres",
-    "description": "",
-    "matiere": "ESF",
-    "module": "Bac Pro SAPAT",
-    "theme": "Territoire",
-    "niveaux": ["Seconde"],
-    "tags": ["", "", ""],
-    "url": "ESF/Structure.html",
-    "emoji": "🔬",
-    "image": "https://img.freepik.com/vecteurs-libre/cellule-vegetale-membrane-cellulaire_1308-15415.jpg",
+  {
+    "id": "outil-003",
+    "categorie": "outil",
+    "titre": "Roue des prénoms",
+    "description": "Sélectionnez un élève au hasard grâce à une roue animée.",
+    "tags": [
+      "aléatoire",
+      "interrogation",
+      "animation"
+    ],
+    "url": "https://exemple.fr/roue",
+    "emoji": "🎡",
+    "image": "",
     "statut": "publié",
-    "date_creation": "2025-01",
+    "date_creation": "2024-02-01",
+    "auteur": "Moi"
+  },
+  {
+    "id": "outil-004",
+    "categorie": "outil",
+    "titre": "Convertisseur d'unités",
+    "description": "Convertissez facilement des unités de mesure : longueur, masse, volume, température.",
+    "tags": [
+      "unités",
+      "conversion",
+      "physique"
+    ],
+    "url": "https://exemple.fr/unites",
+    "emoji": "📐",
+    "image": "",
+    "statut": "publié",
+    "date_creation": "2024-02-20",
+    "auteur": "Moi"
+  },
+  {
+    "id": "structure-001",
+    "categorie": "structure",
+    "titre": "Carte mentale : La photosynthèse",
+    "description": "Une carte mentale complète sur le mécanisme de la photosynthèse.",
+    "module": "Ecologie",
+    "type": "carte mentale",
+    "niveaux": [
+      "3ème",
+      "Bac Pro SAPAT"
+    ],
+    "tags": [
+      "photosynthèse",
+      "plantes",
+      "énergie"
+    ],
+    "url": "https://exemple.fr/photosynthese-map",
+    "emoji": "🌿",
+    "image": "",
+    "statut": "publié",
+    "date_creation": "2024-01-18",
+    "auteur": "Moi"
+  },
+  {
+    "id": "structure-002",
+    "categorie": "structure",
+    "titre": "Fiche méthode : Lire un graphique",
+    "description": "Une fiche pas à pas pour apprendre à lire et analyser un graphique scientifique.",
+    "module": "Transversal",
+    "type": "fiche méthode",
+    "niveaux": [
+      "4ème",
+      "3ème",
+      "CAP SAPVER",
+      "Bac Pro SAPAT"
+    ],
+    "tags": [
+      "graphique",
+      "méthode",
+      "analyse"
+    ],
+    "url": "https://exemple.fr/graphique-methode",
+    "emoji": "📊",
+    "image": "",
+    "statut": "publié",
+    "date_creation": "2024-02-08",
+    "auteur": "Moi"
+  },
+  {
+    "id": "structure-003",
+    "categorie": "structure",
+    "titre": "Schéma bilan : Le cycle de l'eau",
+    "description": "Un schéma bilan animé présentant les grandes étapes du cycle de l'eau.",
+    "module": "Ecologie",
+    "type": "schéma bilan",
+    "niveaux": [
+      "4ème",
+      "3ème"
+    ],
+    "tags": [
+      "eau",
+      "cycle",
+      "environnement"
+    ],
+    "url": "https://exemple.fr/cycle-eau",
+    "emoji": "💧",
+    "image": "",
+    "statut": "publié",
+    "date_creation": "2024-03-15",
+    "auteur": "Moi"
+  },
+  {
+    "id": "structure-004",
+    "categorie": "structure",
+    "titre": "Progression annuelle SNT",
+    "description": "La progression annuelle complète pour le cours de Sciences Numériques et Technologie.",
+    "module": "SNT",
+    "type": "progression",
+    "niveaux": [
+      "Bac Pro SAPAT"
+    ],
+    "tags": [
+      "SNT",
+      "numérique",
+      "progression"
+    ],
+    "url": "https://exemple.fr/progression-snt",
+    "emoji": "🗓️",
+    "image": "",
+    "statut": "publié",
+    "date_creation": "2024-04-10",
     "auteur": "Moi"
   }
 ]

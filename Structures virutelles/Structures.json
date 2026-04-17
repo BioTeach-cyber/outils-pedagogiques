@@ -1,6 +1,6 @@
 [
   {
-    "id": "Strucutre-01",
+    "id": "Structure-01",
     "titre": "EHPAD - Les Esprits Libre",
     "description": "",
     "module": "",
@@ -9,7 +9,7 @@
     "public": ["Personnes Agées"],
     "tags": [],
     "url": "",
-    "emoji": "⚗️",
+    "emoji": "assets/icones/Structure.gif",
     "image": "",
     "statut": "",
     "date_creation": "",
@@ -25,7 +25,7 @@
     "public": ["Tous Personnes"],
     "tags": [],
     "url": "",
-    "emoji": "⚗️",
+    "emoji": "assets/icones/Structure.gif",
     "image": "",
     "statut": "",
     "date_creation": "",
