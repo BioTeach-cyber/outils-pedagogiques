@@ -155,7 +155,24 @@
       stroke: #fff;
       stroke-width: 1.8;
     }
+    .categorie-icon {
+     width: 52px;
+     height: 52px;
+     border-radius: 50%;
+     background-color: #ffffff;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-shrink: 0;
+     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+     overflow: hidden;
+    }
 
+    .categorie-icon img {
+     width: 36px;
+     height: 36px;
+     object-fit: contain;
+    }
     .categorie-title {
       font-size: 1.15rem;
       font-weight: 700;
@@ -769,20 +786,10 @@ const CATEGORY_FILTERS = {
 };
 
 // Icônes SVG inline pour chaque catégorie
-const CATEGORY_ICONS = {
-  'Outils': `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77
-             a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91
-             a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-  </svg>`,
-  'Applications': `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-    <line x1="8" y1="21" x2="16" y2="21"/>
-    <line x1="12" y1="17" x2="12" y2="21"/>
-  </svg>`,
-  'Structure': `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-  </svg>`,
+const CATEGORY_GIFS = {
+  'Outils':       'assets/icones/Outils.gif',
+  'Applications': 'assets/icones/Applications.gif',
+  'Structure':    'assets/icones/Structures.gif',
 };
 
 // Icône placeholder pour image manquante
@@ -888,7 +895,12 @@ header.className = `categorie-header categorie-header-${cat.toLowerCase()}`;
 
   const iconWrap = document.createElement('div');
   iconWrap.className = 'categorie-icon';
-  iconWrap.innerHTML = CATEGORY_ICONS[cat] || CATEGORY_ICONS['Outils'];
+
+  const gifImg = document.createElement('img');
+  gifImg.src = CATEGORY_GIFS[cat] || CATEGORY_GIFS['Outils'];
+  gifImg.alt = cat;
+  iconWrap.appendChild(gifImg);
+
 
   const titleEl = document.createElement('span');
   titleEl.className = 'categorie-title';
