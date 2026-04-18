@@ -1,0 +1,380 @@
+/* ========================================
+   CHARTE GRAPHIQUE - Lycée Le Cleusmeur
+   ======================================== */
+
+/* --- Variables --- */
+:root {
+  --couleur-1: #f49d0e;
+  --couleur-2: #eb630d;
+  --couleur-3: #e63f01;
+  --couleur-4: #e6017b;
+  --couleur-5: #803977;
+  --couleur-6: #039a9f;
+  --couleur-7: #028a85;
+  --couleur-8: #7abbc7;
+
+  --header-gradient: linear-gradient(135deg, var(--couleur-1), var(--couleur-2));
+  --header-text: #ffffff;
+  --header-height: 80px;
+  --logo-size: 60px;
+  --radius: 12px;
+  --font-main: system-ui, -apple-system, sans-serif;
+
+  /* Mode clair */
+  --bg: #f5f5f5;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #555555;
+  --border: #e0e0e0;
+  --shadow: rgba(0,0,0,0.08);
+}
+
+/* Mode sombre */
+[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --surface: #2d2d2d;
+  --text: #f0f0f0;
+  --text-secondary: #aaaaaa;
+  --border: #444444;
+  --shadow: rgba(0,0,0,0.3);
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
+  min-height: 100vh;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+#app-header {
+  background: var(--header-gradient);
+  color: var(--header-text);
+  padding: 12px 20px;
+  display: grid;
+  grid-template-columns: var(--logo-size) auto 1fr var(--logo-size);
+  /* logo | nom lycée | nom appli | qr+toggle */
+  align-items: start;
+  gap: 16px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+/* --- Logo --- */
+.header-logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--logo-size);
+  height: var(--logo-size);
+  background: #ffffff;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  margin-top: 0;
+}
+
+.header-logo-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.header-logo-link img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+/* --- Nom du lycée --- */
+.header-school-name {
+  display: flex;
+  align-items: center;
+  height: var(--logo-size);
+  font-size: 1rem;
+  font-weight: 900;
+  opacity: 0.85;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--header-text);
+  white-space: nowrap;
+}
+
+/* --- Nom de l'application --- */
+.header-titles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--logo-size);
+}
+
+.header-app-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--header-text);
+  text-align: center;
+}
+
+/* --- Zone droite --- */
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- QR Code --- */
+.qr-wrapper {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+}
+
+.qr-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.qr-wrapper canvas,
+.qr-wrapper img {
+  width: 60% !important;
+  height: 60% !important;
+  object-fit: contain;
+}
+
+/* --- Toggle sombre/clair --- */
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: var(--logo-size);
+}
+
+.toggle-icon {
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.toggle-switch {
+  position: relative;
+  width: calc(var(--logo-size) * 0.65);
+  height: calc(var(--logo-size) * 0.32);
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.3);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.3s;
+  border: 2px solid rgba(255,255,255,0.6);
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: calc(var(--logo-size) * 0.32 - 8px);
+  height: calc(var(--logo-size) * 0.32 - 8px);
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: rgba(0,0,0,0.35);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateY(-50%) translateX(calc(var(--logo-size) * 0.65 - var(--logo-size) * 0.32 + 2px));
+}
+
+/* ========================================
+   RESPONSIVE — HEADER
+   ======================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --logo-size: 50px;
+  }
+
+  .header-app-name {
+    font-size: 1.1rem;
+  }
+
+  .header-school-name {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --logo-size: 44px;
+  }
+
+  #app-header {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  /* On masque le nom du lycée sur très petit écran */
+  .header-school-name {
+    display: none;
+  }
+
+  .header-app-name {
+    font-size: 1rem;
+  }
+}
+
+
+
+/* ========================================
+   MODAL QR CODE
+   ======================================== */
+
+#qr-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+#qr-modal.open {
+  display: flex;
+}
+
+.qr-modal-content {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  max-width: 90vw;
+  position: relative;
+}
+
+.qr-modal-content p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  word-break: break-all;
+  text-align: center;
+  max-width: 260px;
+}
+
+.qr-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.qr-modal-close:hover {
+  color: var(--text);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+/* Tablette */
+@media (max-width: 768px) {
+  :root {
+    --logo-size: 50px;
+  }
+
+  .header-app-name {
+    font-size: 1.1rem;
+  }
+
+  .header-school-name {
+    font-size: 0.65rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  :root {
+    --logo-size: 44px;
+  }
+
+  #app-header {
+    grid-template-columns: var(--logo-size) 1fr var(--logo-size);
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .header-app-name {
+    font-size: 1rem;
+  }
+
+  .header-school-name {
+    font-size: 0.6rem;
+  }
+}
+
+
+/* ========================================
+   UTILITAIRES GÉNÉRAUX
+   ======================================== */
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 2px 8px var(--shadow);
+  border: 1px solid var(--border);
+}
