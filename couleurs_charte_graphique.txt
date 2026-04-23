@@ -1,0 +1,11 @@
+Bleu : #53a4db
+Vert : #7fbc48
+Violet : #a6539b
+Orange : #f3912b
+Gris : #b7b7b7
+Rouge : #e62d32
+Rose : #ee7bab
+Rose Genially : #e7708c
+Jaune : #f4d32e
+Marron : #a5706c
+Noir : #494949

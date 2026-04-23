@@ -170,6 +170,12 @@
 
   /* --- Point d'entrée --- */
   function init() {
+    // Favicon
+    const favicon = document.createElement("link");
+    favicon.rel = "icon";
+    favicon.href = BASE_PATH + "assets/icones/Logo.svg";
+    favicon.type = "image/svg+xml";
+    document.head.appendChild(favicon);
     // Lien vers la charte CSS
     const link = document.createElement("link");
     link.rel = "stylesheet";

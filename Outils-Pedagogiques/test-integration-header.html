@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test intégration header</title>
+
+  <!-- ① Déclarer le nom de l'application -->
+  <script>
+    window.APP_NAME  = "Nom de mon application";
+    window.BASE_PATH = "../../";  // ← chemin relatif vers la racine du projet
+  </script>
+
+  <!-- ② Injection automatique du header (CSS + header + modal + QR) -->
+  <script src="../../assets/js/header.js" defer></script>
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      <h1>Coucou</h1>
+      <p>...</p>
+    </div>
+  </div>
+
+</body>
+</html>
