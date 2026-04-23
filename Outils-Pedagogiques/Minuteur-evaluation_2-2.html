@@ -8,7 +8,9 @@
   <!-- ① Déclarer le nom de l'application -->
   <script>
     window.APP_NAME  = "Minuteur d'évaluation";
-    window.BASE_PATH = "/outils-pedagogiques/";  // chemin absolu vers la racine du projet
+    // Détecte automatiquement le chemin selon l'environnement (local ou GitHub Pages)
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    window.BASE_PATH = isGitHubPages ? "/outils-pedagogiques/" : "../";
   </script>
 
   <!-- ② Injection automatique du header (CSS + header + modal + QR) -->
