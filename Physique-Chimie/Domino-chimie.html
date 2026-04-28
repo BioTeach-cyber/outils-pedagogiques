@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chimi-Domino</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #fff;
+    min-height: 100vh;
+    color: #494949;
+    padding: 10px;
+  }
+  h1 { text-align: center; margin-bottom: 10px; font-size: 1.6em; }
+  .ecran { display: none; }
+  .ecran.actif { display: block; }
+
+  #menu { max-width: 500px; margin: 30px auto; text-align: center; }
+  #menu .carte {
+    background: rgba(255,255,255,0.15);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+  }
+  button {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+  }
+  button:hover { background: #ff5252; }
+  button:disabled { background: #888; cursor: not-allowed; }
+
+  #jeu { display: flex; flex-direction: column; height: 95vh; }
+  #infos {
+    background: rgba(0,0,0,0.3);
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+    font-size: 0.9em;
+  }
+  #infos div { padding: 3px 8px; }
+  .actif-joueur { background: #ff6b6b; border-radius: 5px; }
+
+  #plateau-conteneur {
+    flex: 1;
+    overflow: auto;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  #plateau {
+    position: relative;
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+
+  .domino-plateau {
+    position: absolute;
+    background: #fff;
+    border: 2px solid #333;
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+    color: #000;
+    transition: left 0.3s ease, top 0.3s ease;
+  }
+  .domino-plateau.horizontal { flex-direction: row; }
+  .domino-plateau.vertical { flex-direction: column; }
+.demi {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75em;
+    text-align: center;
+    padding: 2px;
+    position: relative;
+    overflow: hidden;
+    /* 🆕 Retour à la ligne automatique */
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .domino-plateau.horizontal .demi:first-child { border-right: 2px solid #333; }
+  .domino-plateau.vertical .demi:first-child { border-bottom: 2px solid #333; }
+  .demi svg { width: 90%; height: 90%; }
+
+  .zone-connexion {
+    position: absolute;
+    background: rgba(76, 175, 80, 0.5);
+    border: 2px dashed #2e7d32;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .zone-connexion:hover { background: rgba(76, 175, 80, 0.8); }
+
+  #main-joueur {
+    background: rgba(0,0,0,0.3);
+    padding: 8px;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+    min-height: 90px;
+  }
+  .domino-main {
+    display: inline-flex;
+    width: 180px;
+    height: 90px;
+    background: #fff;
+    border: 2px solid #333;
+    border-radius: 10px;
+    margin-right: 6px;
+    overflow: hidden;
+    color: #000;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  .domino-main.selectionne {
+    border-color: #ffeb3b;
+    box-shadow: 0 0 10px #ffeb3b;
+  }
+  .domino-main .demi {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    padding: 2px;
+    /* 🆕 Retour à la ligne automatique */
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .domino-main .demi:first-child { border-right: 2px solid #333; }
+  .domino-main svg { width: 90%; height: 90%; }
+
+  #actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+  }
+  #actions button { padding: 8px 12px; font-size: 0.85em; margin: 0; }
+
+  #message {
+    display: none;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.9);
+    padding: 20px 30px;
+    border-radius: 10px;
+    z-index: 100;
+    font-size: 1.1em;
+    text-align: center;
+  }
+  #message.succes { border: 2px solid #4caf50; }
+  #message.erreur { border: 2px solid #f44336; }
+</style>
+</head>
+<body>
+
+<h1>🧪 Chimi-Domino</h1>
+
+<!-- MENU -->
+<div id="menu" class="ecran actif">
+  <div class="carte">
+    <h2>Mode de jeu</h2>
+    <button onclick="demarrer(1)">Solo (1 joueur)</button>
+    <button onclick="demarrer(2)">Duo (2 joueurs)</button>
+  </div>
+  <div class="carte">
+    <h2>Niveau</h2>
+    <p style="margin-bottom:10px;">Plus le niveau est élevé, plus il y a de molécules.</p>
+    <select id="niveau" style="padding:8px; font-size:1em;">
+      <option value="1">Niveau 1 (faciles)</option>
+      <option value="2">Niveau 2</option>
+      <option value="3" selected>Niveau 3</option>
+      <option value="4">Niveau 4</option>
+      <option value="5">Niveau 5 (toutes)</option>
+    </select>
+  </div>
+</div>
+
+<!-- JEU -->
+<div id="jeu" class="ecran">
+  <div id="infos">
+    <div id="info-j1">Joueur 1 : 0 pts</div>
+    <div id="info-j2" style="display:none;">Joueur 2 : 0 pts</div>
+    <div id="info-pioche">Pioche : 0</div>
+  </div>
+  <div id="plateau-conteneur">
+    <div id="plateau"></div>
+  </div>
+  <div id="main-joueur"></div>
+  <div id="actions">
+    <button onclick="piocher()">Piocher</button>
+    <button onclick="passerTour()">Passer</button>
+    <button onclick="retourMenu()">Menu</button>
+  </div>
+</div>
+
+<div id="message"></div>
+
+<script>
+/* ============================================================
+   DONNÉES : MOLÉCULES
+   ============================================================ */
+const MOLECULES = [
+  { id:"eau", nom:"eau", formule:"H₂O", niveau:1,
+    svg:`<svg viewBox="0 0 100 60"><circle cx="50" cy="30" r="14" fill="#e53935"/><circle cx="25" cy="40" r="9" fill="#fff" stroke="#333"/><circle cx="75" cy="40" r="9" fill="#fff" stroke="#333"/></svg>` },
+  { id:"dioxygene", nom:"dioxygène", formule:"O₂", niveau:1,
+    svg:`<svg viewBox="0 0 100 60"><circle cx="35" cy="30" r="14" fill="#e53935"/><circle cx="65" cy="30" r="14" fill="#e53935"/></svg>` },
+  { id:"dihydrogene", nom:"dihydrogène", formule:"H₂", niveau:1,
+    svg:`<svg viewBox="0 0 100 60"><circle cx="38" cy="30" r="11" fill="#fff" stroke="#333"/><circle cx="62" cy="30" r="11" fill="#fff" stroke="#333"/></svg>` },
+  { id:"co2", nom:"dioxyde de carbone", formule:"CO₂", niveau:2,
+    svg:`<svg viewBox="0 0 100 60"><circle cx="50" cy="30" r="13" fill="#222"/><circle cx="22" cy="30" r="11" fill="#e53935"/><circle cx="78" cy="30" r="11" fill="#e53935"/></svg>` },
+  { id:"methane", nom:"méthane", formule:"CH₄", niveau:2,
+    svg:`<svg viewBox="0 0 100 60"><circle cx="50" cy="30" r="13" fill="#222"/><circle cx="20" cy="20" r="8" fill="#fff" stroke="#333"/><circle cx="20" cy="42" r="8" fill="#fff" stroke="#333"/><circle cx="80" cy="20" r="8" fill="#fff" stroke="#333"/><circle cx="80" cy="42" r="8" fill="#fff" stroke="#333"/></svg>` },
+  { id:"diazote", nom:"diazote", formule:"N₂", niveau:3,
+    svg:`<svg viewBox="0 0 100 60"><circle cx="35" cy="30" r="14" fill="#3f51b5"/><circle cx="65" cy="30" r="14" fill="#3f51b5"/></svg>` },
+  { id:"ammoniac", nom:"ammoniac", formule:"NH₃", niveau:3,
+    svg:`<svg viewBox="0 0 100 60"><circle cx="50" cy="30" r="13" fill="#3f51b5"/><circle cx="22" cy="30" r="9" fill="#fff" stroke="#333"/><circle cx="70" cy="14" r="9" fill="#fff" stroke="#333"/><circle cx="70" cy="46" r="9" fill="#fff" stroke="#333"/></svg>` },
+  { id:"ethanol", nom:"éthanol", formule:"C₂H₆O", niveau:4,
+    svg:`<svg viewBox="0 0 100 60"><circle cx="30" cy="30" r="11" fill="#222"/><circle cx="55" cy="30" r="11" fill="#222"/><circle cx="80" cy="30" r="11" fill="#e53935"/><circle cx="92" cy="30" r="6" fill="#fff" stroke="#333"/></svg>` },
+  { id:"glucose", nom:"glucose", formule:"C₆H₁₂O₆", niveau:5,
+    svg:`<svg viewBox="0 0 100 60"><polygon points="50,10 80,25 80,45 50,55 20,45 20,25" fill="none" stroke="#222" stroke-width="2"/><text x="50" y="35" text-anchor="middle" font-size="10" fill="#000">C₆H₁₂O₆</text></svg>` },
+  { id:"sel", nom:"chlorure de sodium", formule:"NaCl", niveau:5,
+    svg:`<svg viewBox="0 0 100 60"><circle cx="35" cy="30" r="14" fill="#9c27b0"/><circle cx="65" cy="30" r="14" fill="#4caf50"/></svg>` }
+];
+
+/* ============================================================
+   CONSTANTES
+   ============================================================ */
+const TAILLE_CASE = 70;
+const MARGE = 3; // cases libres autour des dominos posés
+
+/* ============================================================
+   ÉTAT DU JEU
+   ============================================================ */
+let etat = {
+  nbJoueurs: 1,
+  joueurActif: 0,
+  scores: [0, 0],
+  mains: [[], []],
+  pioche: [],
+  plateau: [],
+  grille: {},
+  dominoSelectionne: null,
+  prochainId: 1,
+  moleculesDispo: [],
+  // Dimensions dynamiques de la grille
+  grilleMinX: 0,
+  grilleMinY: 0,
+  grilleCols: 7,
+  grilleLignes: 7
+};
+
+/* ============================================================
+   PLATEAU DYNAMIQUE
+   ============================================================ */
+function redimensionnerPlateau() {
+  const plateau = document.getElementById('plateau');
+
+  if (etat.plateau.length === 0) {
+    // Taille minimale au démarrage
+    etat.grilleCols   = 7;
+    etat.grilleLignes = 7;
+    etat.grilleMinX   = 0;
+    etat.grilleMinY   = 0;
+    plateau.style.width  = (etat.grilleCols   * TAILLE_CASE) + 'px';
+    plateau.style.height = (etat.grilleLignes * TAILLE_CASE) + 'px';
+    return;
+  }
+
+  // Calculer les bornes occupées
+  let minX = Infinity, maxX = -Infinity;
+  let minY = Infinity, maxY = -Infinity;
+
+  for (const d of etat.plateau) {
+    minX = Math.min(minX, d.x);
+    minY = Math.min(minY, d.y);
+    if (d.orientation === 'horizontal') {
+      maxX = Math.max(maxX, d.x + 1);
+      maxY = Math.max(maxY, d.y);
+    } else {
+      maxX = Math.max(maxX, d.x);
+      maxY = Math.max(maxY, d.y + 1);
+    }
+  }
+
+  // Nouvelles dimensions avec marge
+  const nouvCols   = (maxX - minX + 1) + MARGE * 2;
+  const nouvLignes = (maxY - minY + 1) + MARGE * 2;
+
+  // Décalage nécessaire pour que les dominos restent dans la grille
+  const decalageX = -minX + MARGE;
+  const decalageY = -minY + MARGE;
+
+  if (decalageX !== 0 || decalageY !== 0) {
+    // Reconstruire la carte des cases occupées avec les nouvelles coordonnées
+    etat.grille = {};
+    for (const d of etat.plateau) {
+      d.x += decalageX;
+      d.y += decalageY;
+      if (d.orientation === 'horizontal') {
+        occuperCase(d.x,     d.y, d.id);
+        occuperCase(d.x + 1, d.y, d.id);
+      } else {
+        occuperCase(d.x, d.y,     d.id);
+        occuperCase(d.x, d.y + 1, d.id);
+      }
+    }
+  }
+
+  etat.grilleCols   = nouvCols;
+  etat.grilleLignes = nouvLignes;
+  plateau.style.width  = (etat.grilleCols   * TAILLE_CASE) + 'px';
+  plateau.style.height = (etat.grilleLignes * TAILLE_CASE) + 'px';
+}
+
+/* ============================================================
+   GÉNÉRATION DES DOMINOS
+   ============================================================ */
+function genererDominos(molecules) {
+  const dominos = [];
+  const representations = ['nom', 'formule', 'image'];
+  for (let i = 0; i < molecules.length; i++) {
+    for (let j = i + 1; j < molecules.length; j++) {
+      for (let k = 0; k < 2; k++) {
+        const repG = representations[Math.floor(Math.random() * 3)];
+        const repD = representations[Math.floor(Math.random() * 3)];
+        dominos.push({
+          id: etat.prochainId++,
+          gauche: { molecule: molecules[i].id, representation: repG },
+          droite: { molecule: molecules[j].id, representation: repD },
+          orientation: 'horizontal',
+          connexions: {
+            gaucheExt: false, droiteExt: false,
+            gaucheHaut: false, gaucheBas: false,
+            droiteHaut: false, droiteBas: false
+          },
+          x: 0, y: 0
+        });
+      }
+    }
+  }
+  return dominos;
+}
+
+function melanger(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/* ============================================================
+   DÉMARRAGE
+   ============================================================ */
+function demarrer(nbJoueurs) {
+  const niveau = parseInt(document.getElementById('niveau').value);
+  etat.moleculesDispo = MOLECULES.filter(m => m.niveau <= niveau);
+  if (etat.moleculesDispo.length < 2) {
+    alert("Pas assez de molécules pour ce niveau.");
+    return;
+  }
+
+  etat.nbJoueurs = nbJoueurs;
+  etat.joueurActif = 0;
+  etat.scores = [0, 0];
+  etat.plateau = [];
+  etat.grille = {};
+  etat.prochainId = 1;
+  etat.dominoSelectionne = null;
+
+  const tousDominos = melanger(genererDominos(etat.moleculesDispo));
+  etat.mains[0] = tousDominos.splice(0, 7);
+  etat.mains[1] = nbJoueurs === 2 ? tousDominos.splice(0, 7) : [];
+  etat.pioche = tousDominos;
+
+  document.getElementById('menu').classList.remove('actif');
+  document.getElementById('jeu').classList.add('actif');
+  document.getElementById('info-j2').style.display = nbJoueurs === 2 ? 'block' : 'none';
+
+  // Initialiser le plateau avec taille minimale
+  redimensionnerPlateau();
+  rafraichir();
+}
+
+function retourMenu() {
+  document.getElementById('jeu').classList.remove('actif');
+  document.getElementById('menu').classList.add('actif');
+}
+
+/* ============================================================
+   RECHERCHE D'UNE MOLÉCULE
+   ============================================================ */
+function getMolecule(id) {
+  return MOLECULES.find(m => m.id === id);
+}
+
+function htmlRepresentation(molId, rep) {
+  const m = getMolecule(molId);
+  if (!m) return '?';
+  if (rep === 'nom')     return m.nom;
+  if (rep === 'formule') return m.formule;
+  if (rep === 'image')   return m.svg;
+  return '?';
+}
+
+/* ============================================================
+   AFFICHAGE
+   ============================================================ */
+function rafraichir() {
+  // Infos joueurs
+  document.getElementById('info-j1').textContent =
+    `Joueur 1 : ${etat.scores[0]} pts (${etat.mains[0].length} dominos)`;
+  document.getElementById('info-j1').classList.toggle('actif-joueur', etat.joueurActif === 0);
+
+  if (etat.nbJoueurs === 2) {
+    document.getElementById('info-j2').textContent =
+      `Joueur 2 : ${etat.scores[1]} pts (${etat.mains[1].length} dominos)`;
+    document.getElementById('info-j2').classList.toggle('actif-joueur', etat.joueurActif === 1);
+  }
+  document.getElementById('info-pioche').textContent = `Pioche : ${etat.pioche.length}`;
+
+  // Plateau
+  const plateau = document.getElementById('plateau');
+  plateau.innerHTML = '';
+  etat.plateau.forEach(d => plateau.appendChild(creerDominoPlateau(d)));
+
+  // Zones de connexion
+  if (etat.dominoSelectionne) {
+    afficherZonesConnexion();
+  }
+
+  // Main du joueur actif
+  const main = document.getElementById('main-joueur');
+  main.innerHTML = '';
+  etat.mains[etat.joueurActif].forEach(d => main.appendChild(creerDominoMain(d)));
+}
+
+function creerDominoPlateau(d) {
+  const div = document.createElement('div');
+  div.className = `domino-plateau ${d.orientation}`;
+  div.dataset.id = d.id;
+  if (d.orientation === 'horizontal') {
+    div.style.width  = (TAILLE_CASE * 2 - 4) + 'px';
+    div.style.height = (TAILLE_CASE     - 4) + 'px';
+  } else {
+    div.style.width  = (TAILLE_CASE     - 4) + 'px';
+    div.style.height = (TAILLE_CASE * 2 - 4) + 'px';
+  }
+  div.style.left = (d.x * TAILLE_CASE + 2) + 'px';
+  div.style.top  = (d.y * TAILLE_CASE + 2) + 'px';
+
+  const demiG = document.createElement('div');
+  demiG.className = 'demi';
+  demiG.innerHTML = htmlRepresentation(d.gauche.molecule, d.gauche.representation);
+  const demiD = document.createElement('div');
+  demiD.className = 'demi';
+  demiD.innerHTML = htmlRepresentation(d.droite.molecule, d.droite.representation);
+  div.appendChild(demiG);
+  div.appendChild(demiD);
+  return div;
+}
+
+function creerDominoMain(d) {
+  const div = document.createElement('div');
+  div.className = 'domino-main';
+  if (etat.dominoSelectionne && etat.dominoSelectionne.id === d.id) {
+    div.classList.add('selectionne');
+  }
+  const demiG = document.createElement('div');
+  demiG.className = 'demi';
+  demiG.innerHTML = htmlRepresentation(d.gauche.molecule, d.gauche.representation);
+  const demiD = document.createElement('div');
+  demiD.className = 'demi';
+  demiD.innerHTML = htmlRepresentation(d.droite.molecule, d.droite.representation);
+  div.appendChild(demiG);
+  div.appendChild(demiD);
+  div.onclick = () => selectionnerDomino(d);
+  return div;
+}
+
+/* ============================================================
+   ZONES DE CONNEXION
+   ============================================================ */
+function afficherZonesConnexion() {
+  const plateau = document.getElementById('plateau');
+
+  // Plateau vide → zone centrale
+  if (etat.plateau.length === 0) {
+    const zone = document.createElement('div');
+    zone.className = 'zone-connexion';
+    const cx = Math.floor(etat.grilleCols   / 2) - 1;
+    const cy = Math.floor(etat.grilleLignes / 2);
+    zone.style.left   = (cx * TAILLE_CASE) + 'px';
+    zone.style.top    = (cy * TAILLE_CASE) + 'px';
+    zone.style.width  = (TAILLE_CASE * 2)  + 'px';
+    zone.style.height = TAILLE_CASE         + 'px';
+    zone.onclick = () => poserPremierDomino(cx, cy);
+    plateau.appendChild(zone);
+    return;
+  }
+
+  etat.plateau.forEach(d => {
+    const zones = getZonesLibres(d);
+    zones.forEach(z => {
+      const div = document.createElement('div');
+      div.className = 'zone-connexion';
+      div.style.left   = z.px + 'px';
+      div.style.top    = z.py + 'px';
+      div.style.width  = z.w  + 'px';
+      div.style.height = z.h  + 'px';
+      div.onclick = () => tenterConnexion(d, z);
+      plateau.appendChild(div);
+    });
+  });
+}
+
+function getZonesLibres(d) {
+  const zones = [];
+  const c  = d.connexions;
+  const px = d.x * TAILLE_CASE;
+  const py = d.y * TAILLE_CASE;
+  const T  = TAILLE_CASE;
+
+  if (d.orientation === 'horizontal') {
+    if (!c.gaucheExt && caseLibre(d.x - 1, d.y)) {
+      zones.push({ px: px - T, py: py, w: T, h: T,
+        moitie:'gauche', cote:'ext', moleculeCible: d.gauche.molecule,
+        nouvelleX: d.x - 2, nouvelleY: d.y, orientation:'horizontal',
+        moitieAdjacente:'droite' });
+    }
+    if (!c.droiteExt && caseLibre(d.x + 2, d.y)) {
+      zones.push({ px: px + 2*T, py: py, w: T, h: T,
+        moitie:'droite', cote:'ext', moleculeCible: d.droite.molecule,
+        nouvelleX: d.x + 2, nouvelleY: d.y, orientation:'horizontal',
+        moitieAdjacente:'gauche' });
+    }
+    if (!c.gaucheHaut && caseLibre(d.x, d.y - 1) && caseLibre(d.x, d.y - 2)) {
+      zones.push({ px: px, py: py - T, w: T, h: T,
+        moitie:'gauche', cote:'haut', moleculeCible: d.gauche.molecule,
+        nouvelleX: d.x, nouvelleY: d.y - 2, orientation:'vertical',
+        moitieAdjacente:'bas' });
+    }
+    if (!c.gaucheBas && caseLibre(d.x, d.y + 1) && caseLibre(d.x, d.y + 2)) {
+      zones.push({ px: px, py: py + T, w: T, h: T,
+        moitie:'gauche', cote:'bas', moleculeCible: d.gauche.molecule,
+        nouvelleX: d.x, nouvelleY: d.y + 1, orientation:'vertical',
+        moitieAdjacente:'haut' });
+    }
+    if (!c.droiteHaut && caseLibre(d.x + 1, d.y - 1) && caseLibre(d.x + 1, d.y - 2)) {
+      zones.push({ px: px + T, py: py - T, w: T, h: T,
+        moitie:'droite', cote:'haut', moleculeCible: d.droite.molecule,
+        nouvelleX: d.x + 1, nouvelleY: d.y - 2, orientation:'vertical',
+        moitieAdjacente:'bas' });
+    }
+    if (!c.droiteBas && caseLibre(d.x + 1, d.y + 1) && caseLibre(d.x + 1, d.y + 2)) {
+      zones.push({ px: px + T, py: py + T, w: T, h: T,
+        moitie:'droite', cote:'bas', moleculeCible: d.droite.molecule,
+        nouvelleX: d.x + 1, nouvelleY: d.y + 1, orientation:'vertical',
+        moitieAdjacente:'haut' });
+    }
+  } else {
+    // VERTICAL
+    if (!c.gaucheExt && caseLibre(d.x, d.y - 1) && caseLibre(d.x, d.y - 2)) {
+      zones.push({ px: px, py: py - T, w: T, h: T,
+        moitie:'gauche', cote:'ext', moleculeCible: d.gauche.molecule,
+        nouvelleX: d.x, nouvelleY: d.y - 2, orientation:'vertical',
+        moitieAdjacente:'droite' });
+    }
+    if (!c.droiteExt && caseLibre(d.x, d.y + 2)) {
+      zones.push({ px: px, py: py + 2*T, w: T, h: T,
+        moitie:'droite', cote:'ext', moleculeCible: d.droite.molecule,
+        nouvelleX: d.x, nouvelleY: d.y + 2, orientation:'vertical',
+        moitieAdjacente:'gauche' });
+    }
+    if (!c.gaucheHaut && caseLibre(d.x - 1, d.y) && caseLibre(d.x - 2, d.y)) {
+      zones.push({ px: px - T, py: py, w: T, h: T,
+        moitie:'gauche', cote:'haut', moleculeCible: d.gauche.molecule,
+        nouvelleX: d.x - 2, nouvelleY: d.y, orientation:'horizontal',
+        moitieAdjacente:'droite' });
+    }
+    if (!c.gaucheBas && caseLibre(d.x + 1, d.y) && caseLibre(d.x + 2, d.y)) {
+      zones.push({ px: px + T, py: py, w: T, h: T,
+        moitie:'gauche', cote:'bas', moleculeCible: d.gauche.molecule,
+        nouvelleX: d.x + 1, nouvelleY: d.y, orientation:'horizontal',
+        moitieAdjacente:'gauche' });
+    }
+    if (!c.droiteHaut && caseLibre(d.x - 1, d.y + 1) && caseLibre(d.x - 2, d.y + 1)) {
+      zones.push({ px: px - T, py: py + T, w: T, h: T,
+        moitie:'droite', cote:'haut', moleculeCible: d.droite.molecule,
+        nouvelleX: d.x - 2, nouvelleY: d.y + 1, orientation:'horizontal',
+        moitieAdjacente:'droite' });
+    }
+    if (!c.droiteBas && caseLibre(d.x + 1, d.y + 1) && caseLibre(d.x + 2, d.y + 1)) {
+      zones.push({ px: px + T, py: py + T, w: T, h: T,
+        moitie:'droite', cote:'bas', moleculeCible: d.droite.molecule,
+        nouvelleX: d.x + 1, nouvelleY: d.y + 1, orientation:'horizontal',
+        moitieAdjacente:'gauche' });
+    }
+  }
+  return zones;
+}
+
+function caseLibre(x, y) {
+  // Pas de limite de grille fixe : on vérifie juste si la case est libre
+  if (x < -50 || y < -50 || x > 200 || y > 200) return false; // garde-fou
+  return !etat.grille[`${x},${y}`];
+}
+
+function occuperCase(x, y, idDomino) {
+  etat.grille[`${x},${y}`] = idDomino;
+}
+
+/* ============================================================
+   SÉLECTION ET POSE
+   ============================================================ */
+function selectionnerDomino(d) {
+  if (etat.dominoSelectionne && etat.dominoSelectionne.id === d.id) {
+    etat.dominoSelectionne = null;
+  } else {
+    etat.dominoSelectionne = d;
+  }
+  rafraichir();
+}
+
+function poserPremierDomino(x, y) {
+  if (!etat.dominoSelectionne) return;
+  const d = etat.dominoSelectionne;
+  d.x = x;
+  d.y = y;
+  d.orientation = 'horizontal';
+  occuperCase(x,     y, d.id);
+  occuperCase(x + 1, y, d.id);
+  etat.plateau.push(d);
+  const main = etat.mains[etat.joueurActif];
+  main.splice(main.findIndex(m => m.id === d.id), 1);
+  etat.scores[etat.joueurActif] += 2;
+  etat.dominoSelectionne = null;
+  redimensionnerPlateau();
+  afficherMessage('✅ +2 points', 'succes');
+  finDeTour();
+}
+
+function tenterConnexion(dominoCible, zone) {
+  if (!etat.dominoSelectionne) return;
+  const dPose = etat.dominoSelectionne;
+  const moleculeCible = zone.moleculeCible;
+
+  const repCible = (zone.moitie === 'gauche')
+    ? dominoCible.gauche.representation
+    : dominoCible.droite.representation;
+
+  const matchG = (dPose.gauche.molecule === moleculeCible)
+              && (dPose.gauche.representation !== repCible);
+  const matchD = (dPose.droite.molecule === moleculeCible)
+              && (dPose.droite.representation !== repCible);
+
+  if (!matchG && !matchD) {
+    etat.scores[etat.joueurActif] = Math.max(0, etat.scores[etat.joueurActif] - 1);
+    const memeMolecule = (dPose.gauche.molecule === moleculeCible)
+                      || (dPose.droite.molecule === moleculeCible);
+    if (memeMolecule) {
+      afficherMessage('❌ Même molécule mais même représentation ! -1 point', 'erreur');
+    } else {
+      afficherMessage('❌ Mauvaise association ! -1 point', 'erreur');
+    }
+    rafraichir();
+    return;
+  }
+
+  let moitieAdj;
+  if (zone.orientation === 'horizontal') {
+    moitieAdj = zone.moitieAdjacente;
+  } else {
+    moitieAdj = (zone.moitieAdjacente === 'haut') ? 'gauche' : 'droite';
+  }
+
+  if (moitieAdj === 'gauche' && !matchG) {
+    [dPose.gauche, dPose.droite] = [dPose.droite, dPose.gauche];
+  } else if (moitieAdj === 'droite' && !matchD) {
+    [dPose.gauche, dPose.droite] = [dPose.droite, dPose.gauche];
+  }
+
+  dPose.x = zone.nouvelleX;
+  dPose.y = zone.nouvelleY;
+  dPose.orientation = zone.orientation;
+  if (dPose.orientation === 'horizontal') {
+    occuperCase(dPose.x,     dPose.y, dPose.id);
+    occuperCase(dPose.x + 1, dPose.y, dPose.id);
+  } else {
+    occuperCase(dPose.x, dPose.y,     dPose.id);
+    occuperCase(dPose.x, dPose.y + 1, dPose.id);
+  }
+
+  marquerConnexionOccupee(dominoCible, zone);
+  if (moitieAdj === 'gauche') dPose.connexions.gaucheExt = true;
+  else dPose.connexions.droiteExt = true;
+
+  etat.plateau.push(dPose);
+  const main = etat.mains[etat.joueurActif];
+  main.splice(main.findIndex(x => x.id === dPose.id), 1);
+  etat.scores[etat.joueurActif] += 2;
+  etat.dominoSelectionne = null;
+
+  // 🆕 Redimensionnement dynamique après chaque pose
+  redimensionnerPlateau();
+
+  afficherMessage('✅ Bonne association ! +2 points', 'succes');
+  finDeTour();
+}
+
+function marquerConnexionOccupee(d, zone) {
+  const cle = zone.moitie + (zone.cote === 'ext'  ? 'Ext'  :
+              zone.cote === 'haut' ? 'Haut' : 'Bas');
+  d.connexions[cle] = true;
+}
+
+/* ============================================================
+   ACTIONS
+   ============================================================ */
+function piocher() {
+  if (etat.pioche.length === 0) {
+    afficherMessage('La pioche est vide.', 'erreur');
+    return;
+  }
+  etat.mains[etat.joueurActif].push(etat.pioche.shift());
+  etat.dominoSelectionne = null;
+  finDeTour();
+}
+
+function passerTour() {
+  etat.dominoSelectionne = null;
+  finDeTour();
+}
+
+function finDeTour() {
+  if (etat.mains[etat.joueurActif].length === 0) {
+    finPartie();
+    return;
+  }
+  if (etat.nbJoueurs === 2) {
+    etat.joueurActif = 1 - etat.joueurActif;
+  }
+  rafraichir();
+}
+
+function finPartie() {
+  let msg = '🎉 Partie terminée !\n\n';
+  msg += `Joueur 1 : ${etat.scores[0]} points\n`;
+  if (etat.nbJoueurs === 2) {
+    msg += `Joueur 2 : ${etat.scores[1]} points\n\n`;
+    if      (etat.scores[0] > etat.scores[1]) msg += '🏆 Joueur 1 gagne !';
+    else if (etat.scores[1] > etat.scores[0]) msg += '🏆 Joueur 2 gagne !';
+    else msg += 'Égalité !';
+  }
+  alert(msg);
+  retourMenu();
+}
+
+/* ============================================================
+   MESSAGES
+   ============================================================ */
+function afficherMessage(txt, type) {
+  const m = document.getElementById('message');
+  m.textContent = txt;
+  m.className = type || '';
+  m.style.display = 'block';
+  setTimeout(() => m.style.display = 'none', 1500);
+}
+</script>
+</body>
+</html>
