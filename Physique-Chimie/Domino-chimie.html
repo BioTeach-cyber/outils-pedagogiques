@@ -53,14 +53,19 @@
   #infos div { padding: 3px 8px; }
   .actif-joueur { background: #ff6b6b; border-radius: 5px; }
 
-  #plateau-conteneur {
+    #plateau-conteneur {
     flex: 1;
-    overflow: auto;
+    overflow: hidden; /* 🆕 Cache les scrollbars */
     background: rgba(255,255,255,0.1);
     border-radius: 8px;
     margin-bottom: 8px;
     position: relative;
-  }
+    cursor: grab; /* 🆕 Curseur "main" pour indiquer le glisser */
+    }
+    #plateau-conteneur:active {
+    cursor: grabbing; /* 🆕 Curseur "main fermée" pendant le glisser */
+    }
+
   #plateau {
     position: relative;
     transition: width 0.3s ease, height 0.3s ease;
@@ -107,14 +112,23 @@
   }
   .zone-connexion:hover { background: rgba(76, 175, 80, 0.8); }
 
-  #main-joueur {
-    background: rgba(0,0,0,0.3);
+    #main-joueur {
+    display: flex;
+    flex-wrap: wrap; /* 🆕 Retour à la ligne */
+    justify-content: center;
+    gap: 6px;
     padding: 8px;
+    background: rgba(0,0,0,0.2);
     border-radius: 8px;
-    overflow-x: auto;
-    white-space: nowrap;
-    min-height: 90px;
-  }
+    max-height: 220px;
+    overflow-y: auto; /* 🆕 Scroll vertical si vraiment trop de dominos */
+    scrollbar-width: none; /* 🆕 Cache la scrollbar sur Firefox */
+    }
+
+    #main-joueur::-webkit-scrollbar {
+    display: none; /* 🆕 Cache la scrollbar sur Chrome/Safari */
+}
+
   .domino-main {
     display: inline-flex;
     width: 180px;
@@ -401,6 +415,7 @@ function demarrer(nbJoueurs) {
   // Initialiser le plateau avec taille minimale
   redimensionnerPlateau();
   rafraichir();
+      initGlisserPlateau(); // 🆕
 }
 
 function retourMenu() {
@@ -455,6 +470,59 @@ function rafraichir() {
   main.innerHTML = '';
   etat.mains[etat.joueurActif].forEach(d => main.appendChild(creerDominoMain(d)));
 }
+
+/* ============================================================
+   GLISSER LE PLATEAU (souris + tactile)
+   ============================================================ */
+function initGlisserPlateau() {
+    const conteneur = document.getElementById('plateau-conteneur');
+    let glisse = false;
+    let startX, startY, scrollX, scrollY;
+
+    // --- SOURIS ---
+    conteneur.addEventListener('mousedown', (e) => {
+        // Ne pas déclencher si clic sur une zone cliquable
+        if (e.target.closest('.zone-connexion, button')) return;
+        glisse = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        scrollX = conteneur.scrollLeft;
+        scrollY = conteneur.scrollTop;
+        conteneur.style.cursor = 'grabbing';
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!glisse) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        conteneur.scrollLeft = scrollX - dx;
+        conteneur.scrollTop  = scrollY - dy;
+    });
+
+    document.addEventListener('mouseup', () => {
+        glisse = false;
+        conteneur.style.cursor = 'grab';
+    });
+
+    // --- TACTILE ---
+    conteneur.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        scrollX = conteneur.scrollLeft;
+        scrollY = conteneur.scrollTop;
+    }, { passive: true });
+
+    conteneur.addEventListener('touchmove', (e) => {
+        if (e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        conteneur.scrollLeft = scrollX - dx;
+        conteneur.scrollTop  = scrollY - dy;
+    }, { passive: true });
+}
+
 
 function creerDominoPlateau(d) {
   const div = document.createElement('div');
