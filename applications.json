@@ -50,6 +50,23 @@
     "auteur": "Vincent APREMONT"
   },
   {
+    "id": "application-001",
+    "categorie": "Applications",
+    "titre": "Domino molécules",
+    "description": "Un jeu de domino aec des molécules.",
+    "discipline": "Physique-Chimie",
+    "module": "Physique-Chimie",
+    "public": "",
+    "formation": ["Collège"],
+    "tags": [],
+    "url": "Physique-Chimie/Domino-chimie.html",
+    "icone": "",
+    "image": "",
+    "statut": "Publié",
+    "date_creation": "28/04/2026",
+    "auteur": "Vincent APREMONT"
+  },
+    {
     "id": "",
     "categorie": "",
     "titre": "",
