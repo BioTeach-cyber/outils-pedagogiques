@@ -94,20 +94,35 @@
             font-weight: 500;
         }
 
-        .config-group input {
+        .time-input-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .time-input-field {
+            flex: 1;
+        }
+
+        .time-input-field input {
             background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 8px;
             color: var(--text);
-            font-size: 1.4rem;
-            padding: 10px 16px;
+            font-size: 1rem;
+            padding: 10px 12px;
             outline: none;
             transition: border-color 0.3s;
             width: 100%;
+            text-align: center;
         }
 
-        .config-group input:focus { 
+        .time-input-field input:focus { 
             border-color: var(--color-primary);
+        }
+
+        .time-input-field label {
+            font-size: 0.75rem;
+            margin-bottom: 4px;
         }
 
         #btn-start {
@@ -288,6 +303,7 @@
 
         .btn-pause {
             background: linear-gradient(135deg, var(--couleur-3), var(--couleur-4));
+            display: none;
         }
 
         .btn-reset {
@@ -396,13 +412,31 @@
     <!-- Configuration -->
     <div id="config-panel">
         <div class="config-group">
-            <label>⏳ Temps de présentation (minutes)</label>
-            <input type="number" id="presentationMin" min="0" max="999" value="5">
+            <label>⏳ Temps de présentation</label>
+            <div class="time-input-row">
+                <div class="time-input-field">
+                    <label>Minutes</label>
+                    <input type="number" id="presentationMin" min="0" max="59" value="5">
+                </div>
+                <div class="time-input-field">
+                    <label>Secondes</label>
+                    <input type="number" id="presentationSec" min="0" max="59" value="0">
+                </div>
+            </div>
         </div>
 
         <div class="config-group">
-            <label>❓ Temps de questions (minutes)</label>
-            <input type="number" id="questionsMin" min="0" max="999" value="2">
+            <label>❓ Temps de questions</label>
+            <div class="time-input-row">
+                <div class="time-input-field">
+                    <label>Minutes</label>
+                    <input type="number" id="questionsMin" min="0" max="59" value="2">
+                </div>
+                <div class="time-input-field">
+                    <label>Secondes</label>
+                    <input type="number" id="questionsSec" min="0" max="59" value="0">
+                </div>
+            </div>
         </div>
 
         <button id="btn-start">⏳ Lancer le chronomètre</button>
@@ -494,19 +528,20 @@ let timerInterval = null;
 let isRunning = false;
 let isPaused = false;
 
-let presentationDuration = 0; // en secondes (durée initiale souhaitée)
-let questionsDuration = 0; // en secondes (durée initiale souhaitée)
-let totalDuration = 0; // en secondes (temps total fixe)
+let presentationDuration = 0; // en secondes
+let questionsDuration = 0; // en secondes
+let totalDuration = 0;
 
-let elapsedTime = 0; // temps total écoulé depuis le démarrage
+let elapsedTime = 0; // temps total écoulé
 let currentPhase = 'presentation'; // 'presentation' ou 'questions'
-let presentationMaxTime = null; // limite de temps pour la présentation (presentationDuration par défaut, ou elapsedTime si cliqué avant)
-let presentationUserEnded = false; // true si l'utilisateur a cliqué sur "Fin de présentation"
+let presentationEndTime = 0; // moment où la présentation se termine
 let flashTimeout = null;
 
 // ─── RÉCUPÉRATION DES ÉLÉMENTS DOM ───────────────────────
 const presentationMinInput = document.getElementById('presentationMin');
+const presentationSecInput = document.getElementById('presentationSec');
 const questionsMinInput = document.getElementById('questionsMin');
+const questionsSecInput = document.getElementById('questionsSec');
 
 const configPanel = document.getElementById('config-panel');
 const timerPanel = document.getElementById('timer-panel');
@@ -534,13 +569,14 @@ endPresentationBtn.addEventListener('click', endPresentation);
 // ─── FONCTION: LIRE LES DURÉES ──────────────────────────
 function readDurations() {
     const presentationMin = parseInt(presentationMinInput.value) || 0;
+    const presentationSec = parseInt(presentationSecInput.value) || 0;
     const questionsMin = parseInt(questionsMinInput.value) || 0;
+    const questionsSec = parseInt(questionsSecInput.value) || 0;
 
-    presentationDuration = presentationMin * 60;
-    questionsDuration = questionsMin * 60;
+    presentationDuration = presentationMin * 60 + presentationSec;
+    questionsDuration = questionsMin * 60 + questionsSec;
     totalDuration = presentationDuration + questionsDuration;
-    presentationMaxTime = null; // sera défini au démarrage
-    presentationUserEnded = false;
+    presentationEndTime = presentationDuration;
 }
 
 // ─── FONCTION: DÉMARRER ─────────────────────────────────
@@ -558,8 +594,6 @@ function startTimer() {
     isPaused = false;
     elapsedTime = 0;
     currentPhase = 'presentation';
-    presentationMaxTime = presentationDuration; // Par défaut, la présentation peut durer presentationDuration
-    presentationUserEnded = false;
     elapsedBox.classList.remove('show');
 
     configPanel.style.display = 'none';
@@ -586,8 +620,8 @@ function updateTimer() {
 
     updateDisplay();
 
-    // Transition automatique de la phase 1 à la phase 2 si on atteint le temps max de présentation
-    if (elapsedTime >= presentationMaxTime && currentPhase === 'presentation' && !presentationUserEnded) {
+    // Transition automatique de la phase 1 à la phase 2
+    if (elapsedTime >= presentationEndTime && currentPhase === 'presentation') {
         currentPhase = 'questions';
         updateDisplay();
     }
@@ -595,16 +629,7 @@ function updateTimer() {
 
 // ─── FONCTION: METTRE À JOUR L'AFFICHAGE ────────────────
 function updateDisplay() {
-    let timeRemaining;
-
-    if (currentPhase === 'presentation') {
-        // En phase présentation: affiche le temps restant avant fin prévisionnelle
-        timeRemaining = Math.max(0, presentationDuration - elapsedTime);
-    } else {
-        // En phase questions: affiche le temps restant total après la présentation
-        // = temps restant total - temps consommé par la présentation réelle
-        timeRemaining = Math.max(0, totalDuration - elapsedTime);
-    }
+    const timeRemaining = Math.max(0, totalDuration - elapsedTime);
 
     let minutes = Math.floor(timeRemaining / 60);
     let seconds = Math.round(timeRemaining % 60);
@@ -635,18 +660,14 @@ function updateDisplay() {
     barFill.style.width = (100 - progressPercent) + '%';
 
     // Mise à jour du label de la barre
-    const minRemaining = Math.ceil((totalDuration - elapsedTime) / 60);
+    const minRemaining = Math.ceil(timeRemaining / 60);
     barLabel.textContent = minRemaining + ' min restante' + (minRemaining > 1 ? 's' : '');
 }
 
 // ─── FONCTION: FIN DE LA PRÉSENTATION ────────────────────
 function endPresentation() {
-    if (!isRunning || currentPhase !== 'presentation' || presentationUserEnded) return;
+    if (!isRunning || currentPhase !== 'presentation') return;
 
-    // Marquer que l'utilisateur a cliqué sur "Fin de présentation"
-    presentationUserEnded = true;
-
-    // Afficher le temps écoulé de présentation
     const minutes = Math.floor(elapsedTime / 60);
     const seconds = Math.round(elapsedTime % 60);
     const displayElapsed = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
@@ -654,8 +675,9 @@ function endPresentation() {
     elapsedTimeSpan.textContent = displayElapsed;
     elapsedBox.classList.add('show');
 
-    // Transition vers la phase 2 (le temps affiché se recalculera automatiquement)
+    // Transition vers la phase 2
     currentPhase = 'questions';
+    presentationEndTime = elapsedTime;
     updateDisplay();
 
     showFlash('✓ Fin de présentation', 'Temps écoulé : ' + displayElapsed, '#039a9f', '#7abbc7');
@@ -695,7 +717,6 @@ function resetTimer() {
     isPaused = false;
     elapsedTime = 0;
     currentPhase = 'presentation';
-    presentationUserEnded = false;
     elapsedBox.classList.remove('show');
 
     configPanel.style.display = 'flex';
@@ -712,7 +733,9 @@ function resetTimer() {
 // ─── FONCTION: DÉSACTIVER LES INPUTS ────────────────────
 function disableInputs(disabled) {
     presentationMinInput.disabled = disabled;
+    presentationSecInput.disabled = disabled;
     questionsMinInput.disabled = disabled;
+    questionsSecInput.disabled = disabled;
 }
 
 // ─── SON: BIPS ──────────────────────────────────────────

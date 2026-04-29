@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Carnet de Recettes Magique</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+/* ============ VARIABLES ============ */
+:root {
+  --bleu: #53a4db;
+  --vert: #7fbc48;
+  --violet: #a6539b;
+  --orange: #f3912b;
+  --gris: #b7b7b7;
+  --rouge: #e62d32;
+  --rose: #ee7bab;
+  --jaune: #f4d32e;
+  --marron: #a5706c;
+  --noir: #494949;
+  --fond: #ffffff;
+}
+
+/* ============ BASE ============ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: var(--fond);
+  color: var(--noir);
+  min-height: 100vh;
+  padding: 1rem;
+  line-height: 1.5;
+}
+h1, h2, h3 { color: var(--orange); }
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+input, select {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.6rem;
+  border: 2px solid var(--gris);
+  border-radius: 0.5rem;
+  background: white;
+  color: var(--noir);
+}
+input:focus, select:focus { outline: none; border-color: var(--orange); }
+
+/* ============ LAYOUT ============ */
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 3px solid var(--orange);
+}
+
+header {
+  background: var(--orange);
+  color: white;
+  padding: 1.2rem;
+  text-align: center;
+}
+header h1 { color: white; font-size: clamp(1.3rem, 4vw, 2rem); }
+header p { font-size: 0.95rem; margin-top: 0.3rem; opacity: 0.95; }
+
+main { padding: 1.5rem; }
+
+/* ============ HUD (vie + score) ============ */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  background: #fff7ec;
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  margin-bottom: 1.2rem;
+  border: 2px dashed var(--orange);
+}
+.hud-bloc { display: flex; align-items: center; gap: 0.4rem; font-weight: bold; }
+.coeurs { font-size: 1.2rem; letter-spacing: 2px; }
+.score-val { color: var(--vert); font-size: 1.2rem; }
+.combo-val { color: var(--violet); font-size: 1.1rem; }
+.timer-val { color: var(--rouge); font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+
+/* ============ ÉCRANS ============ */
+.ecran { display: none; animation: apparition 0.4s ease; }
+.ecran.actif { display: block; }
+@keyframes apparition {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ ACCUEIL ============ */
+.modes, .sources {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.carte-choix {
+  background: white;
+  border: 3px solid var(--gris);
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.carte-choix:hover { border-color: var(--orange); transform: translateY(-3px); }
+.carte-choix.selectionnee { border-color: var(--orange); background: #fff7ec; }
+.carte-choix .icone { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+.carte-choix h3 { margin-bottom: 0.3rem; font-size: 1.1rem; }
+.carte-choix p { font-size: 0.85rem; color: var(--noir); }
+
+.bouton-principal {
+  background: var(--vert);
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.9rem 2rem;
+  display: block;
+  margin: 1.5rem auto 0;
+}
+.bouton-secondaire {
+  background: var(--bleu);
+  color: white;
+}
+.bouton-danger { background: var(--rouge); color: white; }
+
+/* ============ RECETTE LIBRE ============ */
+.formulaire-libre { display: flex; flex-direction: column; gap: 0.8rem; }
+.ligne-form { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+.ligne-form label { min-width: 140px; font-weight: bold; }
+.ligne-ingredient {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 0.4rem;
+  align-items: center;
+}
+.ligne-ingredient input, .ligne-ingredient select { width: 100%; }
+.btn-supprimer {
+  background: var(--rouge);
+  color: white;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+/* ============ RECETTES BANQUE ============ */
+.liste-recettes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.8rem;
+}
+.recette-carte {
+  background: #fff7ec;
+  border: 2px solid var(--orange);
+  border-radius: 0.7rem;
+  padding: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.recette-carte:hover { transform: scale(1.04); }
+.recette-carte .emoji { font-size: 2rem; }
+.recette-carte h3 { font-size: 1rem; margin: 0.3rem 0; }
+.recette-carte small { color: var(--gris); }
+
+/* ============ ÉTAPES JEU ============ */
+.etape-titre {
+  background: var(--bleu);
+  color: white;
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+.question-bloc {
+  background: #f9f9f9;
+  border-left: 5px solid var(--orange);
+  padding: 1.2rem;
+  border-radius: 0.6rem;
+  margin-bottom: 1rem;
+}
+.question-bloc p { margin-bottom: 0.8rem; font-size: 1.05rem; }
+.zone-reponse { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.zone-reponse input { flex: 1; min-width: 120px; max-width: 200px; font-size: 1.2rem; font-weight: bold; text-align: center; }
+.btn-valider { background: var(--vert); color: white; }
+
+.feedback {
+  margin-top: 0.8rem;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  display: none;
+}
+.feedback.visible { display: block; animation: apparition 0.3s; }
+.feedback.bon { background: #e7f5d9; color: var(--vert); border: 2px solid var(--vert); }
+.feedback.mauvais { background: #fde0e0; color: var(--rouge); border: 2px solid var(--rouge); }
+
+.recette-affichage {
+  background: #fff7ec;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  margin-bottom: 1rem;
+}
+.recette-affichage h3 { color: var(--marron); margin-bottom: 0.5rem; }
+.recette-affichage ul { list-style: none; padding-left: 0; }
+.recette-affichage li {
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--gris);
+}
+.recette-affichage li:last-child { border-bottom: none; }
+
+.progression {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+.puce {
+  width: 1.8rem; height: 1.8rem;
+  border-radius: 50%;
+  background: var(--gris);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: bold; font-size: 0.85rem;
+}
+.puce.actif { background: var(--orange); transform: scale(1.15); }
+.puce.fait { background: var(--vert); }
+
+/* ============ RÉCAP FINAL ============ */
+.recap-conteneur {
+  background: linear-gradient(135deg, #fff7ec 0%, #ffe8cc 100%);
+  border: 3px solid var(--orange);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.recap-conteneur::before {
+  content: "✨ CARNET MAGIQUE ✨";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: clamp(2rem, 8vw, 4rem);
+  color: rgba(243, 145, 43, 0.08);
+  font-weight: bold;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+.recap-contenu { position: relative; z-index: 1; }
+.badge-score {
+  display: inline-block;
+  background: var(--vert);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0.3rem;
+}
+.badge-score.danger { background: var(--rouge); }
+.badge-score.combo { background: var(--violet); }
+.badge-score.info { background: var(--bleu); }
+
+.tampon {
+  position: absolute;
+  bottom: 0.5rem; right: 0.5rem;
+  border: 3px solid var(--rouge);
+  color: var(--rouge);
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.4rem;
+  font-weight: bold;
+  font-size: 0.75rem;
+  transform: rotate(-8deg);
+  opacity: 0.7;
+  background: rgba(255,255,255,0.6);
+  z-index: 2;
+}
+
+.actions-fin {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+/* ============ GAME OVER ============ */
+.game-over {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.game-over .titre {
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--rouge);
+  margin-bottom: 1rem;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+  .ligne-ingredient { grid-template-columns: 1fr 1fr; }
+  .ligne-ingredient input:first-child { grid-column: 1 / -1; }
+  .ligne-ingredient .btn-supprimer { grid-column: 1 / -1; }
+  main { padding: 1rem; }
+}
+</style>
+</head>
+
+<body>
+<div class="app" id="app">
+
+  <header>
+    <h1>🍰 Le Carnet de Recettes Magique 🪄</h1>
+    <p>Adapte les recettes pour le bon nombre de personnes !</p>
+  </header>
+
+  <main>
+
+    <!-- ========== HUD ========== -->
+    <div class="hud" id="hud" style="display:none;">
+      <div class="hud-bloc">❤️ <span class="coeurs" id="coeurs"></span></div>
+      <div class="hud-bloc">⭐ Score : <span class="score-val" id="score-val">0</span></div>
+      <div class="hud-bloc">🔥 Combo : <span class="combo-val" id="combo-val">x1</span></div>
+      <div class="hud-bloc" id="bloc-timer" style="display:none;">⏱ <span class="timer-val" id="timer-val">--</span></div>
+    </div>
+
+    <!-- ========== ÉCRAN ACCUEIL ========== -->
+    <section class="ecran actif" id="ecran-accueil">
+      <h2>Choisis ta difficulté</h2>
+      <div class="modes" id="modes">
+        <div class="carte-choix" data-mode="facile">
+          <span class="icone">🌱</span>
+          <h3>Facile</h3>
+          <p>Coefficients simples (×2, ÷2, ×3...)</p>
+        </div>
+        <div class="carte-choix" data-mode="difficile">
+          <span class="icone">🔥</span>
+          <h3>Difficile</h3>
+          <p>Coefficients à virgule (×1,5 ; ×2,5...)</p>
+        </div>
+        <div class="carte-choix" data-mode="extreme">
+          <span class="icone">⚡</span>
+          <h3>Très difficile</h3>
+          <p>Avec virgule + chrono (20s)</p>
+        </div>
+      </div>
+
+      <h2>Choisis ta recette</h2>
+      <div class="sources">
+        <div class="carte-choix" data-source="banque">
+          <span class="icone">📖</span>
+          <h3>Recettes du livre</h3>
+          <p>Choisis dans la liste</p>
+        </div>
+        <div class="carte-choix" data-source="libre">
+          <span class="icone">✏️</span>
+          <h3>Ma recette</h3>
+          <p>Saisis ta propre recette</p>
+        </div>
+      </div>
+
+      <button class="bouton-principal" id="btn-suite-accueil" disabled>Continuer ➜</button>
+    </section>
+
+    <!-- ========== ÉCRAN BANQUE ========== -->
+    <section class="ecran" id="ecran-banque">
+      <h2>📖 Choisis ta recette</h2>
+      <div class="liste-recettes" id="liste-recettes"></div>
+      <button class="bouton-principal bouton-secondaire" onclick="retourAccueil()">⬅ Retour</button>
+    </section>
+
+    <!-- ========== ÉCRAN RECETTE LIBRE ========== -->
+    <section class="ecran" id="ecran-libre">
+      <h2>✏️ Crée ta recette</h2>
+      <div class="formulaire-libre">
+        <div class="ligne-form">
+          <label for="nom-recette">Nom de la recette :</label>
+          <input type="text" id="nom-recette" placeholder="Ex : Crêpes" style="flex:1;">
+        </div>
+        <div class="ligne-form">
+          <label for="pers-base">Pour combien de personnes ?</label>
+          <input type="number" id="pers-base" min="1" max="50" value="4" style="width:80px;">
+        </div>
+        <h3 style="margin-top:0.5rem;">Ingrédients :</h3>
+        <div id="ingredients-libres"></div>
+        <button class="bouton-secondaire" onclick="ajouterLigneIngredient()" style="align-self:flex-start;">+ Ajouter un ingrédient</button>
+      </div>
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1rem; justify-content:center;">
+        <button class="bouton-secondaire" onclick="retourAccueil()">⬅ Retour</button>
+        <button class="bouton-principal" style="margin:0;" onclick="validerRecetteLibre()">Valider la recette ➜</button>
+      </div>
+    </section>
+
+    <!-- ========== ÉCRAN JEU ========== -->
+    <section class="ecran" id="ecran-jeu">
+      <div class="progression" id="progression"></div>
+
+      <div class="recette-affichage" id="recette-affichage"></div>
+
+      <div class="etape-titre" id="etape-titre"></div>
+
+      <div class="question-bloc">
+        <p id="question-texte"></p>
+        <div class="zone-reponse">
+          <input type="number" step="any" id="reponse-input" placeholder="Ta réponse">
+          <button class="btn-valider" id="btn-valider-reponse">Valider</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+      </div>
+    </section>
+
+    <!-- ========== ÉCRAN RÉCAP ========== -->
+    <section class="ecran" id="ecran-recap">
+      <div class="recap-conteneur" id="recap-capture">
+        <div class="recap-contenu">
+          <h2 style="text-align:center;">🎉 Recette terminée !</h2>
+          <div style="text-align:center; margin: 0.8rem 0;">
+            <span class="badge-score">⭐ Score : <span id="recap-score">0</span></span>
+            <span class="badge-score info">❤️ Vies : <span id="recap-vies">0</span>/10</span>
+            <span class="badge-score combo">🔥 Combo max : x<span id="recap-combo">1</span></span>
+          </div>
+          <div class="recette-affichage" id="recap-recette" style="background:white;"></div>
+          <p style="text-align:center; font-style:italic; color:var(--marron);" id="recap-message"></p>
+        </div>
+        <div class="tampon" id="tampon-date">CARNET MAGIQUE</div>
+      </div>
+
+      <div class="actions-fin">
+        <button class="bouton-secondaire" onclick="capturerEcran()">📸 Capturer mon score</button>
+        <button class="bouton-principal" style="margin:0;" onclick="retourAccueil()">🔄 Nouvelle recette</button>
+      </div>
+    </section>
+
+    <!-- ========== GAME OVER ========== -->
+    <section class="ecran" id="ecran-gameover">
+      <div class="game-over">
+        <div class="titre">💔 Game Over</div>
+        <p>Tu as perdu toutes tes vies...</p>
+        <p style="margin-top:0.6rem;">Score final : <strong id="go-score">0</strong></p>
+        <button class="bouton-principal" onclick="retourAccueil()">🔄 Réessayer</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   DONNÉES : BANQUE DE RECETTES
+   ============================================================ */
+const banqueRecettes = [
+  {
+    nom: "Crêpes", emoji: "🥞", personnes: 4,
+    ingredients: [
+      { nom: "Farine", quantite: 250, unite: "g" },
+      { nom: "Lait", quantite: 500, unite: "mL" },
+      { nom: "Œufs", quantite: 3, unite: "œuf(s)" },
+      { nom: "Sucre", quantite: 50, unite: "g" },
+      { nom: "Sel", quantite: 1, unite: "pincée(s)" }
+    ]
+  },
+  {
+    nom: "Gâteau au yaourt", emoji: "🍰", personnes: 6,
+    ingredients: [
+      { nom: "Yaourt", quantite: 1, unite: "pot(s)" },
+      { nom: "Sucre", quantite: 150, unite: "g" },
+      { nom: "Farine", quantite: 200, unite: "g" },
+      { nom: "Œufs", quantite: 3, unite: "œuf(s)" },
+      { nom: "Huile", quantite: 80, unite: "mL" }
+    ]
+  },
+  {
+    nom: "Soupe de légumes", emoji: "🍲", personnes: 4,
+    ingredients: [
+      { nom: "Carottes", quantite: 300, unite: "g" },
+      { nom: "Pommes de terre", quantite: 400, unite: "g" },
+      { nom: "Poireaux", quantite: 200, unite: "g" },
+      { nom: "Eau", quantite: 1.5, unite: "L" }
+    ]
+  },
+  {
+    nom: "Cookies", emoji: "🍪", personnes: 8,
+    ingredients: [
+      { nom: "Beurre", quantite: 120, unite: "g" },
+      { nom: "Sucre", quantite: 100, unite: "g" },
+      { nom: "Farine", quantite: 200, unite: "g" },
+      { nom: "Pépites de chocolat", quantite: 150, unite: "g" },
+      { nom: "Œufs", quantite: 1, unite: "œuf(s)" }
+    ]
+  },
+  {
+    nom: "Pizza maison", emoji: "🍕", personnes: 2,
+    ingredients: [
+      { nom: "Farine", quantite: 250, unite: "g" },
+      { nom: "Eau tiède", quantite: 150, unite: "mL" },
+      { nom: "Huile d'olive", quantite: 2, unite: "c. à soupe" },
+      { nom: "Sauce tomate", quantite: 100, unite: "g" },
+      { nom: "Mozzarella", quantite: 125, unite: "g" }
+    ]
+  },
+  {
+    nom: "Salade de pâtes", emoji: "🍝", personnes: 4,
+    ingredients: [
+      { nom: "Pâtes", quantite: 400, unite: "g" },
+      { nom: "Tomates", quantite: 300, unite: "g" },
+      { nom: "Thon", quantite: 200, unite: "g" },
+      { nom: "Maïs", quantite: 150, unite: "g" }
+    ]
+  }
+];
+
+/* ============================================================
+   ÉTAT DU JEU
+   ============================================================ */
+const etat = {
+  mode: null,          // 'facile' | 'difficile' | 'extreme'
+  source: null,        // 'banque' | 'libre'
+  recette: null,
+  personnesCible: 0,
+  coefficient: 0,
+  etapeActuelle: 0,    // 0=cible, 1=coef, 2..n=ingrédients
+  indexIngredient: 0,
+  vies: 10,
+  score: 0,
+  combo: 1,
+  comboMax: 1,
+  erreursManche: 0,    // erreurs sur la manche en cours
+  resultats: [],       // recette finale
+  timerId: null,
+  tempsRestant: 0
+};
+
+const TEMPS_LIMITE = 20; // secondes mode extrême
+
+/* ============================================================
+   NAVIGATION ENTRE ÉCRANS
+   ============================================================ */
+function afficherEcran(id) {
+  document.querySelectorAll('.ecran').forEach(e => e.classList.remove('actif'));
+  document.getElementById(id).classList.add('actif');
+}
+
+function retourAccueil() {
+  arreterTimer();
+  etat.mode = null;
+  etat.source = null;
+  etat.recette = null;
+  etat.vies = 10;
+  etat.score = 0;
+  etat.combo = 1;
+  etat.comboMax = 1;
+  etat.resultats = [];
+  document.getElementById('hud').style.display = 'none';
+  document.querySelectorAll('.carte-choix').forEach(c => c.classList.remove('selectionnee'));
+  document.getElementById('btn-suite-accueil').disabled = true;
+  afficherEcran('ecran-accueil');
+}
+
+/* ============================================================
+   ACCUEIL : sélection mode + source
+   ============================================================ */
+document.querySelectorAll('[data-mode]').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('[data-mode]').forEach(x => x.classList.remove('selectionnee'));
+    c.classList.add('selectionnee');
+    etat.mode = c.dataset.mode;
+    verifSelection();
+  });
+});
+document.querySelectorAll('[data-source]').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('[data-source]').forEach(x => x.classList.remove('selectionnee'));
+    c.classList.add('selectionnee');
+    etat.source = c.dataset.source;
+    verifSelection();
+  });
+});
+function verifSelection() {
+  document.getElementById('btn-suite-accueil').disabled = !(etat.mode && etat.source);
+}
+document.getElementById('btn-suite-accueil').addEventListener('click', () => {
+  if (etat.source === 'banque') afficherBanque();
+  else afficherLibre();
+});
+
+/* ============================================================
+   BANQUE
+   ============================================================ */
+function afficherBanque() {
+  const liste = document.getElementById('liste-recettes');
+  liste.innerHTML = '';
+  banqueRecettes.forEach((r, i) => {
+    const div = document.createElement('div');
+    div.className = 'recette-carte';
+    div.innerHTML = `
+      <div class="emoji">${r.emoji}</div>
+      <h3>${r.nom}</h3>
+      <small>Pour ${r.personnes} personnes • ${r.ingredients.length} ingrédients</small>
+    `;
+    div.addEventListener('click', () => {
+      etat.recette = JSON.parse(JSON.stringify(r));
+      lancerJeu();
+    });
+    liste.appendChild(div);
+  });
+  afficherEcran('ecran-banque');
+}
+
+/* ============================================================
+   RECETTE LIBRE
+   ============================================================ */
+function afficherLibre() {
+  document.getElementById('nom-recette').value = '';
+  document.getElementById('pers-base').value = 4;
+  document.getElementById('ingredients-libres').innerHTML = '';
+  ajouterLigneIngredient();
+  ajouterLigneIngredient();
+  ajouterLigneIngredient();
+  afficherEcran('ecran-libre');
+}
+function ajouterLigneIngredient() {
+  const conteneur = document.getElementById('ingredients-libres');
+  const div = document.createElement('div');
+  div.className = 'ligne-ingredient';
+  div.innerHTML = `
+    <input type="text" placeholder="Nom (ex: Farine)" class="ing-nom">
+    <input type="number" step="any" min="0" placeholder="Quantité" class="ing-qte">
+    <select class="ing-unite">
+      <option value="g">g</option>
+      <option value="kg">kg</option>
+      <option value="mL">mL</option>
+      <option value="L">L</option>
+      <option value="c. à café">c. à café</option>
+      <option value="c. à soupe">c. à soupe</option>
+      <option value="œuf(s)">œuf(s)</option>
+      <option value="pincée(s)">pincée(s)</option>
+      <option value="pot(s)">pot(s)</option>
+    </select>
+    <button class="btn-supprimer" onclick="this.parentElement.remove()">✕</button>
+  `;
+  conteneur.appendChild(div);
+}
+function validerRecetteLibre() {
+  const nom = document.getElementById('nom-recette').value.trim() || "Ma recette";
+  const pers = parseInt(document.getElementById('pers-base').value, 10);
+  if (!pers || pers < 1) { alert("Indique un nombre de personnes valide."); return; }
+
+  const ingredients = [];
+  document.querySelectorAll('.ligne-ingredient').forEach(l => {
+    const n = l.querySelector('.ing-nom').value.trim();
+    const q = parseFloat(l.querySelector('.ing-qte').value);
+    const u = l.querySelector('.ing-unite').value;
+    if (n && !isNaN(q) && q > 0) ingredients.push({ nom: n, quantite: q, unite: u });
+  });
+  if (ingredients.length === 0) { alert("Ajoute au moins un ingrédient valide."); return; }
+
+  etat.recette = { nom, emoji: "🍽️", personnes: pers, ingredients };
+  lancerJeu();
+}
+
+/* ============================================================
+   LANCEMENT DU JEU
+   ============================================================ */
+function lancerJeu() {
+  etat.vies = 10;
+  etat.score = 0;
+  etat.combo = 1;
+  etat.comboMax = 1;
+  etat.resultats = [];
+  etat.etapeActuelle = 0;
+  etat.indexIngredient = 0;
+  document.getElementById('hud').style.display = 'flex';
+  document.getElementById('bloc-timer').style.display = (etat.mode === 'extreme') ? 'flex' : 'none';
+  majHUD();
+  afficherRecetteDepart();
+  construireProgression();
+  afficherEcran('ecran-jeu');
+  etapeChoixCible();
+}
+
+function afficherRecetteDepart() {
+  const r = etat.recette;
+  let html = `<h3>${r.emoji} ${r.nom} <small style="color:var(--gris);font-weight:normal;">— pour ${r.personnes} personne(s)</small></h3><ul>`;
+  r.ingredients.forEach(i => {
+    html += `<li>• ${formaterQuantite(i.quantite)} ${i.unite} de ${i.nom}</li>`;
+  });
+  html += '</ul>';
+  document.getElementById('recette-affichage').innerHTML = html;
+}
+
+function construireProgression() {
+  // étapes : 1=cible, 2=coef, puis 1 par ingrédient
+  const total = 2 + etat.recette.ingredients.length;
+  const cont = document.getElementById('progression');
+  cont.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const p = document.createElement('div');
+    p.className = 'puce';
+    p.textContent = i + 1;
+    p.id = `puce-${i}`;
+    cont.appendChild(p);
+  }
+}
+function majProgression(active) {
+  document.querySelectorAll('.puce').forEach((p, i) => {
+    p.classList.remove('actif', 'fait');
+    if (i < active) p.classList.add('fait');
+    else if (i === active) p.classList.add('actif');
+  });
+}
+
+/* ============================================================
+   HUD
+   ============================================================ */
+function majHUD() {
+  document.getElementById('coeurs').textContent = '❤️'.repeat(etat.vies) + '🤍'.repeat(10 - etat.vies);
+  document.getElementById('score-val').textContent = etat.score;
+  document.getElementById('combo-val').textContent = 'x' + etat.combo;
+}
+
+/* ============================================================
+   ÉTAPE 1 : nombre de personnes cible
+   ============================================================ */
+function etapeChoixCible() {
+  etat.etapeActuelle = 0;
+  etat.erreursManche = 0;
+  majProgression(0);
+  document.getElementById('etape-titre').textContent = "Étape 1 — Pour combien de personnes veux-tu cuisiner ?";
+  document.getElementById('question-texte').innerHTML =
+    `La recette est pour <strong>${etat.recette.personnes}</strong> personne(s).<br>Choisis un autre nombre de personnes (différent de ${etat.recette.personnes}).`;
+  prepReponse(validerCible, false);
+}
+
+function validerCible() {
+  const v = parseFloat(document.getElementById('reponse-input').value);
+  if (isNaN(v) || v < 1 || !Number.isInteger(v)) {
+    feedback(false, "Indique un nombre entier de personnes (1, 2, 3...).", true);
+    return;
+  }
+  if (v === etat.recette.personnes) {
+    feedback(false, `Choisis un nombre différent de ${etat.recette.personnes}.`, true);
+    return;
+  }
+  // Mode facile : on suggère un multiple/diviseur entier si l'élève n'a pas la main
+  // (pas obligatoire ici puisque l'élève choisit lui-même)
+  // Si mode facile, on force quand même un coefficient simple en restreignant ?
+  // → on garde libre, mais on valide le coefficient à l'étape suivante.
+  etat.personnesCible = v;
+  etat.coefficient = v / etat.recette.personnes;
+
+  // En mode facile, vérifier que le coefficient est "simple"
+  if (etat.mode === 'facile' && !estCoefSimple(etat.coefficient)) {
+    feedback(false, `En mode facile, choisis un nombre qui donne un calcul simple (×2, ×3, ÷2...). Essaie autre chose.`, true);
+    return;
+  }
+  feedback(true, `Très bien ! Tu vas adapter pour ${v} personne(s).`);
+  setTimeout(etapeCoefficient, 900);
+}
+function estCoefSimple(c) {
+  // multiplicateurs simples acceptés
+  const simples = [0.25, 0.5, 1/3, 2, 3, 4, 5];
+  return simples.some(s => Math.abs(c - s) < 0.001);
+}
+
+/* ============================================================
+   ÉTAPE 2 : coefficient
+   ============================================================ */
+function etapeCoefficient() {
+  etat.etapeActuelle = 1;
+  etat.erreursManche = 0;
+  majProgression(1);
+  document.getElementById('etape-titre').textContent = "Étape 2 — Quel est le coefficient ?";
+  const sens = etat.coefficient >= 1 ? "multiplier" : "diviser";
+  document.getElementById('question-texte').innerHTML =
+    `Tu passes de <strong>${etat.recette.personnes}</strong> à <strong>${etat.personnesCible}</strong> personne(s).<br>
+     Par combien faut-il <strong>${sens}</strong> chaque ingrédient ?<br>
+     <small style="color:var(--gris);">Astuce : ${etat.personnesCible} ÷ ${etat.recette.personnes} = ?</small>`;
+  prepReponse(validerCoefficient, etat.mode === 'extreme');
+}
+function validerCoefficient() {
+  const v = parseFloat(document.getElementById('reponse-input').value);
+  if (isNaN(v) || v <= 0) {
+    enregistrerErreur();
+    feedback(false, "Entre un nombre positif.", true);
+    return;
+  }
+  // tolérance 0.01
+  if (Math.abs(v - etat.coefficient) < 0.01) {
+    arreterTimer();
+    const gain = calculerGain();
+    etat.score += gain;
+    etat.combo += 1;
+    if (etat.combo > etat.comboMax) etat.comboMax = etat.combo;
+    if (etat.vies < 10) etat.vies += 1;
+    majHUD();
+    feedback(true, `✓ Bonne réponse ! Coefficient = ${formaterQuantite(etat.coefficient)} (+${gain} points)`);
+    setTimeout(() => etapeIngredient(0), 1100);
+  } else {
+    enregistrerErreur();
+    feedback(false, "Pas tout à fait... Essaie encore !", true);
+  }
+}
+
+/* ============================================================
+   ÉTAPE 3+ : ingrédients
+   ============================================================ */
+function etapeIngredient(idx) {
+  etat.etapeActuelle = 2 + idx;
+  etat.indexIngredient = idx;
+  etat.erreursManche = 0;
+  majProgression(etat.etapeActuelle);
+
+  if (idx >= etat.recette.ingredients.length) {
+    finPartie();
+    return;
+  }
+  const ing = etat.recette.ingredients[idx];
+  const estOeuf = ing.unite.toLowerCase().includes('œuf');
+  document.getElementById('etape-titre').textContent =
+    `Ingrédient ${idx + 1} / ${etat.recette.ingredients.length} — ${ing.nom}`;
+  document.getElementById('question-texte').innerHTML =
+    `Recette de départ : <strong>${formaterQuantite(ing.quantite)} ${ing.unite}</strong> de ${ing.nom}.<br>
+     Coefficient : <strong>×${formaterQuantite(etat.coefficient)}</strong><br>
+     Combien faut-il pour ${etat.personnesCible} personne(s) ?
+     ${estOeuf ? '<br><small style="color:var(--marron);">⚠ Pour les œufs, on arrondit au nombre entier supérieur.</small>' : ''}`;
+  prepReponse(() => validerIngredient(idx), etat.mode === 'extreme');
+}
+
+function validerIngredient(idx) {
+  const ing = etat.recette.ingredients[idx];
+  const estOeuf = ing.unite.toLowerCase().includes('œuf');
+  let attendu = ing.quantite * etat.coefficient;
+  if (estOeuf) attendu = Math.ceil(attendu);
+
+  const v = parseFloat(document.getElementById('reponse-input').value);
+  if (isNaN(v) || v < 0) {
+    enregistrerErreur();
+    feedback(false, "Entre un nombre positif.", true);
+    return;
+  }
+  // tolérance : 1% pour les grandes valeurs, 0.05 sinon
+  const tol = Math.max(0.05, attendu * 0.01);
+  if (Math.abs(v - attendu) <= tol) {
+    arreterTimer();
+    const gain = calculerGain();
+    etat.score += gain;
+    etat.combo += 1;
+    if (etat.combo > etat.comboMax) etat.comboMax = etat.combo;
+    if (etat.vies < 10) etat.vies += 1;
+    majHUD();
+    etat.resultats.push({ ...ing, nouvelleQte: attendu });
+    feedback(true, `✓ Bravo ! ${formaterQuantite(attendu)} ${ing.unite} de ${ing.nom} (+${gain} points)`);
+    setTimeout(() => etapeIngredient(idx + 1), 1100);
+  } else {
+    enregistrerErreur();
+    feedback(false, "Pas la bonne quantité, recalcule...", true);
+  }
+}
+
+/* ============================================================
+   GESTION ERREURS / SCORE
+   ============================================================ */
+function enregistrerErreur() {
+  etat.erreursManche += 1;
+  etat.combo = 1; // perte du combo
+  etat.vies -= 1;
+  majHUD();
+  if (etat.vies <= 0) {
+    arreterTimer();
+    document.getElementById('go-score').textContent = etat.score;
+    afficherEcran('ecran-gameover');
+  }
+}
+function calculerGain() {
+  // base 100 pts, dégressif selon erreurs sur la manche, multiplié par combo
+  const base = Math.max(20, 100 - etat.erreursManche * 25);
+  return base * etat.combo;
+}
+
+/* ============================================================
+   FEEDBACK & SAISIE
+   ============================================================ */
+function prepReponse(fnValider, avecTimer) {
+  const inp = document.getElementById('reponse-input');
+  inp.value = '';
+  inp.disabled = false;
+  inp.focus();
+  document.getElementById('feedback').classList.remove('visible');
+
+  const btn = document.getElementById('btn-valider-reponse');
+  // Cloner pour supprimer anciens listeners
+  const newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+  newBtn.addEventListener('click', fnValider);
+  inp.onkeydown = (e) => { if (e.key === 'Enter') fnValider(); };
+
+  if (avecTimer) demarrerTimer(fnValider);
+}
+function feedback(bon, msg, persistant) {
+  const el = document.getElementById('feedback');
+  el.textContent = msg;
+  el.className = 'feedback visible ' + (bon ? 'bon' : 'mauvais');
+  if (!persistant) setTimeout(() => el.classList.remove('visible'), 2000);
+}
+
+/* ============================================================
+   TIMER (mode extrême)
+   ============================================================ */
+function demarrerTimer(fnValider) {
+  arreterTimer();
+  etat.tempsRestant = TEMPS_LIMITE;
+  document.getElementById('timer-val').textContent = etat.tempsRestant + 's';
+  etat.timerId = setInterval(() => {
+    etat.tempsRestant -= 1;
+    document.getElementById('timer-val').textContent = etat.tempsRestant + 's';
+    if (etat.tempsRestant <= 0) {
+      arreterTimer();
+      enregistrerErreur();
+      feedback(false, "⏱ Temps écoulé ! Recommence.", true);
+      // relance un nouveau timer pour la même question
+      setTimeout(() => {
+        if (etat.vies > 0) demarrerTimer(fnValider);
+      }, 800);
+    }
+  }, 1000);
+}
+function arreterTimer() {
+  if (etat.timerId) { clearInterval(etat.timerId); etat.timerId = null; }
+  document.getElementById('timer-val').textContent = '--';
+}
+
+/* ============================================================
+   FIN DE PARTIE
+   ============================================================ */
+function finPartie() {
+  arreterTimer();
+  document.getElementById('recap-score').textContent = etat.score;
+  document.getElementById('recap-vies').textContent = etat.vies;
+  document.getElementById('recap-combo').textContent = etat.comboMax;
+
+  const r = etat.recette;
+  let html = `<h3>${r.emoji} ${r.nom} — pour ${etat.personnesCible} personne(s)</h3><ul>`;
+  etat.resultats.forEach(i => {
+    html += `<li>• ${formaterQuantite(i.nouvelleQte)} ${i.unite} de ${i.nom}</li>`;
+  });
+  html += '</ul>';
+  document.getElementById('recap-recette').innerHTML = html;
+
+  let msg = "";
+  if (etat.score >= 1500) msg = "🌟 Excellent ! Tu es un vrai chef des proportions !";
+  else if (etat.score >= 800) msg = "👏 Très bon travail !";
+  else if (etat.score >= 400) msg = "🙂 Bien joué, continue à t'entraîner !";
+  else msg = "💪 Encore un peu d'entraînement et ce sera parfait !";
+  document.getElementById('recap-message').textContent = msg;
+
+  // Tampon avec date
+  const d = new Date();
+  document.getElementById('tampon-date').textContent =
+    `CARNET MAGIQUE • ${d.toLocaleDateString('fr-FR')}`;
+
+  afficherEcran('ecran-recap');
+}
+
+/* ============================================================
+   CAPTURE D'ÉCRAN
+   ============================================================ */
+function capturerEcran() {
+  const cible = document.getElementById('recap-capture');
+  if (typeof html2canvas === 'undefined') {
+    alert("La capture n'est pas disponible. Fais une capture manuelle.");
+    return;
+  }
+  html2canvas(cible, { backgroundColor: '#ffffff', scale: 2 }).then(canvas => {
+    const lien = document.createElement('a');
+    lien.download = `carnet-magique-${Date.now()}.png`;
+    lien.href = canvas.toDataURL('image/png');
+    lien.click();
+  }).catch(err => {
+    console.error(err);
+    alert("Impossible de capturer l'écran. Fais une capture manuelle (touche Impr écran).");
+  });
+}
+
+/* ============================================================
+   UTILITAIRES
+   ============================================================ */
+function formaterQuantite(n) {
+  if (n === null || n === undefined || isNaN(n)) return '?';
+  // Arrondi à 2 décimales, suppression des zéros inutiles
+  const arr = Math.round(n * 100) / 100;
+  return arr.toString().replace('.', ',');
+}
+
+</script>
+</body>
+</html>

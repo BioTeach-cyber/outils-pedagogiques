@@ -5,7 +5,7 @@ Orange : #f3912b
 Gris : #b7b7b7
 Rouge : #e62d32
 Rose : #ee7bab
-Rose Genially : #e7708c
+Rose Genially : #161213
 Jaune : #f4d32e
 Marron : #a5706c
 Noir : #494949
