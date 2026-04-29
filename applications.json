@@ -8,7 +8,7 @@
     "public": "",
     "formation": ["Collège" , "CAPa SAPVER", "Bac Pro SAPAT"],
     "tags": [],
-    "url": "Outils-Pedagogiques/Chronometre.html",
+    "url": "Outils-Pedagogiques/chronometre-presentation.html",
     "icone": "assets/icones/Chronometre.gif",
     "image": "assets/images/Chronometre.jpg",
     "statut": "Publié",
@@ -67,6 +67,23 @@
     "auteur": "Vincent APREMONT"
   },
     {
+    "id": "",
+    "categorie": "",
+    "titre": "",
+    "description": "",
+    "discipline": "",
+    "module": "",
+    "public": "",
+    "formation": [],
+    "tags": [],
+    "url": "",
+    "icone": "",
+    "image": "",
+    "statut": "",
+    "date_creation": "",
+    "auteur": "Vincent APREMONT"
+  },    
+  {
     "id": "",
     "categorie": "",
     "titre": "",
