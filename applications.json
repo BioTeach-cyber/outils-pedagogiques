@@ -1,7 +1,7 @@
 [{
     "id": "outils-001",
     "categorie": "Outils",
-    "titre": "Chronomètre",
+    "titre": "Tempus",
     "description": "Besoin de chronométrer une présentation, un travail... Voici un chronomètre basique.",
     "discipline": "",
     "module": "",
@@ -18,7 +18,7 @@
   {
     "id": "outils-002",
     "categorie": "Outils",
-    "titre": "Minuterie",
+    "titre": "HoraDura",
     "description": "Vous connaissez l'heure de départ de votre devoir, ainsi que sa durée. Cette minuterie est faite pour vous.",
     "discipline": "",
     "module": "",
@@ -35,7 +35,7 @@
     {
     "id": "outils-003",
     "categorie": "Outils",
-    "titre": "Minuterie",
+    "titre": "TermiNunc",
     "description": "Vous connaissez l'heure de fin de votre devoir, et vous avez besoin d'un décompte ? Cette minuterie est là pour ça.",
     "discipline": "",
     "module": "",
