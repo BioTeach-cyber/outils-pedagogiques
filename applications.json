@@ -101,6 +101,23 @@
     "auteur": "Vincent APREMONT"
   },
     {
+    "id": "application-004",
+    "categorie": "Applications",
+    "titre": "Direction la bonne structure",
+    "description": "Besoin de savoir de s'entrainer pour savoir vers quelle strucutre orienter quelqu'un ? C'est par ici...",
+    "discipline": "ESF",
+    "module": "EP2",
+    "public": "",
+    "formation": ["Bac Pro SAPAT"],
+    "tags": [],
+    "url": "ESF/Structure.html",
+    "icone": "assets/icones/Structure_app.gif",
+    "image": "assets/images/Structure.jpg",
+    "statut": "Publié",
+    "date_creation": "16/04/2026",
+    "auteur": "Vincent APREMONT"
+  },
+    {
     "id": "",
     "categorie": "",
     "titre": "",
