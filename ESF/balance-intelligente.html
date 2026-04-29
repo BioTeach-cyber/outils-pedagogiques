@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Balance Intelligente</title>
+  <style>
+    :root {
+      --bleu: #53a4db;
+      --vert: #7fbc48;
+      --violet: #a6539b;
+      --orange: #f3912b;
+      --gris: #b7b7b7;
+      --rouge: #e62d32;
+      --rose: #ee7bab;
+      --jaune: #f4d32e;
+      --marron: #a5706c;
+      --noir: #494949;
+      --fond: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--fond);
+      color: var(--noir);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: var(--vert);
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: var(--gris);
+      margin-top: 0.3rem;
+    }
+
+    /* ONGLETS MODE */
+    .onglets {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .onglet {
+      padding: 0.6rem 1.5rem;
+      border: 2px solid var(--vert);
+      border-radius: 2rem;
+      background: white;
+      color: var(--vert);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .onglet.actif {
+      background: var(--vert);
+      color: white;
+    }
+
+    /* CARTE PRINCIPALE */
+    .carte {
+      background: white;
+      border: 2px solid #e8e8e8;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+
+    /* SÉLECTEURS MODE LIBRE */
+    .ligne-selects {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .champ-valeur {
+      width: 90px;
+      padding: 0.5rem 0.7rem;
+      border: 2px solid var(--bleu);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      color: var(--noir);
+      text-align: center;
+    }
+
+    select {
+      padding: 0.5rem 0.7rem;
+      border: 2px solid var(--bleu);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      color: var(--noir);
+      background: white;
+      cursor: pointer;
+    }
+
+    .fleche {
+      font-size: 1.3rem;
+      color: var(--bleu);
+      font-weight: bold;
+    }
+
+    /* BOUTONS */
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-vert { background: var(--vert); color: white; }
+    .btn-bleu { background: var(--bleu); color: white; }
+    .btn-orange { background: var(--orange); color: white; }
+    .btn-gris { background: var(--gris); color: white; }
+
+    /* ZONE ETAPES */
+    .zone-etapes { margin-top: 1rem; }
+
+    .etape {
+      background: #f7f7f7;
+      border-left: 4px solid var(--bleu);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+      display: none;
+    }
+
+    .etape.visible { display: block; }
+    .etape.validee { border-left-color: var(--vert); background: #f0fbe8; }
+    .etape.erreur { border-left-color: var(--rouge); background: #fff0f0; }
+
+    .etape p {
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
+    }
+
+    .etape strong { color: var(--bleu); }
+
+    .etape input[type="number"],
+    .etape input[type="text"] {
+      width: 120px;
+      padding: 0.4rem 0.6rem;
+      border: 2px solid var(--bleu);
+      border-radius: 0.4rem;
+      font-size: 1rem;
+      text-align: center;
+      margin-right: 0.5rem;
+    }
+
+    .choix-operation {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .btn-choix {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--gris);
+      border-radius: 0.5rem;
+      background: white;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-choix:hover { border-color: var(--bleu); color: var(--bleu); }
+    .btn-choix.selectionne { background: var(--bleu); color: white; border-color: var(--bleu); }
+
+    .feedback {
+      font-size: 0.88rem;
+      margin-top: 0.4rem;
+      font-weight: 600;
+      min-height: 1.2rem;
+    }
+
+    .feedback.ok { color: var(--vert); }
+    .feedback.ko { color: var(--rouge); }
+
+    /* RÉSULTAT FINAL */
+    .resultat-final {
+      background: var(--vert);
+      color: white;
+      border-radius: 0.7rem;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    /* MODE JEU */
+    .niveau-etoiles {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--noir);
+    }
+
+    .etoile {
+      font-size: 1.4rem;
+      color: var(--gris);
+      transition: color 0.3s;
+    }
+
+    .etoile.allumee { color: var(--jaune); }
+
+    .enonce-jeu {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--noir);
+      text-align: center;
+      margin: 1rem 0;
+      background: #f0f7ff;
+      border-radius: 0.5rem;
+      padding: 0.8rem;
+    }
+
+    .enonce-jeu span { color: var(--bleu); }
+
+    .ligne-reponse {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .champ-reponse-jeu {
+      width: 130px;
+      padding: 0.5rem;
+      border: 2px solid var(--bleu);
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    .score-jeu {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--gris);
+      margin-top: 0.5rem;
+    }
+
+    .score-jeu span { font-weight: 700; }
+    .score-bon { color: var(--vert) !important; }
+    .score-mauvais { color: var(--rouge) !important; }
+
+    /* RESPONSIVE */
+    @media (max-width: 480px) {
+      .ligne-selects { flex-direction: column; align-items: flex-start; }
+      .champ-valeur { width: 100%; }
+      select { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>⚖️ La Balance Intelligente</h1>
+  <p>Apprends à convertir des unités pas à pas</p>
+</header>
+
+<div class="onglets">
+  <button class="onglet actif" id="btn-libre" onclick="afficherMode('libre')">🔓 Mode Libre</button>
+  <button class="onglet" id="btn-jeu" onclick="afficherMode('jeu')">🎮 Mode Jeu</button>
+</div>
+
+<!-- ========== MODE LIBRE ========== -->
+<div class="carte" id="mode-libre">
+  <div class="ligne-selects">
+    <input type="number" class="champ-valeur" id="valeur-libre" placeholder="Ex: 250" min="0" step="any">
+    <select id="unite-depart">
+      <option value="">-- unité --</option>
+    </select>
+    <span class="fleche">→</span>
+    <select id="unite-arrivee">
+      <option value="">-- unité --</option>
+    </select>
+    <button class="btn btn-vert" onclick="lancerLibre()">Commencer</button>
+  </div>
+
+  <div class="zone-etapes" id="zone-etapes">
+    <!-- Étape 1 -->
+    <div class="etape" id="etape1">
+      <p id="question1"></p>
+      <input type="number" id="rep1" placeholder="?" min="0">
+      <button class="btn btn-bleu" onclick="valider1()">Valider</button>
+      <div class="feedback" id="fb1"></div>
+    </div>
+
+    <!-- Étape 2 -->
+    <div class="etape" id="etape2">
+      <p id="question2"></p>
+      <div class="choix-operation" id="choix-op">
+        <button class="btn-choix" id="btn-mult" onclick="choisirOperation('multiplier')">✖️ Multiplier</button>
+        <button class="btn-choix" id="btn-div" onclick="choisirOperation('diviser')">➗ Diviser</button>
+      </div>
+      <button class="btn btn-bleu" onclick="valider2()">Valider</button>
+      <div class="feedback" id="fb2"></div>
+    </div>
+
+    <!-- Étape 3 -->
+    <div class="etape" id="etape3">
+      <p id="question3"></p>
+      <input type="number" id="rep3" placeholder="?" min="0">
+      <button class="btn btn-bleu" onclick="valider3()">Valider</button>
+      <div class="feedback" id="fb3"></div>
+    </div>
+
+    <!-- Étape 4 -->
+    <div class="etape" id="etape4">
+      <p id="question4"></p>
+      <input type="number" id="rep4" placeholder="?" step="any" min="0">
+      <button class="btn btn-bleu" onclick="valider4()">Valider</button>
+      <div class="feedback" id="fb4"></div>
+    </div>
+  </div>
+
+  <div class="resultat-final" id="resultat-final"></div>
+
+  <div style="margin-top:1rem; text-align:right;">
+    <button class="btn btn-gris" onclick="resetLibre()" style="font-size:0.85rem;">🔄 Recommencer</button>
+  </div>
+</div>
+
+<!-- ========== MODE JEU ========== -->
+<div class="carte" id="mode-jeu" style="display:none;">
+  <div class="niveau-etoiles">
+    <strong>Niveau :</strong>
+    <span class="etoile" id="e1">★</span>
+    <span class="etoile" id="e2">★</span>
+    <span class="etoile" id="e3">★</span>
+    <span class="etoile" id="e4">★</span>
+    <span class="etoile" id="e5">★</span>
+  </div>
+
+  <div class="enonce-jeu" id="enonce-jeu">Clique sur "Nouvelle question" pour commencer !</div>
+
+  <div class="ligne-reponse">
+    <input type="number" class="champ-reponse-jeu" id="rep-jeu" placeholder="?" step="any" min="0">
+    <span id="unite-reponse-jeu" style="font-size:1rem; font-weight:600; color:var(--bleu);"></span>
+  </div>
+
+  <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;">
+    <button class="btn btn-vert" onclick="validerJeu()">✅ Valider</button>
+    <button class="btn btn-bleu" onclick="nouvelleQuestionJeu()">🔀 Nouvelle question</button>
+  </div>
+
+  <div class="feedback" id="fb-jeu" style="text-align:center; margin-top:0.6rem; font-size:1rem;"></div>
+
+  <div class="score-jeu">
+    <div>✅ Bonnes : <span class="score-bon" id="nb-bon">0</span></div>
+    <div>❌ Erreurs : <span class="score-mauvais" id="nb-mauvais">0</span></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+// =============================================
+// DONNÉES : toutes les conversions possibles
+// =============================================
+
+const CONVERSIONS = [
+  // MASSE
+  { de:"kg", vers:"g",   facteur:1000,       op:"multiplier" },
+  { de:"g",  vers:"kg",  facteur:1000,       op:"diviser"    },
+  { de:"g",  vers:"mg",  facteur:1000,       op:"multiplier" },
+  { de:"mg", vers:"g",   facteur:1000,       op:"diviser"    },
+  { de:"kg", vers:"mg",  facteur:1000000,    op:"multiplier" },
+  { de:"mg", vers:"kg",  facteur:1000000,    op:"diviser"    },
+  // VOLUME
+  { de:"L",  vers:"dL",  facteur:10,         op:"multiplier" },
+  { de:"dL", vers:"L",   facteur:10,         op:"diviser"    },
+  { de:"L",  vers:"cL",  facteur:100,        op:"multiplier" },
+  { de:"cL", vers:"L",   facteur:100,        op:"diviser"    },
+  { de:"L",  vers:"mL",  facteur:1000,       op:"multiplier" },
+  { de:"mL", vers:"L",   facteur:1000,       op:"diviser"    },
+  { de:"dL", vers:"cL",  facteur:10,         op:"multiplier" },
+  { de:"cL", vers:"dL",  facteur:10,         op:"diviser"    },
+  { de:"dL", vers:"mL",  facteur:100,        op:"multiplier" },
+  { de:"mL", vers:"dL",  facteur:100,        op:"diviser"    },
+  { de:"cL", vers:"mL",  facteur:10,         op:"multiplier" },
+  { de:"mL", vers:"cL",  facteur:10,         op:"diviser"    },
+];
+
+const TOUTES_UNITES = ["kg","g","mg","L","dL","cL","mL"];
+
+// =============================================
+// ÉTAT GLOBAL
+// =============================================
+
+let conversionEnCours = null;
+let valeurEnCours = 0;
+let operationChoisie = null;
+
+// Mode jeu
+let niveauJeu = 1;       // 1 à 5
+let bonConsecutifs = 0;
+let mauvaisConsecutifs = 0;
+let totalBon = 0;
+let totalMauvais = 0;
+let questionJeuEnCours = null;
+
+// =============================================
+// INITIALISATION
+// =============================================
+
+(function init() {
+  const selectDep = document.getElementById("unite-depart");
+  const selectArr = document.getElementById("unite-arrivee");
+
+  TOUTES_UNITES.forEach(u => {
+    selectDep.innerHTML += `<option value="${u}">${u}</option>`;
+    selectArr.innerHTML += `<option value="${u}">${u}</option>`;
+  });
+
+  // Entrée clavier mode libre
+  document.getElementById("rep1").addEventListener("keydown", e => { if(e.key==="Enter") valider1(); });
+  document.getElementById("rep3").addEventListener("keydown", e => { if(e.key==="Enter") valider3(); });
+  document.getElementById("rep4").addEventListener("keydown", e => { if(e.key==="Enter") valider4(); });
+  document.getElementById("rep-jeu").addEventListener("keydown", e => { if(e.key==="Enter") validerJeu(); });
+})();
+
+// =============================================
+// NAVIGATION MODES
+// =============================================
+
+function afficherMode(mode) {
+  document.getElementById("mode-libre").style.display = mode === "libre" ? "block" : "none";
+  document.getElementById("mode-jeu").style.display  = mode === "jeu"   ? "block" : "none";
+  document.getElementById("btn-libre").classList.toggle("actif", mode === "libre");
+  document.getElementById("btn-jeu").classList.toggle("actif", mode === "jeu");
+}
+
+// =============================================
+// MODE LIBRE
+// =============================================
+
+function lancerLibre() {
+  const valStr  = document.getElementById("valeur-libre").value.trim();
+  const uniteDep = document.getElementById("unite-depart").value;
+  const uniteArr = document.getElementById("unite-arrivee").value;
+
+  if (!valStr || !uniteDep || !uniteArr) {
+    alert("Remplis tous les champs avant de commencer !");
+    return;
+  }
+  if (uniteDep === uniteArr) {
+    alert("Choisis deux unités différentes !");
+    return;
+  }
+
+  const conv = CONVERSIONS.find(c => c.de === uniteDep && c.vers === uniteArr);
+  if (!conv) {
+    alert("Cette conversion n'est pas disponible.");
+    return;
+  }
+
+  valeurEnCours = parseFloat(valStr);
+  conversionEnCours = conv;
+  operationChoisie = null;
+
+  resetEtapes();
+  preparerQuestions();
+  afficherEtape("etape1");
+}
+
+function preparerQuestions() {
+  const c = conversionEnCours;
+  const v = valeurEnCours;
+
+  // Étape 1 : la relation de base
+  let q1, grandUnite, petiteUnite;
+  if (c.op === "multiplier") {
+    grandUnite = c.de; petiteUnite = c.vers;
+  } else {
+    grandUnite = c.vers; petiteUnite = c.de;
+  }
+  q1 = `<strong>Étape 1 :</strong> Combien y a-t-il de <strong>${petiteUnite}</strong> dans <strong>1 ${grandUnite}</strong> ?`;
+  document.getElementById("question1").innerHTML = q1;
+
+  // Étape 2 : opération
+  document.getElementById("question2").innerHTML =
+    `<strong>Étape 2 :</strong> Pour passer de <strong>${c.de}</strong> à <strong>${c.vers}</strong>, tu dois...`;
+
+  // Étape 3 : par combien
+  document.getElementById("question3").innerHTML =
+    `<strong>Étape 3 :</strong> Par combien faut-il ${c.op === "multiplier" ? "multiplier" : "diviser"} ?`;
+
+  // Étape 4 : résultat
+  document.getElementById("question4").innerHTML =
+    `<strong>Étape 4 :</strong> Calcule ! ${v} ${c.de} = ? ${c.vers}`;
+}
+
+function valider1() {
+  const rep = parseFloat(document.getElementById("rep1").value);
+  const c = conversionEnCours;
+  const bonneRep = c.facteur;
+
+  if (isNaN(rep)) { afficherFeedback("fb1", "Saisis un nombre !", false); return; }
+
+  if (rep === bonneRep) {
+    afficherFeedback("fb1", `✅ Exact ! 1 ${c.op === "multiplier" ? c.de : c.vers} = ${bonneRep} ${c.op === "multiplier" ? c.vers : c.de}`, true);
+    validerEtape("etape1");
+    setTimeout(() => afficherEtape("etape2"), 600);
+  } else {
+    afficherFeedback("fb1", "❌ Pas tout à fait… Réessaie !", false);
+    document.getElementById("etape1").classList.add("erreur");
+    setTimeout(() => document.getElementById("etape1").classList.remove("erreur"), 800);
+  }
+}
+
+function choisirOperation(op) {
+  operationChoisie = op;
+  document.getElementById("btn-mult").classList.toggle("selectionne", op === "multiplier");
+  document.getElementById("btn-div").classList.toggle("selectionne",  op === "diviser");
+}
+
+function valider2() {
+  if (!operationChoisie) { afficherFeedback("fb2", "Choisis une opération !", false); return; }
+
+  if (operationChoisie === conversionEnCours.op) {
+    afficherFeedback("fb2", "✅ Bonne opération !", true);
+    validerEtape("etape2");
+    setTimeout(() => afficherEtape("etape3"), 600);
+  } else {
+    afficherFeedback("fb2", "❌ Pas la bonne opération… Réessaie !", false);
+    document.getElementById("etape2").classList.add("erreur");
+    setTimeout(() => document.getElementById("etape2").classList.remove("erreur"), 800);
+  }
+}
+
+function valider3() {
+  const rep = parseFloat(document.getElementById("rep3").value);
+  if (isNaN(rep)) { afficherFeedback("fb3", "Saisis un nombre !", false); return; }
+
+  if (rep === conversionEnCours.facteur) {
+    afficherFeedback("fb3", `✅ Oui, on ${conversionEnCours.op === "multiplier" ? "multiplie" : "divise"} par ${conversionEnCours.facteur} !`, true);
+    validerEtape("etape3");
+    setTimeout(() => afficherEtape("etape4"), 600);
+  } else {
+    afficherFeedback("fb3", "❌ Pas tout à fait… Réessaie !", false);
+    document.getElementById("etape3").classList.add("erreur");
+    setTimeout(() => document.getElementById("etape3").classList.remove("erreur"), 800);
+  }
+}
+
+function valider4() {
+  const rep = parseFloat(document.getElementById("rep4").value);
+  if (isNaN(rep)) { afficherFeedback("fb4", "Saisis un nombre !", false); return; }
+
+  const c = conversionEnCours;
+  const bonneRep = c.op === "multiplier"
+    ? valeurEnCours * c.facteur
+    : valeurEnCours / c.facteur;
+
+  const tolerence = Math.abs(bonneRep) * 0.0001;
+
+  if (Math.abs(rep - bonneRep) <= tolerence) {
+    afficherFeedback("fb4", "✅ Parfait !", true);
+    validerEtape("etape4");
+    afficherResultatFinal(bonneRep);
+  } else {
+    afficherFeedback("fb4", "❌ Pas tout à fait… Réessaie !", false);
+    document.getElementById("etape4").classList.add("erreur");
+    setTimeout(() => document.getElementById("etape4").classList.remove("erreur"), 800);
+  }
+}
+
+function afficherResultatFinal(bonneRep) {
+  const c = conversionEnCours;
+  const div = document.getElementById("resultat-final");
+  div.style.display = "block";
+  div.innerHTML = `🎉 ${valeurEnCours} ${c.de} = <strong>${bonneRep} ${c.vers}</strong>`;
+}
+
+// =============================================
+// UTILITAIRES MODE LIBRE
+// =============================================
+
+function afficherEtape(id) {
+  document.getElementById(id).classList.add("visible");
+}
+
+function validerEtape(id) {
+  document.getElementById(id).classList.add("validee");
+}
+
+function afficherFeedback(id, msg, ok) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = "feedback " + (ok ? "ok" : "ko");
+}
+
+function resetEtapes() {
+  ["etape1","etape2","etape3","etape4"].forEach(id => {
+    const el = document.getElementById(id);
+    el.className = "etape";
+  });
+  ["rep1","rep3","rep4"].forEach(id => {
+    document.getElementById(id).value = "";
+  });
+  ["fb1","fb2","fb3","fb4"].forEach(id => {
+    document.getElementById(id).textContent = "";
+    document.getElementById(id).className = "feedback";
+  });
+  operationChoisie = null;
+  document.getElementById("btn-mult").classList.remove("selectionne");
+  document.getElementById("btn-div").classList.remove("selectionne");
+  document.getElementById("resultat-final").style.display = "none";
+}
+
+function resetLibre() {
+  resetEtapes();
+  document.getElementById("valeur-libre").value = "";
+  document.getElementById("unite-depart").value = "";
+  document.getElementById("unite-arrivee").value = "";
+  conversionEnCours = null;
+}
+
+// =============================================
+// MODE JEU
+// =============================================
+
+// Valeurs par niveau (plus le niveau est haut, plus les valeurs sont complexes)
+const VALEURS_PAR_NIVEAU = [
+  [1, 2, 5, 10],           // niveau 1
+  [100, 200, 500, 250],    // niveau 2
+  [1500, 3500, 750, 2500], // niveau 3
+  [0.5, 0.25, 1.5, 2.5],  // niveau 4
+  [0.125, 3.75, 0.025, 1.375] // niveau 5
+];
+
+function getConversionsParNiveau(niveau) {
+  // Niveau 1 : facteur 10 ou 100 uniquement
+  // Niveau 2+ : tout
+  if (niveau <= 2) return CONVERSIONS.filter(c => c.facteur <= 100);
+  return CONVERSIONS;
+}
+
+function nouvelleQuestionJeu() {
+  const convsPossibles = getConversionsParNiveau(niveauJeu);
+  const conv = convsPossibles[Math.floor(Math.random() * convsPossibles.length)];
+  const valeursPool = VALEURS_PAR_NIVEAU[niveauJeu - 1];
+  const val = valeursPool[Math.floor(Math.random() * valeursPool.length)];
+
+  questionJeuEnCours = { conv, val };
+
+  document.getElementById("enonce-jeu").innerHTML =
+    `Convertis <span>${val} ${conv.de}</span> en <span>${conv.vers}</span>`;
+  document.getElementById("unite-reponse-jeu").textContent = conv.vers;
+  document.getElementById("rep-jeu").value = "";
+  document.getElementById("fb-jeu").textContent = "";
+  document.getElementById("fb-jeu").className = "feedback";
+  document.getElementById("rep-jeu").focus();
+}
+
+function validerJeu() {
+  if (!questionJeuEnCours) {
+    document.getElementById("fb-jeu").textContent = "Clique sur 'Nouvelle question' d'abord !";
+    document.getElementById("fb-jeu").className = "feedback ko";
+    return;
+  }
+
+  const rep = parseFloat(document.getElementById("rep-jeu").value);
+  if (isNaN(rep)) {
+    document.getElementById("fb-jeu").textContent = "Saisis un nombre !";
+    document.getElementById("fb-jeu").className = "feedback ko";
+    return;
+  }
+
+  const { conv, val } = questionJeuEnCours;
+  const bonneRep = conv.op === "multiplier" ? val * conv.facteur : val / conv.facteur;
+  const tolerence = Math.max(Math.abs(bonneRep) * 0.0001, 0.0001);
+
+  if (Math.abs(rep - bonneRep) <= tolerence) {
+    // Bonne réponse
+    totalBon++;
+    bonConsecutifs++;
+    mauvaisConsecutifs = 0;
+    document.getElementById("fb-jeu").textContent = `✅ Bravo ! ${val} ${conv.de} = ${bonneRep} ${conv.vers}`;
+    document.getElementById("fb-jeu").className = "feedback ok";
+
+    if (bonConsecutifs >= 3 && niveauJeu < 5) {
+      niveauJeu++;
+      bonConsecutifs = 0;
+      setTimeout(() => {
+        document.getElementById("fb-jeu").textContent += ` 🌟 Niveau ${niveauJeu} débloqué !`;
+      }, 300);
+    }
+  } else {
+    // Mauvaise réponse
+    totalMauvais++;
+    mauvaisConsecutifs++;
+    bonConsecutifs = 0;
+    document.getElementById("fb-jeu").textContent = `❌ Raté ! La bonne réponse était ${bonneRep} ${conv.vers}`;
+    document.getElementById("fb-jeu").className = "feedback ko";
+
+    if (mauvaisConsecutifs >= 3 && niveauJeu > 1) {
+      niveauJeu--;
+      mauvaisConsecutifs = 0;
+      setTimeout(() => {
+        document.getElementById("fb-jeu").textContent += ` ⬇️ Retour au niveau ${niveauJeu}.`;
+      }, 300);
+    }
+  }
+
+  // Mise à jour scores et étoiles
+  document.getElementById("nb-bon").textContent = totalBon;
+  document.getElementById("nb-mauvais").textContent = totalMauvais;
+  mettreAJourEtoiles();
+
+  // Question suivante auto après 2s
+  questionJeuEnCours = null;
+  setTimeout(nouvelleQuestionJeu, 2200);
+}
+
+function mettreAJourEtoiles() {
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById("e" + i);
+    el.classList.toggle("allumee", i <= niveauJeu);
+  }
+}
+</script>
+</body>
+</html>
