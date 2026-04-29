@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chronomètre de Présentation</title>
+
+    <!-- ① Déclarer le nom de l'application -->
+    <script>
+        window.APP_NAME  = "Chronomètre de Présentation";
+        // Détecte automatiquement le chemin selon l'environnement (local ou GitHub Pages)
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        window.BASE_PATH = isGitHubPages ? "/outils-pedagogiques/" : "../";
+    </script>
+
+    <!-- ② Injection automatique du header (CSS + header + modal + QR) -->
+    <script src="../assets/js/header.js" defer></script>
+
+    <style>
+        /* Variables de couleurs personnalisées (pour faciliter les changements) */
+        :root {
+            --color-primary: var(--couleur-6);    /* #039a9f */
+            --color-accent: var(--couleur-8);     /* #7abbc7 */
+            --color-presentation: var(--couleur-5);  /* Phase présentation */
+            --color-questions: var(--couleur-4);     /* Phase questions */
+            --color-success: var(--couleur-6);    /* #039a9f */
+            --color-warning: var(--couleur-4);    /* #e6017b */
+            --color-alert: var(--couleur-1);      /* #f49d0e */
+            
+            --surface-light: rgba(255, 255, 255, 0.95);
+            --surface-dark: rgba(45, 45, 45, 0.95);
+            --border-light: #e0e0e0;
+            --border-dark: #444444;
+            
+            --text-secondary-light: #555555;
+            --text-secondary-dark: #aaaaaa;
+        }
+
+        /* Mode sombre */
+        [data-theme="dark"] {
+            --surface-light: rgba(30, 30, 40, 0.98);
+            --surface-dark: rgba(20, 20, 30, 0.98);
+            --border-light: #444444;
+            --border-dark: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Canvas particules */
+        #particles-canvas {
+            position: fixed;
+            top: 80px; /* Après le header */
+            left: 0;
+            width: 100%; 
+            height: calc(100vh - 80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #main-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin-top: 0;
+        }
+
+        /* Panneau de configuration */
+        #config-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px;
+            width: 420px;
+            max-width: 95vw;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .config-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .config-group label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .time-input-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .time-input-field {
+            flex: 1;
+        }
+
+        .time-input-field input {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            padding: 10px 12px;
+            outline: none;
+            transition: border-color 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .time-input-field input:focus { 
+            border-color: var(--color-primary);
+        }
+
+        .time-input-field label {
+            font-size: 0.75rem;
+            margin-bottom: 4px;
+        }
+
+        #btn-start {
+            background: linear-gradient(135deg, var(--couleur-1), var(--couleur-2));
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 14px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+
+        #btn-start:hover { 
+            opacity: 0.9; 
+            transform: scale(1.02); 
+        }
+
+        /* Panneau chronomètre */
+        #timer-panel {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            width: 420px;
+            max-width: 95vw;
+        }
+
+        .phase-info {
+            text-align: center;
+            width: 100%;
+        }
+
+        #phase-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        #phase-label.phase-presentation {
+            color: var(--color-presentation);
+            font-weight: 600;
+        }
+
+        #phase-label.phase-questions {
+            color: var(--color-questions);
+            font-weight: 600;
+        }
+
+        /* Affichage du temps */
+        #time-display {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text);
+            text-align: center;
+            letter-spacing: 3px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            transition: color 0.3s;
+        }
+
+        #timer-panel.phase-presentation #time-display {
+            color: var(--color-presentation);
+        }
+
+        #timer-panel.phase-questions #time-display {
+            color: var(--color-questions);
+        }
+
+        /* Boîte temps écoulé */
+        #elapsed-box {
+            background: var(--surface);
+            border: 2px solid var(--color-primary);
+            border-radius: 12px;
+            padding: 16px 20px;
+            text-align: center;
+            display: none;
+            width: 100%;
+            animation: slideIn 0.3s ease;
+        }
+
+        #elapsed-box.show {
+            display: block;
+        }
+
+        #elapsed-box-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        #elapsed-time {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Barre de progression */
+        .progress-bar-container {
+            width: 300px;
+            background: var(--bg);
+            border-radius: 20px;
+            height: 14px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 4px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg,
+                var(--couleur-1), var(--couleur-2), var(--couleur-3),
+                var(--couleur-4), var(--couleur-5),
+                var(--couleur-6), var(--couleur-7), var(--couleur-8));
+            background-size: 300% 100%;
+            animation: barShift 6s linear infinite;
+            transition: width 1s linear;
+        }
+
+        @keyframes barShift {
+            0%   { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .bar-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            text-align: right;
+            width: 300px;
+        }
+
+        /* Contrôles */
+        .controls {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px 20px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+
+        button:hover { 
+            opacity: 0.9; 
+            transform: scale(1.02);
+        }
+
+        .btn-pause {
+            background: linear-gradient(135deg, var(--couleur-3), var(--couleur-4));
+            display: none;
+        }
+
+        .btn-reset {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .btn-reset:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .btn-end-presentation {
+            background: linear-gradient(135deg, var(--couleur-6), var(--couleur-8));
+            display: none;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-end-presentation.show {
+            display: block;
+        }
+
+        #timer-panel.show-controls {
+            gap: 16px;
+        }
+
+        #timer-panel.show-controls .controls {
+            display: flex;
+        }
+
+        /* Flash notification */
+        #flash-notif {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            color: #fff;
+            font-size: 1.6rem;
+            font-weight: 800;
+            padding: 28px 48px;
+            border-radius: 12px;
+            text-align: center;
+            letter-spacing: 1px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s, transform 0.4s;
+            z-index: 100;
+        }
+
+        #flash-notif.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .flash-sub {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin-top: 8px;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            #main-content {
+                padding: 30px 20px;
+            }
+            #config-panel, #timer-panel {
+                width: 90vw;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #main-content {
+                padding: 20px 15px;
+            }
+            #config-panel { 
+                width: 95vw; 
+                padding: 20px; 
+            }
+            #timer-panel {
+                width: 95vw;
+            }
+            #time-display { 
+                font-size: 3rem; 
+            }
+            .progress-bar-container, .bar-label { 
+                width: 100%;
+                max-width: 280px;
+            }
+            button {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<div id="main-content">
+
+    <!-- Configuration -->
+    <div id="config-panel">
+        <div class="config-group">
+            <label>⏳ Temps de présentation</label>
+            <div class="time-input-row">
+                <div class="time-input-field">
+                    <label>Minutes</label>
+                    <input type="number" id="presentationMin" min="0" max="59" value="5">
+                </div>
+                <div class="time-input-field">
+                    <label>Secondes</label>
+                    <input type="number" id="presentationSec" min="0" max="59" value="0">
+                </div>
+            </div>
+        </div>
+
+        <div class="config-group">
+            <label>❓ Temps de questions</label>
+            <div class="time-input-row">
+                <div class="time-input-field">
+                    <label>Minutes</label>
+                    <input type="number" id="questionsMin" min="0" max="59" value="2">
+                </div>
+                <div class="time-input-field">
+                    <label>Secondes</label>
+                    <input type="number" id="questionsSec" min="0" max="59" value="0">
+                </div>
+            </div>
+        </div>
+
+        <button id="btn-start">⏳ Lancer le chronomètre</button>
+    </div>
+
+    <!-- Chronomètre -->
+    <div id="timer-panel">
+        <div class="phase-info">
+            <div id="phase-label">Présentation</div>
+            <div id="time-display">00:00</div>
+        </div>
+
+        <div id="elapsed-box">
+            <div id="elapsed-box-label">Temps écoulé de présentation</div>
+            <div id="elapsed-time">00:00</div>
+        </div>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="bar-fill" style="width:100%"></div>
+        </div>
+        <div class="bar-label" id="bar-label">— min restantes</div>
+
+        <div class="controls">
+            <button id="btn-pause-resume" class="btn-pause">⏸ Pause</button>
+            <button id="btn-end-presentation" class="btn-end-presentation">✓ Fin de présentation</button>
+            <button id="btn-reset" class="btn-reset">↩ Recommencer</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Flash notification -->
+<div id="flash-notif"></div>
+
+    <script>
+// ─── PARTICULES ───────────────────────────────────────────
+const canvas = document.getElementById('particles-canvas');
+const ctx2d  = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function createParticle() {
+    const colors = [
+        getComputedStyle(document.documentElement).getPropertyValue('--couleur-1'),
+        getComputedStyle(document.documentElement).getPropertyValue('--couleur-5'),
+        getComputedStyle(document.documentElement).getPropertyValue('--couleur-6'),
+        getComputedStyle(document.documentElement).getPropertyValue('--couleur-8'),
+        getComputedStyle(document.documentElement).getPropertyValue('--couleur-4')
+    ];
+    return {
+        x:     Math.random() * canvas.width,
+        y:     Math.random() * canvas.height,
+        r:     Math.random() * 2 + 0.5,
+        dx:    (Math.random() - 0.5) * 0.4,
+        dy:    (Math.random() - 0.5) * 0.4,
+        alpha: Math.random() * 0.5 + 0.1,
+        color: colors[Math.floor(Math.random()*colors.length)]
+    };
+}
+
+for (let i = 0; i < 80; i++) particles.push(createParticle());
+
+function animParticles() {
+    ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+        ctx2d.beginPath();
+        ctx2d.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx2d.fillStyle = p.color;
+        ctx2d.globalAlpha = p.alpha;
+        ctx2d.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width)  p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    }
+    ctx2d.globalAlpha = 1;
+    requestAnimationFrame(animParticles);
+}
+animParticles();
+
+// ─── ÉTAT ────────────────────────────────────────────────
+let timerInterval = null;
+let isRunning = false;
+let isPaused = false;
+
+let presentationDuration = 0; // en secondes
+let questionsDuration = 0; // en secondes
+let totalDuration = 0;
+
+let elapsedTime = 0; // temps total écoulé
+let currentPhase = 'presentation'; // 'presentation' ou 'questions'
+let presentationEndTime = 0; // moment où la présentation se termine
+let flashTimeout = null;
+
+// ─── RÉCUPÉRATION DES ÉLÉMENTS DOM ───────────────────────
+const presentationMinInput = document.getElementById('presentationMin');
+const presentationSecInput = document.getElementById('presentationSec');
+const questionsMinInput = document.getElementById('questionsMin');
+const questionsSecInput = document.getElementById('questionsSec');
+
+const configPanel = document.getElementById('config-panel');
+const timerPanel = document.getElementById('timer-panel');
+
+const timeDisplay = document.getElementById('time-display');
+const phaseLabel = document.getElementById('phase-label');
+const elapsedBox = document.getElementById('elapsed-box');
+const elapsedTimeSpan = document.getElementById('elapsed-time');
+const barFill = document.getElementById('bar-fill');
+const barLabel = document.getElementById('bar-label');
+
+const startBtn = document.getElementById('btn-start');
+const pauseResumeBtn = document.getElementById('btn-pause-resume');
+const resetBtn = document.getElementById('btn-reset');
+const endPresentationBtn = document.getElementById('btn-end-presentation');
+
+const flashNotif = document.getElementById('flash-notif');
+
+// ─── EVENT LISTENERS ─────────────────────────────────────
+startBtn.addEventListener('click', startTimer);
+pauseResumeBtn.addEventListener('click', togglePause);
+resetBtn.addEventListener('click', resetTimer);
+endPresentationBtn.addEventListener('click', endPresentation);
+
+// ─── FONCTION: LIRE LES DURÉES ──────────────────────────
+function readDurations() {
+    const presentationMin = parseInt(presentationMinInput.value) || 0;
+    const presentationSec = parseInt(presentationSecInput.value) || 0;
+    const questionsMin = parseInt(questionsMinInput.value) || 0;
+    const questionsSec = parseInt(questionsSecInput.value) || 0;
+
+    presentationDuration = presentationMin * 60 + presentationSec;
+    questionsDuration = questionsMin * 60 + questionsSec;
+    totalDuration = presentationDuration + questionsDuration;
+    presentationEndTime = presentationDuration;
+}
+
+// ─── FONCTION: DÉMARRER ─────────────────────────────────
+function startTimer() {
+    if (isRunning) return;
+
+    readDurations();
+
+    if (totalDuration <= 0) {
+        showFlash('⚠ Erreur', 'Veuillez définir une durée valide', '#f49d0e', '#ff6b6b');
+        return;
+    }
+
+    isRunning = true;
+    isPaused = false;
+    elapsedTime = 0;
+    currentPhase = 'presentation';
+    elapsedBox.classList.remove('show');
+
+    configPanel.style.display = 'none';
+    timerPanel.style.display = 'flex';
+    timerPanel.classList.add('show-controls');
+
+    disableInputs(true);
+    updateDisplay();
+
+    timerInterval = setInterval(updateTimer, 100);
+}
+
+// ─── FONCTION: METTRE À JOUR LE CHRONOMÈTRE ─────────────
+function updateTimer() {
+    elapsedTime += 0.1;
+
+    if (elapsedTime >= totalDuration) {
+        elapsedTime = totalDuration;
+        stopTimer();
+        playBeep();
+        showFlash('✓ Terminé !', 'Présentation et questions finies', '#039a9f', '#7abbc7');
+        return;
+    }
+
+    updateDisplay();
+
+    // Transition automatique de la phase 1 à la phase 2
+    if (elapsedTime >= presentationEndTime && currentPhase === 'presentation') {
+        currentPhase = 'questions';
+        updateDisplay();
+    }
+}
+
+// ─── FONCTION: METTRE À JOUR L'AFFICHAGE ────────────────
+function updateDisplay() {
+    const timeRemaining = Math.max(0, totalDuration - elapsedTime);
+
+    let minutes = Math.floor(timeRemaining / 60);
+    let seconds = Math.round(timeRemaining % 60);
+
+    if (seconds === 60) {
+        minutes++;
+        seconds = 0;
+    }
+
+    const displayTime = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    timeDisplay.textContent = displayTime;
+
+    // Mise à jour de la phase
+    if (currentPhase === 'presentation') {
+        phaseLabel.textContent = '📊 Présentation';
+        phaseLabel.className = 'phase-presentation';
+        timerPanel.className = 'phase-presentation';
+        endPresentationBtn.classList.add('show');
+    } else {
+        phaseLabel.textContent = '❓ Questions';
+        phaseLabel.className = 'phase-questions';
+        timerPanel.className = 'phase-questions';
+        endPresentationBtn.classList.remove('show');
+    }
+
+    // Mise à jour de la barre de progression
+    const progressPercent = (elapsedTime / totalDuration) * 100;
+    barFill.style.width = (100 - progressPercent) + '%';
+
+    // Mise à jour du label de la barre
+    const minRemaining = Math.ceil(timeRemaining / 60);
+    barLabel.textContent = minRemaining + ' min restante' + (minRemaining > 1 ? 's' : '');
+}
+
+// ─── FONCTION: FIN DE LA PRÉSENTATION ────────────────────
+function endPresentation() {
+    if (!isRunning || currentPhase !== 'presentation') return;
+
+    const minutes = Math.floor(elapsedTime / 60);
+    const seconds = Math.round(elapsedTime % 60);
+    const displayElapsed = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+
+    elapsedTimeSpan.textContent = displayElapsed;
+    elapsedBox.classList.add('show');
+
+    // Transition vers la phase 2
+    currentPhase = 'questions';
+    presentationEndTime = elapsedTime;
+    updateDisplay();
+
+    showFlash('✓ Fin de présentation', 'Temps écoulé : ' + displayElapsed, '#039a9f', '#7abbc7');
+}
+
+// ─── FONCTION: PAUSE/REPRENDRE ──────────────────────────
+function togglePause() {
+    if (!isRunning) return;
+
+    isPaused = !isPaused;
+
+    if (isPaused) {
+        clearInterval(timerInterval);
+        pauseResumeBtn.textContent = '▶ Reprendre';
+        pauseResumeBtn.classList.add('paused');
+    } else {
+        pauseResumeBtn.textContent = '⏸ Pause';
+        pauseResumeBtn.classList.remove('paused');
+        timerInterval = setInterval(updateTimer, 100);
+    }
+}
+
+// ─── FONCTION: ARRÊTER ──────────────────────────────────
+function stopTimer() {
+    isRunning = false;
+    isPaused = false;
+    clearInterval(timerInterval);
+
+    endPresentationBtn.classList.remove('show');
+    disableInputs(false);
+}
+
+// ─── FONCTION: RÉINITIALISER ────────────────────────────
+function resetTimer() {
+    clearInterval(timerInterval);
+    isRunning = false;
+    isPaused = false;
+    elapsedTime = 0;
+    currentPhase = 'presentation';
+    elapsedBox.classList.remove('show');
+
+    configPanel.style.display = 'flex';
+    timerPanel.style.display = 'none';
+    timerPanel.classList.remove('show-controls');
+
+    pauseResumeBtn.textContent = '⏸ Pause';
+    pauseResumeBtn.classList.remove('paused');
+
+    disableInputs(false);
+    updateDisplay();
+}
+
+// ─── FONCTION: DÉSACTIVER LES INPUTS ────────────────────
+function disableInputs(disabled) {
+    presentationMinInput.disabled = disabled;
+    presentationSecInput.disabled = disabled;
+    questionsMinInput.disabled = disabled;
+    questionsSecInput.disabled = disabled;
+}
+
+// ─── SON: BIPS ──────────────────────────────────────────
+function pingSound(freq, duration, delay = 0) {
+    try {
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc  = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.connect(gain);
+        gain.connect(actx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, actx.currentTime + delay);
+        gain.gain.setValueAtTime(0.45, actx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + delay + duration);
+        osc.start(actx.currentTime + delay);
+        osc.stop(actx.currentTime + delay + duration + 0.05);
+    } catch(e) {}
+}
+
+function playBeep() {
+    pingSound(523, 0.5, 0);
+    pingSound(440, 0.5, 0.55);
+    pingSound(349, 0.8, 1.1);
+}
+
+// ─── FLASH NOTIFICATION ─────────────────────────────────
+function showFlash(title, subtitle, color1, color2) {
+    flashNotif.innerHTML = title + '<span class="flash-sub">' + subtitle + '</span>';
+    flashNotif.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+    flashNotif.style.boxShadow  = `0 0 80px ${color1}99, 0 0 160px ${color1}44`;
+    flashNotif.classList.add('show');
+    if (flashTimeout) clearTimeout(flashTimeout);
+    flashTimeout = setTimeout(() => flashNotif.classList.remove('show'), 4000);
+}
+
+// ─── INITIALISATION ─────────────────────────────────────
+readDurations();
+updateDisplay();
+    </script>
+</body>
+</html>
