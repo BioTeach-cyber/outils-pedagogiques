@@ -118,6 +118,23 @@
     "auteur": "Vincent APREMONT"
   },
     {
+    "id": "application-005",
+    "categorie": "Applications",
+    "titre": "Tableau de conversion",
+    "description": "Un outil qui permet faire de multiples convertions simple.",
+    "discipline": ["Mathématiques","Physique","Chimie"],
+    "module": ["EG1","MG1"],
+    "public": "",
+    "formation": ["Collège","Bac Pro SAPAT"],
+    "tags": [],
+    "url": "Physique-Chimie/tableau-conversion.html",
+    "icone": "assets/icones/Tableau-conversion.gif",
+    "image": "https://amedenfant.fr/wp-content/uploads/2025/06/mesures-et-grandeurs-tableau-de-conversion-fiche-maths.png",
+    "statut": "",
+    "date_creation": "",
+    "auteur": "Vincent APREMONT"
+  },
+  {
     "id": "",
     "categorie": "",
     "titre": "",

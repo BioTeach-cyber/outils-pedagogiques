@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tableau de conversion</title>
+  <style>
+    /* ===== VARIABLES DE COULEURS ===== */
+    :root {
+      --bleu: #53a4db;
+      --vert: #7fbc48;
+      --violet: #a6539b;
+      --orange: #f3912b;
+      --gris: #b7b7b7;
+      --rouge: #e62d32;
+      --rose: #ee7bab;
+      --jaune: #f4d32e;
+      --marron: #a5706c;
+      --noir: #494949;
+      --fond: #ffffff;
+      --bleu-clair: #dceef9;
+      --vert-clair: #e8f5d8;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: var(--fond);
+      color: var(--noir);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 2rem;
+    }
+
+    /* ===== EN-TÊTE ===== */
+    header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    header h1 {
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      color: var(--bleu);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      color: var(--gris);
+      margin-top: 0.3rem;
+    }
+
+    /* ===== SÉLECTEUR D'UNITÉ ===== */
+    .selecteur-zone {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .selecteur-zone label {
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      font-weight: 600;
+      color: var(--noir);
+    }
+
+    #selecteur-unite {
+      padding: 0.5rem 1rem;
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      border: 2px solid var(--bleu);
+      border-radius: 8px;
+      background-color: var(--fond);
+      color: var(--noir);
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #selecteur-unite:focus {
+      border-color: var(--vert);
+    }
+
+    /* ===== BOUTON RESET ===== */
+    #btn-reset {
+      padding: 0.5rem 1.1rem;
+      font-size: 0.95rem;
+      background-color: var(--gris);
+      color: var(--fond);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    #btn-reset:hover {
+      background-color: var(--rouge);
+      transform: scale(1.04);
+    }
+
+    /* ===== ZONE PRINCIPALE DU TABLEAU ===== */
+    main {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    /* ===== TABLEAU DE CONVERSION ===== */
+    .tableau-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(83, 164, 219, 0.13);
+    }
+
+    .tableau {
+      display: flex;
+      min-width: 560px;
+      width: 100%;
+    }
+
+    /* Chaque colonne du tableau */
+    .colonne {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-left: 1px solid #e0e8f0;
+      position: relative;
+    }
+
+    .colonne:first-child {
+      border-left: none;
+    }
+
+    /* En-tête de colonne : préfixe */
+    .col-prefixe {
+      width: 100%;
+      text-align: center;
+      padding: 0.55rem 0.2rem 0.4rem;
+      font-size: clamp(0.75rem, 2vw, 0.95rem);
+      font-weight: 700;
+      color: var(--fond);
+      background-color: var(--bleu);
+      letter-spacing: 0.3px;
+    }
+
+    /* La colonne "unité de base" a un style différent */
+    .colonne.unite-base .col-prefixe {
+      background-color: var(--vert);
+    }
+
+    /* Sous-titre : symbole du préfixe */
+    .col-symbole {
+      width: 100%;
+      text-align: center;
+      padding: 0.25rem 0.1rem;
+      font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+      color: var(--bleu);
+      background-color: var(--bleu-clair);
+      font-weight: 600;
+      min-height: 1.6rem;
+    }
+
+    .colonne.unite-base .col-symbole {
+      color: var(--vert);
+      background-color: var(--vert-clair);
+    }
+
+    /* Cellule de saisie */
+    .col-cellule {
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--fond);
+      border-top: 2px solid #e0e8f0;
+      min-height: 70px;
+    }
+
+    .col-cellule input {
+      width: 100%;
+      height: 70%;
+      min-height: unset;
+      text-align: center;
+      font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+      font-weight: 700;
+      color: var(--noir);
+      border: none;
+      outline: none;
+      background: transparent;
+      caret-color: var(--bleu);
+      padding: 0.2rem;
+    }
+
+    /* Virgule affichée à droite d'une cellule */
+    .virgule {
+      position: absolute;
+      right: -0.18rem;
+      bottom: 0.18rem;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 900;
+      color: var(--rouge);
+      pointer-events: none;
+      z-index: 2;
+      line-height: 1;
+      transition: all 0.25s ease;
+    }
+
+    /* Colonne avec la virgule : léger fond rosé */
+    .colonne.has-virgule .col-cellule {
+      background-color: #fff3f3;
+    }
+
+    /* Zéro ajouté automatiquement */
+    .col-cellule input.zero-auto {
+      color: var(--gris);
+    }
+
+    /* ===== BOUTONS DE DÉPLACEMENT ===== */
+    .boutons-deplacement {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-deplacement {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.5rem;
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .btn-deplacement:active {
+      transform: scale(0.96);
+    }
+
+    #btn-gauche {
+      background-color: var(--vert);
+      color: var(--fond);
+    }
+
+    #btn-gauche:hover {
+      background-color: #6aaa38;
+      box-shadow: 0 5px 14px rgba(127, 188, 72, 0.35);
+    }
+
+    #btn-droite {
+      background-color: var(--orange);
+      color: var(--fond);
+    }
+
+    #btn-droite:hover {
+      background-color: #d97d1e;
+      box-shadow: 0 5px 14px rgba(243, 145, 43, 0.35);
+    }
+
+    .btn-icone {
+      font-size: 1.3rem;
+    }
+
+    /* ===== INDICATEUR DE RÉSULTAT ===== */
+    .resultat-zone {
+      background-color: var(--bleu-clair);
+      border-left: 5px solid var(--bleu);
+      border-radius: 8px;
+      padding: 0.8rem 1.2rem;
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      color: var(--noir);
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      min-height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .resultat-valeur {
+      font-weight: 700;
+      color: var(--bleu);
+      font-size: clamp(1rem, 3vw, 1.2rem);
+    }
+
+    .resultat-unite {
+      font-weight: 700;
+      color: var(--vert);
+    }
+
+    /* ===== AIDE ===== */
+    .aide {
+      font-size: clamp(0.75rem, 2vw, 0.88rem);
+      color: var(--gris);
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.5;
+      margin-top: 0.3rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .boutons-deplacement {
+        gap: 0.8rem;
+      }
+
+      .btn-deplacement {
+        padding: 0.55rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== EN-TÊTE ===== -->
+  <header>
+    <h1>📏 Tableau de conversion</h1>
+    <p>Saisis tes chiffres puis déplace la virgule</p>
+  </header>
+
+  <!-- ===== SÉLECTEUR D'UNITÉ ===== -->
+  <div class="selecteur-zone">
+    <label for="selecteur-unite">Unité :</label>
+    <select id="selecteur-unite" aria-label="Choisir une unité">
+      <option value="m">Mètre (m)</option>
+      <option value="g">Gramme (g)</option>
+      <option value="L">Litre (L)</option>
+      <option value="V">Volt (V)</option>
+      <option value="A">Ampère (A)</option>
+      <option value="Ω">Ohm (Ω)</option>
+      <option value="W">Watt (W)</option>
+      <option value="J">Joule (J)</option>
+      <option value="N">Newton (N)</option>
+    </select>
+    <button id="btn-reset" aria-label="Effacer le tableau">🗑️ Effacer</button>
+  </div>
+
+  <!-- ===== ZONE PRINCIPALE ===== -->
+  <main>
+
+    <!-- Tableau de colonnes -->
+    <div class="tableau-wrapper" role="region" aria-label="Tableau de conversion">
+      <div class="tableau" id="tableau">
+        <!-- Les colonnes sont générées par JavaScript -->
+      </div>
+    </div>
+
+    <!-- Boutons de déplacement de la virgule -->
+    <div class="boutons-deplacement">
+      <button class="btn-deplacement" id="btn-gauche" aria-label="Déplacer la virgule vers la gauche">
+        <span class="btn-icone">⬅️</span>
+        <span>Virgule à gauche</span>
+      </button>
+      <button class="btn-deplacement" id="btn-droite" aria-label="Déplacer la virgule vers la droite">
+        <span>Virgule à droite</span>
+        <span class="btn-icone">➡️</span>
+      </button>
+    </div>
+
+    <!-- Résultat lisible -->
+    <div class="resultat-zone" id="resultat-zone" aria-live="polite">
+      <span>Saisis des chiffres dans le tableau pour commencer ✏️</span>
+    </div>
+
+    <!-- Aide -->
+    <p class="aide">
+      💡 Écris un seul chiffre (0 à 9) par case · La virgule se place automatiquement après l'unité de base ·
+      Les cases grises sont des zéros ajoutés automatiquement
+    </p>
+
+  </main>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    "use strict";
+
+    /* =========================================================
+       DONNÉES DES COLONNES
+       Ordre : kilo → milli (index 0 à 6)
+       La virgule se place à droite de la colonne index 3 (unité)
+    ========================================================= */
+    const COLONNES = [
+      { prefixe: "kilo",   symbole: "k",  exposant: "× 10³"  },
+      { prefixe: "hecto",  symbole: "h",  exposant: "× 10²"  },
+      { prefixe: "déca",   symbole: "da", exposant: "× 10¹"  },
+      { prefixe: "unité",  symbole: "",   exposant: "× 10⁰"  },
+      { prefixe: "déci",   symbole: "d",  exposant: "× 10⁻¹" },
+      { prefixe: "centi",  symbole: "c",  exposant: "× 10⁻²" },
+      { prefixe: "milli",  symbole: "m",  exposant: "× 10⁻³" },
+    ];
+
+    // Index de la colonne "unité de base"
+    const INDEX_UNITE = 3;
+
+    // Position actuelle de la virgule (entre la colonne virgulePos et la suivante)
+    let virgulePos = INDEX_UNITE; // démarre après la colonne "unité"
+
+    // Valeurs saisies dans chaque colonne (null = vide)
+    let valeurs = new Array(COLONNES.length).fill(null);
+
+    // Référence à l'unité choisie
+    let uniteActuelle = "m";
+
+    /* =========================================================
+       CONSTRUCTION DU TABLEAU HTML
+    ========================================================= */
+    function construireTableau() {
+      const tableau = document.getElementById("tableau");
+      tableau.innerHTML = "";
+
+      COLONNES.forEach((col, index) => {
+        // Créer la colonne
+        const colDiv = document.createElement("div");
+        colDiv.classList.add("colonne");
+        colDiv.setAttribute("id", `col-${index}`);
+
+        // Marquer la colonne "unité de base"
+        if (index === INDEX_UNITE) {
+          colDiv.classList.add("unite-base");
+        }
+
+        // En-tête : nom du préfixe
+        const prefixeDiv = document.createElement("div");
+        prefixeDiv.classList.add("col-prefixe");
+
+        // Pour la colonne unité : afficher le nom de l'unité choisie
+        if (index === INDEX_UNITE) {
+          prefixeDiv.textContent = uniteActuelle;
+        } else {
+          prefixeDiv.textContent = col.prefixe;
+        }
+
+        // Sous-titre : symbole + unité
+        const symboleDiv = document.createElement("div");
+        symboleDiv.classList.add("col-symbole");
+        if (index === INDEX_UNITE) {
+          symboleDiv.textContent = uniteActuelle;
+        } else {
+          symboleDiv.textContent = col.symbole + uniteActuelle;
+        }
+
+        // Cellule de saisie
+        const celluleDiv = document.createElement("div");
+        celluleDiv.classList.add("col-cellule");
+
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("inputmode", "numeric");
+        input.setAttribute("maxlength", "1");
+        input.setAttribute("aria-label", `Chiffre pour ${col.prefixe}${uniteActuelle}`);
+        input.setAttribute("id", `input-${index}`);
+        input.setAttribute("placeholder", "0");
+
+        // Restaurer la valeur si elle existe
+        if (valeurs[index] !== null) {
+          input.value = valeurs[index];
+          if (valeurs[index] === "0" && estZeroAuto(index)) {
+            input.classList.add("zero-auto");
+          }
+        }
+
+        // Événement de saisie
+        input.addEventListener("input", (e) => gererSaisie(e, index));
+        input.addEventListener("keydown", (e) => gererNavigation(e, index));
+
+        // La virgule est affichée à droite de la colonne virgulePos
+        const virguleSpan = document.createElement("span");
+        virguleSpan.classList.add("virgule");
+        virguleSpan.setAttribute("id", `virgule-${index}`);
+        virguleSpan.textContent = ",";
+
+        celluleDiv.appendChild(input);
+        celluleDiv.appendChild(virguleSpan);
+
+        colDiv.appendChild(prefixeDiv);
+        colDiv.appendChild(symboleDiv);
+        colDiv.appendChild(celluleDiv);
+
+        tableau.appendChild(colDiv);
+      });
+
+      // Mettre à jour l'affichage de la virgule
+      mettreAJourVirgule();
+      mettreAJourResultat();
+    }
+
+    /* =========================================================
+       GESTION DE LA SAISIE
+    ========================================================= */
+    function gererSaisie(e, index) {
+      const input = e.target;
+      let val = input.value;
+
+      // Garder uniquement le dernier caractère saisi
+      if (val.length > 1) {
+        val = val.slice(-1);
+      }
+
+      // N'accepter que les chiffres 0-9
+      if (val !== "" && !/^[0-9]$/.test(val)) {
+        input.value = valeurs[index] !== null ? valeurs[index] : "";
+        return;
+      }
+
+      // Mettre à jour la valeur
+      valeurs[index] = val === "" ? null : val;
+      input.value = val;
+
+      // Retirer la classe zero-auto car c'est une saisie manuelle
+      input.classList.remove("zero-auto");
+
+      mettreAJourResultat();
+
+      // Passer automatiquement à la colonne suivante si un chiffre est saisi
+      if (val !== "" && index < COLONNES.length - 1) {
+        document.getElementById(`input-${index + 1}`).focus();
+      }
+    }
+
+    /* =========================================================
+       NAVIGATION AU CLAVIER (flèches)
+    ========================================================= */
+    function gererNavigation(e, index) {
+      if (e.key === "ArrowRight" && index < COLONNES.length - 1) {
+        e.preventDefault();
+        document.getElementById(`input-${index + 1}`).focus();
+      }
+      if (e.key === "ArrowLeft" && index > 0) {
+        e.preventDefault();
+        document.getElementById(`input-${index - 1}`).focus();
+      }
+      if (e.key === "Backspace" && (valeurs[index] === null || valeurs[index] === "") && index > 0) {
+        e.preventDefault();
+        valeurs[index] = null;
+        document.getElementById(`input-${index - 1}`).focus();
+      }
+    }
+
+    /* =========================================================
+       DÉPLACEMENT DE LA VIRGULE
+    ========================================================= */
+    function deplacerVirgule(direction) {
+      // direction : -1 = gauche, +1 = droite
+      const nouvellePos = virgulePos + direction;
+
+      // Limites : la virgule reste dans le tableau (0 à 6)
+      if (nouvellePos < 0 || nouvellePos > COLONNES.length - 1) return;
+
+      virgulePos = nouvellePos;
+
+      // Remplir de zéros automatiques les cases vides selon la position
+      completerZeros();
+      mettreAJourVirgule();
+      mettreAJourResultat();
+    }
+
+    /* =========================================================
+       MISE À JOUR VISUELLE DE LA VIRGULE
+    ========================================================= */
+    function mettreAJourVirgule() {
+      COLONNES.forEach((col, index) => {
+        const colDiv = document.getElementById(`col-${index}`);
+        const virguleSpan = document.getElementById(`virgule-${index}`);
+
+        // Afficher la virgule uniquement sur la colonne virgulePos
+        if (index === virgulePos) {
+          virguleSpan.style.display = "block";
+          colDiv.classList.add("has-virgule");
+        } else {
+          virguleSpan.style.display = "none";
+          colDiv.classList.remove("has-virgule");
+        }
+      });
+    }
+
+    /* =========================================================
+       COMPLÉTER AVEC DES ZÉROS AUTOMATIQUES
+       Logique : on regarde où se trouvent les chiffres saisis
+       et on complète entre eux et la virgule si nécessaire.
+    ========================================================= */
+    function completerZeros() {
+      // Trouver le premier et le dernier chiffre saisi manuellement
+      let premierChiffre = -1;
+      let dernierChiffre = -1;
+
+      valeurs.forEach((val, i) => {
+        if (val !== null && val !== "" && !estZeroAuto(i)) {
+          if (premierChiffre === -1) premierChiffre = i;
+          dernierChiffre = i;
+        }
+      });
+
+      // Si aucun chiffre saisi, on ne fait rien
+      if (premierChiffre === -1) return;
+
+      // Remplir de zéros entre le dernier chiffre et la virgule si la virgule est à droite
+      if (virgulePos >= dernierChiffre) {
+        for (let i = dernierChiffre + 1; i <= virgulePos; i++) {
+          if (valeurs[i] === null || valeurs[i] === "") {
+            valeurs[i] = "0";
+            const input = document.getElementById(`input-${i}`);
+            if (input) {
+              input.value = "0";
+              input.classList.add("zero-auto");
+            }
+          }
+        }
+      }
+
+      // Remplir de zéros entre la virgule et le premier chiffre si la virgule est à gauche
+      if (virgulePos < premierChiffre) {
+        for (let i = virgulePos + 1; i < premierChiffre; i++) {
+          if (valeurs[i] === null || valeurs[i] === "") {
+            valeurs[i] = "0";
+            const input = document.getElementById(`input-${i}`);
+            if (input) {
+              input.value = "0";
+              input.classList.add("zero-auto");
+            }
+          }
+        }
+      }
+
+      // Remplir les zéros entre le premier et le dernier chiffre saisi
+      for (let i = premierChiffre; i <= dernierChiffre; i++) {
+        if (valeurs[i] === null || valeurs[i] === "") {
+          valeurs[i] = "0";
+          const input = document.getElementById(`input-${i}`);
+          if (input) {
+            input.value = "0";
+            input.classList.add("zero-auto");
+          }
+        }
+      }
+    }
+
+    /* =========================================================
+       DÉTECTER SI UN ZÉRO EST AUTOMATIQUE
+       (méthode simplifiée basée sur la classe CSS de l'input)
+    ========================================================= */
+    function estZeroAuto(index) {
+      const input = document.getElementById(`input-${index}`);
+      return input ? input.classList.contains("zero-auto") : false;
+    }
+
+    /* =========================================================
+       MISE À JOUR DU RÉSULTAT LISIBLE
+    ========================================================= */
+    function mettreAJourResultat() {
+      const resultatZone = document.getElementById("resultat-zone");
+
+      // Construire la chaîne de chiffres
+      let partieEntiere = "";
+      let partieDecimale = "";
+
+      for (let i = 0; i <= virgulePos; i++) {
+        const val = valeurs[i];
+        partieEntiere += (val !== null && val !== "") ? val : "0";
+      }
+
+      for (let i = virgulePos + 1; i < COLONNES.length; i++) {
+        const val = valeurs[i];
+        partieDecimale += (val !== null && val !== "") ? val : "0";
+      }
+
+      // Supprimer les zéros inutiles en début de partie entière
+      partieEntiere = partieEntiere.replace(/^0+(?=\d)/, "") || "0";
+
+      // Supprimer les zéros inutiles en fin de partie décimale
+      partieDecimale = partieDecimale.replace(/0+$/, "");
+
+      // Vérifier s'il y a des chiffres significatifs
+      const aDesDonnees = valeurs.some(v => v !== null && v !== "");
+
+      if (!aDesDonnees) {
+        resultatZone.innerHTML = "<span>Saisis des chiffres dans le tableau pour commencer ✏️</span>";
+        return;
+      }
+
+      // Construire la valeur affichée
+      let valeurAffichee = partieEntiere;
+      if (partieDecimale !== "") {
+        valeurAffichee += "," + partieDecimale;
+      }
+
+      // Déterminer l'unité correspondant à la position de la virgule
+      const uniteColonne = COLONNES[virgulePos];
+      let symboleUnite;
+      if (virgulePos === INDEX_UNITE) {
+        symboleUnite = uniteActuelle;
+      } else {
+        symboleUnite = uniteColonne.symbole + uniteActuelle;
+      }
+
+      resultatZone.innerHTML =
+        `<span>Valeur lue : </span>` +
+        `<span class="resultat-valeur">${valeurAffichee}</span>` +
+        `<span class="resultat-unite">&nbsp;${symboleUnite}</span>`;
+    }
+
+    /* =========================================================
+       REMISE À ZÉRO
+    ========================================================= */
+    function reinitialiser() {
+      valeurs = new Array(COLONNES.length).fill(null);
+      virgulePos = INDEX_UNITE;
+      construireTableau();
+    }
+
+    /* =========================================================
+       CHANGEMENT D'UNITÉ
+    ========================================================= */
+    function changerUnite() {
+      uniteActuelle = document.getElementById("selecteur-unite").value;
+      reinitialiser();
+    }
+
+    /* =========================================================
+       INITIALISATION DES ÉVÉNEMENTS
+    ========================================================= */
+    document.getElementById("selecteur-unite").addEventListener("change", changerUnite);
+    document.getElementById("btn-reset").addEventListener("click", reinitialiser);
+    document.getElementById("btn-gauche").addEventListener("click", () => deplacerVirgule(-1));
+    document.getElementById("btn-droite").addEventListener("click", () => deplacerVirgule(1));
+
+    // Lancement de l'application
+    construireTableau();
+
+  </script>
+</body>
+</html>
