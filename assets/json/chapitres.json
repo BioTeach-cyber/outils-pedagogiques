@@ -1,0 +1,275 @@
+{
+  "biologie": [
+    {
+      "id": "bio-01",
+      "titre": "Infections résistantes : le quotidien peut-il devenir dangereux ?",
+      "objectifs": [
+        "Définir la notion de bactérie résistante.",
+        "Expliquer les mécanismes de la résistance aux antibiotiques.",
+        "Identifier les sources de contamination courantes dans le quotidien.",
+        "Analyser les facteurs favorisant la prolifération des bactéries résistantes.",
+        "Appliquer des techniques de nettoyage et de désinfection adéquates.",
+        "Évaluer l'efficacité des gestes barrières en milieu domestique.",
+        "Interpréter des situations professionnelles liées aux infections résistantes.",
+        "Proposer des mesures de prise en charge adaptées.",
+        "Concevoir un support de sensibilisation sur les infections résistantes.",
+        "Évaluer l'impact d'une action de prévention auprès d'un public cible."
+      ]
+    },
+    {
+      "id": "bio-02",
+      "titre": "Après l'AVC : comment retrouver des gestes essentiels ?",
+      "objectifs": [
+        "Identifier les symptômes cliniques évocateurs d'un AVC.",
+        "Expliquer les mécanismes physiopathologiques sous-jacents à l'AVC.",
+        "Classifier les différents types d'AVC (ischémique, hémorragique).",
+        "Appliquer la procédure d'alerte médicale en cas de suspicion d'AVC.",
+        "Démontrer les gestes de positionnement et de maintien des fonctions vitales.",
+        "Évaluer l'état neurologique et hémodynamique de la personne à l'aide de repères simples.",
+        "Élaborer un plan d'accompagnement personnalisé post-AVC.",
+        "Adapter l'environnement et les aides techniques pour favoriser l'autonomie.",
+        "Mettre en place des stratégies de prévention des complications secondaires (escarres, chutes)."
+      ]
+    },
+    {
+      "id": "bio-03",
+      "titre": "Douleur et fracture : comment accompagner sans aggraver ?",
+      "objectifs": [
+        "Définir les différents types de douleur selon leur origine et leur durée.",
+        "Classifier les mécanismes physiologiques impliqués dans la transmission de la douleur.",
+        "Expliquer le rôle des neurones et des voies nerveuses dans la perception de la douleur.",
+        "Analyser le trajet de l'influx nociceptif de la périphérie jusqu'au cortex.",
+        "Utiliser des outils d'évaluation de la douleur (échelles verbales, visuelles, comportementales).",
+        "Interpréter les résultats pour adapter l'accompagnement.",
+        "Différencier les types de fractures (simple, multiple, ouverte, déplacée).",
+        "Expliquer les signes cliniques et radiologiques d'une fracture.",
+        "Concevoir un protocole de prévention des chutes et des traumatismes osseux dans un contexte professionnel.",
+        "Proposer des aménagements de l'environnement pour réduire le risque de douleurs et de fractures."
+      ]
+    },
+    {
+      "id": "bio-04",
+      "titre": "Addiction : peut-on réapprendre à vivre avec son corps ?",
+      "objectifs": [
+        "Distinguer les différents types d'addiction, qu'elles soient liées à des substances ou à des comportements.",
+        "Décrire les modes d'action physiologique de ces substances ou comportements.",
+        "Expliquer les mécanismes neurobiologiques de la dépendance.",
+        "Analyser les facteurs de risque individuels et environnementaux.",
+        "Décrire les effets à court et à long terme sur les différents systèmes organiques.",
+        "Évaluer les conséquences somatiques et psychiques chez la personne accompagnée.",
+        "Élaborer des stratégies de prévention adaptées au contexte des services à la personne.",
+        "Proposer des actions d'accompagnement favorisant le sevrage et la réduction des risques.",
+        "Concevoir des supports de prévention adaptés aux publics des services à la personne.",
+        "Adapter le message et la stratégie de diffusion en fonction des contextes d'intervention."
+      ]
+    },
+    {
+      "id": "bio-05",
+      "titre": "Diabète : une maladie invisible mais bien présente ?",
+      "objectifs": [
+        "Définir les différents types de diabète.",
+        "Analyser les mécanismes physiopathologiques de la régulation glycémique.",
+        "Comparer les caractéristiques cliniques et biologiques des diabètes de type 1 et 2.",
+        "Mettre en œuvre le protocole de mesure de la glycémie capillaire.",
+        "Interpréter les résultats glycémiques dans un contexte de suivi.",
+        "Justifier les adaptations thérapeutiques à partir des données de glycémie.",
+        "Concevoir un plan alimentaire adapté à un patient diabétique.",
+        "Expliquer l'impact des conseils hygiéno-diététiques sur l'équilibre glycémique.",
+        "Élaborer des recommandations personnalisées pour l'activité physique quotidienne."
+      ]
+    },
+    {
+      "id": "bio-06",
+      "titre": "Sclérose en plaques : comment s'adapter à une maladie imprévisible ?",
+      "objectifs": [
+        "Définir la sclérose en plaques et ses grandes caractéristiques.",
+        "Identifier les facteurs de risque et les populations concernées.",
+        "Décrire la composition et l'organisation du système nerveux central et périphérique.",
+        "Expliquer le rôle de la transmission synaptique dans la conduction de l'influx nerveux.",
+        "Expliquer le mécanisme de la démyélinisation et son impact sur la conduction nerveuse.",
+        "Décrire les changements cellulaires et tissulaires observés dans la maladie.",
+        "Classer les symptômes moteurs, sensitifs et cognitifs de la sclérose en plaques.",
+        "Analyser l'impact de ces symptômes sur la réalisation des actes de la vie quotidienne.",
+        "Proposer des aménagements et aides techniques pour faciliter les transferts et la mobilité.",
+        "Mettre en œuvre des gestes professionnels adaptés aux troubles moteurs et sensitifs."
+      ]
+    },
+    {
+      "id": "bio-07",
+      "titre": "Escarre : peut-on vraiment éviter les plaies de l'immobilité ?",
+      "objectifs": [
+        "Expliquer les mécanismes physiopathologiques conduisant à la formation d'une escarre.",
+        "Décrire les altérations tissulaires selon les différents stades lésionnels.",
+        "Relier les processus inflammatoires et circulatoires à l'évolution des lésions cutanées.",
+        "Identifier les facteurs de risque d'apparition d'une escarre.",
+        "Classifier les stades d'évolution des lésions cutanées.",
+        "Évaluer l'impact des conditions de vie sur la survenue d'une escarre.",
+        "Appliquer les techniques de mobilisation et de repositionnement adaptées.",
+        "Mettre en œuvre un protocole de prévention des escarres.",
+        "Contrôler régulièrement l'état cutané et détecter les premiers signes."
+      ]
+    },
+    {
+      "id": "bio-08",
+      "titre": "Vaccination : pourquoi se protéger quand on est déjà vulnérable ?",
+      "objectifs": [
+        "Analyser les épidémies à travers l'Histoire.",
+        "Raconter l'histoire des premiers vaccins.",
+        "Identifier les acteurs clés du système immunitaire.",
+        "Expliquer les réponses immunitaires lors d'une infection.",
+        "Expliquer le mécanisme d'action d'un vaccin.",
+        "Comparer les différents types de vaccins.",
+        "Évaluer les effets secondaires des vaccins.",
+        "Justifier l'importance de la vaccination dans les actes essentiels de la vie quotidienne.",
+        "Mettre en œuvre un suivi du calendrier vaccinal.",
+        "Élaborer une communication adaptée pour informer l'usager sur les vaccins."
+      ]
+    },
+    {
+      "id": "bio-09",
+      "titre": "Rougeurs, pleurs, inconfort : comment réagir face à un érythème fessier ?",
+      "objectifs": [
+        "Identifier les signes cliniques et les stades de l'érythème fessier.",
+        "Expliquer les mécanismes physiopathologiques en cause.",
+        "Classer les facteurs de risque selon leur degré d'influence.",
+        "Sélectionner des produits et des matériaux adaptés à la prévention.",
+        "Mettre en œuvre une routine d'hygiène et de change sécurisée.",
+        "Élaborer un protocole de surveillance des rougeurs.",
+        "Concevoir un plan de soins individualisé pour apaiser les rougeurs.",
+        "Évaluer l'efficacité des interventions et ajuster les pratiques.",
+        "Communiquer clairement les recommandations aux parents et à l'équipe."
+      ]
+    },
+    {
+      "id": "bio-10",
+      "titre": "Perdre la mémoire : une fatalité du grand âge ?",
+      "objectifs": [
+        "Décrire les principaux mécanismes physiopathologiques de la maladie d'Alzheimer.",
+        "Identifier les facteurs de risque associés à cette pathologie.",
+        "Reconnaître les symptômes cognitifs et comportementaux précoces.",
+        "Classifier les différents stades d'évolution de la maladie.",
+        "Proposer des aménagements de l'espace adaptés aux troubles mnésiques.",
+        "Adapter les activités quotidiennes pour préserver l'autonomie.",
+        "Mettre en œuvre des techniques de communication verbale et non verbale adaptées.",
+        "Évaluer l'impact des troubles du langage sur l'échange et ajuster son discours.",
+        "Catégoriser les traitements pharmacologiques.",
+        "Proposer des mesures non pharmacologiques."
+      ]
+    }
+  ],
+  "esf": [
+    {
+      "id": "esf-01",
+      "titre": "Bébé : Habillage / Déshabillage",
+      "objectifs": [
+        "Identifier les différents types de vêtements adaptés au nourrisson selon la saison et la morphologie.",
+        "Appliquer les techniques d'habillage et de déshabillage en respectant le confort et la sécurité du bébé.",
+        "Justifier l'ordre des étapes lors de l'habillage et du déshabillage d'un nourrisson."
+      ]
+    },
+    {
+      "id": "esf-02",
+      "titre": "Bain du bébé",
+      "objectifs": [
+        "Identifier les conditions de sécurité et d'hygiène nécessaires à la réalisation du bain.",
+        "Préparer le matériel et l'environnement avant de donner le bain au bébé.",
+        "Appliquer la technique du bain en respectant les règles de sécurité et le bien-être du nourrisson.",
+        "Évaluer les risques liés à une mauvaise pratique du bain."
+      ]
+    },
+    {
+      "id": "esf-03",
+      "titre": "Portage du bébé",
+      "objectifs": [
+        "Identifier les différentes techniques de portage d'un nourrisson.",
+        "Appliquer les positions de portage sécurisées en tenant compte du développement physiologique du bébé.",
+        "Justifier l'importance d'un portage adapté pour le développement psychomoteur du nourrisson."
+      ]
+    },
+    {
+      "id": "esf-04",
+      "titre": "Biberon",
+      "objectifs": [
+        "Identifier les différents types de lait infantile et leur usage selon l'âge du bébé.",
+        "Préparer un biberon dans le respect des règles d'hygiène et des dosages recommandés.",
+        "Appliquer la technique de la prise du biberon en respectant le confort et la sécurité du nourrisson.",
+        "Évaluer les risques liés à une mauvaise préparation ou administration du biberon."
+      ]
+    },
+    {
+      "id": "esf-05",
+      "titre": "Change du bébé",
+      "objectifs": [
+        "Identifier le matériel nécessaire au change d'un nourrisson.",
+        "Appliquer la technique du change en respectant les règles d'hygiène et la sécurité du bébé.",
+        "Distinguer les signes d'irritation cutanée pouvant nécessiter une attention particulière.",
+        "Justifier la fréquence et l'importance du change pour le bien-être du nourrisson."
+      ]
+    },
+    {
+      "id": "esf-06",
+      "titre": "Transfert",
+      "objectifs": [
+        "Identifier les différentes situations nécessitant un transfert de personne.",
+        "Appliquer les techniques de transfert en respectant les principes de sécurité pour la personne aidée et pour l'aidant.",
+        "Justifier l'importance des gestes et postures adaptés lors d'un transfert pour prévenir les accidents."
+      ]
+    },
+    {
+      "id": "esf-07",
+      "titre": "Aide à la marche",
+      "objectifs": [
+        "Identifier les situations nécessitant une aide à la marche.",
+        "Appliquer les techniques d'aide à la marche en garantissant la sécurité et l'autonomie de la personne.",
+        "Adapter son positionnement et ses gestes en fonction des capacités motrices de la personne accompagnée.",
+        "Justifier l'importance de préserver l'autonomie de la personne lors de l'aide à la marche."
+      ]
+    },
+    {
+      "id": "esf-08",
+      "titre": "Réfection du lit vide",
+      "objectifs": [
+        "Identifier le matériel nécessaire à la réfection d'un lit vide.",
+        "Appliquer la technique de réfection du lit vide en respectant les règles d'hygiène.",
+        "Justifier l'importance d'un lit propre et bien fait pour le confort et le bien-être de la personne."
+      ]
+    },
+    {
+      "id": "esf-09",
+      "titre": "Réfection du lit occupé",
+      "objectifs": [
+        "Identifier les précautions à prendre lors de la réfection d'un lit occupé.",
+        "Appliquer la technique de réfection du lit occupé en respectant le confort et la sécurité de la personne.",
+        "Justifier les gestes professionnels mis en œuvre pour préserver la dignité et le bien-être de la personne."
+      ]
+    },
+    {
+      "id": "esf-10",
+      "titre": "Toilette de l'adulte",
+      "objectifs": [
+        "Identifier le matériel et les produits nécessaires à la toilette d'un adulte.",
+        "Appliquer la technique de la toilette en respectant l'hygiène, la pudeur et le confort de la personne.",
+        "Adapter les gestes selon l'autonomie et les besoins spécifiques de la personne accompagnée.",
+        "Justifier l'importance de la toilette dans le maintien de la santé et du bien-être."
+      ]
+    },
+    {
+      "id": "esf-11",
+      "titre": "Massage des mains",
+      "objectifs": [
+        "Identifier les bienfaits du massage des mains sur le bien-être de la personne.",
+        "Appliquer les techniques de base du massage des mains en respectant le confort de la personne.",
+        "Justifier l'importance du toucher relationnel dans la création d'un lien avec la personne accompagnée."
+      ]
+    },
+    {
+      "id": "esf-12",
+      "titre": "Effleurage du coude",
+      "objectifs": [
+        "Identifier les zones et techniques d'effleurage adaptées.",
+        "Appliquer la technique d'effleurage du coude en respectant le confort de la personne.",
+        "Justifier l'intérêt de l'effleurage dans la prévention des escarres et le bien-être de la personne."
+      ]
+    }
+  ]
+}

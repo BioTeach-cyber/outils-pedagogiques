@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Préparation ECCF - Bac Pro SAPAT</title>
+<!-- Bibliothèques pour interpréter le Markdown en toute sécurité -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<style>
+/* ============ VARIABLES ============ */
+:root {
+  --bleu: #53a4db;
+  --vert: #7fbc48;
+  --violet: #a6539b;
+  --orange: #f3912b;
+  --gris: #b7b7b7;
+  --rouge: #e62d32;
+  --rose: #ee7bab;
+  --jaune: #f4d32e;
+  --marron: #a5706c;
+  --noir: #494949;
+  --fond: #ffffff;
+  --gris-clair: #f4f4f4;
+}
+
+/* ============ BASE ============ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--fond);
+  color: var(--noir);
+  font-size: 16px;
+  line-height: 1.5;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+/* ============ ÉCRANS ============ */
+.ecran { display: none; flex: 1; flex-direction: column; }
+.ecran.actif { display: flex; }
+
+/* ============ HEADER ============ */
+header {
+  text-align: center;
+  padding: 1rem 0 1.5rem;
+  border-bottom: 3px solid var(--vert);
+  margin-bottom: 1.5rem;
+}
+header h1 {
+  color: var(--vert);
+  font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+  margin-bottom: 0.3rem;
+}
+header p { color: var(--noir); font-size: 0.95rem; }
+
+/* ============ FORMULAIRES ============ */
+.bloc-config {
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.champ { display: flex; flex-direction: column; gap: 0.4rem; }
+.champ label {
+  font-weight: 600;
+  color: var(--noir);
+  font-size: 1rem;
+}
+.champ select {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--gris);
+  border-radius: 8px;
+  background: var(--fond);
+  color: var(--noir);
+  cursor: pointer;
+  font-family: inherit;
+}
+.champ select:focus { outline: none; border-color: var(--vert); }
+
+/* ============ BOUTONS ============ */
+.btn {
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.1s, opacity 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-principal { background: var(--vert); color: white; }
+.btn-secondaire { background: var(--bleu); color: white; }
+.btn-orange { background: var(--orange); color: white; }
+.btn-gris { background: var(--gris-clair); color: var(--noir); }
+
+/* ============ ÉCRAN MODE ============ */
+.bloc-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+.carte-mode {
+  background: var(--fond);
+  border: 3px solid var(--gris);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.carte-mode:hover { border-color: var(--vert); transform: translateY(-3px); }
+.carte-mode .icone { font-size: 3rem; margin-bottom: 0.8rem; }
+.carte-mode h3 { color: var(--vert); margin-bottom: 0.5rem; font-size: 1.2rem; }
+.carte-mode p { font-size: 0.95rem; color: var(--noir); }
+
+/* ============ CONTEXTE / CHAT ============ */
+.zone-contexte {
+  background: var(--gris-clair);
+  border-left: 5px solid var(--bleu);
+  padding: 1.2rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  max-width: 900px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.zone-contexte h2 { color: var(--bleu); margin-bottom: 0.6rem; font-size: 1.15rem; }
+.zone-contexte p { white-space: pre-wrap; }
+
+.zone-chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  gap: 1rem;
+}
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  border: 2px solid var(--gris);
+  border-radius: 8px;
+  min-height: 300px;
+  max-height: 55vh;
+  background: var(--fond);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.message {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  max-width: 85%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.message.bot { background: var(--gris-clair); color: var(--noir); align-self: flex-start; }
+.message.user { background: var(--vert); color: white; align-self: flex-end; }
+.message.systeme { background: #fff5e6; border: 1px dashed var(--orange); color: var(--noir); align-self: center; font-style: italic; font-size: 0.9rem; }
+
+.zone-saisie {
+  display: flex;
+  gap: 0.5rem;
+}
+.zone-saisie textarea {
+  flex: 1;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 2px solid var(--gris);
+  border-radius: 8px;
+  font-family: inherit;
+  resize: none;
+  min-height: 50px;
+  max-height: 150px;
+}
+.zone-saisie textarea:focus { outline: none; border-color: var(--vert); }
+
+/* ============ ACTIONS BAS DE PAGE ============ */
+.actions-bas {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* ============ CHARGEMENT ============ */
+.chargement {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--gris-clair);
+  border-top-color: var(--vert);
+  border-radius: 50%;
+  animation: tourner 1s linear infinite;
+  vertical-align: middle;
+}
+@keyframes tourner { to { transform: rotate(360deg); } }
+
+.message-erreur {
+  color: var(--rouge);
+  background: #ffe6e6;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border-left: 4px solid var(--rouge);
+}
+/* ============================================================
+   MISE EN FORME DU MARKDOWN DANS LES MESSAGES
+============================================================ */
+.message h1,
+.message h2,
+.message h3 {
+  margin: 0.6em 0 0.3em 0;
+  color: var(--bleu);
+  line-height: 1.3;
+}
+.message h1 { font-size: 1.25rem; }
+.message h2 { font-size: 1.15rem; }
+.message h3 { font-size: 1.05rem; }
+
+.message p {
+  margin: 0.4em 0;
+}
+
+.message ul,
+.message ol {
+  margin: 0.4em 0;
+  padding-left: 1.4em;
+}
+.message li {
+  margin: 0.2em 0;
+}
+
+.message strong {
+  color: var(--violet);
+  font-weight: 600;
+}
+
+.message em {
+  font-style: italic;
+}
+
+.message code {
+  background: #f4f4f4;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+  font-size: 0.95em;
+}
+
+.message pre {
+  background: #f4f4f4;
+  padding: 0.7em;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+.message pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.message blockquote {
+  border-left: 4px solid var(--orange);
+  margin: 0.5em 0;
+  padding: 0.2em 0.8em;
+  color: var(--noir);
+  background: #fff8ef;
+}
+
+.message hr {
+  border: none;
+  border-top: 1px solid var(--gris);
+  margin: 0.8em 0;
+}
+
+.message table {
+  border-collapse: collapse;
+  margin: 0.5em 0;
+  width: 100%;
+}
+.message th,
+.message td {
+  border: 1px solid var(--gris);
+  padding: 0.4em 0.6em;
+  text-align: left;
+}
+.message th {
+  background: var(--bleu);
+  color: white;
+}
+
+.message a {
+  color: var(--bleu);
+  text-decoration: underline;
+}
+/* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+  .message { max-width: 95%; }
+  header h1 { font-size: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ ÉCRAN 1 : CONFIGURATION ============ -->
+<section class="ecran actif" id="ecran-config">
+  <header>
+    <h1>🩺 Préparation à l'ECCF</h1>
+    <p>Bac Pro SAPAT — MP7 (C7.1 et C7.2)</p>
+  </header>
+
+  <div class="bloc-config">
+    <div class="champ">
+      <label for="select-bio">📚 Chapitre de biologie humaine</label>
+      <select id="select-bio">
+        <option value="">-- Choisir un chapitre --</option>
+      </select>
+    </div>
+
+    <div class="champ">
+      <label for="select-esf">🛠️ Chapitre d'ESF (technique professionnelle)</label>
+      <select id="select-esf">
+        <option value="">-- Choisir un chapitre --</option>
+      </select>
+    </div>
+
+    <button class="btn btn-principal" id="btn-lancer" disabled>Lancer la session ➜</button>
+    <p id="msg-erreur-config" class="message-erreur" style="display:none;"></p>
+  </div>
+</section>
+
+<!-- ============ ÉCRAN 2 : CHOIX DU MODE ============ -->
+<section class="ecran" id="ecran-mode">
+  <header>
+    <h1>Comment veux-tu travailler ?</h1>
+    <p>Choisis ton mode de préparation</p>
+  </header>
+
+  <div class="bloc-modes">
+    <div class="carte-mode" data-mode="binome">
+      <div class="icone">👥</div>
+      <h3>Nous sommes en binôme</h3>
+      <p>L'application génère un contexte de TP et une liste de 10 questions pour s'interroger entre camarades.</p>
+    </div>
+    <div class="carte-mode" data-mode="solo">
+      <div class="icone">💬</div>
+      <h3>Je travaille seul(e)</h3>
+      <p>Échange interactif avec un tuteur virtuel qui pose des questions et corrige tes réponses.</p>
+    </div>
+  </div>
+
+  <div class="actions-bas">
+    <button class="btn btn-gris" onclick="retourConfig()">← Retour</button>
+  </div>
+</section>
+
+<!-- ============ ÉCRAN 3 : SESSION (BINÔME OU SOLO) ============ -->
+<section class="ecran" id="ecran-session">
+  <header>
+    <h1 id="titre-session">Session en cours</h1>
+    <p id="sous-titre-session"></p>
+  </header>
+
+  <div class="zone-contexte" id="zone-contexte" style="display:none;">
+    <h2>📋 Contexte du TP santé</h2>
+    <p id="texte-contexte"></p>
+  </div>
+
+  <div class="zone-chat" id="zone-chat">
+    <div class="messages" id="messages"></div>
+
+    <div class="zone-saisie" id="zone-saisie">
+      <textarea id="saisie" placeholder="Écris ta réponse ici..." rows="2"></textarea>
+      <button class="btn btn-principal" id="btn-envoyer">Envoyer</button>
+    </div>
+
+    <div class="actions-bas">
+      <button class="btn btn-orange" id="btn-afficher-questions" style="display:none;">📝 Afficher les 10 questions</button>
+      <button class="btn btn-gris" onclick="nouvelleSession()">🔄 Nouvelle session</button>
+    </div>
+  </div>
+</section>
+
+
+<script>
+"use strict";
+
+/* ============================================================
+   CONFIGURATION
+============================================================ */
+const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbxJQggthIi3As4rzA9NC-9dD3C9URNQQb_dd45u6t9pT-lIhifrkrONiZukiR7tPZ3xAA/exec"; // ⚠️ À REMPLACER
+const CHEMIN_JSON = "./../assets/json/chapitres.json";
+
+/* ============================================================
+   ÉTAT GLOBAL
+============================================================ */
+let chapitres = { biologie: [], esf: [] };
+let chapitreBioChoisi = null;
+let chapitreEsfChoisi = null;
+let modeChoisi = null; // "binome" ou "solo"
+let historiqueMessages = []; // pour le mode solo (mémoire conversationnelle)
+let contexteGenere = ""; // texte du contexte TP
+let questionsBinomes = ""; // liste des 10 questions générées
+
+/* ============================================================
+   CHARGEMENT DU JSON
+============================================================ */
+async function chargerChapitres() {
+  try {
+    const reponse = await fetch(CHEMIN_JSON);
+    if (!reponse.ok) throw new Error("Impossible de charger les chapitres");
+    chapitres = await reponse.json();
+    remplirSelects();
+  } catch (erreur) {
+    afficherErreurConfig("Erreur de chargement des chapitres : " + erreur.message);
+  }
+}
+
+function remplirSelects() {
+  const selBio = document.getElementById("select-bio");
+  const selEsf = document.getElementById("select-esf");
+  chapitres.biologie.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c.id; opt.textContent = c.titre;
+    selBio.appendChild(opt);
+  });
+  chapitres.esf.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c.id; opt.textContent = c.titre;
+    selEsf.appendChild(opt);
+  });
+}
+
+/* ============================================================
+   ÉCRAN 1 : Configuration
+============================================================ */
+document.getElementById("select-bio").addEventListener("change", verifierConfig);
+document.getElementById("select-esf").addEventListener("change", verifierConfig);
+
+function verifierConfig() {
+  const idBio = document.getElementById("select-bio").value;
+  const idEsf = document.getElementById("select-esf").value;
+  document.getElementById("btn-lancer").disabled = !(idBio && idEsf);
+}
+
+document.getElementById("btn-lancer").addEventListener("click", () => {
+  const idBio = document.getElementById("select-bio").value;
+  const idEsf = document.getElementById("select-esf").value;
+  chapitreBioChoisi = chapitres.biologie.find(c => c.id === idBio);
+  chapitreEsfChoisi = chapitres.esf.find(c => c.id === idEsf);
+  basculerEcran("ecran-mode");
+});
+
+function afficherErreurConfig(msg) {
+  const el = document.getElementById("msg-erreur-config");
+  el.textContent = msg;
+  el.style.display = "block";
+}
+
+/* ============================================================
+   ÉCRAN 2 : Choix du mode
+============================================================ */
+document.querySelectorAll(".carte-mode").forEach(carte => {
+  carte.addEventListener("click", () => {
+    modeChoisi = carte.dataset.mode;
+    lancerSession();
+  });
+});
+
+function retourConfig() {
+  basculerEcran("ecran-config");
+}
+
+/* ============================================================
+   ÉCRAN 3 : Session
+============================================================ */
+async function lancerSession() {
+  basculerEcran("ecran-session");
+  const messages = document.getElementById("messages");
+  messages.innerHTML = "";
+  document.getElementById("zone-contexte").style.display = "none";
+  document.getElementById("btn-afficher-questions").style.display = "none";
+  historiqueMessages = [];
+  contexteGenere = "";
+  questionsBinomes = "";
+
+  if (modeChoisi === "binome") {
+    document.getElementById("titre-session").textContent = "👥 Mode binôme";
+    document.getElementById("sous-titre-session").textContent = "Lisez le contexte ensemble, puis l'élève interrogé s'écarte.";
+    document.getElementById("zone-saisie").style.display = "none";
+    await genererBinome();
+  } else {
+    document.getElementById("titre-session").textContent = "💬 Mode solo";
+    document.getElementById("sous-titre-session").textContent = "Échange interactif avec ton tuteur virtuel.";
+    document.getElementById("zone-saisie").style.display = "flex";
+    await demarrerSolo();
+  }
+}
+
+/* ----- MODE BINÔME ----- */
+async function genererBinome() {
+  ajouterMessage("bot", "⏳ Génération de la situation et des questions en cours...");
+  const promptSysteme = construirePromptBinome();
+
+  try {
+    const reponse = await appelerLLM([
+      { role: "system", content: promptSysteme },
+      { role: "user", content: "Génère le contexte du TP santé puis les 10 questions." }
+    ]);
+
+    // On sépare contexte et questions sur le marqueur
+    const parties = reponse.split(/===\s*QUESTIONS\s*===/i);
+    contexteGenere = parties[0].replace(/===\s*CONTEXTE\s*===/i, "").trim();
+    questionsBinomes = (parties[1] || "").trim();
+
+    document.getElementById("texte-contexte").textContent = contexteGenere;
+    document.getElementById("zone-contexte").style.display = "block";
+    document.getElementById("messages").innerHTML = "";
+    ajouterMessage("systeme", "✅ Contexte affiché ci-dessus. Lisez-le ensemble.\nQuand l'élève interrogé est prêt et que l'élève qui pose les questions est seul devant l'écran, cliquez sur le bouton orange.");
+    document.getElementById("btn-afficher-questions").style.display = "inline-block";
+  } catch (e) {
+    document.getElementById("messages").innerHTML = "";
+    ajouterMessage("systeme", "❌ Erreur : " + e.message);
+  }
+}
+
+document.getElementById("btn-afficher-questions").addEventListener("click", () => {
+  document.getElementById("messages").innerHTML = "";
+  ajouterMessage("bot", "📝 Voici les 10 questions à poser à ton ou ta camarade :\n\n" + questionsBinomes);
+  document.getElementById("btn-afficher-questions").style.display = "none";
+});
+
+/* ----- MODE SOLO ----- */
+async function demarrerSolo() {
+  ajouterMessage("bot", "⏳ Préparation de ta session...");
+  const promptSysteme = construirePromptSolo();
+  historiqueMessages = [{ role: "system", content: promptSysteme }];
+
+  try {
+    const reponse = await appelerLLM([
+      ...historiqueMessages,
+      { role: "user", content: "Présente-moi le contexte du TP santé puis pose-moi ta première question." }
+    ]);
+    historiqueMessages.push({ role: "user", content: "Présente-moi le contexte du TP santé puis pose-moi ta première question." });
+    historiqueMessages.push({ role: "assistant", content: reponse });
+    document.getElementById("messages").innerHTML = "";
+    ajouterMessage("bot", reponse);
+  } catch (e) {
+    document.getElementById("messages").innerHTML = "";
+    ajouterMessage("systeme", "❌ Erreur : " + e.message);
+  }
+}
+
+document.getElementById("btn-envoyer").addEventListener("click", envoyerMessageSolo);
+document.getElementById("saisie").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    envoyerMessageSolo();
+  }
+});
+
+async function envoyerMessageSolo() {
+  const saisie = document.getElementById("saisie");
+  const texte = saisie.value.trim();
+  if (!texte) return;
+  saisie.value = "";
+  ajouterMessage("user", texte);
+  historiqueMessages.push({ role: "user", content: texte });
+
+  const idChargement = ajouterMessage("bot", "⏳ ...");
+
+  try {
+    const reponse = await appelerLLM(historiqueMessages);
+    historiqueMessages.push({ role: "assistant", content: reponse });
+    document.getElementById(idChargement).textContent = reponse;
+  } catch (e) {
+    document.getElementById(idChargement).textContent = "❌ Erreur : " + e.message;
+  }
+}
+
+/* ============================================================
+   PROMPTS SYSTÈME
+============================================================ */
+function blocChapitres() {
+  const objBio = chapitreBioChoisi.objectifs.map(o => "- " + o).join("\n");
+  const objEsf = chapitreEsfChoisi.objectifs.map(o => "- " + o).join("\n");
+  return `CHAPITRE DE BIOLOGIE HUMAINE : ${chapitreBioChoisi.titre}
+Objectifs pédagogiques :
+${objBio}
+
+CHAPITRE D'ESF (technique professionnelle) : ${chapitreEsfChoisi.titre}
+Objectifs pédagogiques :
+${objEsf}`;
+}
+
+function cadreECCF() {
+  return `CADRE DE L'EXAMEN ECCF (Évaluation Certificative en Cours de Formation) :
+- Diplôme : Bac Pro SAPAT (Service À la Personne et Animation du Territoire)
+- Module : MP7
+- Capacités évaluées :
+  • C7.1 : Intervenir en soutien auprès de la personne dans les actes essentiels de la vie quotidienne
+  • C7.2 : Créer des occasions d'interactions entre la personne et son environnement
+- Critères évalués :
+  • Posture d'accompagnement : mobilisation des ressources de la personne
+  • Établissement d'une relation interpersonnelle de proximité et distanciée
+  • Réalisation des interventions en toute sécurité pour la personne et l'accompagnant
+  • Recherche de pistes d'interactions
+  • Maintien de la distanciation professionnelle requise
+- Format : TP santé de 45 minutes + entretien d'explicitation de pratique de 15 minutes
+- Public élève : faible niveau scolaire, vocabulaire à adapter (clair, concret, accessible).`;
+}
+
+function construirePromptBinome() {
+  return `Tu es un expert en pédagogie spécialisé dans la formation Bac Pro SAPAT.
+
+${cadreECCF()}
+
+${blocChapitres()}
+
+TA MISSION :
+Génère deux choses, séparées EXACTEMENT par les marqueurs ci-dessous :
+
+=== CONTEXTE ===
+Une situation fictive et réaliste de TP santé adaptée à un Bac Pro SAPAT. Inclus :
+- Un nom et un prénom pour la personne accompagnée
+- Son âge et sa situation de vie (lieu de vie, entourage, autonomie)
+- Sa pathologie ou problématique de santé (en lien avec le chapitre de biologie)
+- La demande d'intervention concrète à réaliser (en lien avec le chapitre d'ESF)
+- Le matériel disponible
+- Quelques éléments de contexte relationnel
+La situation doit faire sens : le geste technique d'ESF doit être cohérent avec la pathologie présentée.
+Vocabulaire SIMPLE et CLAIR (élèves au niveau scolaire faible). Maximum 200 mots.
+
+=== QUESTIONS ===
+10 questions numérotées de 1 à 10 que l'examinateur pourrait poser pendant l'entretien d'explicitation.
+- Les questions doivent croiser les deux chapitres (biologie + ESF).
+- Elles doivent couvrir les objectifs pédagogiques fournis.
+- Vocabulaire accessible, questions ouvertes mais précises.
+- Variété : questions de définition, d'application, d'analyse, de justification.
+Ne donne PAS les réponses. Numérote simplement de 1. à 10.`;
+}
+
+function construirePromptSolo() {
+  return `Tu es un tuteur virtuel bienveillant, à la fois examinateur et formateur, qui prépare un élève de Bac Pro SAPAT à son ECCF.
+
+${cadreECCF()}
+
+${blocChapitres()}
+
+TA MISSION (mode SOLO) :
+1. Commence par présenter une situation fictive de TP santé (nom de patient, âge, situation, pathologie en lien avec le chapitre de biologie, demande d'intervention en lien avec le chapitre d'ESF, matériel). Maximum 150 mots, vocabulaire simple.
+2. Puis pose UNE SEULE question à la fois à l'élève, en lien avec les objectifs pédagogiques.
+3. Attends sa réponse.
+4. Si la réponse est correcte : félicite brièvement, complète si besoin, puis pose la question suivante.
+5. Si la réponse est partiellement correcte ou erronée : reformule la question avec un indice. Laisse une 2e tentative.
+6. Si la 2e tentative est encore erronée : donne la réponse correcte avec une explication courte et claire, puis passe à la question suivante.
+7. Couvre progressivement tous les objectifs pédagogiques (bio + ESF) en croisant les deux disciplines.
+8. À la fin (après ~10 questions), fais un bilan encourageant en pointant les forces et les points à retravailler.
+
+CONSIGNES IMPORTANTES :
+- Vocabulaire SIMPLE, phrases courtes, ton bienveillant.
+- Une seule question à la fois.
+- Pas d'emoji excessif. Maximum 1 par message.
+- Adapte-toi au niveau de l'élève.`;
+}
+
+/* ============================================================
+   APPEL AU LLM via Apps Script
+============================================================ */
+async function appelerLLM(messages) {
+  if (URL_APPS_SCRIPT === "URL_DU_APPS_SCRIPT_ICI") {
+    throw new Error("URL Apps Script non configurée. Voir les consignes de déploiement.");
+  }
+  const reponse = await fetch(URL_APPS_SCRIPT, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ messages })
+  });
+  if (!reponse.ok) throw new Error("Erreur réseau (" + reponse.status + ")");
+  const data = await reponse.json();
+  if (data.erreur) throw new Error(data.erreur);
+  return data.reponse;
+}
+
+/* ============================================================
+   UTILITAIRES UI
+============================================================ */
+function basculerEcran(idEcran) {
+  document.querySelectorAll(".ecran").forEach(e => e.classList.remove("actif"));
+  document.getElementById(idEcran).classList.add("actif");
+}
+
+function ajouterMessage(type, texte) {
+  const messages = document.getElementById("messages");
+  const div = document.createElement("div");
+  const id = "msg-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7);
+  div.id = id;
+  div.className = "message " + type;
+
+  // Les messages de l'élève restent en texte brut (pas de Markdown)
+  // Les messages de l'IA et système sont interprétés en Markdown sécurisé
+  if (type === "eleve") {
+    div.textContent = texte;
+  } else {
+    const htmlBrut = marked.parse(texte, { breaks: true, gfm: true });
+    div.innerHTML = DOMPurify.sanitize(htmlBrut);
+  }
+
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return id;
+}
+
+function nouvelleSession() {
+  document.getElementById("select-bio").value = "";
+  document.getElementById("select-esf").value = "";
+  document.getElementById("btn-lancer").disabled = true;
+  basculerEcran("ecran-config");
+}
+
+/* ============================================================
+   DÉMARRAGE
+============================================================ */
+chargerChapitres();
+</script>
+</body>
+</html>
