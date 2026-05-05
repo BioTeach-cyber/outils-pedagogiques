@@ -128,8 +128,8 @@
     "formation": ["Bac Pro SAPAT"],
     "tags": [],
     "url": "Biologie-Humaine/chatbot-eccf.html",
-    "icone": "",
-    "image": "",
+    "icone": "assets/icones/aide_a_la_personne.gif",
+    "image": "assets/images/aide_a_la_personne.jpg",
     "statut": "Publié",
     "date_creation": "30/04/2026",
     "auteur": "Vincent APREMONT"
