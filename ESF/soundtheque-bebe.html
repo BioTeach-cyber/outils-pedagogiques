@@ -489,6 +489,7 @@ function creerBoutonSon(son, groupe) {
   btn.dataset.nom    = son.nom;
   btn.dataset.groupe = groupe.nom;
   btn.dataset.icone  = son.icone || groupe.icone;
+  btn.dataset.loop   = son.loop !== false; // ← MODIFIÉ : true par défaut si absent
 
   // Étoiles d'intensité
   const intensiteMax = 3;
@@ -547,7 +548,7 @@ function jouerSon(btn, son) {
 
 function démarrerNouveauSon(btn, son) {
   const audio = new Audio(son.fichier);
-  audio.loop   = true;
+  audio.loop   = btn.dataset.loop === "true";
   audio.volume = 0;
   audio.play().catch(err => {
     console.warn("Lecture impossible :", err);

@@ -9,21 +9,21 @@
         {
           "id": "pleurs-leger",
           "nom": "Pleurs légers",
-          "fichier": "./assets/sound/pleurs-leger.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_pleure_legèrement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_pleure_legèrement.svg",
           "intensite": 1
         },
         {
           "id": "pleurs-modere",
           "nom": "Pleurs modérés",
-          "fichier": "./assets/sound/pleurs-modere.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_pleure_moderement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_pleure_moderement.svg",
           "intensite": 2
         },
         {
           "id": "pleurs-intense",
           "nom": "Pleurs intenses",
-          "fichier": "./assets/sound/pleurs-intense.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_pleure_intensement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_pleure_intensement.svg",
           "intensite": 3
         }
@@ -38,21 +38,21 @@
         {
           "id": "douleur-legere",
           "nom": "Gêne légère",
-          "fichier": "./assets/sound/douleur-legere.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_a_mal_legèrement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_a_mal_legèrement.svg",
           "intensite": 1
         },
         {
           "id": "douleur-moderee",
           "nom": "Douleur modérée",
-          "fichier": "./assets/sound/douleur-moderee.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_a_mal_moderement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_a_mal_moderement.svg",
           "intensite": 2
         },
         {
           "id": "douleur-intense",
           "nom": "Douleur intense",
-          "fichier": "./assets/sound/douleur-intense.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_a_mal_intensement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_a_mal_intensement.svg",
           "intensite": 3
         }
@@ -67,21 +67,21 @@
         {
           "id": "gazouillis-calme",
           "nom": "Babillage calme",
-          "fichier": "./assets/sound/gazouillis-calme.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_gazouille_legèrement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_gazouille_legèrement.svg",
           "intensite": 1
         },
         {
           "id": "gazouillis-anime",
           "nom": "Babillage animé",
-          "fichier": "./assets/sound/gazouillis-anime.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_gazouille_moderement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_gazouille_moderement.svg",
           "intensite": 2
         },
                 {
           "id": "gazouillis-intense",
           "nom": "Babillage intense",
-          "fichier": "./assets/sound/gazouillis-anime.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_gazouille_intensement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_gazouille_intensement.svg",
           "intensite": 2
         }
@@ -96,21 +96,21 @@
         {
           "id": "rires-sourire",
           "nom": "Sourire",
-          "fichier": "./assets/sound/rires-sourire.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_rie_legèrement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_rie_legèrement.svg",
           "intensite": 1
         },
         {
           "id": "rires-rire",
           "nom": "Petit rire",
-          "fichier": "./assets/sound/rires-rire.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_rie_moderement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_rie_moderement.svg",
           "intensite": 2
         },
         {
           "id": "rires-eclat",
           "nom": "Éclat de rire",
-          "fichier": "./assets/sound/rires-eclat.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_rie_intensement.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_rie_intensement.svg",
           "intensite": 3
         }
@@ -124,45 +124,64 @@
       "sons": [
         {
           "id": "divers-dort",
-          "nom": "Toux",
-          "fichier": "./assets/sound/divers-toux.mp3",
+          "nom": "Dort",
+          "fichier": "../assets/Sounds/Bebe_qui_dort.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_dort.svg",
           "intensite": 1
         },
         {
           "id": "divers-ronfle",
-          "nom": "Toux",
-          "fichier": "./assets/sound/divers-toux.mp3",
+          "nom": "Ronfle",
+          "fichier": "../assets/Sounds/Bebe_qui_ronfle.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_ronfle.svg",
           "intensite": 1
         },
         {
           "id": "divers-eternuement",
           "nom": "Éternuement",
-          "fichier": "./assets/sound/divers-eternuement.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_eternue.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_eternue.svg",
-          "intensite": 1
+          "intensite": 1,
+          "loop": false
         },
         {
           "id": "divers-tousse",
           "nom": "Tousse",
-          "fichier": "./assets/sound/divers-succion.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_tousse.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_tousse.svg",
-          "intensite": 1
+          "intensite": 1,
+          "loop": false
         },
                 {
           "id": "divers-boit",
           "nom": "Boit",
-          "fichier": "./assets/sound/divers-succion.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_boit.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_boit.svg",
           "intensite": 1
         },
                 {
           "id": "divers-rote",
           "nom": "Rot",
-          "fichier": "./assets/sound/divers-succion.mp3",
+          "fichier": "../assets/Sounds/Bebe_qui_rote.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_rote.svg",
-          "intensite": 1
+          "intensite": 1,
+          "loop": false
+        },
+                {
+          "id": "divers-caca",
+          "nom": "Caca",
+          "fichier": "../assets/Sounds/Bebe_qui_fait_caca.mp3",
+          "icone": "../assets/icones/Bébé/Bebe_qui_fait_caca.svg",
+          "intensite": 1,
+          "loop": false
+        },
+                {
+          "id": "divers-pet",
+          "nom": "Pêt",
+          "fichier": "../assets/Sounds/Bebe_qui_fait_un_pet.mp3",
+          "icone": "../assets/icones/Bébé/Bebe_qui_fait_un_pet.svg",
+          "intensite": 1,
+          "loop": false
         }
       ]
     }
