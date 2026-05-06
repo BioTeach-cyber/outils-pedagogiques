@@ -152,6 +152,23 @@
     "auteur": "Vincent APREMONT"
   },
         {
+    "id": "application-006",
+    "categorie": "Applications",
+    "titre": "BébéBox",
+    "description": "Une bibliothèque de son de bébé pour le module MP7",
+    "discipline": ["Biologie","ESF"],
+    "module": "MP7",
+    "public": "Bébé",
+    "formation": ["Bac Pro SAPAT"],
+    "tags": [],
+    "url": "ESF/soundtheque-bebe.html",
+    "icone": "",
+    "image": "",
+    "statut": "Publié",
+    "date_creation": "06/05/2026",
+    "auteur": "Vincent APREMONT"
+  },
+          {
     "id": "",
     "categorie": "",
     "titre": "",
