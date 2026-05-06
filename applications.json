@@ -154,7 +154,7 @@
         {
     "id": "application-006",
     "categorie": "Applications",
-    "titre": "BébéBox",
+    "titre": "BabyBox",
     "description": "Une bibliothèque de son de bébé pour le module MP7",
     "discipline": ["Biologie","ESF"],
     "module": "MP7",
