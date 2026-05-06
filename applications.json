@@ -169,6 +169,23 @@
     "auteur": "Vincent APREMONT"
   },
           {
+    "id": "application-007",
+    "categorie": "Applications",
+    "titre": "Oui / Non",
+    "description": "",
+    "discipline": ["Biologie","Ecologie"],
+    "module": ["MP7","MG1"],
+    "public": "",
+    "formation": ["Bac Pro SAPAT"],
+    "tags": [],
+    "url": "Biologie-Humaine/oui-non.html",
+    "icone": "assets/icones/Oui-Non.gif",
+    "image": "assets/images/Oui-Non.jpg",
+    "statut": "Publié",
+    "date_creation": "06/05/2026",
+    "auteur": "Vincent APREMONT"
+  },
+            {
     "id": "",
     "categorie": "",
     "titre": "",

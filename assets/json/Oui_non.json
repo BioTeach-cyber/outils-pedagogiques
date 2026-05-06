@@ -1,0 +1,824 @@
+{
+  "titre": "Banque de questions OUI / NON - Débats en classe",
+  "description": "Questions destinées à stimuler le débat, l'argumentation et le raisonnement (déductif, inductif, abductif, analogique) en classe.",
+  "categories": [
+    "Génétique & Hérédité",
+    "Cerveau & Comportement",
+    "Corps humain & Médecine",
+    "Reproduction & Filiation",
+    "Vivant, Animal & Écologie",
+    "Science & Société"
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "categorie": "Génétique & Hérédité",
+      "question": "Un enfant ressemble forcément à ses parents ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non. Un enfant hérite de la moitié des gènes de chaque parent, mais la combinaison aléatoire des allèles, les mutations et l'expression des gènes (épigénétique) font que la ressemblance n'est jamais garantie. Des traits récessifs peuvent réapparaître après plusieurs générations.",
+        "notions_cles": ["Hérédité", "Allèles dominants/récessifs", "Brassage génétique", "Phénotype/Génotype"],
+        "pistes_debat": ["Différence entre ressemblance physique et ressemblance comportementale", "Rôle de l'environnement dans l'apparence (alimentation, mode de vie)", "Cas des enfants adoptés qui 'ressemblent' à leurs parents adoptifs"],
+        "type_raisonnement": "Inductif (à partir d'exemples familiaux) et abductif (expliquer une non-ressemblance)"
+      }
+    },
+    {
+      "id": 2,
+      "categorie": "Génétique & Hérédité",
+      "question": "On peut naître avec les gènes d'une maladie sans jamais être malade ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. On parle de porteur sain pour les maladies récessives (ex: mucoviscidose). De plus, certaines maladies génétiques ont une pénétrance incomplète : le gène est présent mais ne s'exprime pas forcément.",
+        "notions_cles": ["Porteur sain", "Maladies récessives/dominantes", "Pénétrance", "Expression génique"],
+        "pistes_debat": ["Faut-il informer un porteur sain ?", "Conséquences psychologiques de cette connaissance", "Choix reproductifs"],
+        "type_raisonnement": "Déductif (si récessif et un seul allèle, alors porteur sain)"
+      }
+    },
+    {
+      "id": 3,
+      "categorie": "Génétique & Hérédité",
+      "question": "Modifier les gènes d'un embryon pour supprimer une maladie héréditaire, c'est acceptable ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question éthique. Techniquement possible avec CRISPR-Cas9, mais interdit en France sur l'embryon humain destiné à naître. Le cas du chercheur chinois He Jiankui (2018) a soulevé une condamnation internationale.",
+        "notions_cles": ["CRISPR-Cas9", "Thérapie génique germinale/somatique", "Bioéthique", "Eugénisme"],
+        "pistes_debat": ["Où placer la limite entre soigner et améliorer ?", "Risque d'eugénisme", "Inégalités d'accès à ces technologies", "Conséquences sur les générations futures"],
+        "type_raisonnement": "Analogique (comparaison avec d'autres interventions médicales) et déductif (conséquences éthiques)"
+      }
+    },
+    {
+      "id": 4,
+      "categorie": "Génétique & Hérédité",
+      "question": "Des jumeaux identiques sont exactement la même personne biologiquement ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non. Les vrais jumeaux ont le même ADN à la naissance, mais l'épigénétique, les empreintes digitales, le microbiote et les expériences de vie les différencient. Des mutations somatiques apparaissent aussi au cours du développement.",
+        "notions_cles": ["Jumeaux monozygotes", "Épigénétique", "Mutations somatiques", "Identité biologique"],
+        "pistes_debat": ["Identité = ADN ?", "Rôle de l'environnement", "Empreintes digitales différentes malgré le même ADN"],
+        "type_raisonnement": "Abductif (expliquer les différences observées malgré l'ADN identique)"
+      }
+    },
+    {
+      "id": 5,
+      "categorie": "Génétique & Hérédité",
+      "question": "Un enfant conçu pour sauver son frère malade a été instrumentalisé ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question éthique. Le 'bébé-médicament' (DPI-HLA) est autorisé en France sous conditions strictes. Il s'agit d'un enfant conçu par FIV avec sélection d'embryons compatibles pour un don de sang de cordon à un aîné malade.",
+        "notions_cles": ["Bébé-médicament", "DPI (Diagnostic Préimplantatoire)", "Compatibilité HLA", "Bioéthique"],
+        "pistes_debat": ["L'enfant a-t-il une valeur en lui-même ?", "Kant : ne jamais traiter autrui comme un simple moyen", "Conséquences psychologiques pour l'enfant"],
+        "type_raisonnement": "Analogique (autres motivations parentales) et déductif"
+      }
+    },
+    {
+      "id": 6,
+      "categorie": "Génétique & Hérédité",
+      "question": "Une femme porteuse d'une maladie génétique grave devrait être informée des risques pour sa descendance ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui, c'est le principe du conseil génétique. Le droit à l'information médicale est un pilier de l'éthique médicale, mais le droit de ne pas savoir existe aussi.",
+        "notions_cles": ["Conseil génétique", "Consentement éclairé", "Droit de savoir / de ne pas savoir"],
+        "pistes_debat": ["Liberté individuelle vs responsabilité envers la descendance", "Qui informer ? Quand ? Comment ?"],
+        "type_raisonnement": "Déductif (à partir de principes éthiques)"
+      }
+    },
+    {
+      "id": 7,
+      "categorie": "Génétique & Hérédité",
+      "question": "Deux personnes sans aucun lien familial peuvent avoir le même ADN ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non, sauf cas extrêmement rare. La probabilité que deux personnes non apparentées aient le même ADN est quasi nulle (sauf vrais jumeaux). C'est ce qui fonde la fiabilité des tests ADN en criminalistique.",
+        "notions_cles": ["Unicité de l'ADN", "Empreinte génétique", "Probabilités"],
+        "pistes_debat": ["Fiabilité des tests ADN en justice", "Erreurs judiciaires possibles"],
+        "type_raisonnement": "Déductif (à partir des probabilités)"
+      }
+    },
+    {
+      "id": 8,
+      "categorie": "Génétique & Hérédité",
+      "question": "On peut détecter une maladie génétique avant même la naissance ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Diagnostic prénatal (DPN) par amniocentèse, choriocentèse, ou DPNI (test sanguin maternel). Le DPI permet même un diagnostic avant implantation lors d'une FIV.",
+        "notions_cles": ["DPN", "DPNI", "DPI", "Amniocentèse", "Trisomie 21"],
+        "pistes_debat": ["Que faire de l'information ?", "Risque de dérive eugéniste", "Avortement thérapeutique"],
+        "type_raisonnement": "Inductif (à partir d'exemples concrets de tests)"
+      }
+    },
+    {
+      "id": 9,
+      "categorie": "Génétique & Hérédité",
+      "question": "Un enfant peut hériter d'une maladie génétique même si ses deux parents sont en bonne santé ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Cas des maladies récessives où les deux parents sont porteurs sains (1 chance sur 4). Aussi : mutations de novo (nouvelles) qui apparaissent spontanément.",
+        "notions_cles": ["Maladies récessives", "Porteur sain", "Mutations de novo", "Échiquier de Punnett"],
+        "pistes_debat": ["Importance du dépistage avant la conception", "Hasard biologique"],
+        "type_raisonnement": "Déductif (échiquier de Punnett)"
+      }
+    },
+    {
+      "id": 10,
+      "categorie": "Génétique & Hérédité",
+      "question": "Connaître ses prédispositions génétiques à une maladie, c'est une bonne chose ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question complexe. Avantages : prévention, dépistage précoce, choix de vie. Inconvénients : anxiété, discrimination (assurances, employeurs), fatalisme. Cas Angelina Jolie (BRCA1).",
+        "notions_cles": ["Prédisposition génétique", "Médecine prédictive", "Droit de ne pas savoir"],
+        "pistes_debat": ["Anxiété générée", "Discrimination génétique", "Influence sur les choix de vie"],
+        "type_raisonnement": "Inductif (peser le pour et le contre)"
+      }
+    },
+    {
+      "id": 11,
+      "categorie": "Génétique & Hérédité",
+      "question": "Modifier génétiquement un embryon pour qu'il soit plus intelligent, c'est acceptable ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non, interdit en France et dans la plupart des pays. Distinction fondamentale entre médecine thérapeutique (soigner) et médecine d'amélioration (enhancement). Risque d'eugénisme.",
+        "notions_cles": ["Transhumanisme", "Eugénisme", "Médecine d'amélioration", "Bioéthique"],
+        "pistes_debat": ["Inégalités sociales accrues", "Définition de l'intelligence", "Liberté parentale vs droits de l'enfant"],
+        "type_raisonnement": "Analogique (comparaison soigner/améliorer) et déductif"
+      }
+    },
+    {
+      "id": 12,
+      "categorie": "Génétique & Hérédité",
+      "question": "Un test ADN vendu en pharmacie peut remplacer un avis médical ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non. Ces tests (interdits à la vente en France) ont une fiabilité limitée, ne posent pas de diagnostic et nécessitent une interprétation médicale. Ils peuvent générer de fausses inquiétudes ou de faux espoirs.",
+        "notions_cles": ["Tests ADN récréatifs", "Fiabilité scientifique", "Interprétation médicale"],
+        "pistes_debat": ["Marketing vs science", "Protection des données ADN", "Risques psychologiques"],
+        "type_raisonnement": "Déductif (limites techniques) et abductif"
+      }
+    },
+    {
+      "id": 13,
+      "categorie": "Cerveau & Comportement",
+      "question": "La mort cérébrale, c'est vraiment la mort ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui, légalement et médicalement. La mort cérébrale (arrêt complet et irréversible des fonctions cérébrales) est la définition légale de la mort en France depuis 1968, permettant le prélèvement d'organes.",
+        "notions_cles": ["Mort cérébrale", "État végétatif", "Coma", "Don d'organes"],
+        "pistes_debat": ["Différence avec le coma", "Cas où le cœur bat encore", "Acceptation par les familles"],
+        "type_raisonnement": "Déductif (à partir de la définition légale)"
+      }
+    },
+    {
+      "id": 14,
+      "categorie": "Cerveau & Comportement",
+      "question": "Le cerveau d'un adolescent est suffisamment mature pour prendre de grandes décisions ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non, le cortex préfrontal (siège de la prise de décision et du contrôle des impulsions) ne finit sa maturation que vers 25 ans. Cela explique en partie les comportements à risque.",
+        "notions_cles": ["Cortex préfrontal", "Maturation cérébrale", "Prise de risque", "Système limbique"],
+        "pistes_debat": ["Majorité légale à 18 ans : pertinente ?", "Responsabilité pénale des mineurs", "Vote à 16 ans ?"],
+        "type_raisonnement": "Inductif (à partir de comportements observés)"
+      }
+    },
+    {
+      "id": 15,
+      "categorie": "Cerveau & Comportement",
+      "question": "Tomber amoureux, c'est juste de la chimie ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "En partie. Dopamine, ocytocine, sérotonine, vasopressine sont impliquées. Mais réduire l'amour à de la chimie ignore les dimensions culturelles, psychologiques et sociales.",
+        "notions_cles": ["Neurotransmetteurs", "Dopamine", "Ocytocine", "Réductionnisme"],
+        "pistes_debat": ["Réductionnisme scientifique", "Amour libre vs amour programmé", "Pilule de l'amour ?"],
+        "type_raisonnement": "Analogique (comparaison avec addiction) et abductif"
+      }
+    },
+    {
+      "id": 16,
+      "categorie": "Cerveau & Comportement",
+      "question": "La violence peut être programmée génétiquement ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Pas exactement. Le gène MAO-A (dit 'gène guerrier') est associé à une prédisposition, mais l'environnement (maltraitance) joue un rôle majeur. Pas de déterminisme génétique strict.",
+        "notions_cles": ["Gène MAO-A", "Inné vs acquis", "Épigénétique", "Déterminisme"],
+        "pistes_debat": ["Responsabilité pénale si gène 'violent' ?", "Stigmatisation", "Inné/acquis"],
+        "type_raisonnement": "Abductif (expliquer un comportement)"
+      }
+    },
+    {
+      "id": 17,
+      "categorie": "Cerveau & Comportement",
+      "question": "On peut être accro à quelque chose sans le savoir ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Le déni est un mécanisme classique de l'addiction. Addictions comportementales (jeux, écrans, sucre) souvent non reconnues par la personne elle-même.",
+        "notions_cles": ["Addiction", "Déni", "Système de récompense", "Dopamine"],
+        "pistes_debat": ["Écrans = addiction ?", "Société qui favorise les addictions", "Rôle des proches"],
+        "type_raisonnement": "Inductif (à partir de symptômes)"
+      }
+    },
+    {
+      "id": 18,
+      "categorie": "Cerveau & Comportement",
+      "question": "Le cerveau continue de se développer après 18 ans ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Maturation jusqu'à 25 ans. Plasticité cérébrale toute la vie : nouvelles connexions synaptiques, neurogenèse limitée mais réelle dans l'hippocampe.",
+        "notions_cles": ["Plasticité cérébrale", "Neurogenèse", "Maturation", "Apprentissage"],
+        "pistes_debat": ["On peut apprendre à tout âge ?", "Conséquences éducatives", "Réhabilitation après AVC"],
+        "type_raisonnement": "Inductif"
+      }
+    },
+    {
+      "id": 19,
+      "categorie": "Cerveau & Comportement",
+      "question": "Une personne atteinte d'Alzheimer est encore la même personne ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question philosophique. Médicalement : c'est la même personne biologiquement. Mais l'identité personnelle (souvenirs, personnalité) se modifie profondément.",
+        "notions_cles": ["Maladie d'Alzheimer", "Identité personnelle", "Mémoire", "Démence"],
+        "pistes_debat": ["Qu'est-ce qui fait l'identité ?", "Consentement aux soins", "Directives anticipées"],
+        "type_raisonnement": "Analogique et abductif"
+      }
+    },
+    {
+      "id": 20,
+      "categorie": "Cerveau & Comportement",
+      "question": "Rêver sert à quelque chose biologiquement ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Hypothèses : consolidation de la mémoire, régulation émotionnelle, simulation de menaces, créativité. Phase REM (sommeil paradoxal) essentielle.",
+        "notions_cles": ["Sommeil paradoxal", "Consolidation mnésique", "Régulation émotionnelle"],
+        "pistes_debat": ["Interprétation des rêves : science ou pseudoscience ?", "Cauchemars et traumatismes"],
+        "type_raisonnement": "Abductif (hypothèses sur la fonction)"
+      }
+    },
+    {
+      "id": 21,
+      "categorie": "Cerveau & Comportement",
+      "question": "Une émotion forte peut provoquer une vraie maladie physique ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Syndrome du cœur brisé (Tako-Tsubo), ulcères, troubles psychosomatiques, immunodépression liée au stress. Lien corps-esprit avéré.",
+        "notions_cles": ["Psychosomatique", "Stress", "Cortisol", "Tako-Tsubo"],
+        "pistes_debat": ["Dualisme corps/esprit", "Reconnaissance des maladies psychosomatiques", "Médecine holistique"],
+        "type_raisonnement": "Inductif"
+      }
+    },
+    {
+      "id": 22,
+      "categorie": "Cerveau & Comportement",
+      "question": "Le manque de sommeil peut tuer ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Insomnie fatale familiale (maladie génétique mortelle). Privation totale de sommeil prolongée mortelle chez l'animal. Manque chronique : risques cardiovasculaires, accidents.",
+        "notions_cles": ["Sommeil", "IFF", "Privation de sommeil", "Cycle circadien"],
+        "pistes_debat": ["Société qui ne dort plus", "Adolescents et écrans la nuit", "Travail de nuit"],
+        "type_raisonnement": "Inductif (cas extrêmes)"
+      }
+    },
+    {
+      "id": 23,
+      "categorie": "Cerveau & Comportement",
+      "question": "Un enfant élevé sans aucun contact humain peut apprendre à parler ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non, ou très difficilement. Cas des enfants sauvages (Victor de l'Aveyron, Genie). Période critique d'acquisition du langage avant la puberté.",
+        "notions_cles": ["Période critique", "Acquisition du langage", "Enfants sauvages", "Socialisation"],
+        "pistes_debat": ["Inné/acquis du langage", "Importance de l'environnement social", "Chomsky vs Skinner"],
+        "type_raisonnement": "Inductif (cas historiques)"
+      }
+    },
+    {
+      "id": 24,
+      "categorie": "Cerveau & Comportement",
+      "question": "La dépression est une vraie maladie comme le diabète ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Maladie reconnue avec bases neurobiologiques (sérotonine, noradrénaline), génétiques et environnementales. Traitements médicaux efficaces.",
+        "notions_cles": ["Dépression", "Sérotonine", "Maladie mentale", "Stigmatisation"],
+        "pistes_debat": ["Stigmatisation des maladies mentales", "Tabou autour de la dépression", "Place dans la société"],
+        "type_raisonnement": "Analogique"
+      }
+    },
+    {
+      "id": 25,
+      "categorie": "Corps humain & Médecine",
+      "question": "Débrancher quelqu'un en état végétatif permanent, c'est le tuer ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question éthique et juridique. Loi Claeys-Leonetti (2016) en France autorise l'arrêt des traitements (non l'euthanasie active). Affaire Vincent Lambert.",
+        "notions_cles": ["État végétatif", "Loi Claeys-Leonetti", "Acharnement thérapeutique", "Euthanasie passive"],
+        "pistes_debat": ["Acharnement thérapeutique", "Volonté du patient", "Rôle de la famille", "Affaire Vincent Lambert"],
+        "type_raisonnement": "Déductif (à partir de la loi) et analogique"
+      }
+    },
+    {
+      "id": 26,
+      "categorie": "Corps humain & Médecine",
+      "question": "On devrait prélever automatiquement les organes de toute personne décédée ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "En France, c'est le principe du consentement présumé depuis 1976 (loi Caillavet) : on est tous donneurs sauf inscription au registre du refus.",
+        "notions_cles": ["Consentement présumé", "Don d'organes", "Registre national des refus"],
+        "pistes_debat": ["Liberté individuelle vs intérêt collectif", "Rôle de la famille", "Convictions religieuses"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 27,
+      "categorie": "Corps humain & Médecine",
+      "question": "Vendre un organe de son vivant devrait être légal ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non en France (principe de non-patrimonialité du corps humain). Légal en Iran. Trafic d'organes existe dans le monde.",
+        "notions_cles": ["Non-patrimonialité du corps", "Trafic d'organes", "Bioéthique"],
+        "pistes_debat": ["Liberté de disposer de son corps", "Risque d'exploitation des pauvres", "Pénurie d'organes"],
+        "type_raisonnement": "Déductif (principes éthiques) et analogique"
+      }
+    },
+    {
+      "id": 28,
+      "categorie": "Corps humain & Médecine",
+      "question": "Un médecin devrait pouvoir refuser de pratiquer un avortement ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "En France, oui : clause de conscience pour l'IVG. Mais le médecin doit orienter la patiente vers un confrère.",
+        "notions_cles": ["Clause de conscience", "IVG", "Loi Veil"],
+        "pistes_debat": ["Liberté du médecin vs droit des patientes", "Accès à l'IVG en zones rurales", "Convictions personnelles"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 29,
+      "categorie": "Corps humain & Médecine",
+      "question": "Une personne en bonne santé devrait pouvoir choisir l'euthanasie ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question éthique très débattue. Interdit en France. Autorisé aux Pays-Bas et en Belgique sous conditions strictes (souffrance insupportable). Cas de la Belgique élargi à la souffrance psychique.",
+        "notions_cles": ["Euthanasie", "Suicide assisté", "Fin de vie", "Autonomie"],
+        "pistes_debat": ["Liberté individuelle absolue ?", "Risque de dérive", "Souffrance psychique"],
+        "type_raisonnement": "Analogique (comparaison entre pays) et déductif"
+      }
+    },
+    {
+      "id": 30,
+      "categorie": "Corps humain & Médecine",
+      "question": "La douleur chronique qu'on ne voit pas, c'est une vraie maladie ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Fibromyalgie, migraines chroniques, endométriose : longtemps minimisées car invisibles. Reconnues maladies à part entière.",
+        "notions_cles": ["Douleur chronique", "Fibromyalgie", "Endométriose", "Errance médicale"],
+        "pistes_debat": ["Errance médicale", "Sexisme médical (douleurs des femmes minimisées)", "Reconnaissance sociale"],
+        "type_raisonnement": "Inductif"
+      }
+    },
+    {
+      "id": 31,
+      "categorie": "Corps humain & Médecine",
+      "question": "On peut mourir d'une overdose d'eau ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Hyponatrémie (chute du sodium sanguin) due à une consommation excessive d'eau. Cas dans les marathons ou les défis.",
+        "notions_cles": ["Hyponatrémie", "Équilibre hydrique", "Osmose", "Toxicité"],
+        "pistes_debat": ["Tout est question de dose (Paracelse)", "Marketing de l'hydratation", "Mythe des 1,5 L par jour"],
+        "type_raisonnement": "Abductif (explication d'un phénomène contre-intuitif)"
+      }
+    },
+    {
+      "id": 32,
+      "categorie": "Corps humain & Médecine",
+      "question": "Un corps humain peut survivre sans cerveau ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non, sans cerveau (incluant tronc cérébral) le corps ne peut pas maintenir ses fonctions vitales. Cas particulier : maintien artificiel par machines après mort cérébrale.",
+        "notions_cles": ["Tronc cérébral", "Fonctions vitales", "Maintien artificiel"],
+        "pistes_debat": ["Définition de la vie", "Mort cérébrale = mort ?"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 33,
+      "categorie": "Corps humain & Médecine",
+      "question": "Le cœur peut continuer à battre en dehors du corps humain ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui, brièvement. Le cœur a son propre système d'automatisme (nœud sinusal). En transplantation, il est conservé en perfusion. Expériences sur cœurs isolés.",
+        "notions_cles": ["Automatisme cardiaque", "Nœud sinusal", "Transplantation"],
+        "pistes_debat": ["Définition de la mort", "Symbolique du cœur"],
+        "type_raisonnement": "Inductif"
+      }
+    },
+    {
+      "id": 34,
+      "categorie": "Corps humain & Médecine",
+      "question": "Refuser une transfusion sanguine pour raisons religieuses devrait être respecté par les médecins ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question éthique. Cas des Témoins de Jéhovah. En France, on respecte le refus d'un adulte conscient, mais on peut passer outre pour un mineur.",
+        "notions_cles": ["Liberté religieuse", "Consentement éclairé", "Autorité parentale"],
+        "pistes_debat": ["Liberté religieuse vs devoir de soin", "Cas des enfants", "Consentement éclairé"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 35,
+      "categorie": "Corps humain & Médecine",
+      "question": "Un médecin devrait pouvoir forcer un traitement sur un patient qui refuse de se soigner ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non en règle générale (consentement obligatoire). Exceptions : urgence vitale chez patient inconscient, certaines maladies psychiatriques (HSC, HDT), maladies contagieuses dangereuses.",
+        "notions_cles": ["Consentement éclairé", "Hospitalisation sous contrainte", "Santé publique"],
+        "pistes_debat": ["Autonomie vs bienfaisance", "Limites de la liberté individuelle", "Intérêt collectif"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 36,
+      "categorie": "Corps humain & Médecine",
+      "question": "Soigner quelqu'un qui refuse la vaccination avec de l'argent public, c'est juste ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question éthique. Principe d'égalité d'accès aux soins en France (Sécurité sociale). Aucune sélection morale. Mais débats lors du Covid.",
+        "notions_cles": ["Solidarité nationale", "Sécurité sociale", "Responsabilité individuelle"],
+        "pistes_debat": ["Solidarité inconditionnelle ?", "Responsabilité individuelle", "Risque de jugement moral"],
+        "type_raisonnement": "Analogique (comparer avec autres comportements à risque : tabac, alcool)"
+      }
+    },
+    {
+      "id": 37,
+      "categorie": "Reproduction & Filiation",
+      "question": "Un fœtus de 3 mois est un être humain ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question philosophique et juridique. Biologiquement vivant et humain (espèce), mais le statut de personne dépend des cultures et législations. En France, l'IVG est autorisée jusqu'à 14 semaines.",
+        "notions_cles": ["Personne / individu", "Statut de l'embryon", "IVG"],
+        "pistes_debat": ["Quand commence la vie humaine ?", "Critères : conception, viabilité, naissance ?", "Différence vie/personne"],
+        "type_raisonnement": "Abductif"
+      }
+    },
+    {
+      "id": 38,
+      "categorie": "Reproduction & Filiation",
+      "question": "Une mère porteuse est la vraie mère ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question complexe. Distinction entre mère biologique (génétique), mère gestatrice (porteuse) et mère d'intention (sociale). GPA interdite en France.",
+        "notions_cles": ["GPA", "Filiation", "Mère biologique/gestatrice/sociale"],
+        "pistes_debat": ["Qu'est-ce qu'être mère ?", "GPA éthique : possible ?", "Marchandisation du corps des femmes"],
+        "type_raisonnement": "Analogique"
+      }
+    },
+    {
+      "id": 39,
+      "categorie": "Reproduction & Filiation",
+      "question": "Un embryon congelé depuis 10 ans est vivant ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question complexe. L'embryon est en suspension cryogénique : ni vivant ni mort. Métabolisme arrêté mais peut redémarrer. Statut juridique flou.",
+        "notions_cles": ["Cryoconservation", "FIV", "Statut de l'embryon"],
+        "pistes_debat": ["Que faire des embryons surnuméraires ?", "Don, recherche, destruction ?", "Définition de la vie"],
+        "type_raisonnement": "Abductif"
+      }
+    },
+    {
+      "id": 40,
+      "categorie": "Reproduction & Filiation",
+      "question": "Un père biologique a des droits sur un enfant qu'il ne savait pas avoir ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui en France, possibilité de reconnaissance paternelle et action en recherche de paternité. Mais aussi obligations (pension alimentaire).",
+        "notions_cles": ["Filiation", "Reconnaissance de paternité", "Autorité parentale"],
+        "pistes_debat": ["Droits du père vs intérêt de l'enfant", "Mensonge maternel", "Test ADN"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 41,
+      "categorie": "Reproduction & Filiation",
+      "question": "Un homme transgenre qui accouche est une mère ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question juridique et sociétale. En France, débat en cours. Légalement, la personne qui accouche est désignée comme mère sur l'état civil.",
+        "notions_cles": ["Transidentité", "Filiation", "État civil", "Genre/sexe"],
+        "pistes_debat": ["Différence sexe biologique / identité de genre", "Évolution du droit", "Reconnaissance sociale"],
+        "type_raisonnement": "Analogique"
+      }
+    },
+    {
+      "id": 42,
+      "categorie": "Reproduction & Filiation",
+      "question": "Un enfant conçu par FIV a le droit de connaître son donneur de sperme ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui depuis la loi bioéthique de 2021 : levée de l'anonymat à la majorité de l'enfant (pour les conceptions postérieures à 2022).",
+        "notions_cles": ["PMA", "Don de gamètes", "Anonymat", "Droit aux origines"],
+        "pistes_debat": ["Droit aux origines vs anonymat du donneur", "Identité personnelle", "Risque de baisse des dons"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 43,
+      "categorie": "Reproduction & Filiation",
+      "question": "Une femme seule devrait avoir le droit d'accéder à la PMA ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui en France depuis la loi bioéthique de 2021 : PMA ouverte aux femmes seules et couples de femmes.",
+        "notions_cles": ["PMA", "Loi bioéthique 2021", "Famille monoparentale"],
+        "pistes_debat": ["Intérêt de l'enfant", "Modèles familiaux", "Égalité d'accès aux soins"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 44,
+      "categorie": "Reproduction & Filiation",
+      "question": "Deux hommes devraient pouvoir avoir accès à la gestation pour autrui ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "GPA interdite en France pour tous, quel que soit l'orientation sexuelle. Légale dans certains pays (USA, Canada, Ukraine).",
+        "notions_cles": ["GPA", "Homoparentalité", "Bioéthique"],
+        "pistes_debat": ["Égalité des couples", "Marchandisation du corps", "Tourisme procréatif"],
+        "type_raisonnement": "Analogique"
+      }
+    },
+    {
+      "id": 45,
+      "categorie": "Reproduction & Filiation",
+      "question": "Un enfant né sous X a le droit de connaître ses parents biologiques ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "En France, accouchement sous X possible. L'enfant peut demander à connaître ses origines via le CNAOP, mais la mère peut refuser.",
+        "notions_cles": ["Accouchement sous X", "CNAOP", "Droit aux origines"],
+        "pistes_debat": ["Droit aux origines vs droit à l'anonymat", "Souffrance des enfants nés sous X"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 46,
+      "categorie": "Reproduction & Filiation",
+      "question": "Congeler ses ovocytes pour avoir un enfant plus tard, c'est raisonnable ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Possible en France depuis 2021 sans raison médicale (auto-conservation). Permet de différer la maternité, mais pas de garantie de réussite.",
+        "notions_cles": ["Vitrification ovocytaire", "Auto-conservation", "Fertilité"],
+        "pistes_debat": ["Pression sociale sur les femmes", "Carrière vs maternité", "Illusion de maîtrise du temps"],
+        "type_raisonnement": "Inductif"
+      }
+    },
+    {
+      "id": 47,
+      "categorie": "Reproduction & Filiation",
+      "question": "Un enfant de parents homosexuels est désavantagé par rapport aux autres ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non, selon les études scientifiques (American Academy of Pediatrics, etc.). Les enfants élevés par des couples de même sexe se développent normalement.",
+        "notions_cles": ["Homoparentalité", "Études longitudinales", "Bien-être de l'enfant"],
+        "pistes_debat": ["Préjugés sociaux", "Modèles parentaux", "Discrimination"],
+        "type_raisonnement": "Inductif (à partir d'études)"
+      }
+    },
+    {
+      "id": 48,
+      "categorie": "Reproduction & Filiation",
+      "question": "L'avortement devrait être accessible sans délai ni condition ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "En France, IVG autorisée jusqu'à 14 semaines (loi 2022). Question éthique sur l'extension du délai.",
+        "notions_cles": ["IVG", "Loi Veil", "Droit des femmes"],
+        "pistes_debat": ["Délai : critère arbitraire ?", "Liberté vs limite éthique", "Comparaisons internationales"],
+        "type_raisonnement": "Analogique"
+      }
+    },
+    {
+      "id": 49,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Un animal ressent la douleur comme un humain ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Les vertébrés et certains invertébrés (céphalopodes) ressentent la douleur. Reconnus 'êtres sensibles' par le code civil français (2015). Mécanismes neurophysiologiques similaires.",
+        "notions_cles": ["Sensibilité animale", "Nociception", "Éthique animale"],
+        "pistes_debat": ["Élevage intensif", "Expérimentation animale", "Spécisme"],
+        "type_raisonnement": "Analogique"
+      }
+    },
+    {
+      "id": 50,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Tuer un animal pour le manger est un acte moral ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question éthique. Différentes positions : carnisme, végétarisme, véganisme, antispécisme.",
+        "notions_cles": ["Spécisme", "Véganisme", "Éthique animale", "Bien-être animal"],
+        "pistes_debat": ["Tradition culturelle vs souffrance animale", "Élevage extensif vs intensif", "Alternatives (viande cellulaire)"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 51,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Sacrifier un animal sain pour sauver un humain en phase terminale est justifié ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question éthique majeure. Xénogreffes en développement (cœur de porc transplanté en 2022). Débat philosophique sur la hiérarchie des espèces.",
+        "notions_cles": ["Xénogreffe", "Spécisme", "Hiérarchie des vivants"],
+        "pistes_debat": ["Toute vie a-t-elle la même valeur ?", "Anthropocentrisme", "Limites des xénogreffes"],
+        "type_raisonnement": "Analogique et déductif"
+      }
+    },
+    {
+      "id": 52,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Éradiquer définitivement le moustique tigre serait une bonne idée ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question complexe. Le moustique tigre est vecteur de maladies (dengue, Zika), mais espèce intégrée à l'écosystème. Techniques de moustiques stériles (gene drive) en débat.",
+        "notions_cles": ["Espèce invasive", "Gene drive", "Écosystème", "Vecteur de maladies"],
+        "pistes_debat": ["Conséquences écologiques imprévues", "Effet domino", "Santé publique vs biodiversité"],
+        "type_raisonnement": "Abductif"
+      }
+    },
+    {
+      "id": 53,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Un animal sauvage élevé en captivité peut retrouver sa liberté ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Difficilement. Perte des comportements naturels (chasse, peur des prédateurs), empreinte sur l'humain. Programmes de réintroduction longs et coûteux.",
+        "notions_cles": ["Réintroduction", "Empreinte", "Comportements innés/acquis"],
+        "pistes_debat": ["Zoos : pour ou contre ?", "Cas du loup, du lynx", "Cirques avec animaux"],
+        "type_raisonnement": "Inductif"
+      }
+    },
+    {
+      "id": 54,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Une espèce invasive devrait être éliminée même si elle s'est parfaitement intégrée à l'écosystème ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question écologique débattue. Si elle s'intègre sans déséquilibrer, certains scientifiques parlent de 'nouvelle nature'. Sinon, elle peut détruire la biodiversité locale.",
+        "notions_cles": ["Espèce invasive", "Biodiversité", "Écosystème"],
+        "pistes_debat": ["Nature 'pure' ou nature dynamique ?", "Anthropocène", "Quels critères pour décider ?"],
+        "type_raisonnement": "Abductif"
+      }
+    },
+    {
+      "id": 55,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Les loups sont dangereux pour l'écosystème ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non, au contraire. Le loup est un super-prédateur qui régule les populations d'herbivores. Cas exemplaire de Yellowstone (cascade trophique).",
+        "notions_cles": ["Super-prédateur", "Cascade trophique", "Régulation"],
+        "pistes_debat": ["Loup vs élevage ovin", "Cohabitation possible ?", "Mythes et réalités"],
+        "type_raisonnement": "Inductif (cas Yellowstone)"
+      }
+    },
+    {
+      "id": 56,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Replanter des arbres suffit à compenser la déforestation ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non. Une forêt primaire stocke beaucoup plus de carbone et abrite une biodiversité incomparable à une plantation. Greenwashing fréquent.",
+        "notions_cles": ["Forêt primaire", "Plantation", "Biodiversité", "Stockage carbone"],
+        "pistes_debat": ["Compensation carbone : illusion ?", "Greenwashing", "Préservation vs restauration"],
+        "type_raisonnement": "Analogique (forêt vs plantation)"
+      }
+    },
+    {
+      "id": 57,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Un zoo contribue à la protection des espèces ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "En partie. Certains zoos participent à des programmes de reproduction d'espèces menacées (EEP) et de réintroduction. Mais beaucoup restent avant tout des lieux de divertissement.",
+        "notions_cles": ["Programme EEP", "Conservation ex situ", "Réintroduction", "Bien-être animal"],
+        "pistes_debat": ["Captivité vs conservation", "Zoo éducatif ou divertissement ?", "Stress des animaux"],
+        "type_raisonnement": "Inductif (à partir d'exemples) et abductif"
+      }
+    },
+    {
+      "id": 58,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "La disparition d'une espèce d'insecte peut menacer la survie de l'humanité ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui. Exemple des abeilles : 75% des cultures dépendent de la pollinisation. Disparition des insectes = effondrement des chaînes alimentaires.",
+        "notions_cles": ["Pollinisation", "Chaîne alimentaire", "Effondrement de la biodiversité", "Services écosystémiques"],
+        "pistes_debat": ["Pesticides", "Agriculture intensive", "Effet domino écologique"],
+        "type_raisonnement": "Déductif (chaîne de conséquences)"
+      }
+    },
+    {
+      "id": 59,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "Un végétalien a un impact nul sur la mort des animaux ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non. L'agriculture (même végétale) tue des animaux (rongeurs, insectes lors des récoltes), détruit des habitats. Impact réduit, mais pas nul.",
+        "notions_cles": ["Véganisme", "Agriculture", "Impact écologique", "Habitat"],
+        "pistes_debat": ["Pureté éthique impossible ?", "Réduire vs supprimer", "Limites du véganisme"],
+        "type_raisonnement": "Abductif"
+      }
+    },
+    {
+      "id": 60,
+      "categorie": "Vivant, Animal & Écologie",
+      "question": "La vie d'un chimpanzé vaut autant que celle d'un humain ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Question éthique. Les chimpanzés partagent 98,7% de notre ADN, ont conscience d'eux-mêmes, utilisent des outils, ont une culture. Mouvement des 'Grands Singes' pour leur reconnaissance juridique.",
+        "notions_cles": ["Spécisme", "Conscience animale", "Grands singes", "Personne non-humaine"],
+        "pistes_debat": ["Critères pour la valeur d'une vie ?", "Anthropocentrisme", "Droits des animaux"],
+        "type_raisonnement": "Analogique"
+      }
+    },
+    {
+      "id": 61,
+      "categorie": "Science & Société",
+      "question": "La science a toujours raison ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non. La science est un processus de remise en question permanente. Les théories évoluent (réfutabilité de Popper). Erreurs historiques : phrénologie, théorie de la génération spontanée.",
+        "notions_cles": ["Méthode scientifique", "Réfutabilité", "Consensus scientifique", "Progrès des connaissances"],
+        "pistes_debat": ["Confiance dans la science", "Différence entre science et scientisme", "Erreurs historiques"],
+        "type_raisonnement": "Inductif (exemples historiques)"
+      }
+    },
+    {
+      "id": 62,
+      "categorie": "Science & Société",
+      "question": "Un médicament testé uniquement sur des hommes peut être prescrit sans risque à une femme ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non. Les femmes ont longtemps été exclues des essais cliniques. Or, métabolisme, hormones et anatomie diffèrent. Effets secondaires parfois plus fréquents/graves chez les femmes.",
+        "notions_cles": ["Essais cliniques", "Biais de genre en médecine", "Pharmacologie"],
+        "pistes_debat": ["Sexisme médical", "Évolution des protocoles", "Cas du Distilbène, du Mediator"],
+        "type_raisonnement": "Inductif"
+      }
+    },
+    {
+      "id": 63,
+      "categorie": "Science & Société",
+      "question": "Les OGM sont dangereux ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Le consensus scientifique actuel : pas de danger sanitaire prouvé pour les OGM autorisés. Risques surtout environnementaux (résistance, biodiversité) et socio-économiques (brevets, dépendance).",
+        "notions_cles": ["OGM", "Principe de précaution", "Biodiversité", "Brevets vivants"],
+        "pistes_debat": ["Santé vs environnement", "Pouvoir des multinationales (Monsanto)", "Souveraineté alimentaire"],
+        "type_raisonnement": "Abductif"
+      }
+    },
+    {
+      "id": 64,
+      "categorie": "Science & Société",
+      "question": "Cloner un humain disparu, c'est le faire revivre ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non. Un clone aurait le même ADN mais une personnalité différente (environnement, vécu). Comme un jumeau né plus tard. Clonage humain interdit en France.",
+        "notions_cles": ["Clonage", "Identité personnelle", "Inné/acquis", "Bioéthique"],
+        "pistes_debat": ["Identité = ADN ?", "Deuil et clonage", "Cas Dolly la brebis"],
+        "type_raisonnement": "Analogique (jumeaux)"
+      }
+    },
+    {
+          "id": 65,
+      "categorie": "Science & Société",
+      "question": "Une découverte scientifique peut être trop dangereuse pour être publiée ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui, débat réel. Cas du virus H5N1 modifié en laboratoire (2011) : publication retardée par crainte du bioterrorisme. Dilemme entre liberté scientifique et sécurité.",
+        "notions_cles": ["Éthique de la recherche", "Dual use", "Bioterrorisme", "Liberté scientifique"],
+        "pistes_debat": ["Qui décide ?", "Censure scientifique", "Bombe atomique et projet Manhattan"],
+        "type_raisonnement": "Abductif"
+      }
+    },
+    {
+      "id": 66,
+      "categorie": "Science & Société",
+      "question": "Le naturel est toujours meilleur que le synthétique ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Non. Beaucoup de substances naturelles sont toxiques (amanite, ricine, venins). Beaucoup de molécules synthétiques sauvent des vies (médicaments). L'argument 'naturel = bon' est un sophisme (appel à la nature).",
+        "notions_cles": ["Sophisme", "Appel à la nature", "Toxicité", "Chimie"],
+        "pistes_debat": ["Marketing du 'naturel'", "Médecines alternatives", "Pesticides naturels vs synthétiques"],
+        "type_raisonnement": "Inductif (contre-exemples)"
+      }
+    },
+    {
+      "id": 67,
+      "categorie": "Science & Société",
+      "question": "L'intelligence artificielle pourra un jour remplacer un médecin ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Partiellement. L'IA est déjà plus performante pour certains diagnostics (imagerie, dermatologie). Mais la relation humaine, l'empathie, le jugement clinique global restent humains.",
+        "notions_cles": ["Intelligence artificielle", "Diagnostic", "Relation soignant-soigné", "Éthique médicale"],
+        "pistes_debat": ["Médecine déshumanisée ?", "Responsabilité en cas d'erreur IA", "Accès aux soins"],
+        "type_raisonnement": "Abductif"
+      }
+    },
+    {
+      "id": 68,
+      "categorie": "Science & Société",
+      "question": "Une information trouvée sur internet peut être considérée comme scientifique ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Pas automatiquement. Une info scientifique doit être validée par les pairs, publiée dans des revues sérieuses, vérifiable. Internet contient le meilleur (PubMed) et le pire (fake news).",
+        "notions_cles": ["Sources fiables", "Peer review", "Esprit critique", "Fake news"],
+        "pistes_debat": ["Comment vérifier une info ?", "Réseaux sociaux et désinformation", "Wikipédia"],
+        "type_raisonnement": "Déductif (critères de scientificité)"
+      }
+    },
+    {
+      "id": 69,
+      "categorie": "Science & Société",
+      "question": "Un remède de grand-mère peut être aussi efficace qu'un médicament ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Parfois oui (miel pour la toux, validé par études), souvent non. Beaucoup de médicaments sont issus de plantes (aspirine = saule). Mais dosage et efficacité doivent être prouvés.",
+        "notions_cles": ["Phytothérapie", "Effet placebo", "Pharmacologie", "Médecine fondée sur les preuves"],
+        "pistes_debat": ["Tradition vs science", "Risque d'auto-médication", "Médecines douces"],
+        "type_raisonnement": "Inductif"
+      }
+    },
+    {
+      "id": 70,
+      "categorie": "Science & Société",
+      "question": "Les vaccins peuvent provoquer la maladie contre laquelle ils protègent ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Très rarement, et seulement avec les vaccins vivants atténués (ex : forme légère). Les vaccins inactivés ou à ARN ne le peuvent pas. Bénéfices >>> risques.",
+        "notions_cles": ["Vaccins vivants atténués", "Vaccins inactivés", "Immunité", "Balance bénéfice-risque"],
+        "pistes_debat": ["Hésitation vaccinale", "Obligation vaccinale", "Andrew Wakefield et la fraude autisme/ROR"],
+        "type_raisonnement": "Déductif"
+      }
+    },
+    {
+      "id": 71,
+      "categorie": "Science & Société",
+      "question": "Un scientifique peut se tromper et publier quand même ses résultats ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Oui, c'est même normal. La science avance par essais/erreurs. Les articles sont relus (peer review) mais des erreurs passent. Les rétractations existent. Différence entre erreur et fraude.",
+        "notions_cles": ["Peer review", "Rétractation", "Fraude scientifique", "Reproductibilité"],
+        "pistes_debat": ["Cas Raoult, cas Wakefield", "Pression à publier (publish or perish)", "Confiance dans la science"],
+        "type_raisonnement": "Inductif"
+      }
+    },
+    {
+      "id": 72,
+      "categorie": "Science & Société",
+      "question": "La technologie nous rend plus intelligents ?",
+      "fiche_exploitation": {
+        "reponse_scientifique": "Débat ouvert. Accès illimité à l'information, mais externalisation de la mémoire (effet Google), baisse de la concentration. Le QI moyen stagnerait voire baisserait (effet Flynn inversé).",
+        "notions_cles": ["Effet Flynn", "Plasticité cérébrale", "Externalisation cognitive", "Attention"],
+        "pistes_debat": ["Smartphones et concentration", "Dépendance aux GPS", "IA et apprentissage"],
+        "type_raisonnement": "Abductif"
+      }
+    }
+  ],
+  "metadata": {
+    "total_questions": 72,
+    "usage_pedagogique": "Cette banque peut être utilisée pour des débats mouvants, des activités de positionnement, des introductions de séquence, ou des évaluations orales d'argumentation.",
+    "competences_travaillees": [
+      "Argumenter à l'oral",
+      "Mobiliser des connaissances scientifiques",
+      "Développer l'esprit critique",
+      "Respecter le point de vue d'autrui",
+      "Distinguer fait, opinion et croyance"
+    ],
+    "modalites_suggerees": [
+      "Débat mouvant (les élèves se déplacent OUI/NON)",
+      "Pour/Contre en équipes",
+      "Échauffement de début de cours",
+      "Évaluation diagnostique",
+      "Support de production écrite argumentative"
+    ]
+  }
+}
