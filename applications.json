@@ -162,8 +162,8 @@
     "formation": ["Bac Pro SAPAT"],
     "tags": [],
     "url": "ESF/soundtheque-bebe.html",
-    "icone": "",
-    "image": "",
+    "icone": "assets/icones/BabyBox.gif",
+    "image": "assets/images/BabyBox.jpg",
     "statut": "Publié",
     "date_creation": "06/05/2026",
     "auteur": "Vincent APREMONT"
