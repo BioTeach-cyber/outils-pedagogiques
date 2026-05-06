@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soundthèque Bébé</title>
+
+  <script>
+    window.APP_NAME  = "Soundthèque Bébé";
+    window.BASE_PATH = "../";
+  </script>
+  <script src="../assets/js/header.js" defer></script>
+
+  <style>
+    /* =============================================
+       VARIABLES CSS — PALETTE & CONFIGURATION
+    ============================================= */
+    :root {
+      --bleu:   #53a4db;
+      --vert:   #7fbc48;
+      --violet: #a6539b;
+      --orange: #f3912b;
+      --gris:   #b7b7b7;
+      --rouge:  #e62d32;
+      --rose:   #ee7bab;
+      --jaune:  #f4d32e;
+      --marron: #a5706c;
+      --noir:   #494949;
+      --fond:   #ffffff;
+
+      /* Rayon de bordure global */
+      --radius: 12px;
+
+      /* Durée de la transition audio (fade) */
+      --fade-duration: 0.4s;
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--fond);
+      color: var(--noir);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 1rem;
+      min-height: 100vh;
+    }
+
+    /* =============================================
+       CONTENEUR PRINCIPAL
+    ============================================= */
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    /* =============================================
+       BARRE D'ACTIONS GLOBALES
+    ============================================= */
+    .actions-globales {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-global {
+      flex: 1;
+      min-width: 140px;
+      padding: 0.65rem 1rem;
+      border: 2px solid var(--gris);
+      background: var(--fond);
+      color: var(--noir);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-global:hover {
+      background: var(--gris);
+      color: var(--fond);
+      border-color: var(--gris);
+    }
+
+
+/* =============================================
+   INDICATEUR DE LECTURE EN COURS
+============================================= */
+.lecture-en-cours {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  background: color-mix(in srgb, var(--couleur-active, var(--bleu)) 10%, white);
+  border-left: 4px solid var(--couleur-active, var(--bleu));
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  /* Transition douce lors du changement de couleur */
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.lecture-en-cours.visible {
+  display: flex;
+}
+
+.lecture-nom {
+  font-weight: 700;
+  /* Prend la couleur du groupe actif */
+  color: var(--couleur-active, var(--bleu));
+  transition: color 0.4s ease;
+}
+
+.lecture-groupe {
+  font-size: 0.82rem;
+  color: var(--gris);
+}
+
+/* Le pulse prend aussi la couleur du groupe */
+.pulse {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--couleur-active, var(--bleu));
+  flex-shrink: 0;
+  animation: pulse 1.2s ease-in-out infinite;
+  transition: background 0.4s ease;
+}
+
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .btn-stop {
+      background: var(--rouge);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+
+    .btn-stop:hover { opacity: 0.85; }
+
+    /* =============================================
+       ACCORDÉONS — GROUPES
+    ============================================= */
+    .groupe {
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      border: 2px solid var(--couleur-groupe, var(--gris));
+      overflow: hidden;
+    }
+
+    /* En-tête cliquable de l'accordéon */
+    .groupe-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1rem;
+      cursor: pointer;
+      background: color-mix(in srgb, var(--couleur-groupe, var(--gris)) 12%, white);
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .groupe-header:hover {
+      background: color-mix(in srgb, var(--couleur-groupe, var(--gris)) 22%, white);
+    }
+
+    .groupe-icone {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .groupe-nom {
+      flex: 1;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--couleur-groupe, var(--noir));
+    }
+
+    .groupe-compteur {
+      font-size: 0.8rem;
+      color: var(--couleur-groupe, var(--gris));
+      font-weight: 600;
+      background: color-mix(in srgb, var(--couleur-groupe, var(--gris)) 18%, white);
+      padding: 0.2rem 0.55rem;
+      border-radius: 20px;
+    }
+
+    /* Flèche de l'accordéon */
+    .groupe-fleche {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      fill: var(--couleur-groupe, var(--gris));
+    }
+
+    .groupe.ouvert .groupe-fleche {
+      transform: rotate(180deg);
+    }
+
+    /* Corps de l'accordéon */
+    .groupe-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+      background: var(--fond);
+    }
+
+    .groupe.ouvert .groupe-body {
+      max-height: 2000px; /* valeur large pour l'animation */
+    }
+
+    /* =============================================
+       GRILLE DES SONS
+    ============================================= */
+    .sons-grille {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+      padding: 1rem;
+    }
+
+    /* =============================================
+       BOUTON SON
+    ============================================= */
+    .btn-son {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 0.5rem;
+      border: 2px solid color-mix(in srgb, var(--couleur-groupe, var(--gris)) 40%, white);
+      border-radius: var(--radius);
+      background: var(--fond);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      text-align: center;
+      position: relative;
+    }
+
+    .btn-son:hover {
+      background: color-mix(in srgb, var(--couleur-groupe, var(--gris)) 10%, white);
+      border-color: var(--couleur-groupe, var(--gris));
+      transform: translateY(-2px);
+    }
+
+    /* État actif (son en cours de lecture) */
+    .btn-son.actif {
+      background: color-mix(in srgb, var(--couleur-groupe, var(--gris)) 18%, white);
+      border-color: var(--couleur-groupe, var(--gris));
+      border-width: 3px;
+    }
+
+    .btn-son.actif::after {
+      content: "▶ EN COURS";
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: var(--couleur-groupe, var(--gris));
+      letter-spacing: 0.03em;
+    }
+
+    .son-icone {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .son-nom {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--noir);
+      line-height: 1.2;
+    }
+
+    /* Indicateur d'intensité (étoiles) */
+    .son-intensite {
+      display: flex;
+      gap: 3px;
+    }
+
+    .etoile {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gris);
+    }
+
+    .etoile.active {
+      background: var(--couleur-groupe, var(--gris));
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 480px) {
+      .sons-grille {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 0.6rem;
+        padding: 0.75rem;
+      }
+
+      .son-icone {
+        width: 38px;
+        height: 38px;
+      }
+
+      .groupe-nom {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- BARRE D'ACTIONS GLOBALES -->
+  <div class="actions-globales">
+    <button class="btn-global" id="btn-tout-ouvrir">
+      <!-- Icône "déplier" -->
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+      Tout déplier
+    </button>
+    <button class="btn-global" id="btn-tout-fermer">
+      <!-- Icône "replier" -->
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+      Tout replier
+    </button>
+  </div>
+
+  <!-- INDICATEUR DE LECTURE EN COURS -->
+  <div class="lecture-en-cours" id="lectureEnCours">
+    <div class="pulse"></div>
+    <img class="lecture-icone-son" id="lectureIcone" src="" alt="" />
+    <div class="lecture-info">
+      <div class="lecture-nom" id="lectureNom">—</div>
+      <div class="lecture-groupe" id="lectureGroupe">—</div>
+    </div>
+    <button class="btn-stop" id="btnStop">■ Arrêter</button>
+  </div>
+
+  <!-- ZONE DES GROUPES (générée dynamiquement) -->
+  <div id="zoneGroupes"></div>
+
+</div>
+
+<script>
+"use strict";
+
+/* =============================================
+   CONFIGURATION
+============================================= */
+const JSON_URL     = "../assets/json/sons-bebe.json";
+const FADE_DURÉE   = 400; // ms — doit correspondre à --fade-duration
+
+/* =============================================
+   ÉTAT DE L'APPLICATION
+============================================= */
+let audioActif      = null;  // objet Audio en cours
+let btnActif        = null;  // bouton DOM actif
+let idSonActif      = null;  // id du son en cours
+let transitionEnCours = false;
+
+/* =============================================
+   CHARGEMENT DU JSON ET CONSTRUCTION DE L'UI
+============================================= */
+async function chargerSons() {
+  try {
+    const reponse = await fetch(JSON_URL);
+    if (!reponse.ok) throw new Error("Fichier JSON introuvable");
+    const données = await reponse.json();
+    construireInterface(données.groupes);
+  } catch (erreur) {
+    document.getElementById("zoneGroupes").innerHTML =
+      `<p style="color:var(--rouge);text-align:center;padding:2rem;">
+        ⚠️ Impossible de charger les sons.<br>
+        <small>${erreur.message}</small>
+      </p>`;
+  }
+}
+
+/* =============================================
+   CONSTRUCTION DE L'INTERFACE
+============================================= */
+function construireInterface(groupes) {
+  const zone = document.getElementById("zoneGroupes");
+  zone.innerHTML = "";
+
+  groupes.forEach(groupe => {
+    /* --- Conteneur groupe --- */
+    const divGroupe = document.createElement("div");
+    divGroupe.classList.add("groupe");
+    // La couleur du groupe est injectée comme variable CSS locale
+    divGroupe.style.setProperty("--couleur-groupe", groupe.couleur);
+    divGroupe.dataset.id = groupe.id;
+
+    /* --- En-tête accordéon --- */
+    const header = document.createElement("div");
+    header.classList.add("groupe-header");
+    header.setAttribute("role", "button");
+    header.setAttribute("aria-expanded", "false");
+    header.setAttribute("tabindex", "0");
+    header.innerHTML = `
+      <img class="groupe-icone" src="${groupe.icone}" alt="${groupe.nom}" />
+      <span class="groupe-nom">${groupe.nom}</span>
+      <span class="groupe-compteur">${groupe.sons.length} son${groupe.sons.length > 1 ? "s" : ""}</span>
+      <svg class="groupe-fleche" viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      </svg>
+    `;
+
+    /* --- Corps accordéon --- */
+    const body = document.createElement("div");
+    body.classList.add("groupe-body");
+
+    /* --- Grille des sons --- */
+    const grille = document.createElement("div");
+    grille.classList.add("sons-grille");
+
+    groupe.sons.forEach(son => {
+      const btn = creerBoutonSon(son, groupe);
+      grille.appendChild(btn);
+    });
+
+    body.appendChild(grille);
+
+    /* --- Assemblage --- */
+    divGroupe.appendChild(header);
+    divGroupe.appendChild(body);
+    zone.appendChild(divGroupe);
+
+    /* --- Événement accordéon --- */
+    header.addEventListener("click", () => basculerAccordéon(divGroupe, header));
+    header.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        basculerAccordéon(divGroupe, header);
+      }
+    });
+  });
+}
+
+/* =============================================
+   CRÉATION D'UN BOUTON SON
+============================================= */
+function creerBoutonSon(son, groupe) {
+  const btn = document.createElement("button");
+  btn.classList.add("btn-son");
+  btn.dataset.id     = son.id;
+  btn.dataset.fichier = son.fichier;
+  btn.dataset.nom    = son.nom;
+  btn.dataset.groupe = groupe.nom;
+  btn.dataset.icone  = son.icone || groupe.icone;
+
+  // Étoiles d'intensité
+  const intensiteMax = 3;
+  let étoilesHTML = '<div class="son-intensite">';
+  for (let i = 1; i <= intensiteMax; i++) {
+    étoilesHTML += `<div class="etoile${i <= son.intensite ? " active" : ""}"></div>`;
+  }
+  étoilesHTML += "</div>";
+
+  btn.innerHTML = `
+    <img class="son-icone" src="${son.icone || groupe.icone}" alt="${son.nom}" />
+    <span class="son-nom">${son.nom}</span>
+    ${son.intensite ? étoilesHTML : ""}
+  `;
+
+  btn.addEventListener("click", () => gererClic(btn, son));
+  return btn;
+}
+
+/* =============================================
+   GESTION DU CLIC SUR UN SON
+============================================= */
+function gererClic(btn, son) {
+  // Clic sur le son déjà actif → on arrête
+  if (idSonActif === son.id) {
+    arrêterSon();
+    return;
+  }
+
+  // Sinon, on lance avec transition
+  jouerSon(btn, son);
+}
+
+/* =============================================
+   JOUER UN SON (avec fade)
+============================================= */
+function jouerSon(btn, son) {
+  if (audioActif) {
+    // Fade out du son actuel puis lancement du nouveau
+    fadeTo(audioActif, 0, FADE_DURÉE, () => {
+      audioActif.pause();
+      audioActif = null;
+      démarrerNouveauSon(btn, son);
+    });
+  } else {
+    démarrerNouveauSon(btn, son);
+  }
+
+  // Mise à jour visuelle immédiate (n'attend pas le fade)
+  if (btnActif) btnActif.classList.remove("actif");
+  btn.classList.add("actif");
+  btnActif = btn;
+  idSonActif = son.id;
+  mettreÀJourIndicateur(btn, son);
+}
+
+function démarrerNouveauSon(btn, son) {
+  const audio = new Audio(son.fichier);
+  audio.loop   = true;
+  audio.volume = 0;
+  audio.play().catch(err => {
+    console.warn("Lecture impossible :", err);
+  });
+
+  // Fade in
+  fadeTo(audio, 1, FADE_DURÉE, null);
+  audioActif = audio;
+}
+
+/* =============================================
+   ARRÊTER LE SON (avec fade out)
+============================================= */
+function arrêterSon() {
+  if (!audioActif) return;
+
+  const audioÀArrêter = audioActif;
+  audioActif = null;
+  idSonActif = null;
+
+  if (btnActif) {
+    btnActif.classList.remove("actif");
+    btnActif = null;
+  }
+
+  masquerIndicateur();
+
+  fadeTo(audioÀArrêter, 0, FADE_DURÉE, () => {
+    audioÀArrêter.pause();
+  });
+}
+
+/* =============================================
+   FADE (volume progressif)
+============================================= */
+function fadeTo(audio, volumeCible, durée, callback) {
+  const pas        = 20; // intervalle en ms
+  const étapes     = durée / pas;
+  const delta      = (volumeCible - audio.volume) / étapes;
+  let compteur     = 0;
+
+  const intervalle = setInterval(() => {
+    compteur++;
+    audio.volume = Math.min(1, Math.max(0, audio.volume + delta));
+
+    if (compteur >= étapes) {
+      clearInterval(intervalle);
+      audio.volume = volumeCible;
+      if (callback) callback();
+    }
+  }, pas);
+}
+
+/* =============================================
+   INDICATEUR DE LECTURE EN COURS
+============================================= */
+function mettreÀJourIndicateur(btn, son) {
+  const indicateur = document.getElementById("lectureEnCours");
+
+  // Récupère la couleur du groupe parent du bouton cliqué
+  const couleurGroupe = btn.closest(".groupe").style.getPropertyValue("--couleur-groupe");
+
+  // Injecte la couleur comme variable CSS sur l'indicateur
+  indicateur.style.setProperty("--couleur-active", couleurGroupe);
+
+  document.getElementById("lectureNom").textContent    = btn.dataset.nom;
+  document.getElementById("lectureGroupe").textContent = "Groupe : " + btn.dataset.groupe;
+  document.getElementById("lectureIcone").src          = btn.dataset.icone;
+  document.getElementById("lectureIcone").alt          = btn.dataset.nom;
+  indicateur.classList.add("visible");
+}
+
+
+function masquerIndicateur() {
+  document.getElementById("lectureEnCours").classList.remove("visible");
+}
+
+/* =============================================
+   ACCORDÉON
+============================================= */
+function basculerAccordéon(divGroupe, header) {
+  const estOuvert = divGroupe.classList.contains("ouvert");
+  divGroupe.classList.toggle("ouvert");
+  header.setAttribute("aria-expanded", String(!estOuvert));
+}
+
+function toutOuvrir() {
+  document.querySelectorAll(".groupe").forEach(g => {
+    g.classList.add("ouvert");
+    g.querySelector(".groupe-header").setAttribute("aria-expanded", "true");
+  });
+}
+
+function toutFermer() {
+  document.querySelectorAll(".groupe").forEach(g => {
+    g.classList.remove("ouvert");
+    g.querySelector(".groupe-header").setAttribute("aria-expanded", "false");
+  });
+}
+
+/* =============================================
+   ÉVÉNEMENTS GLOBAUX
+============================================= */
+document.getElementById("btn-tout-ouvrir").addEventListener("click", toutOuvrir);
+document.getElementById("btn-tout-fermer").addEventListener("click", toutFermer);
+document.getElementById("btnStop").addEventListener("click", arrêterSon);
+
+/* =============================================
+   INITIALISATION
+============================================= */
+chargerSons();
+</script>
+</body>
+</html>

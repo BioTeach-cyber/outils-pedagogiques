@@ -1,0 +1,142 @@
+{
+  "groupes": [
+    {
+      "id": "pleurs",
+      "nom": "Pleurs",
+      "icone": "./assets/icones/pleurs.svg",
+      "couleur": "#53a4db",
+      "sons": [
+        {
+          "id": "pleurs-leger",
+          "nom": "Pleurs légers",
+          "fichier": "./assets/sound/pleurs-leger.mp3",
+          "icone": "./assets/icones/pleurs-leger.svg",
+          "intensite": 1
+        },
+        {
+          "id": "pleurs-modere",
+          "nom": "Pleurs modérés",
+          "fichier": "./assets/sound/pleurs-modere.mp3",
+          "icone": "./assets/icones/pleurs-modere.svg",
+          "intensite": 2
+        },
+        {
+          "id": "pleurs-intense",
+          "nom": "Pleurs intenses",
+          "fichier": "./assets/sound/pleurs-intense.mp3",
+          "icone": "./assets/icones/pleurs-intense.svg",
+          "intensite": 3
+        }
+      ]
+    },
+    {
+      "id": "douleur",
+      "nom": "Douleur",
+      "icone": "./assets/icones/douleur.svg",
+      "couleur": "#e62d32",
+      "sons": [
+        {
+          "id": "douleur-legere",
+          "nom": "Gêne légère",
+          "fichier": "./assets/sound/douleur-legere.mp3",
+          "icone": "./assets/icones/douleur-legere.svg",
+          "intensite": 1
+        },
+        {
+          "id": "douleur-moderee",
+          "nom": "Douleur modérée",
+          "fichier": "./assets/sound/douleur-moderee.mp3",
+          "icone": "./assets/icones/douleur-moderee.svg",
+          "intensite": 2
+        },
+        {
+          "id": "douleur-intense",
+          "nom": "Douleur intense",
+          "fichier": "./assets/sound/douleur-intense.mp3",
+          "icone": "./assets/icones/douleur-intense.svg",
+          "intensite": 3
+        }
+      ]
+    },
+    {
+      "id": "gazouillis",
+      "nom": "Gazouillis",
+      "icone": "./assets/icones/gazouillis.svg",
+      "couleur": "#7fbc48",
+      "sons": [
+        {
+          "id": "gazouillis-calme",
+          "nom": "Babillage calme",
+          "fichier": "./assets/sound/gazouillis-calme.mp3",
+          "icone": "./assets/icones/gazouillis-calme.svg",
+          "intensite": 1
+        },
+        {
+          "id": "gazouillis-anime",
+          "nom": "Babillage animé",
+          "fichier": "./assets/sound/gazouillis-anime.mp3",
+          "icone": "./assets/icones/gazouillis-anime.svg",
+          "intensite": 2
+        }
+      ]
+    },
+    {
+      "id": "rires",
+      "nom": "Rires",
+      "icone": "./assets/icones/rires.svg",
+      "couleur": "#f3912b",
+      "sons": [
+        {
+          "id": "rires-sourire",
+          "nom": "Sourire",
+          "fichier": "./assets/sound/rires-sourire.mp3",
+          "icone": "./assets/icones/rires-sourire.svg",
+          "intensite": 1
+        },
+        {
+          "id": "rires-rire",
+          "nom": "Petit rire",
+          "fichier": "./assets/sound/rires-rire.mp3",
+          "icone": "./assets/icones/rires-rire.svg",
+          "intensite": 2
+        },
+        {
+          "id": "rires-eclat",
+          "nom": "Éclat de rire",
+          "fichier": "./assets/sound/rires-eclat.mp3",
+          "icone": "./assets/icones/rires-eclat.svg",
+          "intensite": 3
+        }
+      ]
+    },
+    {
+      "id": "divers",
+      "nom": "Divers",
+      "icone": "./assets/icones/divers.svg",
+      "couleur": "#a6539b",
+      "sons": [
+        {
+          "id": "divers-toux",
+          "nom": "Toux",
+          "fichier": "./assets/sound/divers-toux.mp3",
+          "icone": "./assets/icones/divers-toux.svg",
+          "intensite": 1
+        },
+        {
+          "id": "divers-eternuement",
+          "nom": "Éternuement",
+          "fichier": "./assets/sound/divers-eternuement.mp3",
+          "icone": "./assets/icones/divers-eternuement.svg",
+          "intensite": 1
+        },
+        {
+          "id": "divers-succion",
+          "nom": "Succion",
+          "fichier": "./assets/sound/divers-succion.mp3",
+          "icone": "./assets/icones/divers-succion.svg",
+          "intensite": 1
+        }
+      ]
+    }
+  ]
+}
