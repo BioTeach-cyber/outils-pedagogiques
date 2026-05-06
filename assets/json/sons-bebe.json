@@ -123,14 +123,14 @@
       "couleur": "#a6539b",
       "sons": [
         {
-          "id": "divers-toux",
+          "id": "divers-dort",
           "nom": "Toux",
           "fichier": "./assets/sound/divers-toux.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_dort.svg",
           "intensite": 1
         },
         {
-          "id": "divers-toux",
+          "id": "divers-ronfle",
           "nom": "Toux",
           "fichier": "./assets/sound/divers-toux.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_ronfle.svg",
@@ -144,10 +144,24 @@
           "intensite": 1
         },
         {
-          "id": "divers-succion",
-          "nom": "Succion",
+          "id": "divers-tousse",
+          "nom": "Tousse",
           "fichier": "./assets/sound/divers-succion.mp3",
           "icone": "../assets/icones/Bébé/Bebe_qui_tousse.svg",
+          "intensite": 1
+        },
+                {
+          "id": "divers-boit",
+          "nom": "Boit",
+          "fichier": "./assets/sound/divers-succion.mp3",
+          "icone": "../assets/icones/Bébé/Bebe_qui_boit.svg",
+          "intensite": 1
+        },
+                {
+          "id": "divers-rote",
+          "nom": "Rot",
+          "fichier": "./assets/sound/divers-succion.mp3",
+          "icone": "../assets/icones/Bébé/Bebe_qui_rote.svg",
           "intensite": 1
         }
       ]
