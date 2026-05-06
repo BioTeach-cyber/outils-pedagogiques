@@ -172,8 +172,7 @@
     "id": "application-007",
     "categorie": "Applications",
     "titre": "BioDebat",
-    "description": "BioDebat est une application web pédagogique destinée aux enseignants de sciences du vivant, de biologie et d'écologie. Elle met à disposition une banque de questions volontairement provocantes, formulées sous forme de proposition OUI / NON, couvrant des thématiques scientifiques, éthiques et sociétales.
-    Chaque question est accompagnée d'une fiche d'exploitation pédagogique permettant à l'enseignant de préparer et animer un débat structuré, une activité de positionnement ou une séquence d'argumentation.",
+    "description": "BioDebat est une application web pédagogique destinée aux enseignants de sciences du vivant, de biologie et d'écologie. Elle met à disposition une banque de questions volontairement provocantes, formulées sous forme de proposition OUI / NON, couvrant des thématiques scientifiques, éthiques et sociétales. Chaque question est accompagnée d'une fiche d'exploitation pédagogique permettant à l'enseignant de préparer et animer un débat structuré, une activité de positionnement ou une séquence d'argumentation.",
     "discipline": ["Biologie","Ecologie"],
     "module": ["MP7","MG1"],
     "public": "",
