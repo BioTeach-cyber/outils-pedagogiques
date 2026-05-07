@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Conseil des Acteurs</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      --bleu: #53a4db;
+      --vert: #7fbc48;
+      --violet: #a6539b;
+      --orange: #f3912b;
+      --gris: #b7b7b7;
+      --rouge: #e62d32;
+      --rose: #ee7bab;
+      --jaune: #f4d32e;
+      --marron: #a5706c;
+      --noir: #494949;
+      --fond: #ffffff;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--fond);
+      color: var(--noir);
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      text-align: center;
+      padding: 1.5rem 1rem 1rem;
+    }
+    header h1 {
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      color: var(--vert);
+      font-weight: 700;
+    }
+    header p {
+      color: var(--gris);
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ===== SECTIONS (vues) ===== */
+    .vue { display: none; }
+    .vue.active { display: block; }
+
+    /* ===== CARTES SUJET ===== */
+    .sujets-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .carte-sujet {
+      background: var(--fond);
+      border: 2px solid var(--vert);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      width: clamp(200px, 30%, 320px);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .carte-sujet:hover {
+      background: var(--vert);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(127,188,72,0.3);
+    }
+    .carte-sujet h3 { font-size: 1rem; }
+    .carte-sujet .nb-roles {
+      font-size: 0.8rem;
+      margin-top: 0.4rem;
+      opacity: 0.7;
+    }
+
+    /* ===== BOUTONS ===== */
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-vert { background: var(--vert); color: white; }
+    .btn-orange { background: var(--orange); color: white; }
+    .btn-gris { background: var(--gris); color: white; }
+    .btn-row {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    /* ===== ZONE CENTRALE ===== */
+    .zone {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* ===== TIRAGE SUJET ===== */
+    #sujet-affiche {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      border: 2px solid var(--vert);
+      border-radius: 12px;
+      background: #f6fbf0;
+    }
+    #sujet-affiche h2 { color: var(--vert); font-size: 1.4rem; }
+    #sujet-affiche p  { margin-top: 0.5rem; color: var(--noir); }
+
+    /* ===== RÉPARTITION ===== */
+    #input-participants {
+      font-size: 1.1rem;
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--vert);
+      border-radius: 8px;
+      width: 120px;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .repartition-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .repartition-table th {
+      background: var(--vert);
+      color: white;
+      padding: 0.6rem 1rem;
+      text-align: left;
+    }
+    .repartition-table td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+    .repartition-table tr:nth-child(even) td { background: #f6fbf0; }
+    .numeros { color: var(--orange); font-weight: 600; }
+
+    /* ===== QR CODES ===== */
+    .qr-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .qr-carte {
+      border: 2px solid var(--vert);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      width: clamp(160px, 22%, 220px);
+      background: var(--fond);
+    }
+    .qr-carte h4 {
+      color: var(--vert);
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+    .qr-masque {
+      width: 150px;
+      height: 150px;
+      background: var(--noir);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin: 0 auto;
+      user-select: none;
+    }
+    .qr-contenu { display: none; }
+    .qr-contenu canvas,
+    .qr-contenu img { border-radius: 6px; }
+    .btn-toggle-qr {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: var(--orange);
+      color: white;
+      font-weight: 600;
+    }
+
+    /* ===== FICHE ACTEUR (vue élève) ===== */
+    .fiche {
+      max-width: 480px;
+      margin: 2rem auto;
+      border: 3px solid var(--vert);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .fiche-header {
+      background: var(--vert);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .fiche-header .emoji { font-size: 2.5rem; }
+    .fiche-header h2 { font-size: 1.4rem; margin-top: 0.5rem; }
+    .fiche-header .sujet-titre {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-top: 0.3rem;
+    }
+    .fiche-body { padding: 1.5rem; }
+    .badge-position {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      border-radius: 20px;
+      padding: 0.3rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .fiche-body h3 {
+      color: var(--vert);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .fiche-body p { font-size: 0.95rem; line-height: 1.5; }
+    .arguments-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.5rem;
+    }
+    .arguments-list li {
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.5rem;
+      border-left: 4px solid var(--orange);
+      background: #fff8f2;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    /* ===== ÉTAPE TITRE ===== */
+    .etape-titre {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--vert);
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--orange);
+      padding-left: 0.7rem;
+    }
+
+    /* ===== ERREUR ===== */
+    .erreur {
+      text-align: center;
+      padding: 3rem;
+      color: var(--rouge);
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>🌿 Conseil des Acteurs</h1>
+  <p>Jeu de rôle — Débat citoyen</p>
+</header>
+
+<main id="app"></main>
+
+<script>
+"use strict";
+
+/* ========================================================
+   DONNÉES & ÉTAT
+======================================================== */
+let donnees = null;        // contenu du JSON
+let sujetActif = null;     // objet sujet sélectionné
+let repartition = {};      // { nomRole: [n°élèves] }
+
+/* ========================================================
+   UTILITAIRES
+======================================================== */
+
+/** Mélange un tableau (Fisher-Yates) */
+function melangerTableau(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/** Répartit n numéros dans k groupes le plus équitablement possible */
+function repartirNumerosEquitable(nbParticipants, roles) {
+  const numeros = melangerTableau(
+    Array.from({ length: nbParticipants }, (_, i) => i + 1)
+  );
+  const result = {};
+  roles.forEach(r => result[r.nom] = []);
+
+  numeros.forEach((num, idx) => {
+    const nomRole = roles[idx % roles.length].nom;
+    result[nomRole].push(num);
+  });
+  return result;
+}
+
+/** Renvoie les paramètres de l'URL courante */
+function getParams() {
+  return new URLSearchParams(window.location.search);
+}
+
+/** Affiche une vue (cache toutes les autres) */
+function afficherVue(id) {
+  document.querySelectorAll('.vue').forEach(v => v.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+/* ========================================================
+   CHARGEMENT DU JSON
+======================================================== */
+async function chargerDonnees() {
+  try {
+    const rep = await fetch('../assets/json/Conseil-municipal-scientifique.json');
+    if (!rep.ok) throw new Error('Fichier introuvable');
+    donnees = await rep.json();
+  } catch (e) {
+    document.getElementById('app').innerHTML =
+      `<div class="erreur">❌ Impossible de charger les sujets.<br><small>${e.message}</small></div>`;
+    return false;
+  }
+  return true;
+}
+
+/* ========================================================
+   VUE : FICHE ACTEUR (téléphone élève)
+======================================================== */
+function afficherFicheActeur() {
+  const params = getParams();
+  const idxSujet = parseInt(params.get('sujet'));
+  const idxRole  = parseInt(params.get('role'));
+
+  const app = document.getElementById('app');
+
+  if (
+    isNaN(idxSujet) || isNaN(idxRole) ||
+    !donnees.sujets[idxSujet] ||
+    !donnees.sujets[idxSujet].roles[idxRole]
+  ) {
+    app.innerHTML = `<div class="erreur">❌ Fiche introuvable. Scanne à nouveau le QR Code.</div>`;
+    return;
+  }
+
+  const sujet = donnees.sujets[idxSujet];
+  const role  = sujet.roles[idxRole];
+
+  app.innerHTML = `
+    <div class="vue active" id="vue-fiche">
+      <div class="fiche">
+        <div class="fiche-header" style="background:${role.couleur || 'var(--vert)'}">
+          <div class="emoji">${role.emoji || '🎭'}</div>
+          <h2>${role.nom}</h2>
+          <div class="sujet-titre">📌 ${sujet.titre}</div>
+        </div>
+        <div class="fiche-body">
+          <span class="badge-position">Position : ${role.position}</span>
+          <h3>👤 Qui suis-je ?</h3>
+          <p>${role.description}</p>
+          <h3 style="margin-top:1.2rem">💬 Mes arguments pour débattre</h3>
+          <ul class="arguments-list">
+            ${role.arguments.map(a => `<li>${a}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ========================================================
+   VUE : INTERFACE ENSEIGNANT
+======================================================== */
+function afficherInterfaceEnseignant() {
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="zone">
+      <!-- ÉTAPE 1 : Choix du sujet -->
+      <div class="vue active" id="vue-choix-sujet">
+        <div class="etape-titre">Étape 1 — Choisir un sujet</div>
+        <div class="btn-row">
+          <button class="btn btn-vert" onclick="tirerSujetAuSort()">🎲 Tirage au sort</button>
+          <button class="btn btn-gris" onclick="afficherListeSujets()">📋 Choisir dans la liste</button>
+        </div>
+        <div id="sujet-affiche" style="display:none"></div>
+        <div id="liste-sujets" class="sujets-grid" style="margin-top:1.5rem"></div>
+        <div class="btn-row" id="btn-valider-sujet" style="display:none">
+          <button class="btn btn-orange" onclick="allerEtape2()">Continuer →</button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 2 : Répartition -->
+      <div class="vue" id="vue-repartition">
+        <div class="etape-titre">Étape 2 — Répartition des participants</div>
+        <p>Nombre de participants :</p>
+        <input type="number" id="input-participants" min="1" max="100" value="24" />
+        <div class="btn-row">
+          <button class="btn btn-vert" onclick="lancerRepartition()">🎲 Répartir au sort</button>
+          <button class="btn btn-gris" onclick="allerEtape1()">← Retour</button>
+        </div>
+        <div id="resultat-repartition"></div>
+        <div class="btn-row" id="btn-vers-qr" style="display:none">
+          <button class="btn btn-orange" onclick="allerEtape3()">Afficher les QR Codes →</button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 3 : QR Codes -->
+      <div class="vue" id="vue-qrcodes">
+        <div class="etape-titre">Étape 3 — QR Codes des rôles</div>
+        <p style="font-size:0.9rem;color:var(--gris);margin-bottom:0.5rem">
+          Cliquez sur "Révéler" pour afficher chaque QR Code au bon moment.
+        </p>
+        <div class="qr-grid" id="qr-grid"></div>
+        <div class="btn-row">
+          <button class="btn btn-gris" onclick="allerEtape2()">← Retour</button>
+          <button class="btn btn-vert" onclick="allerEtape1(true)">🔄 Nouvelle session</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ===== ÉTAPE 1 : sujets ===== */
+function tirerSujetAuSort() {
+  const idx = Math.floor(Math.random() * donnees.sujets.length);
+  sujetActif = { ...donnees.sujets[idx], _idx: idx };
+  afficherSujetChoisi();
+}
+
+function afficherListeSujets() {
+  const liste = document.getElementById('liste-sujets');
+  liste.innerHTML = donnees.sujets.map((s, i) => `
+    <div class="carte-sujet" onclick="choisirSujet(${i})">
+      <h3>${s.titre}</h3>
+      <div class="nb-roles">${s.roles.length} rôles</div>
+    </div>
+  `).join('');
+  document.getElementById('sujet-affiche').style.display = 'none';
+}
+
+function choisirSujet(idx) {
+  sujetActif = { ...donnees.sujets[idx], _idx: idx };
+  afficherSujetChoisi();
+  document.getElementById('liste-sujets').innerHTML = '';
+}
+
+function afficherSujetChoisi() {
+  const el = document.getElementById('sujet-affiche');
+  el.style.display = 'block';
+  el.innerHTML = `
+    <h2>📌 ${sujetActif.titre}</h2>
+    <p>${sujetActif.contexte}</p>
+    <p style="margin-top:0.6rem;font-size:0.85rem;color:var(--gris)">${sujetActif.roles.length} rôles disponibles</p>
+  `;
+  document.getElementById('btn-valider-sujet').style.display = 'flex';
+}
+
+function allerEtape1(reset = false) {
+  if (reset) { sujetActif = null; repartition = {}; }
+  afficherVue('vue-choix-sujet');
+  if (reset) {
+    document.getElementById('sujet-affiche').style.display = 'none';
+    document.getElementById('liste-sujets').innerHTML = '';
+    document.getElementById('btn-valider-sujet').style.display = 'none';
+  }
+}
+
+function allerEtape2() {
+  afficherVue('vue-repartition');
+  document.getElementById('resultat-repartition').innerHTML = '';
+  document.getElementById('btn-vers-qr').style.display = 'none';
+}
+
+/* ===== ÉTAPE 2 : répartition ===== */
+function lancerRepartition() {
+  const nb = parseInt(document.getElementById('input-participants').value);
+  if (!nb || nb < 1) return;
+
+  repartition = repartirNumerosEquitable(nb, sujetActif.roles);
+
+  let html = `<table class="repartition-table">
+    <thead><tr><th>Rôle</th><th>Numéros attribués</th></tr></thead><tbody>`;
+  sujetActif.roles.forEach(r => {
+    const nums = repartition[r.nom];
+    html += `<tr>
+      <td><strong>${r.emoji || ''} ${r.nom}</strong></td>
+      <td class="numeros">${nums.sort((a,b)=>a-b).join(', ')}</td>
+    </tr>`;
+  });
+  html += `</tbody></table>`;
+
+  document.getElementById('resultat-repartition').innerHTML = html;
+  document.getElementById('btn-vers-qr').style.display = 'flex';
+}
+
+/* ===== ÉTAPE 3 : QR Codes ===== */
+function allerEtape3() {
+  afficherVue('vue-qrcodes');
+  genererQRCodes();
+}
+
+function genererQRCodes() {
+  const grille = document.getElementById('qr-grid');
+  grille.innerHTML = '';
+
+  const baseURL = window.location.href.split('?')[0];
+  const idxSujet = sujetActif._idx;
+
+  sujetActif.roles.forEach((role, idxRole) => {
+    const url = `${baseURL}?sujet=${idxSujet}&role=${idxRole}`;
+    const nums = repartition[role.nom]
+      ? repartition[role.nom].sort((a,b)=>a-b).join(', ')
+      : '—';
+
+    const carte = document.createElement('div');
+    carte.className = 'qr-carte';
+    carte.innerHTML = `
+      <h4>${role.emoji || '🎭'} ${role.nom}</h4>
+      <div class="qr-masque" id="masque-${idxRole}">🔒 Masqué</div>
+      <div class="qr-contenu" id="qr-${idxRole}"></div>
+      <button class="btn-toggle-qr" onclick="toggleQR(${idxRole})">👁 Révéler</button>
+      <p style="font-size:0.75rem;margin-top:0.5rem;color:var(--gris)">
+        Numéros : <span style="color:var(--orange);font-weight:700">${nums}</span>
+      </p>
+    `;
+    grille.appendChild(carte);
+
+    // Générer le QR Code
+    new QRCode(document.getElementById(`qr-${idxRole}`), {
+      text: url,
+      width: 150,
+      height: 150,
+      colorDark: '#494949',
+      colorLight: '#ffffff'
+    });
+  });
+}
+
+function toggleQR(idxRole) {
+  const masque  = document.getElementById(`masque-${idxRole}`);
+  const contenu = document.getElementById(`qr-${idxRole}`);
+  const btn = masque.nextElementSibling.nextElementSibling; // le bouton
+
+  const estMasque = masque.style.display !== 'none';
+  masque.style.display  = estMasque ? 'none'  : 'flex';
+  contenu.style.display = estMasque ? 'block' : 'none';
+  btn.textContent = estMasque ? '🔒 Masquer' : '👁 Révéler';
+}
+
+/* ===== ÉTAPE 2 vers 1 ===== */
+function allerEtape1Depuis2() { allerEtape1(); }
+
+/* ========================================================
+   POINT D'ENTRÉE
+======================================================== */
+(async function init() {
+  const ok = await chargerDonnees();
+  if (!ok) return;
+
+  const params = getParams();
+
+  // Si l'URL contient des paramètres → vue fiche élève
+  if (params.has('sujet') && params.has('role')) {
+    afficherFicheActeur();
+  } else {
+    // Sinon → interface enseignant
+    afficherInterfaceEnseignant();
+  }
+})();
+</script>
+</body>
+</html>

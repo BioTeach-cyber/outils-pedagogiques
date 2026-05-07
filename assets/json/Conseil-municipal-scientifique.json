@@ -1,0 +1,115 @@
+{
+  "sujets": [
+    {
+      "titre": "Faut-il drainer cette zone humide ?",
+      "contexte": "La commune de Saint-Agri envisage de drainer une zone humide de 12 hectares pour agrandir les terres agricoles. Cette décision divise les habitants et les professionnels.",
+      "roles": [
+        {
+          "nom": "Agriculteur",
+          "emoji": "🚜",
+          "couleur": "#f3912b",
+          "position": "Pour le drainage",
+          "description": "Tu exploites une ferme familiale depuis 20 ans. Tes terres sont régulièrement inondées et tu as besoin de plus de surface cultivable pour assurer la viabilité de ton exploitation.",
+          "arguments": [
+            "Le drainage me permettrait de gagner 12 hectares supplémentaires et d'assurer l'avenir de mon exploitation.",
+            "Mes rendements ont chuté de 30% ces 5 dernières années à cause des inondations répétées."
+          ]
+        },
+        {
+          "nom": "Écologue",
+          "emoji": "🔬",
+          "couleur": "#7fbc48",
+          "position": "Contre le drainage",
+          "description": "Tu travailles pour une association de protection de la nature. Tu as étudié cette zone humide pendant 3 ans et tu connais sa richesse écologique.",
+          "arguments": [
+            "Cette zone humide abrite 14 espèces protégées d'amphibiens et d'oiseaux qui disparaîtraient définitivement.",
+            "Les zones humides filtrent naturellement l'eau et réduisent les crues : les supprimer aggravera les inondations en aval."
+          ]
+        },
+        {
+          "nom": "Élu municipal",
+          "emoji": "🏛️",
+          "couleur": "#53a4db",
+          "position": "Neutre — cherche un compromis",
+          "description": "Tu es adjoint à l'environnement de la commune. Tu dois trouver une solution qui satisfasse à la fois les agriculteurs et les défenseurs de la nature, tout en respectant la loi.",
+          "arguments": [
+            "La loi sur l'eau interdit le drainage sans compensation écologique : nous devons respecter ce cadre légal.",
+            "Je propose une étude d'impact et une réunion publique avant toute décision pour entendre toutes les parties."
+          ]
+        },
+        {
+          "nom": "Chasseur",
+          "emoji": "🦆",
+          "couleur": "#a5706c",
+          "position": "Contre le drainage",
+          "description": "Tu es président de la société de chasse locale. La zone humide est un lieu de chasse traditionnel très fréquenté, notamment pour le canard et le gibier d'eau.",
+          "arguments": [
+            "Cette zone humide attire des milliers d'oiseaux migrateurs chaque année : la détruire ruinerait la chasse locale.",
+            "La chasse génère des revenus pour les commerces du village et contribue à la régulation des espèces."
+          ]
+        }
+      ]
+    },
+    {
+      "titre": "Installation d'une retenue d'eau collinaire",
+      "contexte": "Face aux sécheresses répétées, un groupement d'agriculteurs souhaite construire une retenue d'eau collinaire de 50 000 m³ dans un vallon boisé. Le projet nécessite de couper 3 hectares de forêt.",
+      "roles": [
+        {
+          "nom": "Maraîcher bio",
+          "emoji": "🥕",
+          "couleur": "#7fbc48",
+          "position": "Pour la retenue",
+          "description": "Tu cultives des légumes en agriculture biologique. Depuis 3 ans, les sécheresses estivales te contraignent à réduire tes cultures faute d'eau d'irrigation.",
+          "arguments": [
+            "Sans irrigation sécurisée, je ne peux plus garantir mes livraisons aux restaurants et marchés locaux.",
+            "La retenue permettrait de stocker l'eau hivernale abondante pour l'utiliser en été : c'est du bon sens."
+          ]
+        },
+        {
+          "nom": "Représentant de l'ONF",
+          "emoji": "🌲",
+          "couleur": "#494949",
+          "position": "Contre dans l'état actuel",
+          "description": "Tu travailles à l'Office National des Forêts. Le vallon visé contient une forêt de feuillus âgée de 80 ans, avec des arbres remarquables.",
+          "arguments": [
+            "Couper 3 hectares de forêt centenaire détruirait un puits de carbone irremplaçable à court terme.",
+            "Il existe des sites alternatifs moins impactants pour implanter cette retenue : nous demandons une étude comparative."
+          ]
+        },
+        {
+          "nom": "Hydrologue",
+          "emoji": "💧",
+          "couleur": "#53a4db",
+          "position": "Favorable sous conditions",
+          "description": "Tu es spécialiste de la gestion de l'eau. Tu penses que les retenues collinaires peuvent être utiles mais mal conçues, elles peuvent assécher les ruisseaux en aval.",
+          "arguments": [
+            "Une retenue bien conçue avec un débit réservé minimum peut coexister avec les milieux aquatiques aval.",
+            "Je recommande une étude hydrologique complète pour s'assurer que le ruisseau en aval ne sera pas asséché."
+          ]
+        },
+        {
+          "nom": "Apiculteur",
+          "emoji": "🐝",
+          "couleur": "#f4d32e",
+          "position": "Contre le projet",
+          "description": "Tu possèdes 40 ruches dans le vallon et la forêt environnante. La floraison de cette forêt est essentielle pour la production de miel.",
+          "arguments": [
+            "Mes abeilles butinent cette forêt de mai à juillet : sa destruction réduirait ma production de miel de moitié.",
+            "La forêt fournit un microclimat frais indispensable à la survie de mes colonies lors des canicules."
+          ]
+        },
+        {
+          "nom": "Élu de la communauté de communes",
+          "emoji": "🗳️",
+          "couleur": "#a6539b",
+          "position": "Pour, avec des garanties",
+          "description": "Tu représentes les intérêts de 8 communes rurales. La sécurisation de l'eau agricole est une priorité pour maintenir l'activité économique du territoire.",
+          "arguments": [
+            "Sans eau, nos agriculteurs partent et nos villages se vident : la retenue est un investissement pour l'avenir du territoire.",
+            "Nous sommes prêts à financer une étude d'impact complète et des mesures compensatoires si le projet est validé."
+          ]
+        }
+      ]
+    }
+  ]
+}
