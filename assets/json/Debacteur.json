@@ -1,112 +1,2570 @@
 {
   "sujets": [
     {
-      "titre": "Faut-il drainer cette zone humide ?",
-      "contexte": "La commune de Saint-Agri envisage de drainer une zone humide de 12 hectares pour agrandir les terres agricoles. Cette décision divise les habitants et les professionnels.",
+      "id": 1,
+      "categorie": "🧬 Génétique & Hérédité",
+      "titre": "Un enfant peut-il hériter d'une maladie génétique même si ses deux parents sont en bonne santé ?",
+      "contexte": "Au conseil scientifique d'un lycée, une élève vient d'apprendre qu'elle est atteinte d'une maladie génétique rare. Ses parents, en parfaite santé, ne comprennent pas comment c'est possible. Le conseil réunit différents acteurs pour expliquer, débattre et décider des mesures d'accompagnement.",
       "roles": [
         {
-          "nom": "Agriculteur",
-          "emoji": "🚜",
-          "couleur": "#f3912b",
-          "position": "Pour le drainage",
-          "description": "Tu exploites une ferme familiale depuis 20 ans. Tes terres sont régulièrement inondées et tu as besoin de plus de surface cultivable pour assurer la viabilité de ton exploitation.",
-          "arguments": [
-            "Le drainage me permettrait de gagner 12 hectares supplémentaires et d'assurer l'avenir de mon exploitation.",
-            "Mes rendements ont chuté de 30% ces 5 dernières années à cause des inondations répétées."
-          ]
-        },
-        {
-          "nom": "Écologue",
-          "emoji": "🔬",
-          "couleur": "#7fbc48",
-          "position": "Contre le drainage",
-          "description": "Tu travailles pour une association de protection de la nature. Tu as étudié cette zone humide pendant 3 ans et tu connais sa richesse écologique.",
-          "arguments": [
-            "Cette zone humide abrite 14 espèces protégées d'amphibiens et d'oiseaux qui disparaîtraient définitivement.",
-            "Les zones humides filtrent naturellement l'eau et réduisent les crues : les supprimer aggravera les inondations en aval."
-          ]
-        },
-        {
-          "nom": "Élu municipal",
-          "emoji": "🏛️",
+          "nom": "Généticien",
+          "emoji": "🧬",
           "couleur": "#53a4db",
-          "position": "Neutre — cherche un compromis",
-          "description": "Tu es adjoint à l'environnement de la commune. Tu dois trouver une solution qui satisfasse à la fois les agriculteurs et les défenseurs de la nature, tout en respectant la loi.",
+          "position": "Neutre / Explicatif",
+          "description": "Tu es médecin spécialisé en génétique. Tu expliques que certaines maladies sont dites 'récessives' : les parents portent le gène sans être malades, mais si l'enfant hérite des deux copies défectueuses, la maladie se déclare.",
           "arguments": [
-            "La loi sur l'eau interdit le drainage sans compensation écologique : nous devons respecter ce cadre légal.",
-            "Je propose une étude d'impact et une réunion publique avant toute décision pour entendre toutes les parties."
+            "Une maladie récessive comme la mucoviscidose nécessite deux copies du gène muté : un parent porteur sur deux ne développe pas la maladie mais peut la transmettre.",
+            "On estime que chaque être humain est porteur sain d'environ 5 à 10 gènes défectueux sans le savoir."
           ]
         },
         {
-          "nom": "Chasseur",
-          "emoji": "🦆",
-          "couleur": "#a5706c",
-          "position": "Contre le drainage",
-          "description": "Tu es président de la société de chasse locale. La zone humide est un lieu de chasse traditionnel très fréquenté, notamment pour le canard et le gibier d'eau.",
+          "nom": "Parent de l'élève",
+          "emoji": "👨‍👩‍👧",
+          "couleur": "#f3912b",
+          "position": "Déstabilisé / En quête de sens",
+          "description": "Tu es le parent de l'élève malade. Tu te sens coupable et tu ne comprends pas comment tu as pu transmettre une maladie sans le savoir. Tu veux des réponses claires et un soutien psychologique.",
           "arguments": [
-            "Cette zone humide attire des milliers d'oiseaux migrateurs chaque année : la détruire ruinerait la chasse locale.",
-            "La chasse génère des revenus pour les commerces du village et contribue à la régulation des espèces."
+            "Personne ne nous a jamais proposé un test génétique avant notre grossesse : si on avait su, on aurait pu faire des choix éclairés.",
+            "Se sentir responsable sans l'avoir voulu, c'est une souffrance réelle qui nécessite un accompagnement."
+          ]
+        },
+        {
+          "nom": "Éthicien médical",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "Pour le dépistage, avec encadrement",
+          "description": "Tu travailles sur les questions éthiques liées à la médecine. Tu penses que le dépistage génétique des porteurs sains devrait être proposé à tous les futurs parents, mais encadré pour éviter les dérives.",
+          "arguments": [
+            "Proposer un dépistage systématique aux couples qui souhaitent avoir un enfant permettrait d'éviter des drames humains évitables.",
+            "Mais attention : ces informations sont sensibles et pourraient être utilisées par des assurances ou des employeurs — il faut une loi protectrice."
+          ]
+        },
+        {
+          "nom": "Représentant d'une association de patients",
+          "emoji": "🤝",
+          "couleur": "#7fbc48",
+          "position": "Pour la recherche et l'information",
+          "description": "Tu représentes une association qui soutient les familles touchées par des maladies génétiques rares. Tu milites pour plus de recherche, plus d'information et moins de tabou autour de ces maladies.",
+          "arguments": [
+            "Des milliers de familles vivent dans l'ignorance totale de leur statut de porteur sain : une campagne d'information nationale est indispensable.",
+            "La recherche génétique progresse vite : des thérapies géniques existent déjà pour certaines maladies — investir dans la recherche, c'est sauver des vies."
           ]
         }
       ]
     },
     {
-      "titre": "Installation d'une retenue d'eau collinaire",
-      "contexte": "Face aux sécheresses répétées, un groupement d'agriculteurs souhaite construire une retenue d'eau collinaire de 50 000 m³ dans un vallon boisé. Le projet nécessite de couper 3 hectares de forêt.",
+      "id": 2,
+      "categorie": "🧬 Génétique & Hérédité",
+      "titre": "Modifier les gènes d'un embryon pour supprimer une maladie héréditaire, c'est acceptable ?",
+      "contexte": "Un couple sait qu'il risque de transmettre une maladie génétique grave à ses futurs enfants. Des scientifiques proposent de modifier génétiquement l'embryon avant implantation. Le comité d'éthique d'un hôpital se réunit pour décider si cette technique doit être autorisée en France.",
       "roles": [
         {
-          "nom": "Maraîcher bio",
-          "emoji": "🥕",
-          "couleur": "#7fbc48",
-          "position": "Pour la retenue",
-          "description": "Tu cultives des légumes en agriculture biologique. Depuis 3 ans, les sécheresses estivales te contraignent à réduire tes cultures faute d'eau d'irrigation.",
-          "arguments": [
-            "Sans irrigation sécurisée, je ne peux plus garantir mes livraisons aux restaurants et marchés locaux.",
-            "La retenue permettrait de stocker l'eau hivernale abondante pour l'utiliser en été : c'est du bon sens."
-          ]
-        },
-        {
-          "nom": "Représentant de l'ONF",
-          "emoji": "🌲",
-          "couleur": "#494949",
-          "position": "Contre dans l'état actuel",
-          "description": "Tu travailles à l'Office National des Forêts. Le vallon visé contient une forêt de feuillus âgée de 80 ans, avec des arbres remarquables.",
-          "arguments": [
-            "Couper 3 hectares de forêt centenaire détruirait un puits de carbone irremplaçable à court terme.",
-            "Il existe des sites alternatifs moins impactants pour implanter cette retenue : nous demandons une étude comparative."
-          ]
-        },
-        {
-          "nom": "Hydrologue",
-          "emoji": "💧",
+          "nom": "Biologiste chercheur",
+          "emoji": "🔬",
           "couleur": "#53a4db",
-          "position": "Favorable sous conditions",
-          "description": "Tu es spécialiste de la gestion de l'eau. Tu penses que les retenues collinaires peuvent être utiles mais mal conçues, elles peuvent assécher les ruisseaux en aval.",
+          "position": "Pour, avec précautions",
+          "description": "Tu travailles sur la technique CRISPR-Cas9, qui permet de modifier le génome avec précision. Tu penses que cette technologie peut éliminer des maladies héréditaires dévastatrices.",
           "arguments": [
-            "Une retenue bien conçue avec un débit réservé minimum peut coexister avec les milieux aquatiques aval.",
-            "Je recommande une étude hydrologique complète pour s'assurer que le ruisseau en aval ne sera pas asséché."
+            "CRISPR permet de corriger une mutation génétique avec une précision inégalée : on peut cibler le gène défectueux sans toucher au reste du génome.",
+            "Si on peut éviter qu'un enfant souffre toute sa vie d'une maladie grave, refuser de le faire par principe devient difficile à justifier éthiquement."
           ]
         },
+        {
+          "nom": "Éthicien",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "Contre, risque de dérives",
+          "description": "Tu es favorable à la recherche médicale mais tu t'inquiètes des dérives possibles. Modifier un embryon, c'est modifier tous ses descendants : une décision irréversible aux conséquences imprévisibles.",
+          "arguments": [
+            "On ne peut pas donner son consentement à la place de l'enfant à naître pour une modification permanente et héréditaire de son génome.",
+            "Si on autorise la correction de maladies, où s'arrête-t-on ? Le 'bébé sur mesure' intelligent et grand n'est qu'un pas de plus."
+          ]
+        },
+        {
+          "nom": "Parent concerné",
+          "emoji": "👨‍👩‍👧",
+          "couleur": "#f3912b",
+          "position": "Pour, par amour parental",
+          "description": "Tu as déjà perdu un enfant à cause de cette maladie génétique. Tu attends un deuxième enfant et tu souhaites que la technique soit autorisée pour lui éviter la même souffrance.",
+          "arguments": [
+            "Voir son enfant souffrir et mourir d'une maladie qu'on aurait pu éviter, c'est insupportable : en tant que parent, j'ai le devoir de le protéger.",
+            "Ce n'est pas créer un enfant parfait, c'est juste lui éviter une maladie grave : la frontière me semble claire."
+          ]
+        },
+        {
+          "nom": "Représentant d'une association de personnes handicapées",
+          "emoji": "♿",
+          "couleur": "#7fbc48",
+          "position": "Contre, risque de discrimination",
+          "description": "Tu représentes des personnes vivant avec des maladies génétiques. Tu crains que vouloir 'effacer' ces maladies envoie un message négatif sur la valeur de leur vie.",
+          "arguments": [
+            "Dire qu'il faut supprimer ces gènes, c'est dire que des gens comme moi n'auraient pas dû naître : c'est une forme de discrimination.",
+            "La société devrait s'adapter aux personnes différentes plutôt que de chercher à les faire disparaître avant même leur naissance."
+          ]
+        },
+        {
+          "nom": "Juriste spécialisé en bioéthique",
+          "emoji": "📜",
+          "couleur": "#e62d32",
+          "position": "Neutre / Cadre légal",
+          "description": "Tu analyses les lois françaises et européennes en matière de bioéthique. Tu rappelles le cadre légal actuel et les garde-fous nécessaires avant toute autorisation.",
+          "arguments": [
+            "En France, la modification génétique germinale est actuellement interdite : toute autorisation nécessiterait une révision de la loi de bioéthique.",
+            "Le droit international interdit la modification du génome héréditaire humain : une décision nationale ne peut pas s'affranchir de ce cadre."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "categorie": "🧬 Génétique & Hérédité",
+      "titre": "Un enfant conçu pour sauver son frère malade a-t-il été instrumentalisé ?",
+      "contexte": "Un couple a eu recours à la sélection embryonnaire pour concevoir un enfant dont les cellules souches pourraient soigner leur fils aîné atteint d'une maladie du sang grave. Le comité d'éthique de l'hôpital débat des conséquences pour l'enfant conçu.",
+      "roles": [
+        {
+          "nom": "Médecin hématologue",
+          "emoji": "🩺",
+          "couleur": "#53a4db",
+          "position": "Pour, si encadré médicalement",
+          "description": "Tu traites l'enfant malade depuis des années. La greffe de cellules souches est sa seule chance de guérison. Sans donneur compatible, il mourra.",
+          "arguments": [
+            "Le prélèvement de cellules souches dans le sang du cordon ombilical est indolore pour le bébé donneur : le risque médical est quasi nul.",
+            "Cet enfant sauvera la vie de son frère et grandira dans une famille aimante : l'intention des parents n'est pas de l'exploiter."
+          ]
+        },
+        {
+          "nom": "Psychologue de l'enfant",
+          "emoji": "🧠",
+          "couleur": "#ee7bab",
+          "position": "Vigilant / Risque psychologique",
+          "description": "Tu travailles avec des enfants et tu t'interroges sur la construction identitaire d'un enfant qui sait qu'il a été conçu pour sauver quelqu'un.",
+          "arguments": [
+            "Grandir en sachant qu'on a été 'fabriqué' pour une mission peut engendrer une pression psychologique intense et des questions sur sa propre valeur.",
+            "Il faudra un suivi psychologique long terme pour cet enfant, afin qu'il construise son identité au-delà de son rôle de 'sauveur'."
+          ]
+        },
+        {
+          "nom": "Éthicien",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "Contre, instrumentalisation de l'enfant",
+          "description": "Tu t'appuies sur le principe kantien selon lequel on ne doit jamais utiliser un être humain uniquement comme moyen. Concevoir un enfant pour soigner un autre, c'est franchir cette ligne.",
+          "arguments": [
+            "Cet enfant n'a pas consenti à être conçu dans ce but : on lui a assigné une fonction avant même sa naissance.",
+            "Si on admet ce principe, on ouvre la porte à des dérives : concevoir des enfants pour d'autres usages médicaux futurs."
+          ]
+        },
+        {
+          "nom": "Parent de l'enfant malade",
+          "emoji": "👨‍👩‍👧",
+          "couleur": "#f3912b",
+          "position": "Pour, par amour",
+          "description": "Tu es le parent des deux enfants. Tu aimes profondément ton fils malade et tu es convaincu que le deuxième enfant sera lui aussi chéri pour lui-même, pas seulement pour ce qu'il apporte.",
+          "arguments": [
+            "On ne conçoit pas un enfant qu'on n'aime pas : notre deuxième enfant est désiré, aimé, et il sauvera son frère. C'est une chance pour tout le monde.",
+            "Des millions d'enfants sont conçus pour de mauvaises raisons sans que personne n'intervienne : pourquoi nous juger quand notre démarche est médicalement encadrée ?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "categorie": "🧬 Génétique & Hérédité",
+      "titre": "Connaître ses prédispositions génétiques à une maladie, est-ce vraiment une bonne chose ?",
+      "contexte": "Des tests ADN en ligne permettent désormais de connaître ses risques génétiques pour des maladies comme Alzheimer, le cancer du sein ou le diabète. Le conseil de santé publique débat de l'opportunité d'encadrer ou d'interdire ces tests vendus directement au grand public.",
+      "roles": [
+        {
+          "nom": "Médecin généraliste",
+          "emoji": "🩺",
+          "couleur": "#53a4db",
+          "position": "Pour, mais avec suivi médical",
+          "description": "Tu penses que connaître ses risques génétiques peut inciter à adopter de meilleures habitudes de vie, mais seulement si les résultats sont expliqués par un professionnel de santé.",
+          "arguments": [
+            "Une femme qui apprend qu'elle a une mutation BRCA1 peut décider de faire des mammographies plus tôt et plus souvent : ça sauve des vies.",
+            "Sans accompagnement médical, ces résultats peuvent être mal interprétés et provoquer une anxiété injustifiée ou une fausse sécurité."
+          ]
+        },
+        {
+          "nom": "Représentant d'une entreprise de tests ADN",
+          "emoji": "💼",
+          "couleur": "#7fbc48",
+          "position": "Pour, liberté d'information",
+          "description": "Tu défends le droit de chacun à accéder à ses propres données génétiques. Ton entreprise propose des tests accessibles, rapides et abordables.",
+          "arguments": [
+            "Chacun a le droit de connaître ses propres données biologiques : interdire ces tests, c'est une atteinte à la liberté individuelle.",
+            "Nos tests sont basés sur des études scientifiques solides et nos clients sont informés des limites des résultats."
+          ]
+        },
+        {
+          "nom": "Psychologue",
+          "emoji": "🧠",
+          "couleur": "#ee7bab",
+          "position": "Vigilant / Impact psychologique",
+          "description": "Tu t'inquiètes de l'impact psychologique d'apprendre qu'on a un risque élevé de développer une maladie grave, notamment Alzheimer, pour laquelle il n'existe pas de traitement curatif.",
+          "arguments": [
+            "Apprendre à 30 ans qu'on a un risque élevé d'Alzheimer sans pouvoir rien y faire peut détruire la qualité de vie d'une personne.",
+            "Ces tests sont vendus sans filet de sécurité psychologique : personne n'appelle pour demander si vous allez bien après avoir reçu des résultats bouleversants."
+          ]
+        },
+        {
+          "nom": "Juriste spécialisé en protection des données",
+          "emoji": "📜",
+          "couleur": "#e62d32",
+          "position": "Contre, risque de discrimination",
+          "description": "Tu t'inquiètes de l'utilisation des données génétiques par des tiers : assurances, employeurs, algorithmes. Ces données sont les plus personnelles qui existent.",
+          "arguments": [
+            "Une compagnie d'assurance qui accède à vos données génétiques pourrait refuser de vous couvrir ou augmenter vos primes.",
+            "Les données génétiques ne vous concernent pas seulement vous : elles révèlent des informations sur toute votre famille sans son consentement."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "categorie": "🧠 Cerveau & Comportement",
+      "titre": "Le cerveau d'un adolescent est-il suffisamment mature pour prendre de grandes décisions ?",
+      "contexte": "Le parlement débat d'un projet de loi pour abaisser la majorité pénale à 16 ans. Des experts sont convoqués pour discuter de la maturité cérébrale des adolescents et de ses implications juridiques.",
+      "roles": [
+        {
+          "nom": "Neuroscientifique",
+          "emoji": "🧠",
+          "couleur": "#53a4db",
+          "position": "Contre l'abaissement, cerveau immature",
+          "description": "Tu études le développement du cerveau adolescent. Tu expliques que le cortex préfrontal, siège du raisonnement et du contrôle des impulsions, n'est pas mature avant 25 ans environ.",
+          "arguments": [
+            "L'IRM montre clairement que le cortex préfrontal des adolescents est encore en développement : la prise de risque et l'impulsivité sont biologiquement favorisées à cet âge.",
+            "Juger un adolescent comme un adulte sans tenir compte de son cerveau immature, c'est scientifiquement injuste."
+          ]
+        },
+        {
+          "nom": "Juge pour enfants",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "Pour la responsabilisation, avec nuances",
+          "description": "Tu travailles quotidiennement avec des mineurs ayant commis des actes graves. Tu penses que la maturité n'est pas seulement une question de cerveau mais aussi de contexte et d'éducation.",
+          "arguments": [
+            "J'ai vu des adolescents de 16 ans parfaitement conscients de leurs actes et capables de raisonnement moral élaboré.",
+            "La réponse pénale doit être proportionnée et éducative, pas uniquement punitive, mais l'impunité totale n'est pas non plus une solution."
+          ]
+        },
+        {
+          "nom": "Représentant d'association de victimes",
+          "emoji": "🤝",
+          "couleur": "#e62d32",
+          "position": "Pour l'abaissement",
+          "description": "Tu représentes des familles victimes de violences commises par des mineurs. Tu estimes que les peines actuelles sont trop légères et que la société doit mieux protéger les victimes.",
+          "arguments": [
+            "Quand un adolescent de 17 ans commet un meurtre prémédité, dire qu'il ne savait pas ce qu'il faisait, c'est insultant pour les victimes.",
+            "Les peines légères n'ont aucun effet dissuasif : des sanctions plus sévères enverraient un signal clair à la société."
+          ]
+        },
+        {
+          "nom": "Éducateur spécialisé",
+          "emoji": "🏫",
+          "couleur": "#7fbc48",
+          "position": "Pour l'accompagnement, contre la prison",
+          "description": "Tu travailles avec des adolescents en difficulté depuis 15 ans. Tu penses que la prison aggrave les problèmes et que la prévention et l'éducation sont plus efficaces.",
+          "arguments": [
+            "Un adolescent incarcéré sort presque toujours plus dangereux qu'il n'est entré : la prison est une école du crime, pas de la réinsertion.",
+            "Investir dans l'éducation, le sport, l'accompagnement familial coûte moins cher et donne de bien meilleurs résultats sur le long terme."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "categorie": "🧠 Cerveau & Comportement",
+      "titre": "La dépression est-elle une vraie maladie comme le diabète ?",
+      "contexte": "Dans une école, un élève est absent depuis plusieurs semaines pour dépression. Certains professeurs et parents minimisent la situation. Le conseil d'établissement réunit différents acteurs pour débattre de la reconnaissance de la maladie mentale.",
+      "roles": [
+        {
+          "nom": "Psychiatre",
+          "emoji": "🧠",
+          "couleur": "#53a4db",
+          "position": "Oui, c'est une vraie maladie",
+          "description": "Tu soignes des patients dépressifs depuis des années. Tu expliques que la dépression a des bases biologiques mesurables et qu'elle nécessite un traitement médical sérieux.",
+          "arguments": [
+            "L'IRM cérébrale montre des altérations mesurables chez les personnes dépressives : c'est une maladie du cerveau, pas une faiblesse de caractère.",
+            "La dépression non traitée peut être mortelle : le suicide est la première cause de mort chez les 15-35 ans en France."
+          ]
+        },
+        {
+          "nom": "Parent d'élève sceptique",
+          "emoji": "👨‍👩‍👧",
+          "couleur": "#f3912b",
+          "position": "Sceptique / Idées reçues",
+          "description": "Tu penses que la dépression est souvent exagérée et que les jeunes manquent de volonté. Tu crois qu'un peu d'effort et de sport suffit à aller mieux.",
+          "arguments": [
+            "De mon temps, on ne se plaignait pas autant : les jeunes aujourd'hui sont trop fragiles et la société les encourage à se victimiser.",
+            "Les médicaments antidépresseurs créent une dépendance et ne règlent pas les vrais problèmes : mieux vaut apprendre à surmonter les difficultés."
+          ]
+        },
+        {
+          "nom": "Élève ayant vécu une dépression",
+          "emoji": "🎒",
+          "couleur": "#ee7bab",
+          "position": "Oui, témoignage vécu",
+          "description": "Tu as toi-même traversé une dépression sévère l'an dernier. Tu témoignes de ce que tu as vécu pour briser les tabous et défendre la reconnaissance de cette maladie.",
+          "arguments": [
+            "Ce n'est pas un manque de volonté : je ne pouvais littéralement plus me lever le matin, plus manger, plus penser — c'est une souffrance physique réelle.",
+            "Les moqueries et le manque de compréhension de mon entourage ont retardé ma demande d'aide de plusieurs mois : ça aurait pu me coûter la vie."
+          ]
+        },
+        {
+          "nom": "Infirmière scolaire",
+          "emoji": "🏥",
+          "couleur": "#7fbc48",
+          "position": "Pour la prise en charge à l'école",
+          "description": "Tu es au contact quotidien des élèves. Tu plaides pour que l'école soit mieux formée à détecter et accompagner les élèves en souffrance psychologique.",
+          "arguments": [
+            "Je vois chaque semaine des élèves qui souffrent en silence : l'école doit être un lieu de détection précoce, pas uniquement d'instruction.",
+            "Former les enseignants à reconnaître les signes de dépression permettrait d'orienter les élèves vers des professionnels bien plus tôt."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "categorie": "🧠 Cerveau & Comportement",
+      "titre": "Une personne atteinte d'Alzheimer est-elle encore la même personne ?",
+      "contexte": "La famille d'une patiente atteinte d'Alzheimer sévère débat avec l'équipe médicale de la maison de retraite de la prise en charge et de l'identité de la personne malade. Un comité éthique local est réuni.",
+      "roles": [
+        {
+          "nom": "Médecin gériatre",
+          "emoji": "🩺",
+          "couleur": "#53a4db",
+          "position": "Oui, la personne reste elle-même",
+          "description": "Tu soignes des patients Alzheimer depuis 20 ans. Tu défends l'idée que la personne conserve une identité au-delà de ses souvenirs, dans ses émotions et ses réactions corporelles.",
+          "arguments": [
+            "Même au stade avancé, mes patients réagissent à la musique de leur enfance, sourient à certaines personnes : l'identité n'est pas que dans la mémoire.",
+            "Traiter ces patients comme s'ils n'étaient 'plus là' est une erreur médicale et humaine qui aggrave leur état."
+          ]
+        },
+        {
+          "nom": "Philosophe",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "Question ouverte, débat identitaire",
+          "description": "Tu t'interroges sur la notion d'identité personnelle. Si une personne ne se souvient plus de qui elle est, de ses proches, de ses valeurs, est-elle encore la même ?",
+          "arguments": [
+            "John Locke définissait l'identité personnelle par la continuité de la mémoire : sans mémoire, la continuité du moi est philosophiquement problématique.",
+            "Mais d'autres philosophes soulignent que le corps, les habitudes, les émotions constituent aussi une forme d'identité qui persiste au-delà des souvenirs."
+          ]
+        },
+        {
+          "nom": "Proche aidant",
+          "emoji": "❤️",
+          "couleur": "#f3912b",
+          "position": "Douleur du deuil blanc",
+          "description": "Tu es le conjoint de la patiente. Tu vis ce qu'on appelle le 'deuil blanc' : perdre quelqu'un qui est encore vivant. Tu partages ta souffrance et tes interrogations.",
+          "arguments": [
+            "Elle ne me reconnaît plus, ne se souvient plus de nos 40 ans de vie commune : pour moi, c'est comme si elle était déjà partie, et cette ambiguïté est insupportable.",
+            "Mais parfois, dans un regard, un geste, je la retrouve : et c'est pour ces moments que je continue à venir chaque jour."
+          ]
+        },
+        {
+          "nom": "Aide-soignante",
+          "emoji": "🏥",
+          "couleur": "#7fbc48",
+          "position": "Pour le respect de la dignité",
+          "description": "Tu travailles quotidiennement auprès de résidents atteints d'Alzheimer. Tu défends leur dignité et leur humanité quelle que soit l'évolution de la maladie.",
+          "arguments": [
+            "Ces personnes ressentent la douleur, le plaisir, la peur, la joie : les ignorer ou les infantiliser parce qu'elles ne parlent plus est une violence.",
+            "Mon rôle est de maintenir leur confort et leur dignité jusqu'au bout, quelle que soit la réponse à la question philosophique de leur identité."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "categorie": "🫀 Corps humain & Médecine",
+      "titre": "Devrait-on prélever automatiquement les organes de toute personne décédée ?",
+      "contexte": "En France, la loi Claeys-Leonetti impose le consentement présumé au don d'organes. Mais de nombreuses familles s'y opposent encore au moment du décès. Un comité de santé publique débat d'un renforcement ou non de cette loi.",
+      "roles": [
+        {
+          "nom": "Médecin transplanteur",
+          "emoji": "🏥",
+          "couleur": "#53a4db",
+          "position": "Pour le prélèvement automatique",
+          "description": "Tu réalises des greffes d'organes. Tu vois chaque jour des patients mourir faute de greffon disponible. Tu défends le prélèvement automatique pour sauver des vies.",
+          "arguments": [
+            "En France, 500 personnes meurent chaque année faute de greffon disponible : le refus des familles bloque encore trop de prélèvements.",
+            "Un corps mort n'a pas besoin de ses organes : les utiliser pour sauver des vivants est un acte de solidarité logique."
+          ]
+        },
+        {
+          "nom": "Représentant religieux",
+          "emoji": "🕌",
+          "couleur": "#a6539b",
+          "position": "Contre, respect du corps",
+          "description": "Tu représentes une communauté religieuse pour qui l'intégrité du corps après la mort a une importance spirituelle. Tu n'es pas contre le don, mais contre l'absence de choix.",
+          "arguments": [
+            "Pour nous, le corps est sacré même après la mort : imposer un prélèvement sans consentement explicite viole une croyance fondamentale.",
+            "La liberté de conscience et de religion est un droit fondamental : l'État ne peut pas l'ignorer au nom de l'utilitarisme médical."
+          ]
+        },
+        {
+          "nom": "Famille ayant refusé le prélèvement",
+          "emoji": "👨‍👩‍👧",
+          "couleur": "#f3912b",
+          "position": "Contre, respect de la famille",
+          "description": "Tu as refusé le prélèvement d'organes de ton proche décédé, par respect de ses convictions et de tes propres valeurs. Tu trouves insupportable qu'on puisse passer outre.",
+          "arguments": [
+            "Mon proche n'avait jamais explicitement dit qu'il voulait donner ses organes : comment pourrais-je accepter qu'on le découpe sans son accord clairement exprimé ?",
+            "Dans un moment de deuil intense, on nous demande de signer des papiers en urgence : ce n'est pas un contexte où on peut décider librement."
+          ]
+        },
+        {
+          "nom": "Patient en attente de greffe",
+          "emoji": "🩺",
+          "couleur": "#7fbc48",
+          "position": "Pour, urgence vitale",
+          "description": "Tu es en attente d'une greffe de rein depuis 4 ans. Ton quotidien est rythmé par les dialyses. Tu plaides pour que davantage d'organes soient disponibles.",
+          "arguments": [
+            "Chaque semaine qui passe sans greffe détériore un peu plus ma santé : la liste d'attente est une liste de condamnés à mort au ralenti.",
+            "Si ma mort peut sauver quelqu'un, j'espère que mes organes seront prélevés : je ne comprends pas qu'on puisse refuser d'offrir ce cadeau."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "categorie": "🫀 Corps humain & Médecine",
+      "titre": "Une personne en bonne santé devrait-elle pouvoir choisir librement l'euthanasie ?",
+      "contexte": "Le parlement examine un projet de loi sur l'aide active à mourir. Contrairement aux propositions actuelles limitées aux malades en phase terminale, un amendement propose d'élargir le droit à l'euthanasie aux personnes souffrant de façon insupportable, même sans maladie physique. Un comité d'éthique est réuni.",
+      "roles": [
+        {
+          "nom": "Médecin en soins palliatifs",
+          "emoji": "🏥",
+          "couleur": "#53a4db",
+          "position": "Contre, développer les soins palliatifs",
+          "description": "Tu accompagnes des mourants depuis 15 ans. Tu t'opposes à l'euthanasie et plaides pour le développement des soins palliatifs qui permettent de mourir dans la dignité sans donner la mort.",
+          "arguments": [
+            "95% des demandes d'euthanasie disparaissent quand les patients bénéficient de soins palliatifs de qualité : la vraie demande, c'est de ne pas souffrir, pas de mourir.",
+            "Autoriser un médecin à donner la mort brise un tabou fondateur de la médecine et détruira la relation de confiance patient-médecin."
+          ]
+        },
+        {
+          "nom": "Philosophe libéral",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "Pour, liberté individuelle absolue",
+          "description": "Tu défends le principe d'autonomie : chaque individu est souverain sur son propre corps et sa propre vie, y compris sur la décision d'y mettre fin.",
+          "arguments": [
+            "Si une personne adulte et lucide décide que sa vie ne vaut pas la peine d'être vécue, qui sommes-nous pour lui imposer de continuer contre sa volonté ?",
+            "Interdire l'euthanasie, c'est imposer ses valeurs morales à autrui : dans une société laïque, chacun doit pouvoir choisir sa mort comme il choisit sa vie."
+          ]
+        },
+        {
+          "nom": "Représentant d'une association de personnes handicapées",
+          "emoji": "♿",
+          "couleur": "#e62d32",
+          "position": "Contre, pression sur les vulnérables",
+          "description": "Tu crains que l'euthanasie élargie crée une pression implicite sur les personnes handicapées ou âgées qui se sentiraient un 'fardeau' pour leur entourage.",
+          "arguments": [
+            "Dans des pays où l'euthanasie est légale, des personnes handicapées témoignent de pressions familiales ou sociales pour choisir la mort : c'est une dérive réelle.",
+            "Ma vie vaut d'être vécue même si elle est différente, limitée, douloureuse : légaliser l'euthanasie large envoie le message que certaines vies valent moins."
+          ]
+        },
+        {
+          "nom": "Proche d'une personne décédée dans la souffrance",
+          "emoji": "❤️",
+          "couleur": "#f3912b",
+          "position": "Pour, fin de la souffrance",
+          "description": "Tu as vu ton proche mourir dans des souffrances intolérables malgré les soins palliatifs. Tu témoignes de ce vécu pour plaider pour le droit à une mort digne choisie.",
+          "arguments": [
+            "J'ai regardé mon père souffrir pendant trois semaines alors qu'il me suppliait de l'aider à partir : aucune loi ne devrait imposer ça à un être humain.",
+            "La mort dans la dignité devrait être un droit fondamental : mourir dans la souffrance quand on ne le veut pas est une forme de torture."
+          ]
+        },
+        {
+          "nom": "Psychiatre",
+          "emoji": "🧠",
+          "couleur": "#7fbc48",
+          "position": "Très vigilant pour les cas psychiatriques",
+          "description": "Tu travailles avec des patients dépressifs et suicidaires. Tu t'inquiètes que des personnes en crise psychologique puissent accéder à l'euthanasie alors que leur souffrance est traitable.",
+          "arguments": [
+            "La dépression sévère altère le jugement et la perception de l'avenir : une personne en crise n'est pas en mesure de prendre une décision irréversible de façon lucide.",
+            "Au Benelux, des personnes dépressives ont été euthanasiées : plusieurs cas ont été reconnus comme des erreurs après coup. C'est une dérive que je ne peux pas accepter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "categorie": "🫀 Corps humain & Médecine",
+      "titre": "Refuser une transfusion sanguine pour raisons religieuses devrait-il être respecté par les médecins ?",
+      "contexte": "Aux urgences, un patient adulte, Témoin de Jéhovah, refuse une transfusion sanguine qui pourrait lui sauver la vie. Il est conscient et lucide. L'équipe médicale est divisée. Le comité d'éthique de l'hôpital est convoqué en urgence.",
+      "roles": [
+        {
+          "nom": "Médecin urgentiste",
+          "emoji": "🚨",
+          "couleur": "#e62d32",
+          "position": "Pour transfuser, devoir de sauver",
+          "description": "Tu es face à un patient qui va mourir dans les heures qui suivent sans transfusion. Ton serment est de sauver des vies. Tu trouves insupportable de laisser mourir quelqu'un qu'on peut sauver.",
+          "arguments": [
+            "Mon devoir de médecin est de sauver des vies : laisser mourir un patient que je pourrais sauver va à l'encontre de tout ce que je suis.",
+            "La mort est irréversible : si ce patient survit et change d'avis sur sa religion, il me remerciera. S'il meurt, on ne peut plus revenir en arrière."
+          ]
+        },
+        {
+          "nom": "Juriste médical",
+          "emoji": "📜",
+          "couleur": "#53a4db",
+          "position": "Pour respecter le refus, autonomie du patient",
+          "description": "Tu rappelles que la loi française reconnaît le droit du patient adulte et lucide à refuser un traitement, même vital. Passer outre est légalement une agression.",
+          "arguments": [
+            "La loi Kouchner de 2002 garantit à tout patient adulte et conscient le droit de refuser un traitement : transgresser cette loi expose le médecin à des poursuites pénales.",
+            "Respecter l'autonomie du patient, même jusqu'à la mort, est un principe fondateur de la médecine moderne : on ne peut pas soigner quelqu'un contre sa volonté."
+          ]
+        },
+        {
+          "nom": "Représentant religieux Témoin de Jéhovah",
+          "emoji": "📖",
+          "couleur": "#a6539b",
+          "position": "Pour respecter la conviction religieuse",
+          "description": "Tu représentes la communauté du patient. Pour les Témoins de Jéhovah, accepter une transfusion sanguine est un péché grave qui met en danger le salut éternel.",
+          "arguments": [
+            "Pour notre foi, le sang est sacré et ne doit pas être transfusé : cette conviction est aussi profonde et respectable que n'importe quelle autre croyance.",
+            "Il existe des alternatives médicales à la transfusion : les médecins devraient explorer ces options plutôt que d'imposer leur conception de la vie."
+          ]
+        },
+        {
+          "nom": "Infirmière",
+          "emoji": "🏥",
+          "couleur": "#7fbc48",
+          "position": "Partagée, entre loi et conscience",
+          "description": "Tu es au chevet du patient. Tu comprends les deux positions mais tu vis un conflit de conscience intense : respecter la loi ou suivre ton instinct de soignante.",
+          "arguments": [
+            "Je respecte les convictions de ce patient, mais le regarder mourir alors que j'ai le médicament dans la main, c'est une souffrance professionnelle que personne ne prend en compte.",
+            "Les soignants aussi ont une conscience : on nous demande d'appliquer des décisions éthiques complexes sans nous donner les moyens psychologiques de les supporter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "categorie": "🤰 Reproduction & Filiation",
+      "titre": "Une mère porteuse est-elle la vraie mère ?",
+      "contexte": "Un couple a eu recours à une mère porteuse à l'étranger. À leur retour en France, les autorités refusent de transcrire la filiation de l'enfant. Le tribunal de famille réunit les différentes parties pour statuer.",
+      "roles": [
+        {
+          "nom": "Mère porteuse",
+          "emoji": "🤰",
+          "couleur": "#ee7bab",
+          "position": "Non, je ne suis pas la mère",
+          "description": "Tu as porté l'enfant pour ce couple. Tu n'as aucun lien génétique avec lui (ovule d'une donneuse). Tu considères que tu as rendu un service et que la mère, c'est celle qui éduquera cet enfant.",
+          "arguments": [
+            "Je savais depuis le début que cet enfant n'était pas le mien : j'ai fait un choix libre et éclairé pour aider un couple à avoir un enfant.",
+            "La maternité, ce n'est pas la grossesse : c'est l'amour, l'éducation, le lien construit jour après jour. Cette mère-là, c'est celle qui attend cet enfant."
+          ]
+        },
+        {
+          "nom": "Mère d'intention",
+          "emoji": "❤️",
+          "couleur": "#f3912b",
+          "position": "Oui, je suis la vraie mère",
+          "description": "Tu es la femme du couple commanditaire. Tu as fourni l'ovule ou non, mais tu as porté ce projet, tu attends cet enfant et tu l'élèveras. Tu revendiques ta maternité.",
+          "arguments": [
+            "J'ai porté ce désir d'enfant pendant des années, j'ai subi des traitements médicaux éprouvants : cet enfant est le mien autant que si je l'avais porté.",
+            "La loi française doit évoluer : refuser de reconnaître ma maternité pénalise avant tout l'enfant qui se retrouve sans filiation légale."
+          ]
+        },
+        {
+          "nom": "Juriste spécialisé en droit de la famille",
+          "emoji": "📜",
+          "couleur": "#53a4db",
+          "position": "Complexe, la loi française est claire mais inadaptée",
+          "description": "Tu rappelles qu'en France, la maternité est définie par l'accouchement. La GPA est interdite. Mais la jurisprudence évolue sous pression de la Cour européenne des droits de l'homme.",
+          "arguments": [
+            "En droit français, mater semper certa est : la mère est celle qui accouche. La GPA contourne ce principe fondateur, d'où l'interdiction.",
+            "Mais la CEDH a condamné la France pour avoir refusé la transcription de filiation : l'intérêt supérieur de l'enfant prime sur les principes juridiques nationaux."
+          ]
+        },
+        {
+          "nom": "Éthicien féministe",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "Contre la GPA, exploitation du corps féminin",
+          "description": "Tu t'opposes à la gestation pour autrui au nom de la protection des femmes. Tu crains que cette pratique marchandise le corps féminin, surtout dans les pays pauvres.",
+          "arguments": [
+            "Dans la majorité des cas mondiaux, les mères porteuses sont des femmes pauvres qui louent leur corps par nécessité économique : c'est une exploitation déguisée.",
+            "Même 'altruiste', la GPA demande à une femme de porter neuf mois un enfant qu'elle devra abandonner : la souffrance psychologique est réelle et documentée."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "categorie": "🤰 Reproduction & Filiation",
+      "titre": "Un enfant conçu par FIV a-t-il le droit de connaître son donneur de sperme ?",
+      "contexte": "La loi de bioéthique de 2021 a ouvert le droit d'accès aux origines pour les enfants conçus par don de gamètes. Des donneurs anonymes s'inquiètent. Des enfants nés de dons revendiquent ce droit. Un débat public est organisé.",
+      "roles": [
+        {
+          "nom": "Enfant né d'un don (adulte)",
+          "emoji": "🔍",
+          "couleur": "#53a4db",
+          "position": "Pour le droit à la connaissance des origines",
+          "description": "Tu es né d'un don de sperme anonyme. Depuis toujours, tu te demandes qui est ton père biologique, à qui tu ressembles, quels sont tes antécédents médicaux.",
+          "arguments": [
+            "Connaître ses origines est un besoin identitaire fondamental : ne pas savoir d'où on vient crée un vide douloureux que rien ne peut combler.",
+            "Mes antécédents médicaux génétiques sont essentiels pour ma santé : ignorer les maladies héréditaires de mon donneur me met en danger."
+          ]
+        },
+        {
+          "nom": "Donneur anonyme",
+          "emoji": "👨",
+          "couleur": "#f3912b",
+          "position": "Contre la levée de l'anonymat",
+          "description": "Tu as donné ton sperme il y a 20 ans dans la promesse d'un anonymat total. Tu as une famille qui ne sait pas. Tu t'inquiètes des conséquences d'une prise de contact.",
+          "arguments": [
+            "J'ai donné dans des conditions légales qui garantissaient mon anonymat : changer les règles rétroactivement est une rupture de contrat moral.",
+            "Je ne suis pas le père de cet enfant : je suis un donneur. Être contacté par des inconnus que je n'ai pas voulu pour enfants bouleverserait ma vie de famille."
+          ]
+        },
+        {
+          "nom": "Médecin de la CECOS (centre de don)",
+          "emoji": "🏥",
+          "couleur": "#7fbc48",
+          "position": "Pour, avec accompagnement",
+          "description": "Tu travailles dans un centre de don de gamètes. Tu soutiens la loi de 2021 qui permet la levée de l'anonymat à la majorité, avec un accompagnement psychologique des deux parties.",
+          "arguments": [
+            "La loi de 2021 est un bon compromis : les anciens dons restent anonymes, seuls les nouveaux donneurs acceptent la levée possible de l'anonymat à la majorité.",
+            "Dans les pays où cela existe depuis longtemps, comme la Suède, le nombre de donneurs n'a pas chuté : la peur de la pénurie est infondée."
+          ]
+        },
+        {
+          "nom": "Parent ayant eu recours au don",
+          "emoji": "👨‍👩‍👧",
+          "couleur": "#a6539b",
+          "position": "Partagé, protection de la famille constituée",
+          "description": "Tu as eu ton enfant grâce à un don. Tu l'as élevé, tu es son parent. Tu crains que la recherche du donneur ne remette en question ta place de père ou mère.",
+          "arguments": [
+            "Je suis le vrai parent de cet enfant : je l'ai élevé, accompagné, aimé depuis sa naissance. La biologie ne fait pas tout.",
+            "Je comprends le besoin de connaître ses origines médicales, mais une rencontre avec le donneur risque de bouleverser l'équilibre familial que nous avons construit."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "categorie": "🌿 Vivant, Animal & Écologie",
+      "titre": "Tuer un animal pour le manger est-il un acte moral ?",
+      "contexte": "Dans le cadre d'un projet éducatif sur l'alimentation durable, un lycée agricole organise un débat entre élèves, enseignants et intervenants extérieurs sur la question de la consommation de viande et de son rapport à l'éthique.",
+      "roles": [
+        {
+          "nom": "Éleveur",
+          "emoji": "🐄",
+          "couleur": "#7fbc48",
+          "position": "Oui, si l'animal est bien traité",
+          "description": "Tu élèves des bovins en plein air. Tu as un rapport respectueux avec tes animaux. Tu défends une consommation de viande responsable et locale.",
+          "arguments": [
+            "Mes animaux ont une vie de qualité : espace, herbe, soins. Les tuer pour nous nourrir fait partie d'un cycle naturel que nos ancêtres ont toujours respecté.",
+            "Supprimer l'élevage, c'est supprimer des paysages entretenus, des emplois ruraux et une partie de notre patrimoine culturel et gastronomique."
+          ]
+        },
+        {
+          "nom": "Militant végane",
+          "emoji": "🌱",
+          "couleur": "#a6539b",
+          "position": "Non, la mort d'un être sensible n'est jamais morale",
+          "description": "Tu milites pour les droits des animaux. Tu défends l'idée qu'aucune raison gustative ne justifie de tuer un être capable de souffrir.",
+          "arguments": [
+            "Un animal ressent la douleur, la peur et le stress de la mort : tuer un être sensible pour le plaisir du goût est une violence que rien ne justifie.",
+            "On peut aujourd'hui vivre en parfaite santé sans consommer de produits animaux : l'argument de la nécessité ne tient plus."
+          ]
+        },
+        {
+          "nom": "Nutritionniste",
+          "emoji": "🥗",
+          "couleur": "#53a4db",
+          "position": "Neutre, équilibre alimentaire d'abord",
+          "description": "Tu abordes la question sous l'angle de la santé. Tu défends une alimentation équilibrée qui peut inclure ou non de la viande selon les besoins individuels.",
+          "arguments": [
+            "La viande apporte des protéines complètes, du fer héminique et de la vitamine B12 difficiles à obtenir en quantité suffisante dans une alimentation végétale sans supplémentation.",
+            "Mais une consommation excessive de viande rouge augmente les risques de cancer colorectal : la modération est la clé, pas l'extrémisme dans un sens ou dans l'autre."
+          ]
+        },
+        {
+          "nom": "Philosophe spécialiste de l'éthique animale",
+          "emoji": "📚",
+          "couleur": "#f3912b",
+          "position": "Question ouverte, selon les conditions",
+          "description": "Tu travailles sur la question de la sensibilité animale et du statut moral des animaux. Tu proposes une réflexion nuancée qui distingue les espèces et les conditions d'élevage.",
+          "arguments": [
+            "Peter Singer défend que si un être est capable de souffrir, il a un intérêt à ne pas souffrir qui mérite considération morale : l'espèce importe peu.",
+            "Mais la question n'est peut-être pas 'est-ce moral de tuer ?' mais 'dans quelles conditions ?' : un poulet élevé en batterie et un boeuf en plein air posent des questions morales très différentes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "categorie": "🌿 Vivant, Animal & Écologie",
+      "titre": "Éradiquer définitivement le moustique tigre serait-il une bonne idée ?",
+      "contexte": "Une commune du Sud de la France est infestée de moustiques tigres vecteurs de maladies graves. Des scientifiques proposent d'utiliser des moustiques génétiquement modifiés pour éliminer l'espèce localement. Le conseil municipal débat de cette décision.",
+      "roles": [
+        {
+          "nom": "Entomologiste",
+          "emoji": "🦟",
+          "couleur": "#53a4db",
+          "position": "Très prudent, risque écologique",
+          "description": "Tu étudies les insectes depuis 20 ans. Tu rappelles que chaque espèce, même nuisible, joue un rôle dans l'écosystème et que son élimination peut avoir des conséquences imprévisibles.",
+          "arguments": [
+            "Le moustique tigre est une source de nourriture pour des chauves-souris, des oiseaux et des libellules : son élimination totale pourrait déséquilibrer des chaînes alimentaires locales.",
+            "Une fois une espèce éradiquée, on ne peut pas revenir en arrière : la prudence s'impose face à une décision irréversible."
+          ]
+        },
+        {
+          "nom": "Médecin épidémiologiste",
+          "emoji": "🏥",
+          "couleur": "#e62d32",
+          "position": "Pour l'éradication, santé publique",
+          "description": "Tu travailles sur la prévention des maladies à vecteurs comme la dengue et le chikungunya. Tu défends l'élimination du moustique tigre au nom de la santé publique.",
+          "arguments": [
+            "Le moustique tigre tue des centaines de milliers de personnes chaque année dans le monde via la dengue, le chikungunya et le Zika : sa disparition sauverait des millions de vies.",
+            "On a déjà éradiqué la variole sans que la nature s'effondre : éliminer un vecteur de maladie mortelle est un acte de santé publique légitime."
+          ]
+        },
+        {
+          "nom": "Habitant de la commune",
+          "emoji": "🏠",
+          "couleur": "#f3912b",
+          "position": "Pour, qualité de vie",
+          "description": "Tu vis dans cette commune depuis toujours. L'invasion de moustiques tigres a détruit tes étés : tu ne peux plus profiter de ton jardin et tes enfants se font piquer en permanence.",
+          "arguments": [
+            "Ma qualité de vie s'est effondrée : je n'ouvre plus les fenêtres l'été, mes enfants ont des réactions allergiques aux piqûres, les soirées en terrasse sont impossibles.",
+            "Si les scientifiques ont une solution sûre pour éliminer ce fléau, je veux qu'on l'applique sans attendre : l'écologie, c'est bien, mais pas au détriment de ma santé."
+          ]
+        },
+        {
+          "nom": "Militant écologiste",
+          "emoji": "🌿",
+          "couleur": "#7fbc48",
+          "position": "Contre, biodiversité d'abord",
+          "description": "Tu défends la biodiversité et tu t'opposes à toute manipulation génétique des espèces sauvages. Tu proposes des alternatives naturelles de lutte contre le moustique.",
+          "arguments": [
+            "Introduire des moustiques génétiquement modifiés dans la nature est une expérience dont on ne maîtrise pas les conséquences à long terme sur l'écosystème.",
+            "Des alternatives existent : favoriser les prédateurs naturels comme les chauves-souris et les hirondelles, supprimer les eaux stagnantes, utiliser des larvicides biologiques."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "categorie": "🌿 Vivant, Animal & Écologie",
+      "titre": "Un zoo contribue-t-il vraiment à la protection des espèces ?",
+      "contexte": "La ville envisage de rénover son zoo vieillissant avec un investissement de 20 millions d'euros. Une association de protection animale s'y oppose. Le conseil municipal organise un débat public.",
+      "roles": [
+        {
+          "nom": "Directeur du zoo",
+          "emoji": "🦁",
+          "couleur": "#f3912b",
+          "position": "Pour, outil de conservation",
+          "description": "Tu diriges ce zoo depuis 10 ans. Tu défends son rôle dans la conservation des espèces menacées, la recherche scientifique et l'éducation du public.",
+          "arguments": [
+            "Notre zoo participe à des programmes d'élevage européens qui ont permis la réintroduction de plusieurs espèces dans la nature, comme le lynx ibérique.",
+            "Chaque enfant qui voit un gorille ou un lion en vrai développe une sensibilité à leur protection : le zoo crée des défenseurs de la nature."
+          ]
+        },
+        {
+          "nom": "Militant pour les droits des animaux",
+          "emoji": "🐘",
+          "couleur": "#e62d32",
+          "position": "Contre, prison pour animaux",
+          "description": "Tu milites pour la fermeture des zoos. Tu défends l'idée qu'enfermer des animaux sauvages pour les exposer au regard humain est une forme de cruauté, quelle que soit la mission affichée.",
+          "arguments": [
+            "Un éléphant a besoin de parcourir des dizaines de kilomètres par jour : un enclos de zoo, aussi grand soit-il, est une cage qui détruit son bien-être.",
+            "La vraie conservation, c'est protéger les habitats naturels, pas enfermer des individus en captivité pour les montrer aux touristes."
+          ]
+        },
+        {
+          "nom": "Biologiste spécialiste de la conservation",
+          "emoji": "🔬",
+          "couleur": "#53a4db",
+          "position": "Pour certains zoos, contre d'autres",
+          "description": "Tu travailles sur la conservation des espèces in situ et ex situ. Tu distingues les zoos sérieux impliqués dans la recherche des parcs d'attraction déguisés.",
+          "arguments": [
+            "Les meilleurs zoos sont des arches de Noé vivantes : sans eux, le condor de Californie et le cheval de Przewalski auraient disparu.",
+            "Mais 80% des zoos dans le monde n'ont aucun programme de conservation réel : ils servent uniquement au divertissement sous couvert d'éducation."
+          ]
+        },
+        {
+          "nom": "Élu municipal",
+          "emoji": "🗳️",
+          "couleur": "#7fbc48",
+          "position": "Pour la rénovation, économie locale",
+          "description": "Tu représentes la majorité municipale. Le zoo attire 300 000 visiteurs par an et génère des emplois. Sa fermeture serait une perte économique et culturelle majeure pour la ville.",
+          "arguments": [
+            "Le zoo emploie 80 personnes et fait vivre indirectement des hôtels, restaurants et commerces locaux : le fermer détruirait une partie de l'économie touristique de la ville.",
+            "Rénover le zoo en intégrant de grands espaces naturels et des programmes pédagogiques est un investissement pour l'avenir, pas une reculade éthique."
+          ]
+        }
+      ]
+    },
+    {      "id": 16,
+      "categorie": "⚗️ Science & Société",
+      "titre": "L'intelligence artificielle pourra-t-elle un jour remplacer un médecin ?",
+      "contexte": "Un hôpital envisage d'utiliser une intelligence artificielle pour aider au diagnostic médical. Certains médecins s'inquiètent pour leur métier et la qualité des soins. Un comité réunit les différentes parties.",
+      "roles": [
+        {
+          "nom": "Ingénieur en IA médicale",
+          "emoji": "💻",
+          "couleur": "#53a4db",
+          "position": "Pour, l'IA est plus fiable que l'humain",
+          "description": "Tu développes des algorithmes de diagnostic médical. Tu montres que l'IA détecte déjà certains cancers avec une précision supérieure aux meilleurs radiologues.",
+          "arguments": [
+            "Une IA ne se fatigue pas, ne fait pas d'erreur due au stress ou au manque de sommeil, et peut analyser des milliers d'images par heure : elle surpasse déjà les radiologues humains dans la détection du cancer du sein.",
+            "Les algorithmes apprennent de millions de cas : leur base de données est infiniment plus large que celle qu'un médecin peut accumuler en 30 ans de carrière."
+          ]
+        },
+        {
+          "nom": "Médecin généraliste",
+          "emoji": "🩺",
+          "couleur": "#f3912b",
+          "position": "Non, la relation humaine est irremplaçable",
+          "description": "Tu exerces depuis 20 ans. Tu penses que la médecine ne se réduit pas à un diagnostic : écouter, rassurer, comprendre le contexte de vie d'un patient nécessite une humanité que l'IA n'aura jamais.",
+          "arguments": [
+            "Un patient qui apprend qu'il a un cancer a besoin d'un regard humain, d'une main sur son épaule, d'une voix qui rassure : aucun algorithme ne peut offrir cela.",
+            "Le diagnostic médical, c'est aussi flairer quelque chose d'indéfinissable chez un patient : une intuition clinique construite sur des années d'expérience humaine."
+          ]
+        },
+        {
+          "nom": "Patient",
+          "emoji": "🛏️",
+          "couleur": "#7fbc48",
+          "position": "Partagé, confiance avant tout",
+          "description": "Tu as été mal diagnostiqué deux fois par des médecins humains. Tu es ouvert à l'IA si elle améliore la fiabilité des diagnostics, mais tu veux garder un interlocuteur humain.",
+          "arguments": [
+            "Si une IA avait détecté mon cancer six mois plus tôt, j'aurais évité une chimio lourde : je suis prêt à faire confiance à la technologie si elle est plus fiable.",
+            "Mais je veux un médecin humain pour m'expliquer les résultats, répondre à mes questions et prendre les décisions avec moi : l'IA seule, non."
+          ]
+        },
+        {
+          "nom": "Éthicien du numérique",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "Vigilant, risques éthiques majeurs",
+          "description": "Tu travailles sur les implications éthiques de l'IA en médecine. Tu soulèves les questions de responsabilité, de biais algorithmiques et de protection des données de santé.",
+          "arguments": [
+            "Si une IA se trompe de diagnostic et qu'un patient meurt, qui est responsable ? Le médecin qui a suivi son conseil ? L'ingénieur qui l'a programmée ? L'hôpital qui l'a achetée ?",
+            "Les algorithmes sont entraînés sur des données historiques souvent biaisées : une IA entraînée majoritairement sur des données d'hommes blancs diagnostique moins bien les femmes et les personnes racisées."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "categorie": "⚗️ Science & Société",
+      "titre": "Les OGM sont-ils dangereux pour la santé et l'environnement ?",
+      "contexte": "Une commune agricole débat de l'autorisation de cultures OGM sur son territoire. Agriculteurs, scientifiques, associations et élus s'affrontent lors d'une réunion publique.",
+      "roles": [
+        {
+          "nom": "Chercheur en agronomie",
+          "emoji": "🔬",
+          "couleur": "#53a4db",
+          "position": "Non dangereux, bénéfices réels",
+          "description": "Tu travailles sur les plantes génétiquement modifiées depuis 15 ans. Tu défends les OGM comme un outil scientifique sérieux, encadré, aux bénéfices documentés.",
+          "arguments": [
+            "Aucune étude scientifique sérieuse, parmi les centaines publiées depuis 30 ans, n'a démontré de danger pour la santé humaine lié à la consommation d'OGM.",
+            "Les OGM peuvent réduire l'utilisation de pesticides, résister aux maladies et produire plus avec moins d'eau : dans un contexte de changement climatique, c'est une piste sérieuse."
+          ]
+        },
+        {
+          "nom": "Agriculteur bio",
+          "emoji": "🌾",
+          "couleur": "#7fbc48",
+          "position": "Contre, contamination et dépendance",
+          "description": "Tu cultives en agriculture biologique depuis 10 ans. Tu crains la contamination de tes cultures par le pollen OGM et la dépendance des agriculteurs aux semences brevetées.",
+          "arguments": [
+            "Le pollen OGM ne connaît pas les frontières : si mes cultures sont contaminées, je perds ma certification bio et je ne peux rien y faire.",
+            "Les semences OGM sont brevetées par des multinationales : les agriculteurs ne peuvent pas les ressemer, ce qui crée une dépendance économique dangereuse."
+          ]
+        },
+        {
+          "nom": "Représentant d'une multinationale semencière",
+          "emoji": "💼",
+          "couleur": "#f3912b",
+          "position": "Pour, innovation nécessaire",
+          "description": "Tu représentes une entreprise qui développe et commercialise des semences OGM. Tu défends leur rôle dans la sécurité alimentaire mondiale.",
+          "arguments": [
+            "Nous nourrissons 8 milliards d'humains : sans innovation variétale, dont les OGM, nous ne pourrons pas nourrir 10 milliards en 2050 avec moins de terres et moins d'eau.",
+            "Nos semences sont soumises à des années d'évaluation réglementaire avant autorisation : les accuser d'être dangereuses sans preuve, c'est de l'obscurantisme."
+          ]
+        },
+        {
+          "nom": "Militant d'une association de consommateurs",
+          "emoji": "🛒",
+          "couleur": "#e62d32",
+          "position": "Pour l'étiquetage et le choix",
+          "description": "Tu défends le droit des consommateurs à savoir ce qu'ils mangent. Tu ne t'opposes pas nécessairement aux OGM mais tu exiges une transparence totale.",
+          "arguments": [
+            "Que les OGM soient dangereux ou non, les consommateurs ont le droit de savoir ce qu'ils achètent et de choisir librement : l'étiquetage clair est non négociable.",
+            "La confiance dans l'alimentation est fragile : forcer les gens à manger des OGM sans leur accord détruit le lien de confiance entre producteurs et consommateurs."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "categorie": "⚗️ Science & Société",
+      "titre": "Une découverte scientifique peut-elle être trop dangereuse pour être publiée ?",
+      "contexte": "Des chercheurs ont découvert comment rendre un virus grippal beaucoup plus contagieux. Avant publication, un comité d'éthique scientifique se réunit pour décider si ces résultats doivent être rendus publics.",
+      "roles": [
+        {
+          "nom": "Chercheur auteur de la découverte",
+          "emoji": "🔬",
+          "couleur": "#53a4db",
+          "position": "Pour la publication, liberté scientifique",
+          "description": "Tu as passé 5 ans sur cette recherche. Tu défends la liberté scientifique et tu penses que comprendre comment un virus devient plus dangereux est essentiel pour s'en protéger.",
+          "arguments": [
+            "La science progresse grâce au partage des connaissances : censurer une découverte crée des angles morts qui peuvent être plus dangereux que la découverte elle-même.",
+            "D'autres chercheurs dans le monde travaillent sur le même sujet : si on ne publie pas, quelqu'un d'autre le fera, peut-être sans les mêmes précautions éthiques."
+          ]
+        },
+        {
+          "nom": "Expert en biosécurité",
+          "emoji": "🛡️",
+          "couleur": "#e62d32",
+          "position": "Contre la publication totale, risque bioterroriste",
+          "description": "Tu travailles pour un organisme gouvernemental de sécurité. Tu t'inquiètes qu'une publication détaillée permette à des acteurs malveillants de reproduire et d'utiliser ce virus comme arme.",
+          "arguments": [
+            "Publier le protocole exact pour rendre un virus grippal plus contagieux, c'est offrir un mode d'emploi à des terroristes ou des États malveillants.",
+            "Les retombées d'une pandémie provoquée seraient catastrophiques : le principe de précaution doit primer sur la liberté académique dans ce cas précis."
+          ]
+        },
+        {
+          "nom": "Éditeur d'une revue scientifique",
+          "emoji": "📰",
+          "couleur": "#a6539b",
+          "position": "Pour une publication partielle",
+          "description": "Tu diriges une grande revue scientifique. Tu proposes un compromis : publier les conclusions sans les protocoles détaillés, disponibles uniquement pour les chercheurs accrédités.",
+          "arguments": [
+            "On peut publier 'ce que nous avons découvert' sans publier 'comment le reproduire' : les conclusions scientifiques et les protocoles sont deux choses différentes.",
+            "Une restriction d'accès aux données sensibles existe déjà en physique nucléaire : adapter ce modèle à la biologie n'est pas une censure, c'est une responsabilité."
+          ]
+        },
+        {
+          "nom": "Philosophe des sciences",
+          "emoji": "📚",
+          "couleur": "#7fbc48",
+          "position": "Question de gouvernance mondiale",
+          "description": "Tu analyses les rapports entre science, pouvoir et société. Tu penses que la question n'est pas de publier ou non, mais de décider collectivement qui contrôle les connaissances dangereuses.",
+          "arguments": [
+            "Qui décide qu'une connaissance est trop dangereuse ? Si c'est un gouvernement, on glisse vers la censure d'État ; si c'est une entreprise, vers le secret commercial.",
+            "Il faut une instance internationale indépendante pour évaluer et encadrer les recherches à double usage : ni l'État, ni le marché, ni les chercheurs seuls ne peuvent décider."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "categorie": "🧠 Cerveau & Comportement",
+      "titre": "La mort cérébrale, c'est vraiment la mort ?",
+      "contexte": "Un jeune de 19 ans est hospitalisé après un accident de la route. Les médecins annoncent une mort cérébrale. Ses parents refusent d'y croire : son cœur bat encore. Un comité d'éthique hospitalier se réunit pour décider de la suite.",
+      "roles": [
+        {
+          "nom": "Neurologue",
+          "emoji": "🧠",
+          "couleur": "#53a4db",
+          "position": "La mort cérébrale EST la mort",
+          "description": "Tu es médecin spécialisé en neurologie. Tu expliques que la mort cérébrale signifie l'arrêt total et irréversible de toutes les fonctions du cerveau, y compris le tronc cérébral. La personne ne peut plus rien ressentir, penser ou vivre sans assistance artificielle.",
+          "arguments": [
+            "La mort cérébrale est légalement et médicalement reconnue comme la mort dans tous les pays développés : le cœur qui bat sous assistance n'est pas un signe de vie, c'est une machine qui fonctionne.",
+            "Sans cerveau fonctionnel, il n'y a plus de conscience, plus de douleur, plus de personnalité : tout ce qui fait qu'une personne est une personne a disparu de façon irréversible."
+          ]
+        },
+        {
+          "nom": "Parent",
+          "emoji": "👨‍👩‍👦",
+          "couleur": "#f3912b",
+          "position": "Mon enfant est encore en vie",
+          "description": "Tu es le parent du jeune hospitalisé. Tu vois sa poitrine se soulever, tu entends son cœur battre. Pour toi, tant qu'il y a un souffle, il y a de l'espoir. Tu refuses qu'on arrête les machines.",
+          "arguments": [
+            "Son cœur bat, sa peau est chaude, il respire : comment peut-on me dire qu'il est mort ? Ce que je vois ne correspond pas à ce qu'on m'annonce.",
+            "Des gens se sont réveillés de comas qu'on disait irréversibles : je veux qu'on laisse du temps, qu'on attende un miracle possible."
+          ]
+        },
+        {
+          "nom": "Éthicien médical",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "La définition de la mort est une construction sociale",
+          "description": "Tu travailles sur les questions de fin de vie. Tu rappelles que la définition de la mort a évolué dans l'histoire et qu'elle est aussi une question philosophique, culturelle et juridique.",
+          "arguments": [
+            "Avant le XIXe siècle, on était déclaré mort à l'arrêt du cœur : la définition de la mort a déjà changé une fois, elle peut être questionnée à nouveau.",
+            "Dans certaines cultures et religions, la mort n'est pas un moment précis mais un processus : imposer une définition unique et légale à tous est une décision politique autant que médicale."
+          ]
+        },
+        {
+          "nom": "Coordinateur de greffe",
+          "emoji": "🫀",
+          "couleur": "#7fbc48",
+          "position": "La mort cérébrale permet de sauver d'autres vies",
+          "description": "Tu travailles dans le service des greffes. Tu expliques que la mort cérébrale est la condition qui permet le prélèvement d'organes pour sauver plusieurs vies. Tu dois aborder la question du don avec la famille.",
+          "arguments": [
+            "Chaque jour en France, 3 personnes meurent faute d'organe disponible : la mort cérébrale est la seule situation permettant de prélever des organes en état de fonctionner.",
+            "Accepter la mort cérébrale de son enfant et autoriser le don d'organes, c'est une décision douloureuse mais qui peut transformer ce drame en acte de vie pour d'autres familles."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "categorie": "🧠 Cerveau & Comportement",
+      "titre": "Une personne atteinte d'Alzheimer est-elle encore la même personne ?",
+      "contexte": "Une femme de 78 ans atteinte d'Alzheimer à un stade avancé ne reconnaît plus ses enfants et a une personnalité totalement différente de ce qu'elle était. Sa famille se déchire sur la question de son identité et de ses droits. Un comité de famille réunit les différentes positions.",
+      "roles": [
+        {
+          "nom": "Fille de la patiente",
+          "emoji": "👩",
+          "couleur": "#f3912b",
+          "position": "Ma mère a disparu, il reste son corps",
+          "description": "Tu t'occupes de ta mère depuis 5 ans. Tu souffres de ne plus la reconnaître : elle dit des choses qu'elle n'aurait jamais dites, elle ne te connaît plus. Pour toi, la personne que tu aimais n'est plus là.",
+          "arguments": [
+            "Ma mère était douce, cultivée, attentionnée : la femme dans ce lit crie, frappe les soignants et ne me reconnaît pas. Ce n'est plus elle, même si c'est son corps.",
+            "Continuer à appeler ça 'ma mère' me fait souffrir : j'ai fait mon deuil de la personne, il me reste à m'occuper du corps avec bienveillance."
+          ]
+        },
+        {
+          "nom": "Fils de la patiente",
+          "emoji": "👨",
+          "couleur": "#53a4db",
+          "position": "C'est toujours ma mère, quoi qu'il arrive",
+          "description": "Tu refuses de considérer ta mère comme une personne différente. Pour toi, l'identité ne se réduit pas à la mémoire ou à la personnalité : ta mère reste ta mère jusqu'à son dernier souffle.",
+          "arguments": [
+            "Son ADN est le même, son histoire est la même, ses enfants sont les mêmes : la maladie a modifié son comportement mais elle n'a pas créé une nouvelle personne.",
+            "Si on accepte qu'une personne peut 'cesser d'être elle-même' à cause d'une maladie, on ouvre la porte à des dérives : qui décide à quel stade elle n'est 'plus là' ?"
+          ]
+        },
+        {
+          "nom": "Philosophe de l'identité",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "L'identité est une question complexe et ouverte",
+          "description": "Tu travailles sur les questions d'identité personnelle. Tu montres que philosophers et scientifiques ne s'accordent pas sur ce qui fait qu'une personne reste 'la même' dans le temps.",
+          "arguments": [
+            "Selon Locke, l'identité personnelle repose sur la continuité de la mémoire : si elle ne se souvient de rien, peut-on encore parler de la même personne au sens philosophique ?",
+            "Selon d'autres philosophes, l'identité est dans la continuité du corps et de l'histoire biographique : même sans mémoire, elle reste la même personne parce qu'elle a vécu les mêmes événements."
+          ]
+        },
+        {
+          "nom": "Gériatre",
+          "emoji": "🩺",
+          "couleur": "#7fbc48",
+          "position": "La personne existe et souffre, quel que soit son état",
+          "description": "Tu soignes des patients Alzheimer depuis 15 ans. Tu insistes sur le fait que, quelle que soit la réponse philosophique, la personne ressent encore des émotions et mérite les mêmes soins et la même dignité.",
+          "arguments": [
+            "Mes patients Alzheimer sourient quand on leur joue leur musique préférée, pleurent quand ils se sentent abandonnés : ils ressentent, donc ils existent et ont des droits.",
+            "La question 'est-ce encore la même personne' ne doit jamais servir à justifier de moins bien la soigner ou de ne plus respecter ses droits fondamentaux."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "categorie": "🫀 Corps & Médecine",
+      "titre": "Débrancher quelqu'un en état végétatif permanent, c'est le tuer ?",
+      "contexte": "Un homme de 35 ans est en état végétatif depuis 3 ans après un accident. Les médecins estiment qu'il n'a aucune chance de récupérer. Sa femme veut arrêter les soins. Ses parents s'y opposent. Un comité d'éthique hospitalier se réunit.",
+      "roles": [
+        {
+          "nom": "Épouse du patient",
+          "emoji": "💍",
+          "couleur": "#53a4db",
+          "position": "Ce n'est pas lui, il faut le laisser partir",
+          "description": "Tu vis dans la douleur depuis 3 ans. Ton mari t'avait dit qu'il ne voulait jamais 'rester en légume'. Tu veux respecter sa volonté et lui éviter une survie artificielle sans dignité.",
+          "arguments": [
+            "Mon mari m'avait dit clairement qu'il ne voudrait jamais vivre ainsi : je ne fais que respecter la personne qu'il était et la volonté qu'il avait exprimée.",
+            "Le maintenir en vie artificiellement pendant des années, sans conscience ni espoir, c'est refuser de faire le deuil et prolonger une souffrance qui ne lui profite pas."
+          ]
+        },
+        {
+          "nom": "Parents du patient",
+          "emoji": "👴👵",
+          "couleur": "#f3912b",
+          "position": "On ne peut pas tuer notre fils",
+          "description": "Vous refusez d'arrêter les soins. Pour vous, arrêter l'alimentation et l'hydratation artificielle, c'est tuer activement votre fils. Tant qu'il respire, il vit.",
+          "arguments": [
+            "Arrêter de le nourrir et de l'hydrater, c'est le condamner à mourir de faim et de soif : peu importe son état, c'est un acte qui provoque directement sa mort.",
+            "La médecine progresse : des patients ont émergé d'états végétatifs après plusieurs années. Qui sommes-nous pour décider que c'est impossible pour lui ?"
+          ]
+        },
+        {
+          "nom": "Médecin réanimateur",
+          "emoji": "🩺",
+          "couleur": "#7fbc48",
+          "position": "L'acharnement thérapeutique n'est pas soigner",
+          "description": "Tu travailles en réanimation depuis 20 ans. Tu fais la distinction entre soigner et maintenir artificiellement en vie. Tu expliques ce qu'est l'obstination déraisonnable.",
+          "arguments": [
+            "La loi française reconnaît le droit à l'arrêt des traitements déraisonnables : maintenir quelqu'un en vie artificielle sans espoir de récupération n'est pas un soin, c'est de l'acharnement.",
+            "Arrêter les machines n'est pas tuer : c'est laisser la maladie suivre son cours naturel sans s'y opposer par des moyens artificiels disproportionnés."
+          ]
+        },
+        {
+          "nom": "Juriste spécialisé en droit médical",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "La loi encadre mais ne tranche pas tout",
+          "description": "Tu expliques ce que dit la loi française (loi Claeys-Leonetti) et ses limites. Tu montres que la question reste éthiquement ouverte même quand le cadre légal est posé.",
+          "arguments": [
+            "La loi autorise l'arrêt des traitements en cas d'obstination déraisonnable, mais exige une procédure collégiale et la recherche de la volonté du patient : la décision ne peut pas être unilatérale.",
+            "La loi ne dit pas 'c'est un meurtre' ni 'ce n'en est pas un' : elle dit que dans certaines conditions, c'est légalement autorisé. La question morale reste entière."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "categorie": "🫀 Corps & Médecine",
+      "titre": "On devrait prélever automatiquement les organes de toute personne décédée ?",
+      "contexte": "En France, le consentement présumé existe depuis 2017 : tout le monde est donneur sauf si on s'y est opposé de son vivant. Mais les familles continuent de s'opposer dans 30% des cas. Un débat parlementaire est organisé pour décider si on doit aller plus loin et rendre le prélèvement vraiment automatique, sans droit d'opposition.",
+      "roles": [
+        {
+          "nom": "Médecin transplanteur",
+          "emoji": "🫀",
+          "couleur": "#53a4db",
+          "position": "Pour le prélèvement automatique total",
+          "description": "Tu effectues des greffes depuis 15 ans. Chaque année tu vois des patients mourir faute d'organe. Pour toi, la solidarité nationale doit primer sur les convictions individuelles post-mortem.",
+          "arguments": [
+            "En France, 25 000 patients attendent une greffe et 3 meurent chaque jour faute d'organe disponible : si le prélèvement était automatique, on pourrait sauver des milliers de vies supplémentaires.",
+            "Un corps mort n'appartient plus à personne au sens médical : le garder intact par conviction personnelle alors qu'il pourrait sauver 7 vies est un choix que la société a le droit de questionner."
+          ]
+        },
+        {
+          "nom": "Représentant d'une association religieuse",
+          "emoji": "🕌",
+          "couleur": "#f3912b",
+          "position": "Contre, le corps appartient à la personne et à sa foi",
+          "description": "Tu représentes une communauté dont la religion impose l'intégrité du corps après la mort. Tu t'opposes à toute forme de prélèvement automatique sans consentement explicite.",
+          "arguments": [
+            "Dans notre foi, le corps doit être enterré intact pour la résurrection : un prélèvement automatique sans notre accord violerait un droit fondamental à la liberté religieuse.",
+            "L'État ne peut pas décider souverainement de ce qu'il advient du corps d'un croyant contre sa volonté et celle de sa famille : c'est une atteinte à la dignité et à la liberté de conscience."
+          ]
+        },
+        {
+          "nom": "Philosophe du droit",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "La question du consentement est centrale",
+          "description": "Tu travailles sur les droits individuels et l'intérêt général. Tu montres la tension entre autonomie corporelle et solidarité collective.",
+          "arguments": [
+            "Le consentement présumé actuel est déjà un compromis : il présume que vous acceptez si vous n'avez pas dit non. Supprimer même ce droit de refus, c'est franchir une ligne importante.",
+            "Si l'État peut disposer de votre corps après votre mort contre votre volonté exprimée, quelle est la limite ? Le principe d'autonomie corporelle doit rester un droit fondamental."
+          ]
+        },
+        {
+          "nom": "Parent d'un enfant sauvé par une greffe",
+          "emoji": "👨‍👧",
+          "couleur": "#7fbc48",
+          "position": "Pour, ma fille est vivante grâce à un don",
+          "description": "Ta fille de 12 ans a reçu un cœur greffé il y a 2 ans. Tu sais ce que le don d'organes représente concrètement. Tu témoignes de l'urgence d'augmenter le nombre de donneurs.",
+          "arguments": [
+            "Ma fille était mourante : une famille en deuil a accepté de donner le cœur de leur enfant et ma fille vit aujourd'hui. Ce geste devrait être la norme, pas l'exception.",
+            "Je comprends les réticences culturelles et religieuses, mais face à des enfants qui meurent en attente d'organe, je ne peux pas rester silencieux : il faut trouver un système qui augmente les dons."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "categorie": "🫀 Corps & Médecine",
+      "titre": "Vendre un organe de son vivant devrait-il être légal ?",
+      "contexte": "Dans plusieurs pays, la vente de rein est légale et encadrée. En France, c'est interdit. Face à la pénurie d'organes, un groupe de parlementaires propose d'ouvrir le débat sur la légalisation encadrée du don rémunéré. Une audition parlementaire réunit les parties.",
+      "roles": [
+        {
+          "nom": "Économiste libéral",
+          "emoji": "📊",
+          "couleur": "#53a4db",
+          "position": "Pour, si c'est encadré et volontaire",
+          "description": "Tu penses que la liberté individuelle inclut celle de disposer de son corps. Si quelqu'un veut vendre un rein en connaissance de cause, l'État n'a pas à l'interdire.",
+          "arguments": [
+            "On accepte qu'une personne risque sa vie pour de l'argent dans des métiers dangereux comme mineur ou militaire : pourquoi interdire de vendre un rein, risque bien moindre, à quelqu'un qui le choisit librement ?",
+            "L'interdiction ne fait pas disparaître le marché : elle le rend clandestin et dangereux. Légaliser et encadrer protégerait bien mieux les donneurs qu'une prohibition hypocrite."
+          ]
+        },
+        {
+          "nom": "Médecin éthicien",
+          "emoji": "🩺",
+          "couleur": "#e62d32",
+          "position": "Contre, le corps ne peut pas être une marchandise",
+          "description": "Tu t'opposes fermement à la marchandisation du corps humain. Tu montres que le 'choix libre' dans un contexte de pauvreté n'est pas un vrai choix.",
+          "arguments": [
+            "Dans les pays où c'est légal, 95% des vendeurs d'organes sont des personnes pauvres qui vendent par nécessité financière : ce n'est pas un choix libre, c'est une contrainte économique déguisée en liberté.",
+            "Légaliser la vente d'organes crée un marché où les riches achètent la santé des pauvres avec leur propre chair : c'est une forme d'exploitation corporelle que le droit médical doit interdire."
+          ]
+        },
+        {
+          "nom": "Personne en attente de greffe",
+          "emoji": "🛏️",
+          "couleur": "#f3912b",
+          "position": "Pour, si ça peut me sauver la vie",
+          "description": "Tu attends un rein depuis 7 ans sous dialyse. Ta vie est suspendue à une machine 3 fois par semaine. Tu serais prêt à payer pour obtenir un organe si c'était légal.",
+          "arguments": [
+            "Je suis dialysé 12 heures par semaine depuis 7 ans : je ne peux plus travailler normalement, voyager, vivre. Si quelqu'un veut me vendre un rein et que ça nous arrange tous les deux, pourquoi l'interdire ?",
+            "Le marché noir existe déjà : des gens vont en Inde ou en Iran acheter des reins illégalement. Autant légaliser pour que ce soit fait proprement, avec des contrôles médicaux sérieux."
+          ]
+        },
+        {
+          "nom": "Sociologue spécialisé en inégalités",
+          "emoji": "🔬",
+          "couleur": "#a6539b",
+          "position": "Contre, risque majeur d'exploitation des pauvres",
+          "description": "Tu étudies les marchés d'organes dans le monde. Tu montres que légaliser la vente crée systématiquement une exploitation des populations vulnérables.",
+          "arguments": [
+            "En Iran, seul pays au monde où la vente de rein est légale depuis 1988, les donneurs sont quasi exclusivement des personnes pauvres endettées : la loi n'a pas créé de liberté, elle a créé un marché de la misère.",
+            "Un système de compensation non monétaire — remboursement des frais, couverture médicale à vie, priorité en cas de besoin de greffe — permettrait d'augmenter les dons sans créer un marché du corps humain."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "categorie": "🫀 Corps & Médecine",
+      "titre": "Un médecin devrait-il pouvoir refuser de pratiquer un avortement ?",
+      "contexte": "Une jeune femme de 17 ans demande une IVG dans un hôpital de petite ville. Le seul gynécologue de l'établissement refuse en invoquant la clause de conscience. Elle doit faire 80 km pour trouver un autre médecin. Une commission hospitalière se réunit.",
+      "roles": [
+        {
+          "nom": "Gynécologue objecteur de conscience",
+          "emoji": "🩺",
+          "couleur": "#53a4db",
+          "position": "Pour la clause de conscience",
+          "description": "Tu refuses de pratiquer des IVG pour des raisons éthiques personnelles. Tu penses qu'un médecin ne peut pas être forcé à accomplir un acte qu'il juge moralement inacceptable.",
+          "arguments": [
+            "La liberté de conscience est un droit fondamental reconnu par la loi : on ne peut pas obliger un médecin à pratiquer un acte qui va à l'encontre de ses convictions profondes.",
+            "Je m'assure que la patiente est orientée vers un confrère : je ne bloque pas l'accès à l'IVG, je me retire simplement d'un acte que je ne peux pas accomplir en mon âme et conscience."
+          ]
+        },
+        {
+          "nom": "La patiente",
+          "emoji": "👩",
+          "couleur": "#e62d32",
+          "position": "Mon droit prime sur sa conscience",
+          "description": "Tu es la jeune femme de 17 ans. Tu as dû faire 80 km supplémentaires dans une situation déjà difficile. Pour toi, la clause de conscience est une entrave à un droit légal.",
+          "arguments": [
+            "L'IVG est un droit légal en France : si un médecin peut le refuser, ce droit devient fictif pour les femmes qui vivent loin des grandes villes ou qui n'ont pas de voiture.",
+            "Ma santé et mon avenir ne peuvent pas dépendre des convictions religieuses ou morales d'un médecin de garde : dans un hôpital public, les droits des patients doivent passer avant les croyances personnelles des soignants."
+          ]
+        },
+        {
+          "nom": "Directrice de l'hôpital",
+          "emoji": "🏥",
+          "couleur": "#7fbc48",
+          "position": "La clause de conscience crée des déserts médicaux",
+          "description": "Tu gères un hôpital rural. Tu montres que la clause de conscience, acceptable en théorie, devient une atteinte réelle aux droits des patientes quand il n'y a pas d'alternative proche.",
+          "arguments": [
+            "Dans les grandes villes, la clause de conscience ne pose pas de problème car il y a des alternatives : en zone rurale, un seul médecin objecteur peut priver des dizaines de femmes d'un accès réel à l'IVG.",
+            "Un service public hospitalier a l'obligation d'assurer tous les soins légaux à ses patients : si un médecin objecteur est recruté dans un désert médical, l'hôpital doit exiger qu'il assure la continuité des soins."
+          ]
+        },
+        {
+          "nom": "Juriste en droit de la santé",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "La loi protège les deux, mais imparfaitement",
+          "description": "Tu expliques que la loi française reconnaît la clause de conscience mais impose une obligation d'orientation. Tu montres les limites de ce compromis.",
+          "arguments": [
+            "La loi est claire : le médecin peut refuser mais doit informer immédiatement la patiente et lui fournir les coordonnées d'un confrère. S'il ne le fait pas, il est en faute.",
+            "Le vrai problème est structurel : on laisse coexister un droit à l'IVG et une clause de conscience sans garantir que les deux soient compatibles sur tout le territoire."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "categorie": "🫀 Corps & Médecine",
+      "titre": "Une personne en bonne santé devrait-elle pouvoir choisir l'euthanasie ?",
+      "contexte": "Un homme de 45 ans, en parfaite santé physique, souffre d'une dépression chronique sévère résistante à tous les traitements depuis 10 ans. Il demande l'euthanasie. En Belgique, cela serait possible. En France, c'est interdit. Un comité d'éthique examine son cas.",
+      "roles": [
+        {
+          "nom": "Le patient",
+          "emoji": "🧍",
+          "couleur": "#53a4db",
+          "position": "Ma souffrance est réelle et mon choix doit être respecté",
+          "description": "Tu souffres de façon intolérable depuis 10 ans malgré tous les traitements. Tu considères que ta souffrance psychique est aussi réelle qu'une douleur physique et que ton autonomie inclut le droit de mourir.",
+          "arguments": [
+            "On accepte l'euthanasie pour quelqu'un qui souffre physiquement d'un cancer en phase terminale : pourquoi ma souffrance psychique insupportable depuis 10 ans serait-elle moins légitime ?",
+            "J'ai essayé tous les traitements disponibles pendant 10 ans : je ne suis pas en crise passagère, je suis dans une souffrance chronique irréductible. Mon choix est réfléchi et stable."
+          ]
+        },
+        {
+          "nom": "Psychiatre traitant",
+          "emoji": "🧠",
+          "couleur": "#f3912b",
+          "position": "La dépression altère la capacité de décision",
+          "description": "Tu soignes ce patient depuis 5 ans. Tu penses que la dépression, même sévère, altère le jugement et que la demande de mort est un symptôme de la maladie, pas une décision libre.",
+          "arguments": [
+            "La dépression sévère modifie la perception de l'avenir : mon patient est convaincu que rien ne changera jamais, mais c'est la maladie qui pense ça, pas lui librement.",
+            "Des thérapies nouvelles comme la kétamine ou la stimulation magnétique transcrânienne montrent des résultats sur des dépressions résistantes : accorder l'euthanasie maintenant fermerait la porte à des espoirs thérapeutiques réels."
+          ]
+        },
+        {
+          "nom": "Philosophe de l'autonomie",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "L'autonomie inclut le droit de mourir",
+          "description": "Tu défends le principe que chaque individu est souverain sur sa vie et sa mort. Tu penses que refuser l'euthanasie à quelqu'un qui souffre de façon chronique est une forme de paternalisme.",
+          "arguments": [
+            "Si on accepte que les humains sont des êtres autonomes capables de décider de leur vie, on doit accepter qu'ils puissent décider de leur mort dans des conditions de souffrance durable et éclairée.",
+            "Le paternalisme médical — 'on sait mieux que vous ce qui est bon pour vous' — a une longue histoire d'abus : à quel moment doit-on faire confiance à la personne qui souffre et qui demande à mourir ?"
+          ]
+        },
+        {
+          "nom": "Représentante d'une association de prévention du suicide",
+          "emoji": "🎗️",
+          "couleur": "#7fbc48",
+          "position": "Le risque de dérive est trop grand",
+          "description": "Tu travailles depuis 20 ans dans la prévention du suicide. Tu t'inquiètes qu'élargir l'euthanasie aux souffrances psychiques envoie un message dangereux aux personnes vulnérables.",
+          "arguments": [
+            "En Belgique, depuis que l'euthanasie pour souffrance psychique est autorisée, des dizaines de personnes jeunes l'ont obtenue : certains cas ont choqué des psychiatres qui estimaient que la souffrance était traitable.",
+            "Notre société doit répondre à la souffrance psychique par plus de soins, plus de ressources, plus d'humanité : pas par une porte de sortie qui risque d'être utilisée quand les soins font défaut."
+          ]
+        }
+      ]
+    },
+     {
+      "id": 23,
+      "categorie": "🫀 Corps & Médecine",
+      "titre": "La douleur chronique invisible, c'est une vraie maladie ?",
+      "contexte": "Une femme de 32 ans souffre de fibromyalgie depuis 5 ans. Tous ses examens sont normaux. Son employeur la soupçonne de simulation. Sa caisse d'assurance maladie remet en question ses arrêts de travail répétés. Elle porte plainte pour discrimination.",
+      "roles": [
+        {
+          "nom": "La patiente",
+          "emoji": "🧍‍♀️",
+          "couleur": "#53a4db",
+          "position": "Ma douleur existe même si on ne la voit pas",
+          "description": "Tu souffres chaque jour de douleurs diffuses, de fatigue intense et de troubles du sommeil. Les examens ne trouvent rien mais tu vis dans un handicap réel. Tu te bats pour être reconnue.",
+          "arguments": [
+            "Une douleur n'a pas besoin d'être visible sur une radio pour être réelle : mon cerveau envoie de vrais signaux de douleur, je ne simule pas et je n'ai aucun intérêt à perdre mon emploi et ma vie sociale.",
+            "Des millions de personnes souffrent de fibromyalgie, reconnue par l'OMS depuis 1992 : le problème n'est pas que ma maladie n'existe pas, c'est que notre système médical ne sait pas encore pourquoi."
+          ]
+        },
+        {
+          "nom": "Médecin généraliste",
+          "emoji": "🩺",
+          "couleur": "#7fbc48",
+          "position": "C'est réel mais mal compris",
+          "description": "Tu suis cette patiente depuis 3 ans. Tu es convaincu de sa souffrance mais tu manques d'outils pour la quantifier et la faire reconnaître administrativement.",
+          "arguments": [
+            "La douleur chronique sans lésion visible correspond à un dérèglement du système nerveux central documenté scientifiquement : ce n'est pas de la simulation, c'est une neurologie que nos outils actuels ne savent pas encore photographier.",
+            "Le vrai problème est systémique : notre médecine est construite sur des preuves visibles et mesurables, et elle est démunie face aux maladies dont les mécanismes sont encore mal compris."
+          ]
+        },
+        {
+          "nom": "Responsable RH de l'entreprise",
+          "emoji": "💼",
+          "couleur": "#f3912b",
+          "position": "Sans preuve, difficile de gérer",
+          "description": "Tu gères les absences de l'entreprise. Tu ne mets pas en doute la souffrance de la salariée mais tu es confronté à une réalité : sans diagnostic clair, tu ne peux pas adapter le poste ni justifier les absences répétées.",
+          "arguments": [
+            "Je ne dis pas qu'elle simule, mais sans diagnostic précis ni pronostic, je ne peux pas réorganiser le travail de toute une équipe sur la base d'une douleur que personne ne peut évaluer objectivement.",
+            "La loi m'oblige à adapter le poste en cas de handicap reconnu : si la fibromyalgie était officiellement reconnue comme affection longue durée, j'aurais un cadre légal pour agir autrement."
+          ]
+        },
+        {
+          "nom": "Chercheur en neurosciences de la douleur",
+          "emoji": "🔬",
+          "couleur": "#a6539b",
+          "position": "La science progresse, la société doit suivre",
+          "description": "Tu travailles sur les mécanismes de la douleur centrale. Tu expliques que l'invisibilité de certaines douleurs est un problème de nos outils, pas de la réalité de la souffrance.",
+          "arguments": [
+            "L'IRM fonctionnelle montre des patterns cérébraux distincts chez les patients fibromyalgiques : la douleur est physiquement réelle dans le cerveau, même si aucune lésion périphérique n'est visible.",
+            "Il y a 30 ans, les ulcères gastriques étaient considérés comme psychosomatiques : depuis qu'on a découvert la bactérie H. pylori, on sait qu'on avait tort. La fibromyalgie suivra probablement le même chemin."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "categorie": "🫀 Corps & Médecine",
+      "titre": "Le cœur peut-il continuer à battre en dehors du corps humain ?",
+      "contexte": "Un lycée professionnel agricole organise une journée scientifique. Une élève de terminale SAPAT affirme avoir vu une vidéo où un cœur humain bat tout seul sur une table. Ses camarades et son professeur débattent de ce que ça signifie vraiment sur la vie, la mort et la biologie.",
+      "roles": [
+        {
+          "nom": "Professeur de biologie",
+          "emoji": "🔬",
+          "couleur": "#53a4db",
+          "position": "Oui, c'est possible mais ça ne veut pas dire 'vivant'",
+          "description": "Tu expliques le mécanisme du nœud sinusal, la propriété d'automatisme cardiaque, et ce que cela signifie biologiquement. Tu fais la distinction entre activité cellulaire et vie.",
+          "arguments": [
+            "Le cœur possède son propre système électrique autonome, le nœud sinusal : placé dans un liquide nutritif oxygéné à bonne température, il peut effectivement continuer à se contracter pendant quelques heures sans être dans un corps.",
+            "Qu'un cœur batte hors du corps ne signifie pas qu'il est 'vivant' au sens d'un être : c'est une activité cellulaire mécanique, comme une cellule musculaire qui se contracte en réponse à un stimulus chimique."
+          ]
+        },
+        {
+          "nom": "Élève sceptique",
+          "emoji": "🧑‍🎓",
+          "couleur": "#f3912b",
+          "position": "Si ça bat, c'est vivant non ?",
+          "description": "Tu as du mal à séparer l'activité du cœur de la notion de vie. Pour toi, si quelque chose se meut de façon autonome, c'est vivant.",
+          "arguments": [
+            "Si le cœur bat tout seul sans qu'on lui donne d'ordre, c'est qu'il a quelque chose de vivant en lui : comment peut-on dire qu'il est mort si personne ne le fait battre ?",
+            "La frontière entre vivant et non-vivant n'est peut-être pas si claire : une cellule qui se contracte, un virus qui se réplique… à quel moment dit-on que quelque chose est vraiment vivant ?"
+          ]
+        },
+        {
+          "nom": "Chirurgien cardiaque",
+          "emoji": "🏥",
+          "couleur": "#7fbc48",
+          "position": "On utilise cette propriété en chirurgie",
+          "description": "Tu pratiques des greffes cardiaques. Tu expliques comment on conserve un cœur prélevé et comment cette propriété d'automatisme est exploitée médicalement.",
+          "arguments": [
+            "Lors d'une greffe, le cœur prélevé est placé dans une solution froide et oxygénée : on dispose de 4 à 6 heures avant qu'il ne soit plus greffable. Pendant ce temps, il peut reprendre ses contractions une fois réchauffé.",
+            "La machine de perfusion ex-vivo permet aujourd'hui de faire battre un cœur prélevé en dehors du corps pendant le transport : c'est une avancée médicale majeure qui augmente le nombre de greffes réussies."
+          ]
+        },
+        {
+          "nom": "Philosophe de la biologie",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "La question de la vie dépasse la biologie",
+          "description": "Tu montres que définir ce qu'est la vie est une question philosophique autant que scientifique, et que le cas du cœur isolé illustre bien la complexité de cette frontière.",
+          "arguments": [
+            "La biologie définit le vivant par 7 critères : organisation, métabolisme, croissance, réponse aux stimuli, reproduction, homéostasie, évolution. Un cœur isolé répond à certains mais pas tous : il est à la frontière.",
+            "La question 'est-ce vivant ?' est profondément culturelle et philosophique : dans certaines traditions, la vie réside dans le souffle, dans d'autres dans le sang, dans d'autres dans la conscience. La biologie seule ne répond pas à tout."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "categorie": "🫀 Corps & Médecine",
+      "titre": "Un fœtus de 3 mois est-il un être humain ?",
+      "contexte": "Dans un cours de SVT, la question de l'IVG est abordée. Une élève demande : 'Mais à quel moment ça devient un vrai humain ?' Le débat s'ouvre dans la classe puis lors d'un conseil de vie lycéenne.",
+      "roles": [
+        {
+          "nom": "Biologiste",
+          "emoji": "🔬",
+          "couleur": "#53a4db",
+          "position": "C'est humain biologiquement mais pas une personne",
+          "description": "Tu expliques ce qu'est un fœtus de 12 semaines sur le plan biologique : son génome, son développement, ce qu'il peut et ne peut pas faire à ce stade.",
+          "arguments": [
+            "À 12 semaines, le fœtus a un génome humain complet, des ébauches d'organes, mais son système nerveux est si peu développé qu'il est incapable de ressentir la douleur ou d'avoir la moindre conscience.",
+            "Être humain biologiquement et être une personne sont deux choses différentes : une cellule souche a aussi un génome humain complet. La question n'est pas biologique, elle est philosophique et éthique."
+          ]
+        },
+        {
+          "nom": "Représentant d'une association anti-IVG",
+          "emoji": "🤲",
+          "couleur": "#f3912b",
+          "position": "La vie humaine commence à la conception",
+          "description": "Tu défends que l'être humain commence au moment de la fécondation et que toute interruption de grossesse est une atteinte à une vie humaine.",
+          "arguments": [
+            "Dès la conception, un être génétiquement unique est formé : toute sa vie future est déjà inscrite dans cet embryon. Interrompre cette vie, à n'importe quel stade, c'est mettre fin à un être humain.",
+            "Le développement est un continuum sans rupture claire : s'il n'est pas humain à 12 semaines, à quel moment l'est-il ? Tracer une ligne arbitraire revient à décider politiquement de qui a droit à la vie."
+          ]
+        },
+        {
+          "nom": "Militante féministe",
+          "emoji": "✊",
+          "couleur": "#e62d32",
+          "position": "La femme est prioritaire sur le fœtus",
+          "description": "Tu défends le droit à l'IVG comme un droit fondamental. Tu penses que tant qu'un fœtus n'est pas viable hors du corps maternel, la femme a une autorité totale sur sa grossesse.",
+          "arguments": [
+            "Un fœtus de 3 mois ne peut pas vivre sans le corps d'une femme : tant qu'il dépend entièrement d'elle pour survivre, c'est elle qui a autorité sur sa propre grossesse.",
+            "L'histoire montre que l'interdiction de l'IVG ne fait pas disparaître les avortements, elle les rend dangereux : protéger la vie, c'est d'abord protéger les femmes qui avortent, pas imposer une grossesse non désirée."
+          ]
+        },
+        {
+          "nom": "Juriste",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "La personnalité juridique est une construction sociale",
+          "description": "Tu expliques comment le droit définit la personne et pourquoi la loi française a choisi de ne pas accorder la personnalité juridique avant la naissance.",
+          "arguments": [
+            "En droit français, la personnalité juridique commence à la naissance : un fœtus n'a pas de droits propres. C'est un choix politique et social, pas une vérité biologique.",
+            "Différentes sociétés ont tracé cette ligne différemment dans l'histoire et selon les cultures : c'est la preuve que cette frontière est une construction humaine, pas une évidence naturelle."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "Un embryon congelé depuis 10 ans est-il vivant ?",
+      "contexte": "Un couple a réalisé une FIV il y a 10 ans et conservé 3 embryons congelés. Ils ont eu leurs enfants et se séparent. Ils ne savent pas quoi faire des embryons restants : les détruire, les donner à la recherche, les donner à un autre couple ou les conserver indéfiniment. Ils ne s'accordent pas.",
+      "roles": [
+        {
+          "nom": "La mère",
+          "emoji": "👩",
+          "couleur": "#53a4db",
+          "position": "Ce sont mes enfants potentiels, je ne peux pas les détruire",
+          "description": "Tu ressens un lien fort avec ces embryons. Pour toi, les détruire serait une forme de mort que tu ne peux pas accepter moralement.",
+          "arguments": [
+            "Ces embryons ont le même patrimoine génétique que mes enfants actuels : si l'un d'eux avait été implanté, il serait aujourd'hui mon enfant. Je ne peux pas décider de les supprimer.",
+            "Les donner à la recherche ou les détruire me semble violent : je préfère les donner à un couple infertile qui leur donnera une chance de vie."
+          ]
+        },
+        {
+          "nom": "Le père",
+          "emoji": "👨",
+          "couleur": "#f3912b",
+          "position": "Ce sont des cellules, pas des enfants",
+          "description": "Tu fais une distinction nette entre un embryon congelé et un être humain. Tu penses que les donner à la recherche médicale serait le choix le plus utile.",
+          "arguments": [
+            "Un embryon de quelques cellules à -196°C n'a aucune activité biologique : il n'est pas en vie au sens fonctionnel. C'est du matériel biologique précieux pour la recherche médicale.",
+            "Ces embryons ne deviendront jamais mes enfants : nous sommes séparés, je ne veux pas qu'une autre femme porte mes enfants biologiques sans mon accord. La destruction est la seule option qui me convient."
+          ]
+        },
+        {
+          "nom": "Embryologiste",
+          "emoji": "🔬",
+          "couleur": "#7fbc48",
+          "position": "La réponse biologique est complexe",
+          "description": "Tu travailles en laboratoire de procréation médicalement assistée. Tu expliques ce qu'est réellement un embryon congelé sur le plan biologique.",
+          "arguments": [
+            "Un embryon congelé est en état de vie suspendue : toute activité biologique est arrêtée mais le potentiel de développement est intact si les conditions de décongélation sont réunies.",
+            "La question 'est-il vivant ?' dépend de la définition de la vie qu'on choisit : biologiquement, il n'a pas de métabolisme actif ; potentiellement, il peut devenir un être humain complet."
+          ]
+        },
+        {
+          "nom": "Éthicien du droit de la famille",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "Le droit doit trancher ce que la biologie ne peut pas",
+          "description": "Tu expliques que le droit français fixe des règles précises sur les embryons surnuméraires et que le désaccord entre les parents crée une situation juridiquement complexe.",
+          "arguments": [
+            "En droit français, les deux membres du couple doivent consentir à l'utilisation des embryons : en cas de séparation et de désaccord, la loi prévoit que les embryons ne peuvent pas être utilisés sans accord commun.",
+            "La loi française interdit la conservation indéfinie : après 5 ans sans projet parental, les embryons peuvent être détruits ou donnés à la recherche. C'est un choix législatif qui ne satisfait personne mais qui tranche."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "Un père biologique a-t-il des droits sur un enfant qu'il ne savait pas avoir ?",
+      "contexte": "Un homme de 28 ans apprend par hasard qu'il a un enfant de 4 ans. La mère avait décidé seule de mener la grossesse à terme sans l'en informer. Il réclame la reconnaissance de paternité et un droit de visite. La mère s'y oppose.",
+      "roles": [
+        {
+          "nom": "Le père biologique",
+          "emoji": "👨",
+          "couleur": "#53a4db",
+          "position": "Mon enfant biologique a des droits sur moi et moi sur lui",
+          "description": "Tu viens d'apprendre l'existence de ton enfant. Tu veux le connaître, assumer ta paternité et avoir un rôle dans sa vie, même si tu n'étais pas au courant.",
+          "arguments": [
+            "Je n'ai pas eu le choix de participer ou non à cette décision : on me l'a caché. Mais maintenant que je le sais, j'ai le droit et le devoir d'être présent pour mon enfant.",
+            "Mon fils a le droit de connaître ses deux parents biologiques : le priver de son père pour des raisons qui ne le concernent pas serait lui faire porter les conséquences d'une décision prise sans moi."
+          ]
+        },
+        {
+          "nom": "La mère",
+          "emoji": "👩",
+          "couleur": "#e62d32",
+          "position": "J'ai élevé cet enfant seule, son irruption le déstabilise",
+          "description": "Tu as fait le choix de garder cet enfant et de l'élever seule. Tu avais tes raisons de ne pas impliquer le père. Tu t'inquiètes de l'impact sur ton fils.",
+          "arguments": [
+            "Mon fils a 4 ans et n'a connu qu'une structure familiale stable : introduire brutalement un inconnu qui se présente comme son père peut lui causer un traumatisme.",
+            "J'ai fait seule tous les sacrifices de ces 4 années : couches, nuits sans sommeil, maladies. Il ne peut pas arriver maintenant et réclamer des droits sans avoir assumé aucune responsabilité."
+          ]
+        },
+        {
+          "nom": "Juge aux affaires familiales",
+          "emoji": "⚖️",
+          "couleur": "#7fbc48",
+          "position": "L'intérêt supérieur de l'enfant prime",
+          "description": "Tu dois trancher ce litige. Tu rappelles que la loi française place l'intérêt de l'enfant au centre de toute décision, et non les droits ou les torts des parents.",
+          "arguments": [
+            "La loi reconnaît le droit à l'établissement de la filiation biologique : un test ADN peut établir la paternité, et cette reconnaissance ouvre des droits et des devoirs indépendamment des circonstances de la conception.",
+            "L'intérêt supérieur de l'enfant n'est pas automatiquement de connaître son père biologique : le juge doit évaluer si cette introduction sera bénéfique pour cet enfant précis, à ce stade précis de son développement."
+          ]
+        },
+        {
+          "nom": "Psychologue de l'enfant",
+          "emoji": "🧠",
+          "couleur": "#a6539b",
+          "position": "L'enfant a besoin de stabilité avant tout",
+          "description": "Tu travailles avec des enfants dans des situations familiales complexes. Tu éclaires la question sous l'angle du développement psychologique de l'enfant.",
+          "arguments": [
+            "Un enfant de 4 ans est dans une phase de construction de ses attachements fondamentaux : bousculer brutalement sa structure familiale peut générer une anxiété durable, même si l'intention du père est bonne.",
+            "Dans l'idéal, une introduction progressive, accompagnée par un professionnel, permettrait à l'enfant de construire un lien avec son père biologique sans que ce soit vécu comme une menace pour ses repères existants."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "Un homme transgenre qui accouche est-il une mère ?",
+      "contexte": "Lucas, homme transgenre de 29 ans, a interrompu son traitement hormonal pour mener une grossesse à terme. Il a accouché d'un garçon. À l'état civil, il veut être inscrit comme 'père'. La mairie refuse et inscrit 'mère'. Il porte l'affaire en justice.",
+      "roles": [
+        {
+          "nom": "Lucas, le parent transgenre",
+          "emoji": "🧑",
+          "couleur": "#53a4db",
+          "position": "Je suis le père, pas la mère",
+          "description": "Tu t'identifies comme homme depuis 7 ans. Tu as porté cet enfant mais tu es son père. Pour toi, la maternité est une fonction sociale et juridique, pas uniquement biologique.",
+          "arguments": [
+            "Mon identité est masculine, reconnue légalement sur mes papiers d'identité : inscrire 'mère' sur l'acte de naissance de mon fils efface mon identité et crée une incohérence administrative absurde.",
+            "Ce qui compte pour mon fils, c'est d'avoir un parent aimant et présent : que ce parent soit inscrit comme père ou mère n'a aucun impact sur la qualité de l'amour qu'il recevra."
+          ]
+        },
+        {
+          "nom": "Officier d'état civil",
+          "emoji": "🏛️",
+          "couleur": "#f3912b",
+          "position": "La loi définit la mère comme celle qui accouche",
+          "description": "Tu appliques le droit français. Tu expliques que la loi définit la maternité par l'accouchement et que tu n'as pas le pouvoir d'y déroger.",
+          "arguments": [
+            "En droit français, la mère est celle qui accouche : c'est un principe fondamental du code civil. Je ne peux pas inscrire 'père' pour une personne qui a accouché, même si elle est légalement reconnue comme homme.",
+            "Mon rôle est d'appliquer la loi, pas de l'interpréter : si la loi doit changer, c'est au Parlement de le décider, pas à un officier d'état civil."
+          ]
+        },
+        {
+          "nom": "Juriste spécialisé en droit des personnes",
+          "emoji": "⚖️",
+          "couleur": "#7fbc48",
+          "position": "Le droit doit évoluer pour refléter les réalités",
+          "description": "Tu plaides pour une évolution législative qui permettrait aux personnes transgenres d'être inscrites selon leur genre reconnu, même en cas de grossesse.",
+          "arguments": [
+            "La Cour européenne des droits de l'homme a condamné la France dans des affaires similaires : le refus d'inscrire un homme transgenre comme père viole le droit au respect de la vie privée.",
+            "La loi peut créer une mention neutre ou adapter les termes : certains pays utilisent déjà 'parent 1' et 'parent 2'. Le droit n'est pas figé, il suit l'évolution des réalités sociales."
+          ]
+        },
+        {
+          "nom": "Pédopsychiatre",
+          "emoji": "🧠",
+          "couleur": "#a6539b",
+          "position": "L'impact sur l'enfant doit être étudié",
+          "description": "Tu travailles sur le développement des enfants dans des configurations familiales non traditionnelles. Tu rappelles que la science sur ce sujet est encore récente.",
+          "arguments": [
+            "Les études sur les enfants élevés par des parents transgenres sont peu nombreuses mais ne montrent pas de conséquences négatives sur le développement : la stabilité affective prime sur la configuration familiale.",
+            "L'enfant devra un jour comprendre sa propre histoire de naissance : ce qui compte, c'est que ses parents lui transmettent une narrative cohérente et bienveillante, pas que l'état civil corresponde à une norme biologique."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "Un enfant conçu par FIV a-t-il le droit de connaître son donneur de sperme ?",
+      "contexte": "Théo, 18 ans, vient d'apprendre qu'il a été conçu par don de sperme anonyme. Il veut retrouver son donneur biologique. La loi française a changé en 2021 : les donneurs doivent désormais accepter d'être contactés. Mais le donneur de Théo a donné en 2004, sous régime d'anonymat total.",
+      "roles": [
+        {
+          "nom": "Théo",
+          "emoji": "🧑",
+          "couleur": "#53a4db",
+          "position": "J'ai le droit de connaître mes origines",
+          "description": "Tu viens d'apprendre ta conception. Tu ressens un besoin profond de comprendre d'où tu viens, même sans vouloir remplacer tes parents. Tu veux au moins des informations médicales et peut-être un visage.",
+          "arguments": [
+            "Connaître ses origines biologiques n'est pas une question de légitimité de ses parents : c'est un besoin identitaire fondamental. Je veux savoir d'où viennent mes traits, mes maladies potentielles, mon histoire.",
+            "La Convention internationale des droits de l'enfant reconnaît le droit de connaître ses parents : je n'ai rien choisi dans ma conception, pourquoi devrais-je vivre avec un trou dans mon identité ?"
+          ]
+        },
+        {
+          "nom": "Le donneur anonyme",
+          "emoji": "👨",
+          "couleur": "#f3912b",
+          "position": "J'ai donné sous promesse d'anonymat",
+          "description": "Tu as donné ton sperme en 2004 sous la garantie légale de l'anonymat total. Tu as une famille, des enfants, et tu n'as jamais envisagé être contacté un jour.",
+          "arguments": [
+            "En 2004, la loi me garantissait l'anonymat : je n'aurais peut-être pas donné si j'avais su qu'on pourrait me retrouver 20 ans plus tard. Rétroactivement lever l'anonymat, c'est trahir un contrat.",
+            "Je respecte le besoin de ce jeune homme mais ma propre famille ne sait pas que j'ai donné : une prise de contact forcée pourrait détruire mon équilibre familial actuel."
+          ]
+        },
+        {
+          "nom": "Mère de Théo",
+          "emoji": "👩",
+          "couleur": "#7fbc48",
+          "position": "Je comprends mais j'ai peur de perdre mon fils",
+          "description": "Tu as eu Théo grâce au don. Tu l'as élevé seule pendant 18 ans. Tu comprends son besoin mais tu as peur que retrouver le donneur remette en question votre lien.",
+          "arguments": [
+            "J'ai toujours su que ce moment pourrait arriver : je soutiens Théo, même si c'est douloureux pour moi. Son besoin de connaître ses origines ne remet pas en question l'amour que nous partageons.",
+            "Ma peur est irrationnelle mais humaine : et si ce donneur prenait une place dans sa vie que je ne saurai jamais combler ? Je dois travailler sur cette peur, pas l'imposer à mon fils."
+          ]
+        },
+        {
+          "nom": "Juriste spécialisé en bioéthique",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "Le droit a changé, le passé pose problème",
+          "description": "Tu expliques la loi de 2021 sur l'accès aux origines et pourquoi elle ne s'applique pas rétroactivement, et ce que cela implique pour des personnes comme Théo.",
+          "arguments": [
+            "La loi de 2021 est un progrès : elle oblige les nouveaux donneurs à accepter d'être contactés à la majorité de l'enfant. Mais elle ne s'applique pas aux dons antérieurs, laissant des milliers de personnes comme Théo sans recours légal.",
+            "Des plateformes de tests ADN comme 23andMe permettent aujourd'hui de retrouver des demi-frères et sœurs issus du même donneur : la technologie court-circuite le droit et crée des situations que la loi n'a pas anticipées."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "Une femme seule devrait-elle avoir le droit d'accéder à la PMA ?",
+      "contexte": "La loi de 2021 a ouvert la PMA aux femmes seules en France. Mais les délais d'attente sont très longs et certains professionnels de santé rechignent à suivre des femmes seules. Un débat est organisé dans un lycée dans le cadre d'une journée citoyenneté.",
+      "roles": [
+        {
+          "nom": "Femme célibataire souhaitant une PMA",
+          "emoji": "👩",
+          "couleur": "#53a4db",
+          "position": "C'est mon droit et mon projet de vie",
+          "description": "Tu as 36 ans, tu n'as pas trouvé de partenaire et ton horloge biologique tourne. Tu veux avoir un enfant et tu as les moyens de l'élever seule. Tu revendiques ce droit.",
+          "arguments": [
+            "Des femmes élèvent seules des enfants nés de grossesses imprévues ou après divorce : personne ne leur retire leurs enfants. Pourquoi serait-ce différent si le projet est réfléchi et assumé ?",
+            "Je suis autonome financièrement, stable émotionnellement et prête : refuser la PMA à une femme seule, c'est lui dire que son projet de vie est moins valable que celui d'un couple."
+          ]
+        },
+        {
+          "nom": "Pédopsychiatre",
+          "emoji": "🧠",
+          "couleur": "#f3912b",
+          "position": "L'absence de père pose des questions",
+          "description": "Tu travailles avec des enfants en souffrance. Tu n'es pas contre la PMA pour femmes seules mais tu soulèves des questions sur le développement de l'enfant sans figure paternelle.",
+          "arguments": [
+            "De nombreux enfants élevés par des mères seules s'épanouissent parfaitement : le facteur décisif est la qualité de l'attachement et la stabilité affective, pas le nombre ou le genre des parents.",
+            "La question n'est pas de juger le projet parental mais de s'assurer que l'enfant aura suffisamment de figures d'attachement solides : un enfant peut avoir besoin de modèles masculins même si son parent est une mère seule."
+          ]
+        },
+        {
+          "nom": "Médecin généraliste",
+          "emoji": "🩺",
+          "couleur": "#7fbc48",
+          "position": "La loi est là, il faut l'appliquer sans discrimination",
+          "description": "Tu accompagnes des femmes dans leur parcours PMA. Tu constates que certains confrères créent des obstacles informels aux femmes seules, ce que tu considères contraire à la loi et à l'éthique médicale.",
+          "arguments": [
+            "Depuis 2021, la PMA pour femmes seules est un droit légal en France : un professionnel de santé qui crée des obstacles informels à ce droit pratique une discrimination que rien ne justifie légalement.",
+            "Mon rôle est d'accompagner les projets parentaux légaux de mes patients, pas de porter un jugement moral sur leur configuration familiale."
+          ]
+        },
+        {
+          "nom": "Sociologue de la famille",
+          "emoji": "📊",
+          "couleur": "#a6539b",
+          "position": "La famille évolue, la société doit suivre",
+          "description": "Tu étudies les transformations des structures familiales. Tu montres que la famille nucléaire traditionnelle est déjà minoritaire et que la monoparentalité choisie est une réalité croissante.",
+          "arguments": [
+            "En France, 25% des enfants vivent dans des familles monoparentales : la plupart n'ont pas été 'choisies' mais subies. Une monoparentalité planifiée, avec des ressources, est souvent plus stable que beaucoup de situations de divorce.",
+            "L'inquiétude sur l'absence de père révèle un idéal normatif de la famille : or les études montrent que ce qui compte pour le développement de l'enfant, c'est la qualité des soins reçus, pas la configuration familiale."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "Deux hommes devraient-ils pouvoir accéder à la GPA ?",
+      "contexte": "La GPA (gestation pour autrui) est interdite en France mais pratiquée légalement dans certains pays. Des couples d'hommes français ont des enfants nés par GPA à l'étranger. Un débat parlementaire s'ouvre sur la légalisation encadrée de la GPA en France.",
+      "roles": [
+        {
+          "nom": "Père dans un couple gay ayant eu recours à la GPA",
+          "emoji": "👨‍👨‍👦",
+          "couleur": "#53a4db",
+          "position": "Pour la légalisation encadrée",
+          "description": "Tu as eu recours à une GPA éthique en Californie. Tu as un fils de 3 ans. Tu témoignes d'une expérience positive et tu plaides pour que ce soit possible en France, sous contrôle.",
+          "arguments": [
+            "Interdire la GPA en France ne l'empêche pas : ça pousse les couples à aller à l'étranger dans des conditions parfois moins protectrices pour la gestatrice. Légaliser et encadrer serait plus protecteur pour tout le monde.",
+            "La gestatrice qui a porté mon fils l'a fait librement, sous contrat équitable, suivie médicalement et psychologiquement : dire que c'est de l'exploitation, c'est nier sa capacité à faire un choix libre et éclairé."
+          ]
+        },
+        {
+          "nom": "Féministe opposée à la GPA",
+          "emoji": "✊",
+          "couleur": "#e62d32",
+          "position": "La GPA est une marchandisation du corps des femmes",
+          "description": "Tu t'opposes à la GPA même éthique. Pour toi, le corps d'une femme ne peut pas être loué pour une grossesse, quelle que soit la rémunération ou les conditions.",
+          "arguments": [
+            "Une grossesse n'est pas un service : elle engage le corps d'une femme pendant 9 mois, avec des risques médicaux réels. Mettre ce corps au service du projet parental d'autrui est une forme d'exploitation même consentie.",
+            "Les gestatrices sont quasi exclusivement des femmes aux revenus modestes : la GPA crée un marché où les femmes pauvres portent les enfants des riches. L'encadrement ne supprime pas ce déséquilibre fondamental."
+          ]
+        },
+        {
+          "nom": "Gynécologue obstétricien",
+          "emoji": "🩺",
+          "couleur": "#7fbc48",
+          "position": "Les risques médicaux doivent guider la décision",
+          "description": "Tu gères des grossesses complexes. Tu rappelles que toute grossesse comporte des risques et que demander à une femme d'en prendre pour autrui est une question médicale et éthique sérieuse.",
+          "arguments": [
+            "Une grossesse peut entraîner des complications graves, voire mortelles : demander à une femme de prendre ce risque pour le projet parental d'un couple tiers est une décision qui ne peut pas être traitée comme un contrat commercial banal.",
+            "Si la GPA est légalisée, il faut une indépendance totale entre le suivi médical de la gestatrice et les intérêts des parents d'intention : conflit d'intérêts médicaux en cas de complications."
+          ]
+        },
+        {
+          "nom": "Juriste en droit de la famille",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "La question juridique de la filiation est centrale",
+          "description": "Tu expliques les problèmes juridiques posés par la GPA : filiation, nationalité, droits de l'enfant, statut de la gestatrice.",
+          "arguments": [
+            "Actuellement, un enfant né par GPA à l'étranger peut se retrouver sans nationalité ni filiation reconnue en France : l'interdiction de la GPA punit les enfants pour les choix de leurs parents.",
+            "Légaliser la GPA exigerait de répondre à des questions juridiques complexes : qui est la mère légale, quand les droits parentaux sont-ils transférés, que se passe-t-il en cas de conflit entre gestatrice et parents d'intention ?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "Accoucher sous X, est-ce abandonner son enfant ?",
+      "contexte": "Une jeune femme de 17 ans, en grande détresse, accouche sous le secret. Son enfant est confié à l'aide sociale à l'enfance. Dix-huit ans plus tard, cet enfant devenu adulte cherche à retrouver sa mère biologique. Un débat s'ouvre dans une émission de radio.",
+      "roles": [
+        {
+          "nom": "La mère biologique",
+          "emoji": "👩",
+          "couleur": "#53a4db",
+          "position": "C'était un acte d'amour, pas d'abandon",
+          "description": "Tu avais 17 ans, tu étais seule et sans ressources. Tu as choisi l'accouchement sous X pour protéger ton enfant et lui donner une chance de vie stable que tu ne pouvais pas lui offrir.",
+          "arguments": [
+            "J'aurais pu avorter mais j'ai choisi de lui donner la vie et une famille capable de l'accueillir : c'est la décision la plus difficile et la plus aimante que j'aie jamais prise.",
+            "La loi me garantissait l'anonymat : si je savais qu'il pourrait me retrouver, j'aurais peut-être fait un autre choix. Rétroactivement lever cet anonymat trahit la promesse qui m'a permis d'accoucher en sécurité."
+          ]
+        },
+        {
+          "nom": "L'enfant devenu adulte",
+          "emoji": "🧑",
+          "couleur": "#f3912b",
+          "position": "J'ai le droit de connaître mes origines",
+          "description": "Tu as été adopté à 3 mois et tu as grandi dans une famille aimante. Mais tu ressens un manque identitaire. Tu veux au moins savoir qui est ta mère biologique, sans forcément avoir une relation.",
+          "arguments": [
+            "Connaître ses origines est un besoin humain fondamental : je ne veux pas remplacer mes parents adoptifs, je veux juste comprendre d'où je viens et pourquoi j'ai été confié.",
+            "Je n'ai pas choisi de naître sous X : pourquoi dois-je porter toute ma vie le poids d'un secret que je n'ai pas décidé ? Mon identité ne devrait pas dépendre du consentement d'une autre personne."
+          ]
+        },
+        {
+          "nom": "Travailleur social spécialisé adoption",
+          "emoji": "🤝",
+          "couleur": "#7fbc48",
+          "position": "Accompagner les deux sans forcer",
+          "description": "Tu travailles au Conseil national pour l'accès aux origines personnelles (CNAOP). Tu expliques le dispositif existant et ses limites.",
+          "arguments": [
+            "Le CNAOP permet depuis 2002 à un enfant né sous X de rechercher sa mère biologique, et à la mère de lever ou non le secret : c'est un équilibre qui respecte les deux parties sans forcer la rencontre.",
+            "Dans mon expérience, les retrouvailles sont souvent complexes pour les deux parties : un accompagnement psychologique est indispensable, car les attentes des deux côtés sont rarement symétriques."
+          ]
+        },
+        {
+          "nom": "Philosophe de l'identité",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "L'identité ne se réduit pas aux origines biologiques",
+          "description": "Tu questionnes l'idée que connaître ses origines biologiques est indispensable à la construction identitaire.",
+          "arguments": [
+            "L'identité se construit dans les liens vécus, les expériences partagées, les valeurs transmises : des millions d'adoptés construisent une identité solide sans jamais retrouver leurs parents biologiques.",
+            "L'obsession des origines biologiques est culturellement datée et liée à une vision essentialiste de l'identité : qui on est dépend de ce qu'on vit, pas uniquement de qui nous a engendré."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "Congeler ses ovocytes pour raisons de convenance, bonne idée ?",
+      "contexte": "Une femme de 31 ans, cadre dynamique, veut congeler ses ovocytes pour ne pas avoir à choisir entre carrière et maternité. La loi française l'autorise désormais. Mais le coût est élevé et la technique n'est pas remboursée. Un débat s'ouvre dans une émission féministe.",
+      "roles": [
+        {
+          "nom": "La femme qui souhaite congeler",
+          "emoji": "👩",
+          "couleur": "#53a4db",
+          "position": "C'est une liberté que je m'offre",
+          "description": "Tu veux préserver ta fertilité pour ne pas avoir à choisir entre ton évolution professionnelle et ton désir d'enfant. Tu vois ça comme un investissement dans ton avenir.",
+          "arguments": [
+            "Les hommes n'ont pas d'horloge biologique aussi contraignante : la congélation d'ovocytes me donne une liberté temporelle que la biologie ne m'accorde pas naturellement.",
+            "C'est mon corps et mon argent : si je préfère dépenser 5000€ dans la préservation de ma fertilité plutôt qu'en voyages ou voiture, c'est mon choix souverain."
+          ]
+        },
+        {
+          "nom": "Gynécologue",
+          "emoji": "🩺",
+          "couleur": "#f3912b",
+          "position": "La technique a des limites qu'on sous-estime",
+          "description": "Tu pratiques la stimulation ovarienne et la congélation d'ovocytes. Tu mets en garde contre une vision trop optimiste de cette technologie.",
+          "arguments": [
+            "Le taux de réussite d'une FIV avec ovocytes congelés reste modeste : environ 20 à 30% de chance de grossesse par tentative, et les femmes surestiment souvent leurs chances. Ce n'est pas une assurance-bébé.",
+            "La stimulation ovarienne n'est pas sans risque : syndrome d'hyperstimulation, plusieurs injections, anesthésie générale pour le prélèvement. Ce n'est pas un acte anodin médicalement."
+          ]
+        },
+        {
+          "nom": "Sociologue féministe",
+          "emoji": "📊",
+          "couleur": "#7fbc48",
+          "position": "Le problème, c'est le monde du travail, pas la biologie",
+          "description": "Tu travailles sur les inégalités professionnelles femmes-hommes. Tu penses que la congélation d'ovocytes est une réponse individuelle à un problème structurel.",
+          "arguments": [
+            "Au lieu d'adapter les femmes aux exigences d'un monde du travail pensé par et pour les hommes, on devrait adapter le monde du travail : congé parental égal, crèches, carrières moins pénalisantes pour les mères.",
+            "Des entreprises comme Apple et Facebook proposent la congélation d'ovocytes comme avantage social : c'est un message inquiétant — 'reportez votre maternité, votre carrière passe d'abord'."
+          ]
+        },
+        {
+          "nom": "Éthicien médical",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "La médicalisation du corps féminin pose des questions",
+          "description": "Tu t'interroges sur la tendance à médicaliser des processus biologiques normaux et sur ce que cela dit de notre rapport au corps et au temps.",
+          "arguments": [
+            "Congeler ses ovocytes par convenance sociale, c'est traiter la biologie féminine comme un obstacle technique à corriger : cela renforce l'idée que le corps des femmes est un problème à gérer.",
+            "Le vrai enjeu éthique est l'équité d'accès : réservée aux femmes qui peuvent se le payer, cette technique creuse les inégalités entre femmes plutôt que de les réduire."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "Un enfant de parents homosexuels est-il désavantagé ?",
+      "contexte": "Depuis l'ouverture du mariage pour tous en 2013 et de la PMA en 2021, des enfants grandissent avec deux mères ou deux pères. Dans une réunion de parents d'élèves, la question est posée : ces enfants sont-ils pénalisés par rapport aux autres ?",
+      "roles": [
+        {
+          "nom": "Parent dans un couple lesbien",
+          "emoji": "👩‍👩‍👧",
+          "couleur": "#53a4db",
+          "position": "Ma fille s'épanouit parfaitement",
+          "description": "Tu élèves ta fille de 7 ans avec ta femme. Ta fille est joyeuse, sociable et bien intégrée à l'école. Tu témoignes de ta réalité.",
+          "arguments": [
+            "Ma fille sait qu'elle a deux mamans et que sa famille est différente de certaines : elle le vit bien parce que nous lui en parlons sereinement et qu'elle est entourée d'amour.",
+            "Les études scientifiques sérieuses ne montrent pas de différence de développement entre enfants de couples homoparentaux et hétéroparentaux : ce qui compte, c'est la qualité des soins, pas le genre des parents."
+          ]
+        },
+        {
+          "nom": "Psychologue scolaire",
+          "emoji": "🧠",
+          "couleur": "#7fbc48",
+          "position": "Le regard social est le vrai facteur de risque",
+          "description": "Tu travailles dans plusieurs écoles. Tu expliques que les difficultés des enfants de familles homoparentales viennent surtout de l'environnement social, pas de la configuration familiale elle-même.",
+          "arguments": [
+            "Les enfants de familles homoparentales ne souffrent pas de leur famille mais du regard que la société porte sur elle : les moqueries, les questions intrusives des autres enfants, l'invisibilité dans les manuels scolaires.",
+            "Un enfant dont la famille est acceptée et visible dans son environnement social s'épanouit exactement comme les autres : c'est la société qui crée le désavantage, pas la famille."
+          ]
+        },
+        {
+          "nom": "Parent traditionaliste",
+          "emoji": "👨‍👩‍👧",
+          "couleur": "#f3912b",
+          "position": "Un enfant a besoin d'un père et d'une mère",
+          "description": "Tu penses que l'enfant a besoin de modèles des deux genres pour construire son identité. Tu exprimes tes inquiétudes sans agressivité.",
+          "arguments": [
+            "Un père et une mère ne sont pas interchangeables : ils apportent des modes relationnels différents qui se complètent. Priver un enfant de l'un ou l'autre, c'est lui manquer quelque chose.",
+            "Dire que les études ne montrent pas de différence ne prouve pas l'absence de différence : ces enfants sont encore jeunes et les études à long terme manquent encore."
+          ]
+        },
+        {
+          "nom": "Sociologue spécialisé en structures familiales",
+          "emoji": "📊",
+          "couleur": "#a6539b",
+          "position": "La diversité familiale est une réalité, pas une expérience",
+          "description": "Tu rappelles que la famille nucléaire hétérosexuelle est un modèle historiquement récent et que de nombreux enfants ont toujours grandi dans des configurations diverses.",
+          "arguments": [
+            "Historiquement, les enfants ont été élevés par des grands-parents, des oncles, des voisins, des communautés : l'idée que seule la famille nucléaire hétérosexuelle est 'normale' est une construction culturelle du XXe siècle.",
+            "Les 50 études les plus sérieuses sur le sujet convergent : les enfants de familles homoparentales ont des trajectoires de développement comparables aux autres. Les inquiétudes reposent sur des valeurs, pas sur des données."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "categorie": "🤰 Reproduction & Famille",
+      "titre": "L'avortement devrait-il être possible sans délai ni condition ?",
+      "contexte": "En France, le délai légal de l'IVG est passé à 14 semaines en 2022. Des militantes féministes réclament la suppression de tout délai. Des professionnels de santé s'interrogent. Un débat est organisé dans le cadre d'une journée citoyenneté.",
+      "roles": [
+        {
+          "nom": "Militante féministe radicale",
+          "emoji": "✊",
+          "couleur": "#e62d32",
+          "position": "Mon corps, mes règles, sans délai",
+          "description": "Tu défends l'autonomie corporelle totale des femmes. Pour toi, toute restriction temporelle est une forme de contrôle du corps des femmes par l'État.",
+          "arguments": [
+            "Qui décide qu'à 14 semaines une femme peut avorter mais pas à 15 ? Ces lignes sont arbitraires et stigmatisantes : une femme qui décide tardivement a toujours de bonnes raisons, souvent liées à la précarité ou au déni de grossesse.",
+            "Aucune loi ne contraint un homme dans les décisions qu'il prend sur son corps : l'existence de délais pour l'avortement est une forme de tutelle spécifique aux femmes."
+          ]
+        },
+        {
+          "nom": "Gynécologue obstétricien",
+          "emoji": "🩺",
+          "couleur": "#53a4db",
+          "position": "La réalité médicale impose des limites",
+          "description": "Tu pratiques des IVG. Tu expliques ce que signifie médicalement un avortement tardif et pourquoi les médecins ne peuvent pas être indifférents au terme.",
+          "arguments": [
+            "Un avortement à 20 semaines est médicalement un accouchement prématuré provoqué : les risques pour la femme augmentent significativement avec le terme. L'absence de délai ne tient pas compte de cette réalité médicale.",
+            "À un certain stade de développement, le fœtus ressent la douleur : même si on accorde la priorité absolue à l'autonomie de la femme, la question de la souffrance fœtale ne peut pas être complètement ignorée."
+          ]
+        },
+        {
+          "nom": "Sociologue spécialisée en santé reproductive",
+          "emoji": "📊",
+          "couleur": "#7fbc48",
+          "position": "Les délais pénalisent les plus vulnérables",
+          "description": "Tu étudies les inégalités d'accès à l'IVG. Tu montres que les délais affectent davantage les femmes précaires, jeunes ou victimes de violences.",
+          "arguments": [
+            "Les femmes qui avortent tard ne l'ont pas choisi par caprice : elles sont souvent en déni de grossesse, en situation de violence, ou ont rencontré des obstacles d'accès aux soins. Les délais punissent les plus vulnérables.",
+            "En Espagne ou au Royaume-Uni, les délais sont plus larges qu'en France : les IVG tardives ne sont pas plus nombreuses pour autant. Le délai n'est pas un garde-fou efficace, c'est un obstacle."
+          ]
+        },
+        {
+          "nom": "Représentant d'un comité d'éthique",
+          "emoji": "⚖️",
+          "couleur": "#a6539b",
+          "position": "Le débat doit intégrer le statut du fœtus",
+          "description": "Tu travailles sur les questions éthiques de fin et de début de vie. Tu rappelles que la question du statut moral du fœtus ne peut pas être évacuée du débat.",
+          "arguments": [
+            "La question du délai est indissociable de celle du statut moral du fœtus : à quel stade acquiert-il une valeur morale qui mérite considération ? C'est une question philosophique légitime, pas une attaque contre les droits des femmes.",
+            "Une société peut reconnaître simultanément le droit à l'avortement et une certaine valeur morale au fœtus à un stade avancé : c'est précisément ce que font la plupart des législations, avec des compromis imparfaits mais nécessaires."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "categorie": "🌿 Vivant & Écologie",
+      "titre": "Une espèce invasive bien intégrée devrait-elle être éliminée ?",
+      "contexte": "La tortue de Floride a été introduite en Europe dans les années 1980 comme animal de compagnie puis relâchée dans la nature. Elle colonise les étangs et concurrence les espèces locales. Des gestionnaires d'espaces naturels veulent l'éradiquer. Des riverains s'y opposent.",
+      "roles": [
+        {
+          "nom": "Gestionnaire d'espace naturel protégé",
+          "emoji": "🌿",
+          "couleur": "#7fbc48",
+          "position": "Il faut l'éliminer pour protéger les espèces locales",
+          "description": "Tu gères une réserve naturelle. Tu observes l'impact de la tortue de Floride sur la cistude d'Europe, espèce protégée. Tu plaides pour un plan d'éradication.",
+          "arguments": [
+            "La tortue de Floride occupe les mêmes niches écologiques que la cistude d'Europe : elle est plus agressive, plus robuste, et elle pousse notre espèce protégée hors de ses habitats naturels.",
+            "Laisser une espèce invasive s'installer durablement crée un précédent : l'argument 'elle s'est intégrée' peut justifier n'importe quelle introduction. La biodiversité locale a une valeur intrinsèque à protéger."
+          ]
+        },
+        {
+          "nom": "Riverain attaché aux tortues locales",
+          "emoji": "🏡",
+          "couleur": "#f3912b",
+          "position": "Elles font partie du paysage maintenant",
+          "description": "Tu habites près de l'étang depuis 20 ans. Pour toi, les tortues de Floride font désormais partie de l'environnement local. Tu t'opposes à leur destruction.",
+          "arguments": [
+            "Ces tortues sont là depuis 30 ans : mes enfants ont grandi en les observant. Les détruire maintenant semblerait cruel et arbitraire pour quelque chose qui n'est pas de leur faute.",
+            "La nature s'adapte constamment : des espèces disparaissent et d'autres arrivent depuis des millions d'années. Pourquoi l'intervention humaine devrait-elle figer la biodiversité à un instant T arbitraire ?"
+          ]
+        },
+        {
+          "nom": "Écologue spécialisé en espèces invasives",
+          "emoji": "🔬",
+          "couleur": "#53a4db",
+          "position": "L'intégration apparente cache des déséquilibres",
+          "description": "Tu étudies scientifiquement les impacts des espèces invasives sur les écosystèmes. Tu nuances l'idée d'une intégration réussie.",
+          "arguments": [
+            "Une espèce peut sembler intégrée à l'œil humain tout en causant des déséquilibres profonds invisibles : modification de la végétation aquatique, compétition pour les ressources, transmission de maladies aux espèces locales.",
+            "Le concept d'intégration en écologie est trompeur : il faudrait des décennies d'études pour affirmer qu'une espèce s'est vraiment intégrée sans impact négatif durable sur l'écosystème."
+          ]
+        },
+        {
+          "nom": "Philosophe de l'environnement",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "La notion d'espèce native est une construction",
+          "description": "Tu questionnes l'idée même d'espèce invasive et la valeur accordée à la 'naturalité' d'un écosystème.",
+          "arguments": [
+            "Qu'est-ce qu'une espèce 'native' ? Le cheval a disparu d'Amérique puis a été réintroduit par les Espagnols : est-il invasif ou natif ? La frontière entre espèce locale et invasive dépend de l'instant t qu'on choisit comme référence.",
+            "La valeur accordée à la biodiversité locale est une valeur humaine, pas une loi naturelle : la nature n'a pas de préférence pour les espèces 'originelles'. C'est nous qui décidons quel écosystème nous voulons préserver, et pourquoi."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "categorie": "🌿 Vivant & Écologie",
+      "titre": "Les loups sont-ils dangereux pour l'écosystème ?",
+      "contexte": "Le loup est de retour naturellement en France depuis les années 1990. Sa population dépasse aujourd'hui 1000 individus. Les attaques sur les troupeaux se multiplient. Un conseil municipal d'une commune rurale débat de la position à adopter.",
+      "roles": [
+        {
+          "nom": "Éleveur ovin",
+          "emoji": "🐑",
+          "couleur": "#f3912b",
+          "position": "Le loup détruit mon travail et ma vie",
+          "description": "Tu élèves 300 brebis dans les Alpes. Tu as subi plusieurs attaques. Tu demandes des mesures de protection renforcées voire des abattages.",
+          "arguments": [
+            "En deux ans, j'ai perdu 40 brebis malgré les patous et les filets électriques : les indemnisations ne compensent pas le traumatisme, les nuits sans sommeil et l'angoisse permanente.",
+            "On nous demande de coexister avec un prédateur qui n'a pas de prédateur lui-même : sans régulation humaine, le loup va proliférer jusqu'à rendre l'élevage extensif impossible dans les zones de montagne."
+          ]
+        },
+        {
+          "nom": "Écologue spécialisé en grands prédateurs",
+          "emoji": "🔬",
+          "couleur": "#53a4db",
+          "position": "Le loup est bénéfique pour l'écosystème",
+          "description": "Tu étudies le retour du loup en Europe. Tu expliques son rôle écologique essentiel et les effets de trophic cascade observés dans les parcs où il a été réintroduit.",
+          "arguments": [
+            "À Yellowstone, le retour du loup a modifié le comportement des cervidés, réduit le surpâturage, favorisé la végétation des berges et même modifié le cours des rivières : un prédateur régule tout un écosystème.",
+            "Le loup est une espèce protégée par la Convention de Berne et la directive Habitats : son retour est naturel et légal. La question n'est pas de le supprimer mais de trouver des modes de coexistence."
+          ]
+        },
+        {
+          "nom": "Maire de commune rurale",
+          "emoji": "🏛️",
+          "couleur": "#7fbc48",
+          "position": "Il faut trouver un équilibre entre protection et activité humaine",
+          "description": "Tu dois gérer à la fois les intérêts des éleveurs et les obligations légales de protection du loup. Tu cherches des solutions pragmatiques.",
+          "arguments": [
+            "Ma commune perd des éleveurs chaque année : si l'élevage extensif disparaît, c'est toute une économie, une culture et un paysage entretenus qui s'effondrent. L'écologie ne peut pas ignorer les réalités humaines.",
+            "Des quotas d'abattage ciblés sur les loups habituels des troupeaux, combinés à des aides renforcées pour la protection, pourraient permettre de préserver à la fois les loups et les éleveurs."
+          ]
+        },
+        {
+          "nom": "Association de protection de la nature",
+          "emoji": "🌿",
+          "couleur": "#a6539b",
+          "position": "Le loup paye pour nos erreurs passées",
+          "description": "Tu milites pour la coexistence. Tu rappelles que c'est l'humain qui a éradiqué le loup et que son retour est une restauration écologique nécessaire.",
+          "arguments": [
+            "Le loup a été exterminé en France au XIXe siècle par l'humain : son retour naturel est une restauration écologique que nous devons accueillir, même si cela demande des adaptations douloureuses.",
+            "Des pays comme la Suède, l'Espagne ou la Pologne ont des populations de loups bien supérieures et maintiennent l'élevage : la coexistence est possible, elle demande des investissements et de la volonté politique."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "categorie": "🌿 Vivant & Écologie",
+      "titre": "Replanter des arbres suffit-il à compenser la déforestation ?",
+      "contexte": "Une grande entreprise annonce qu'elle compense ses émissions de CO2 en finançant la plantation d'un million d'arbres en Amazonie. Des ONG environnementales dénoncent une opération de greenwashing. Un débat s'ouvre sur les réseaux sociaux et dans les médias.",
+      "roles": [
+        {
+          "nom": "Responsable RSE de l'entreprise",
+          "emoji": "💼",
+          "couleur": "#53a4db",
+          "position": "C'est mieux que rien",
+          "description": "Tu défends l'initiative de ton entreprise. Tu expliques la démarche de compensation carbone et son intérêt dans une stratégie de transition.",
+          "arguments": [
+            "Planter un million d'arbres, c'est concret, mesurable et immédiatement bénéfique : en attendant des solutions technologiques parfaites, agir imparfaitement vaut mieux que ne rien faire du tout.",
+            "Notre engagement fait partie d'une stratégie plus large de réduction des émissions : la compensation n'est pas un substitut mais un complément pendant la transition."
+          ]
+        },
+        {
+          "nom": "Écologue spécialisé en forêts tropicales",
+          "emoji": "🔬",
+          "couleur": "#7fbc48",
+          "position": "Une plantation n'est pas une forêt",
+          "description": "Tu travailles sur la biodiversité des forêts primaires. Tu expliques pourquoi une plantation de jeunes arbres ne compense pas la destruction d'une forêt ancienne.",
+          "arguments": [
+            "Une forêt primaire abrite des milliers d'espèces interdépendantes construites sur des millions d'années : planter des arbres d'une seule espèce en rangées, c'est créer un désert biologique comparé à ce qu'on a détruit.",
+            "Un arbre planté absorbe du CO2 sur 50 ans : une forêt primaire détruite libère instantanément du carbone stocké depuis des siècles. La compensation carbone par reboisement est une illusion mathématique."
+          ]
+        },
+        {
+          "nom": "Militante écologiste",
+          "emoji": "✊",
+          "couleur": "#e62d32",
+          "position": "C'est du greenwashing pur",
+          "description": "Tu dénonces les opérations de communication environnementale des grandes entreprises. Tu penses que la compensation carbone est une façon de continuer à polluer avec bonne conscience.",
+          "arguments": [
+            "Cette entreprise n'a pas réduit ses émissions d'un gramme : elle achète une indulgence environnementale pour continuer comme avant. C'est précisément ce qu'on appelle le greenwashing.",
+            "Le seul carbone qu'on ne relâche pas, c'est celui qu'on ne brûle pas : tant qu'on ne s'attaque pas aux causes, les solutions de compensation ne font que retarder l'inévitable."
+          ]
+        },
+        {
+          "nom": "Chercheur en solutions basées sur la nature",
+          "emoji": "🌱",
+          "couleur": "#a6539b",
+          "position": "Le reboisement peut marcher dans de bonnes conditions",
+          "description": "Tu travailles sur la restauration écologique. Tu défends l'idée que le reboisement, bien fait, est un outil utile, tout en reconnaissant ses limites actuelles.",
+          "arguments": [
+            "Des projets de reboisement bien conçus, avec des espèces locales diversifiées et un accompagnement à long terme, montrent de vrais résultats en termes de biodiversité et de stockage carbone.",
+            "Le problème n'est pas le principe du reboisement mais sa mise en œuvre industrielle et son utilisation comme alibi : un arbre planté et abandonné meurt dans 60% des cas. La qualité compte plus que la quantité."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "categorie": "🌿 Vivant & Écologie",
+      "titre": "La disparition d'un insecte peut-elle menacer l'humanité ?",
+      "contexte": "Les abeilles sauvages disparaissent à un rythme alarmant en Europe. Une étude scientifique annonce que si les pollinisateurs disparaissent, un tiers de l'alimentation humaine mondiale serait menacée. Un débat est organisé dans un lycée agricole.",
+      "roles": [
         {
           "nom": "Apiculteur",
           "emoji": "🐝",
           "couleur": "#f4d32e",
-          "position": "Contre le projet",
-          "description": "Tu possèdes 40 ruches dans le vallon et la forêt environnante. La floraison de cette forêt est essentielle pour la production de miel.",
+          "position": "Sans abeilles, on meurt de faim",
+          "description": "Tu élèves des abeilles depuis 15 ans et tu observes la chute des populations. Tu témoignes de la réalité de terrain et de l'urgence de la situation.",
           "arguments": [
-            "Mes abeilles butinent cette forêt de mai à juillet : sa destruction réduirait ma production de miel de moitié.",
-            "La forêt fournit un microclimat frais indispensable à la survie de mes colonies lors des canicules."
+            "En 15 ans, j'ai perdu 40% de mes ruches malgré tous mes efforts : pesticides, varroa, changement climatique. Ce que je vois sur le terrain dépasse largement ce qu'on lit dans les statistiques.",
+            "Les abeilles pollinisent 80% des plantes à fleurs et un tiers des cultures alimentaires humaines : leur disparition n'est pas un problème d'apiculteurs, c'est une menace sur la sécurité alimentaire mondiale."
           ]
         },
         {
-          "nom": "Élu de la communauté de communes",
-          "emoji": "🗳️",
-          "couleur": "#a6539b",
-          "position": "Pour, avec des garanties",
-          "description": "Tu représentes les intérêts de 8 communes rurales. La sécurisation de l'eau agricole est une priorité pour maintenir l'activité économique du territoire.",
+          "nom": "Agronome",
+          "emoji": "🌾",
+          "couleur": "#7fbc48",
+          "position": "L'agriculture peut s'adapter mais à quel coût ?",
+          "description": "Tu travailles sur les systèmes agricoles du futur. Tu évalues les alternatives à la pollinisation naturelle et leurs limites.",
           "arguments": [
-            "Sans eau, nos agriculteurs partent et nos villages se vident : la retenue est un investissement pour l'avenir du territoire.",
-            "Nous sommes prêts à financer une étude d'impact complète et des mesures compensatoires si le projet est validé."
+            "La pollinisation manuelle existe déjà en Chine dans des régions sans pollinisateurs : des milliers d'ouvriers pollinisent les arbres fruitiers à la main. C'est possible mais d'un coût prohibitif et non extensible à grande échelle.",
+            "Des recherches sur les drones pollinisateurs avancent mais sont encore expérimentales : miser sur la technologie pour remplacer les pollinisateurs naturels, c'est prendre un risque énorme sans filet de sécurité."
+          ]
+        },
+        {
+          "nom": "Directeur d'une coopérative agricole",
+          "emoji": "🚜",
+          "couleur": "#f3912b",
+          "position": "Le monde agricole a besoin de solutions économiquement viables",
+          "description": "Tu représentes des agriculteurs qui doivent vivre de leur travail. Tu rappelles que la protection des insectes a un coût que tous les agriculteurs ne peuvent pas assumer seuls.",
+          "arguments": [
+            "Je suis convaincu que les abeilles sont essentielles, mais interdire les pesticides sans compensation ni alternative revient à demander aux agriculteurs de se ruiner pour un problème qu'ils n'ont pas créé seuls.",
+            "Nos agriculteurs sont en concurrence avec des pays qui n'ont pas les mêmes contraintes environnementales : une réglementation uniquement européenne pénalise nos producteurs sans résoudre le problème global."
+          ]
+        },
+        {
+          "nom": "Chercheur en entomologie",
+          "emoji": "🔬",
+          "couleur": "#53a4db",
+          "position": "L'effondrement est documenté et sous-estimé",
+          "description": "Tu études les populations d'insectes depuis 20 ans. Tu présentes les données scientifiques sur l'effondrement des insectes et ses conséquences en cascade.",
+          "arguments": [
+            "La biomasse des insectes volants a diminué de 75% en 27 ans en Europe : ce n'est pas une projection, c'est une mesure. La vitesse de cet effondrement dépasse toutes les extinctions précédentes de mémoire d'homme.",
+            "Les insectes sont à la base de la chaîne alimentaire : leur disparition affecte les oiseaux, les amphibiens, les poissons, les sols. Ce n'est pas la disparition d'une espèce, c'est l'effondrement d'un système entier."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "categorie": "🌿 Vivant & Écologie",
+      "titre": "Être végétalien garantit-il un impact nul sur la mort animale ?",
+      "contexte": "Un étudiant végétalien affirme en cours que son alimentation ne cause aucune mort animale. Son professeur de biologie le challenge. Un débat s'engage sur ce que signifie vraiment ne pas causer de mort animale dans nos systèmes alimentaires modernes.",
+      "roles": [
+        {
+          "nom": "L'étudiant végétalien",
+          "emoji": "🌱",
+          "couleur": "#7fbc48",
+          "position": "Mon alimentation cause beaucoup moins de morts",
+          "description": "Tu es végétalien depuis 2 ans pour des raisons éthiques. Tu nuances ta position initiale mais tu défends que ton impact reste bien inférieur à celui d'un omnivore.",
+          "arguments": [
+            "Même si la culture végétale cause des morts animales, un kilogramme de bœuf nécessite 7 à 10 kg de céréales pour être produit : manger végétalien cause de loin moins de mort animale qu'une alimentation carnée.",
+            "Je ne prétends pas à la perfection mais à la cohérence : réduire au maximum sa contribution à la souffrance animale est un objectif éthique valide même si l'impact zéro est impossible."
+          ]
+        },
+        {
+          "nom": "Professeur de biologie",
+          "emoji": "🔬",
+          "couleur": "#53a4db",
+          "position": "Toute agriculture cause des morts animales",
+          "description": "Tu challenges scientifiquement la position de l'étudiant. Tu expliques les mécanismes par lesquels la culture végétale cause des morts animales.",
+          "arguments": [
+            "Les pesticides, le labour, la destruction d'habitats, les pièges à rongeurs dans les champs de blé ou de soja : l'agriculture végétale industrielle cause des millions de morts animales par hectare chaque année.",
+            "Un élevage extensif sur prairies naturelles peut causer moins de morts animales par calorie produite qu'une monoculture de soja : la question n'est pas végétal versus animal mais industriel versus extensif."
+          ]
+        },
+        {
+          "nom": "Philosophe de l'éthique animale",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "La perfection ne doit pas être l'ennemi du bien",
+          "description": "Tu travailles sur l'éthique animale dans la tradition de Peter Singer. Tu rappelles que l'objectif éthique est de minimiser la souffrance, pas d'atteindre un impact zéro impossible.",
+          "arguments": [
+            "L'argument 'même les végétaliens causent des morts' est souvent utilisé pour justifier l'immobilisme : 'puisqu'on ne peut pas être parfait, autant ne rien changer'. C'est un sophisme.",
+            "L'éthique se mesure à l'échelle des conséquences : si un régime végétalien cause 10 fois moins de souffrance animale qu'un régime carné, c'est un progrès moral significatif même si ce n'est pas la perfection."
+          ]
+        },
+        {
+          "nom": "Agriculteur en élevage extensif bio",
+          "emoji": "🐄",
+          "couleur": "#f3912b",
+          "position": "Mon élevage contribue à la biodiversité",
+          "description": "Tu élèves des vaches allaitantes en prairie naturelle. Tu défends que ton système d'élevage peut être plus respectueux de la vie animale qu'une monoculture intensive.",
+          "arguments": [
+            "Mes prairies permanentes abritent des dizaines d'espèces d'insectes, d'oiseaux et de petits mammifères : elles sont des refuges de biodiversité que n'offrira jamais un champ de soja en monoculture.",
+            "Mes animaux vivent en plein air, se nourrissent d'herbe et ont une vie de qualité avant d'être abattus de façon rapide : comparer ça à l'agriculture végétale industrielle qui massacre les rongeurs au gaz est réducteur."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "categorie": "🌿 Vivant & Écologie",
+      "titre": "La vie d'un chimpanzé vaut-elle celle d'un humain ?",
+      "contexte": "Un laboratoire pharmaceutique demande l'autorisation d'utiliser des chimpanzés pour tester un médicament qui pourrait sauver des milliers de vies humaines. Des associations de défense des animaux s'y opposent. Un comité d'éthique se réunit.",
+      "roles": [
+        {
+          "nom": "Directeur de recherche pharmaceutique",
+          "emoji": "💊",
+          "couleur": "#53a4db",
+          "position": "Sauver des humains justifie l'expérimentation",
+          "description": "Tu diriges un projet de recherche sur un traitement contre une maladie rare mortelle. Tu demandes l'autorisation d'utiliser des chimpanzés car les modèles alternatifs sont insuffisants.",
+          "arguments": [
+            "Ce médicament pourrait sauver 10 000 enfants par an : refuser de tester sur quelques dizaines de chimpanzés au nom de leur valeur intrinsèque, c'est faire un choix philosophique au détriment de milliers d'humains.",
+            "L'expérimentation animale est encadrée par des protocoles stricts minimisant la souffrance : nous ne torturons pas des animaux, nous menons des études contrôlées avec des soins vétérinaires de qualité."
+          ]
+        },
+        {
+          "nom": "Primatologue",
+          "emoji": "🐒",
+          "couleur": "#7fbc48",
+          "position": "Le chimpanzé est un être conscient et social",
+          "description": "Tu étudies les chimpanzés depuis 20 ans en milieu naturel. Tu témoignes de leur intelligence, de leur vie sociale et émotionnelle pour montrer que leur souffrance a une valeur morale.",
+          "arguments": [
+            "Les chimpanzés ont une théorie de l'esprit, utilisent des outils, ont des cultures locales, pleurent leurs morts et peuvent apprendre le langage des signes : leur capacité à souffrir et à avoir des intérêts est comparable à celle d'un jeune enfant humain.",
+            "Les États-Unis ont interdit l'expérimentation sur les chimpanzés en 2015 en reconnaissant leur statut particulier : l'Europe doit suivre cette évolution éthique plutôt que de régresser."
+          ]
+        },
+        {
+          "nom": "Philosophe spécialisé en éthique animale",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "Le spécisme est une discrimination arbitraire",
+          "description": "Tu défends que la valeur d'une vie ne dépend pas de l'espèce mais de la capacité à souffrir et à avoir des intérêts.",
+          "arguments": [
+            "Dire qu'une vie humaine vaut plus qu'une vie de chimpanzé parce qu'elle est humaine, c'est du spécisme : c'est le même raisonnement que le racisme ou le sexisme, une discrimination fondée sur une caractéristique arbitraire.",
+            "Si on juge la valeur morale à la capacité à souffrir et à avoir des projets de vie, un chimpanzé adulte a plus de valeur morale qu'un fœtus humain ou qu'un humain en état végétatif permanent."
+          ]
+        },
+        {
+          "nom": "Parent d'un enfant atteint par la maladie",
+          "emoji": "👨‍👩‍👧",
+          "couleur": "#f3912b",
+          "position": "Ma fille passe avant un animal",
+          "description": "Ta fille de 8 ans est atteinte par la maladie que le médicament pourrait traiter. Tu témoignes de ta souffrance et de ta conviction que la vie de ta fille doit passer en premier.",
+          "arguments": [
+            "Ma fille souffre chaque jour et son pronostic est sombre : me demander de choisir entre sa vie et celle d'un chimpanzé, c'est me demander l'impossible. Pour moi, il n'y a pas de choix.",
+            "Je respecte les animaux et je suis contre la cruauté inutile : mais quand il s'agit de sauver la vie de mon enfant avec un protocole encadré et humain, oui, je choisis ma fille."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "categorie": "⚗️ Science & Société",
+      "titre": "Un médicament testé sur des hommes peut-il être prescrit aux femmes ?",
+      "contexte": "Une étude révèle qu'un médicament cardiaque largement prescrit aux femmes n'a été testé que sur des hommes lors des essais cliniques. Des effets secondaires spécifiques aux femmes sont maintenant documentés. Un comité de pharmacovigilance se réunit.",
+      "roles": [
+        {
+          "nom": "Cardiologue",
+          "emoji": "🫀",
+          "couleur": "#e62d32",
+          "position": "On a prescrit ce médicament sans données fiables",
+          "description": "Tu soignes des femmes depuis 20 ans et tu constates des effets secondaires que les études initiales n'avaient pas détectés. Tu réclames des essais spécifiques.",
+          "arguments": [
+            "Pendant des décennies, les femmes ont été exclues des essais cliniques au prétexte que leurs cycles hormonaux 'compliquaient' les données : résultat, on les soigne avec des médicaments calibrés pour le corps masculin.",
+            "Les femmes métabolisent certains médicaments différemment des hommes, ont des symptômes cardiaques différents et réagissent différemment aux traitements : extrapoler les données masculines est une erreur médicale documentée."
+          ]
+        },
+        {
+          "nom": "Directeur d'agence du médicament",
+          "emoji": "💊",
+          "couleur": "#53a4db",
+          "position": "Les protocoles actuels ont des limites mais protègent",
+          "description": "Tu défends les procédures d'autorisation de mise sur le marché tout en reconnaissant que les biais de genre dans la recherche sont un problème réel en cours de correction.",
+          "arguments": [
+            "Les réglementations européennes exigent désormais une représentation équilibrée hommes-femmes dans les essais cliniques depuis 2004 : les anciens médicaments posent problème mais les nouveaux sont mieux étudiés.",
+            "Retirer un médicament efficace du marché sans alternative équivaut à priver des patientes d'un traitement dont elles bénéficient : la réponse est d'exiger des études complémentaires, pas de supprimer le traitement."
+          ]
+        },
+        {
+          "nom": "Chercheuse en médecine de genre",
+          "emoji": "🔬",
+          "couleur": "#7fbc48",
+          "position": "Le biais de genre en médecine est systémique",
+          "description": "Tu travailles sur les inégalités de genre dans la recherche médicale. Tu documentes l'ampleur historique du problème et ses conséquences actuelles.",
+          "arguments": [
+            "Jusqu'aux années 1990, les femmes étaient systématiquement exclues des essais cliniques : sur les 10 médicaments retirés du marché américain entre 1997 et 2001, 8 présentaient des risques spécifiquement supérieurs chez les femmes.",
+            "Le biais commence dès la recherche fondamentale : même les souris utilisées dans les laboratoires sont majoritairement mâles. Ce n'est pas un accident, c'est une culture scientifique qui traite le corps masculin comme universel."
+          ]
+        },
+        {
+          "nom": "Patiente concernée",
+          "emoji": "🧍‍♀️",
+          "couleur": "#f3912b",
+          "position": "J'aurais dû être informée",
+          "description": "Tu prends ce médicament depuis 5 ans et tu viens d'apprendre qu'il n'a pas été testé sur des femmes. Tu réclames transparence et consentement éclairé.",
+          "arguments": [
+            "Mon médecin m'a prescrit ce médicament sans m'informer qu'il n'avait jamais été testé sur une femme : c'est une violation de mon droit au consentement éclairé, que ce soit intentionnel ou non.",
+            "Je ne demande pas qu'on supprime le médicament : je demande qu'on me dise la vérité sur ce qu'on me donne. Les patients ont le droit de connaître les limites des connaissances médicales qui les concernent."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "categorie": "⚗️ Science & Société",
+      "titre": "Cloner un être humain disparu, est-ce le ramener à la vie ?",
+      "contexte": "Une start-up américaine annonce qu'elle est techniquement capable de cloner un être humain à partir d'ADN conservé. Une famille qui a perdu un enfant en bas âge demande à recourir à cette technologie. Un comité d'éthique international est saisi.",
+      "roles": [
+        {
+          "nom": "Les parents endeuillés",
+          "emoji": "👨‍👩‍👧",
+          "couleur": "#f3912b",
+          "position": "Nous voulons retrouver notre enfant",
+          "description": "Vous avez perdu votre fils de 2 ans dans un accident. Son ADN a été conservé. Vous voyez dans le clonage une possibilité de le retrouver.",
+          "arguments": [
+            "Notre fils avait le même ADN que personne d'autre au monde : si on peut recréer cet être unique à partir de son code génétique, c'est lui que nous retrouvons, pas un inconnu.",
+            "Nous ne demandons pas à la société de payer ni d'approuver notre choix : nous sommes des adultes consentants qui voulons accéder à une technologie pour notre propre vie familiale."
+          ]
+        },
+        {
+          "nom": "Généticien",
+          "emoji": "🧬",
+          "couleur": "#53a4db",
+          "position": "L'ADN ne fait pas la personne",
+          "description": "Tu expliques la différence entre identité génétique et identité personnelle. Tu montres pourquoi un clone ne serait pas la même personne.",
+          "arguments": [
+            "Des vrais jumeaux ont un ADN identique et sont des personnes totalement différentes : un clone de votre fils aurait le même génome mais une personnalité, des souvenirs et une vie entièrement différents.",
+            "L'identité d'une personne se construit dans l'interaction entre ses gènes, son environnement, ses expériences et ses relations : recréer l'ADN de quelqu'un ne recrée pas la personne, ça crée quelqu'un de nouveau."
+          ]
+        },
+        {
+          "nom": "Psychologue spécialisé en deuil",
+          "emoji": "🧠",
+          "couleur": "#7fbc48",
+          "position": "Le clonage entraverait le deuil et nuirait à l'enfant",
+          "description": "Tu travailles avec des familles en deuil. Tu t'inquiètes des conséquences psychologiques pour les parents et pour l'enfant cloné.",
+          "arguments": [
+            "Un enfant cloné grandirait dans l'ombre d'un mort : ses parents attendraient inconsciemment qu'il reproduise les traits, les gestes, la personnalité de l'enfant perdu. C'est une pression psychologique insupportable à imposer à un être innocent.",
+            "Le deuil est un processus douloureux mais nécessaire : chercher à remplacer l'être perdu par un substitut génétique n'est pas un chemin vers la guérison, c'est un évitement qui peut empêcher toute reconstruction."
+          ]
+        },
+        {
+          "nom": "Philosophe de l'identité personnelle",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "L'enfant cloné aurait le droit d'être lui-même",
+          "description": "Tu soulèves la question des droits de l'enfant qui serait cloné et de ce que signifie être une personne autonome.",
+          "arguments": [
+            "Cet enfant naîtrait avec une identité prédéfinie, un rôle assigné, une histoire qui n'est pas la sienne : être créé pour remplacer quelqu'un d'autre est une violation fondamentale de son droit à exister pour lui-même.",
+            "Chaque être humain a le droit à un futur ouvert, non déterminé par les attentes de ses géniteurs : le clonage de remplacement crée un enfant dont l'existence entière est définie par la mort d'un autre."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "categorie": "⚗️ Science & Société",
+      "titre": "Les vaccins peuvent-ils provoquer la maladie qu'ils sont censés prévenir ?",
+      "contexte": "Dans un groupe de parents d'élèves, une mère affirme que le vaccin contre la grippe lui a donné la grippe l'année dernière. Une autre refuse de vacciner ses enfants par peur. Le médecin scolaire est invité à intervenir.",
+      "roles": [
+        {
+          "nom": "Médecin scolaire",
+          "emoji": "🩺",
+          "couleur": "#53a4db",
+          "position": "Les vaccins ne provoquent pas la maladie",
+          "description": "Tu expliques scientifiquement comment fonctionnent les vaccins et pourquoi la confusion entre effets secondaires et maladie est fréquente mais infondée.",
+          "arguments": [
+            "Les vaccins à virus inactivés ou à ARNm ne contiennent pas de virus vivant capable de se reproduire : il est médicalement impossible qu'ils provoquent la maladie. Les symptômes ressentis après vaccination sont une réponse immunitaire normale.",
+            "Les coïncidences temporelles sont trompeuses : on se vaccine en automne, période où les virus respiratoires circulent. Tomber malade après la vaccination ne signifie pas tomber malade à cause d'elle."
+          ]
+        },
+        {
+          "nom": "La mère sceptique",
+          "emoji": "👩",
+          "couleur": "#f3912b",
+          "position": "J'ai vécu quelque chose que la science minimise",
+          "description": "Tu témoignes de ton expérience personnelle et tu exprimes ta méfiance envers un discours médical que tu perçois comme peu à l'écoute.",
+          "arguments": [
+            "Je me suis vaccinée un vendredi et le lundi j'avais de la fièvre, des courbatures et tous les symptômes de la grippe : peut-être que c'est une coïncidence, mais ma méfiance est légitime face à cette expérience.",
+            "On nous dit que les effets secondaires sont normaux et bénins, mais personne ne m'a prévenue avant : si le système médical voulait vraiment ma confiance, il commencerait par être transparent sur ce que je vais ressentir."
+          ]
+        },
+        {
+          "nom": "Immunologiste",
+          "emoji": "🔬",
+          "couleur": "#7fbc48",
+          "position": "Distinguer réaction immunitaire et maladie est crucial",
+          "description": "Tu expliques la biologie de la réponse vaccinale pour aider les parents à comprendre ce qu'ils ressentent réellement.",
+          "arguments": [
+            "La fièvre, les courbatures et la fatigue après vaccination sont des signaux que votre système immunitaire travaille : ce sont les cytokines libérées pendant la réponse immunitaire, pas un virus qui se multiplie dans votre corps.",
+            "Ces symptômes durent 24 à 48h et ne sont pas contagieux : une vraie grippe dure 7 à 10 jours avec des symptômes bien plus intenses. Apprendre à distinguer les deux aide à faire confiance à ce que son corps ressent vraiment."
+          ]
+        },
+        {
+          "nom": "Sociologue de la méfiance envers la science",
+          "emoji": "📊",
+          "couleur": "#a6539b",
+          "position": "La méfiance vaccinale est un symptôme social",
+          "description": "Tu étudies les raisons pour lesquelles des personnes éduquées rejettent les recommandations médicales. Tu analyses la méfiance comme un phénomène social compréhensible.",
+          "arguments": [
+            "La méfiance vaccinale n'est pas de la stupidité : elle est souvent corrélée à une méfiance plus générale envers les institutions, alimentée par des scandales réels comme le Mediator ou la gestion de la crise du sang contaminé.",
+            "Le discours médical a longtemps été autoritaire et peu pédagogique : 'faites-nous confiance, on sait' ne suffit plus dans une société où l'information circule librement. La reconquête de la confiance passe par la transparence, pas par la condescendance."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "categorie": "⚗️ Science & Société",
+      "titre": "Un scientifique a-t-il le droit de publier une étude fausse ?",
+      "contexte": "Un chercheur publie une étude affirmant un lien entre un pesticide et l'autisme. L'étude est reprise par des milliers de médias. Deux ans plus tard, d'autres chercheurs prouvent que les données ont été manipulées. Un comité de déontologie scientifique se réunit.",
+      "roles": [
+        {
+          "nom": "Le chercheur mis en cause",
+          "emoji": "👨‍🔬",
+          "couleur": "#f3912b",
+          "position": "Je croyais en mes résultats",
+          "description": "Tu défends ta démarche initiale tout en reconnaissant des erreurs méthodologiques. Tu distingues fraude intentionnelle et erreur de bonne foi.",
+          "arguments": [
+            "J'ai publié ce que mes données semblaient montrer à l'époque : une erreur méthodologique n'est pas une fraude. La science avance par essais et erreurs, et la communauté scientifique a joué son rôle en corrigeant mes résultats.",
+            "Les médias ont amplifié mes résultats préliminaires bien au-delà de ce que j'avais affirmé : la responsabilité de la désinformation ne repose pas uniquement sur le chercheur qui publie une hypothèse."
+          ]
+        },
+        {
+          "nom": "Directrice d'un comité d'éthique scientifique",
+          "emoji": "⚖️",
+          "couleur": "#53a4db",
+          "position": "La fraude scientifique cause des dommages réels",
+          "description": "Tu présides le comité de déontologie. Tu distingues les différents niveaux de manquement et leurs conséquences.",
+          "arguments": [
+            "Manipuler des données, même avec de bonnes intentions, est une fraude : cela détourne des ressources de recherche, oriente faussement des politiques publiques et détruit la confiance envers la science.",
+            "L'étude sur le lien supposé vaccin-autisme publiée par Wakefield en 1998 a provoqué une chute de la vaccination et des milliers de morts évitables dans le monde : une publication fausse peut tuer."
+          ]
+        },
+        {
+          "nom": "Journaliste scientifique",
+          "emoji": "📰",
+          "couleur": "#7fbc48",
+          "position": "Les médias amplifient le problème",
+          "description": "Tu travailles sur la vulgarisation scientifique. Tu analyses la responsabilité des médias dans la diffusion d'études non répliquées.",
+          "arguments": [
+            "Les médias publient en première page les études sensationnelles et en page 15 les démentis : l'information de correction ne rattrape jamais l'information erronée initiale dans l'esprit du public.",
+            "Notre métier devrait exiger de ne publier que des études répliquées ou de contextualiser clairement le caractère préliminaire des résultats : le sensationnalisme scientifique est une forme de désinformation."
+          ]
+        },
+        {
+          "nom": "Épistémologue",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "L'erreur fait partie du processus scientifique",
+          "description": "Tu expliques comment la science fonctionne réellement, entre idéal de vérité et pratique humaine faillible.",
+          "arguments": [
+            "La science n'est pas une collection de vérités définitives mais un processus de correction progressive : une étude fausse qui est ensuite réfutée est le signe que le système fonctionne, pas qu'il est défaillant.",
+            "La vraie menace pour la science n'est pas l'erreur mais la suppression de l'erreur : les systèmes scientifiques qui ne permettent pas la réfutation et la correction sont ceux qui produisent de vraies dérives."
+          ]
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "categorie": "⚗️ Science & Société",
+      "titre": "La technologie nous rend-elle plus intelligents ?",
+      "contexte": "Dans un lycée, des enseignants observent que leurs élèves ne mémorisent plus rien mais savent trouver n'importe quelle information en quelques secondes. Certains voient une évolution positive, d'autres une régression. Un conseil pédagogique est organisé.",
+      "roles": [
+        {
+          "nom": "Professeur de philosophie",
+          "emoji": "📚",
+          "couleur": "#a6539b",
+          "position": "Nous confondons accès à l'information et intelligence",
+          "description": "Tu fais la distinction entre mémoriser, comprendre et raisonner. Tu penses que la technologie peut nuire au développement de la pensée profonde.",
+          "arguments": [
+            "Google peut me donner la date de la Révolution française en 0,3 secondes : ça ne me donne pas la capacité de comprendre pourquoi elle a eu lieu, ni d'analyser ses conséquences. L'accès à l'information n'est pas la connaissance.",
+            "La mémoire n'est pas un simple disque dur : mémoriser, c'est construire des réseaux de connexions neuronales qui permettent la pensée analogique, la créativité et le raisonnement. Déléguer la mémoire à la machine appauvrit ces réseaux."
+          ]
+        },
+        {
+          "nom": "Enseignant en numérique éducatif",
+          "emoji": "💻",
+          "couleur": "#53a4db",
+          "position": "La technologie libère l'intelligence supérieure",
+          "description": "Tu formes des enseignants à l'usage pédagogique du numérique. Tu penses que la technologie permet de consacrer l'énergie cognitive aux tâches de haut niveau.",
+          "arguments": [
+            "Si la machine gère la mémoire des faits, le cerveau humain peut se consacrer à l'analyse, la synthèse, la créativité et le jugement critique : c'est une élévation du niveau d'intelligence mobilisée, pas un appauvrissement.",
+            "Chaque révolution technologique a provoqué les mêmes peurs : l'écriture, l'imprimerie, la calculatrice. Socrate craignait que l'écriture détruise la mémoire. Ces peurs n'ont jamais empêché le progrès cognitif humain."
+          ]
+        },
+        {
+          "nom": "Neuroscientifique",
+          "emoji": "🧠",
+          "couleur": "#7fbc48",
+          "position": "Le cerveau s'adapte mais certaines fonctions s'atrophient",
+          "description": "Tu présentes les recherches en neurosciences sur l'impact du numérique sur le développement cognitif, notamment chez les adolescents.",
+          "arguments": [
+            "Les études d'imagerie cérébrale montrent que la lecture linéaire et la lecture sur écran activent des zones différentes du cerveau : la lecture numérique favorise le balayage rapide au détriment de la lecture profonde et de la compréhension complexe.",
+            "La plasticité cérébrale est réelle mais à double sens : le cerveau se renforce dans ce qu'il pratique et s'affaiblit dans ce qu'il délègue. Si on cesse de mémoriser, les circuits de mémorisation s'appauvrissent."
+          ]
+        },
+        {
+          "nom": "Élève de terminale",
+          "emoji": "🎒",
+          "couleur": "#f3912b",
+          "position": "On nous prépare mal au monde réel",
+          "description": "Tu témoignes de ton expérience d'élève dans un système scolaire qui valorise encore la mémorisation alors que le monde professionnel valorise la recherche d'information et la collaboration.",
+          "arguments": [
+            "Dans mon futur métier, j'aurai accès à internet en permanence : m'obliger à mémoriser des dates ou des formules que je pourrai toujours vérifier en 5 secondes est une perte de temps qui ne prépare pas à la vraie vie.",
+            "Ce qu'on ne m'apprend pas assez à l'école, c'est à vérifier une information, à distinguer une source fiable d'une fake news, à croiser les données : ça, c'est l'intelligence dont j'aurai besoin."
           ]
         }
       ]
