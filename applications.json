@@ -134,7 +134,7 @@
     "date_creation": "30/04/2026",
     "auteur": "Vincent APREMONT"
   },
-      {
+    {
     "id": "outils-004",
     "categorie": "Outils",
     "titre": "ChronoPrez",
@@ -151,7 +151,7 @@
     "date_creation": "05/05/2026",
     "auteur": "Vincent APREMONT"
   },
-        {
+    {
     "id": "application-006",
     "categorie": "Applications",
     "titre": "BabyBox",
@@ -168,7 +168,7 @@
     "date_creation": "06/05/2026",
     "auteur": "Vincent APREMONT"
   },
-          {
+    {
     "id": "application-007",
     "categorie": "Applications",
     "titre": "BioDebat",
@@ -185,7 +185,7 @@
     "date_creation": "06/05/2026",
     "auteur": "Vincent APREMONT"
   },
-            {
+   {
     "id": "",
     "categorie": "",
     "titre": "",
@@ -200,6 +200,23 @@
     "image": "",
     "statut": "",
     "date_creation": "",
+    "auteur": "Vincent APREMONT"
+  },
+    {
+    "id": "application-008",
+    "categorie": "Applications",
+    "titre": "Conseil Municipal Scientifique",
+    "description": "",
+    "discipline": ["Biologie","Ecologie"],
+    "module": ["MG1","MP7"],
+    "public": "",
+    "formation": ["Bac Pro SAPAT"],
+    "tags": [],
+    "url": "Biologie-Humaine/Conseil-municipal-scientifique.html",
+    "icone": "",
+    "image": "",
+    "statut": "Publié",
+    "date_creation": "07/05/2026",
     "auteur": "Vincent APREMONT"
   }
 ]
