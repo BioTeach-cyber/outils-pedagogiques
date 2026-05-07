@@ -340,7 +340,7 @@ function afficherVue(id) {
 ======================================================== */
 async function chargerDonnees() {
   try {
-    const rep = await fetch('../assets/json/Conseil-municipal-scientifique.json');
+    const rep = await fetch('../assets/json/Debacteur.json');
     if (!rep.ok) throw new Error('Fichier introuvable');
     donnees = await rep.json();
   } catch (e) {
