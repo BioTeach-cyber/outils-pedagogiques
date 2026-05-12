@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <title>Générateur de groupes</title>
+  <style>
+    /* =============================================
+       VARIABLES & RESET
+    ============================================= */
+    :root {
+      --bleu: #53a4db;
+      --vert: #7fbc48;
+      --violet: #a6539b;
+      --orange: #f3912b;
+      --gris: #b7b7b7;
+      --rouge: #e62d32;
+      --rose: #ee7bab;
+      --jaune: #f4d32e;
+      --marron: #a5706c;
+      --noir: #494949;
+      --fond: #ffffff;
+      --rayon: 12px;
+      --ombre: 0 4px 16px rgba(0,0,0,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+
+      color: var(--noir);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* =============================================
+       EN-TÊTE
+    ============================================= */
+    header {
+      background: var(--bleu);
+      color: #fff;
+      padding: 1.2rem 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-top: 0.3rem;
+    }
+
+    /* =============================================
+       MAIN LAYOUT
+    ============================================= */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    /* =============================================
+       SECTIONS / CARTES UI
+    ============================================= */
+    .carte-ui {
+      background: #fff;
+      border: 2px solid #e8e8e8;
+      border-radius: var(--rayon);
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1.4rem;
+      box-shadow: var(--ombre);
+    }
+
+    .carte-ui h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--bleu);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .carte-ui h2 .emoji { font-size: 1.2rem; }
+
+    /* =============================================
+       LABELS & INPUTS
+    ============================================= */
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--noir);
+    }
+
+    textarea, input[type="number"], input[type="text"] {
+      width: 100%;
+      border: 2px solid #d0d0d0;
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.95rem;
+      color: var(--noir);
+      background: #fafafa;
+      transition: border-color 0.2s;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    textarea:focus, input:focus {
+      outline: none;
+      border-color: var(--bleu);
+      background: #fff;
+    }
+
+    textarea { min-height: 100px; }
+
+    .compteur-eleves {
+      font-size: 0.82rem;
+      color: var(--gris);
+      margin-top: 0.3rem;
+      text-align: right;
+    }
+
+    .compteur-eleves span {
+      color: var(--bleu);
+      font-weight: 700;
+    }
+
+    /* =============================================
+       MODES (onglets)
+    ============================================= */
+    .onglets {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .onglet {
+      flex: 1;
+      min-width: 140px;
+      padding: 0.65rem 1rem;
+      border: 2px solid var(--bleu);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bleu);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      text-align: center;
+    }
+
+    .onglet:hover { background: #e8f4fb; }
+
+    .onglet.actif {
+      background: var(--bleu);
+      color: #fff;
+    }
+
+    /* =============================================
+       SLIDERS & INFOS
+    ============================================= */
+    .range-groupe {
+      margin: 1rem 0;
+    }
+
+    .range-groupe label { margin-bottom: 0.5rem; }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: linear-gradient(to right, var(--bleu), var(--bleu));
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--bleu);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(83, 164, 219, 0.3);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--bleu);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(83, 164, 219, 0.3);
+    }
+
+    .infos-modes {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: var(--gris);
+    }
+
+    .info-mode { flex: 1; min-width: 150px; }
+    .info-mode strong { color: var(--bleu); }
+
+    /* =============================================
+       CHECKBOX SUJETS
+    ============================================= */
+    .checkbox-groupe {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 1rem 0;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--bleu);
+    }
+
+    .checkbox-groupe label {
+      margin: 0;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* =============================================
+       BOUTONS
+    ============================================= */
+    .boutons-groupe {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      flex: 1;
+      min-width: 140px;
+      padding: 0.75rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .btn-action:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+
+    .btn-action:active:not(:disabled) { transform: translateY(0); }
+
+    .btn-action:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .generer {
+      background: var(--bleu);
+      color: #fff;
+    }
+
+    .generer:hover:not(:disabled) { background: #4191c6; }
+
+    .telecharger {
+      background: var(--vert);
+      color: #fff;
+    }
+
+    .telecharger:hover:not(:disabled) { background: #6ca83d; }
+
+    .reinitialiser {
+      background: var(--gris);
+      color: #fff;
+    }
+
+    .reinitialiser:hover:not(:disabled) { background: #a0a0a0; }
+
+    /* =============================================
+       ZONE ERREUR
+    ============================================= */
+    .zone-erreur {
+      display: none;
+      background: #ffebee;
+      border-left: 4px solid var(--rouge);
+      padding: 0.8rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      color: var(--rouge);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .zone-erreur.visible { display: block; }
+
+    /* =============================================
+       RÉSULTATS
+    ============================================= */
+    #zoneResultats {
+      display: none;
+      margin-top: 2rem;
+    }
+
+    #zoneResultats h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--bleu);
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+
+    #grilleGroupes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .groupe-carte {
+      background: #fff;
+      border-radius: var(--rayon);
+      padding: 1.2rem;
+      box-shadow: var(--ombre);
+      border-top: 5px solid var(--bleu);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .groupe-carte:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .groupe-carte h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid #e8e8e8;
+    }
+
+    .groupe-carte .sujet {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--gris);
+      margin-bottom: 0.8rem;
+      padding: 0.4rem 0.6rem;
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+
+    .groupe-carte ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .groupe-carte li {
+      padding: 0.4rem 0;
+      font-size: 0.95rem;
+      color: var(--noir);
+    }
+
+    .groupe-carte li::before {
+      content: "👤 ";
+      margin-right: 0.5rem;
+    }
+
+    /* =============================================
+       ANIMATION CHARGEMENT
+    ============================================= */
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    .groupe-carte.animation {
+      animation: pulse 0.8s ease-in-out;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 600px) {
+      main { padding: 1rem 0.8rem 2rem; }
+      .carte-ui { padding: 1rem 1.2rem; }
+      .onglets { gap: 0.3rem; }
+      .onglet { min-width: 110px; padding: 0.5rem 0.8rem; }
+      .boutons-groupe { gap: 0.6rem; }
+      .btn-action { min-width: 120px; padding: 0.65rem 1rem; }
+      #grilleGroupes { grid-template-columns: 1fr; }
+    }
+  </style>
+
+    <!-- ① Déclarer le nom de l'application -->
+
+</head>
+
+<body>
+  <script>
+    window.APP_NAME  = "🎲 Générateur de groupes";
+    window.BASE_PATH = "../../";  // ← chemin relatif vers la racine du projet
+  </script>
+
+  <!-- ② Injection automatique du header (CSS + header + modal + QR) -->
+  <script src="../../assets/js/header.js" defer></script>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main>
+    <!-- ZONE ERREUR -->
+    <div id="zoneErreur" class="zone-erreur"></div>
+
+    <!-- SECTION 1 : SAISIE DES ÉLÈVES -->
+    <section class="carte-ui">
+      <h2><span class="emoji">👥</span> Élèves</h2>
+      <label for="inputEleves">Saisissez les noms (un par ligne) :</label>
+      <textarea id="inputEleves" placeholder="Alice&#10;Bob&#10;Charlie&#10;Diana..."></textarea>
+      <div class="compteur-eleves">
+        <span id="compteurEleves">0</span> élève(s)
+      </div>
+    </section>
+
+    <!-- SECTION 2 : MODE DE GROUPEMENT -->
+    <section class="carte-ui">
+      <h2><span class="emoji">⚙️</span> Mode de groupement</h2>
+      <div class="onglets">
+        <button class="onglet actif" data-mode="parNombre">Par nombre</button>
+        <button class="onglet" data-mode="parGroupe">Par groupe</button>
+      </div>
+
+      <!-- Mode : Par nombre -->
+      <div id="modeParNombre" class="mode-contenu visible">
+        <div class="range-groupe">
+          <label for="sliderNombre">Élèves par groupe :</label>
+          <input type="range" id="sliderNombre" min="2" max="10" value="3" />
+          <div class="infos-modes">
+            <div class="info-mode">
+              📊 <strong id="valeurSliderNombre">3</strong> élèves/groupe
+            </div>
+            <div class="info-mode">
+              📈 = environ <strong id="estimGroupesNombre">3</strong> groupe(s)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode : Par groupe -->
+      <div id="modeParGroupe" class="mode-contenu" style="display: none;">
+        <div class="range-groupe">
+          <label for="sliderGroupe">Nombre de groupes :</label>
+          <input type="range" id="sliderGroupe" min="2" max="15" value="3" />
+          <div class="infos-modes">
+            <div class="info-mode">
+              🎯 <strong id="valeurSliderGroupe">3</strong> groupe(s)
+            </div>
+            <div class="info-mode">
+              👥 = environ <strong id="estimTailleGroupe">3</strong> élève(s)/groupe
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3 : SUJETS OPTIONNELS -->
+    <section class="carte-ui">
+      <h2><span class="emoji">📋</span> Sujets (optionnel)</h2>
+      <div class="checkbox-groupe">
+        <input type="checkbox" id="toggleSujets" />
+        <label for="toggleSujets">Attribuer un sujet par groupe</label>
+      </div>
+      <div id="zoneSujets" style="display: none;">
+        <label for="inputSujets">Saisissez les sujets (un par ligne) :</label>
+        <textarea id="inputSujets" placeholder="Hygiène et sécurité&#10;Communication&#10;Développement durable..."></textarea>
+        <div class="compteur-eleves">
+          <span id="compteurSujets">0</span> sujet(s)
+        </div>
+      </div>
+    </section>
+
+    <!-- BOUTONS ACTIONS -->
+    <div class="boutons-groupe">
+      <button id="btnGenerer" class="btn-action generer">🎲 Générer</button>
+      <button id="btnTelecharger" class="btn-action telecharger" style="display: none;">📥 Télécharger en PDF</button>
+      <button id="btnReinitialiser" class="btn-action reinitialiser" style="display: none;">🔄 Réinitialiser</button>
+    </div>
+
+    <!-- ZONE RÉSULTATS -->
+    <div id="zoneResultats">
+      <h2>✅ Groupes générés</h2>
+      <div id="grilleGroupes"></div>
+    </div>
+  </main>
+
+  <!-- SCRIPT -->
+  <script>
+    "use strict";
+
+    /* =============================================
+       ATTENDRE LE CHARGEMENT DU DOM
+    ============================================= */
+    document.addEventListener("DOMContentLoaded", function() {
+
+    /* =============================================
+       SÉLECTEURS DOM
+    ============================================= */
+    const inputEleves = document.getElementById("inputEleves");
+    const inputSujets = document.getElementById("inputSujets");
+    const toggleSujets = document.getElementById("toggleSujets");
+    const zoneSujets = document.getElementById("zoneSujets");
+    const compteurEleves = document.getElementById("compteurEleves");
+    const compteurSujets = document.getElementById("compteurSujets");
+
+    const sliderNombre = document.getElementById("sliderNombre");
+    const sliderGroupe = document.getElementById("sliderGroupe");
+    const valeurSliderNombre = document.getElementById("valeurSliderNombre");
+    const valeurSliderGroupe = document.getElementById("valeurSliderGroupe");
+    const estimGroupesNombre = document.getElementById("estimGroupesNombre");
+    const estimTailleGroupe = document.getElementById("estimTailleGroupe");
+
+    const onglets = document.querySelectorAll(".onglet");
+    const modeParNombre = document.getElementById("modeParNombre");
+    const modeParGroupe = document.getElementById("modeParGroupe");
+
+    const btnGenerer = document.getElementById("btnGenerer");
+    const btnTelecharger = document.getElementById("btnTelecharger");
+    const btnReinitialiser = document.getElementById("btnReinitialiser");
+
+    const zoneResultats = document.getElementById("zoneResultats");
+    const grilleGroupes = document.getElementById("grilleGroupes");
+    const zoneErreur = document.getElementById("zoneErreur");
+
+    /* =============================================
+       VARIABLES D'ÉTAT
+    ============================================= */
+    let modeActif = "parNombre";
+    let groupesActuels = [];
+    let sujetsActuels = null;
+
+    /* =============================================
+       PALETTE DE COULEURS
+    ============================================= */
+    const couleursPalette = [
+      "#53a4db", // Bleu
+      "#7fbc48", // Vert
+      "#a6539b", // Violet
+      "#f3912b", // Orange
+      "#f4d32e", // Jaune
+      "#ee7bab", // Rose
+      "#e62d32", // Rouge
+      "#a5706c", // Marron
+    ];
+
+    /* =============================================
+       FONCTIONS UTILITAIRES
+    ============================================= */
+
+    /**
+     * Nettoyer le texte pour le PDF (accents)
+     */
+    function nettoyerTexte(texte) {
+      if (!texte) return "";
+      return texte
+        .replace(/[éèêë]/g, "e")
+        .replace(/[àâä]/g, "a")
+        .replace(/[ùûü]/g, "u")
+        .replace(/[ôö]/g, "o")
+        .replace(/[ç]/g, "c")
+        .replace(/[î]/g, "i")
+        .replace(/[ñ]/g, "n")
+        .replace(/[œ]/g, "oe");
+    }
+
+    /**
+     * Convertir HEX en RGB
+     */
+    function hexVersRgb(hex) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return { r, g, b };
+    }
+
+    /**
+     * Obtenir la couleur d'un groupe
+     */
+    function getCouleurGroupe(index) {
+      return couleursPalette[index % couleursPalette.length];
+    }
+
+    /**
+     * Parser la liste des noms
+     */
+    function parseListeNoms(texte) {
+      return texte
+        .split("\n")
+        .map(nom => nom.trim())
+        .filter(nom => nom.length > 0);
+    }
+
+    /**
+     * Mélanger un tableau (Fisher-Yates)
+     */
+    function melangerTableau(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    /**
+     * Afficher une erreur
+     */
+    function afficherErreur(message) {
+      zoneErreur.textContent = message;
+      zoneErreur.classList.add("visible");
+    }
+
+    /**
+     * Masquer l'erreur
+     */
+    function masquerErreur() {
+      zoneErreur.classList.remove("visible");
+      zoneErreur.textContent = "";
+    }
+
+    /**
+     * Générer les groupes
+     */
+    function genererGroupes(eleves, mode, valeur) {
+      const groupes = [];
+
+      if (mode === "parNombre") {
+        // Groupes de taille fixe
+        for (let i = 0; i < eleves.length; i += valeur) {
+          groupes.push(eleves.slice(i, i + valeur));
+        }
+      } else if (mode === "parGroupe") {
+        // Nombre de groupes fixe
+        const eleveParGroupe = Math.ceil(eleves.length / valeur);
+        for (let i = 0; i < valeur; i++) {
+          groupes.push(eleves.slice(i * eleveParGroupe, (i + 1) * eleveParGroupe));
+        }
+      }
+
+      return groupes;
+    }
+
+    /**
+     * Lancer animation lors de la génération
+     */
+    function lancerAnimation(eleves, callback) {
+      const duree = 1000; // 1 seconde
+      const debut = Date.now();
+
+      function animer() {
+        const elapsed = Date.now() - debut;
+        if (elapsed < duree) {
+          requestAnimationFrame(animer);
+        } else {
+          callback();
+        }
+      }
+
+      animer();
+    }
+
+    /**
+     * Mettre à jour les infos des modes
+     */
+    function mettreAJourInfos() {
+      const nbreEleves = parseListeNoms(inputEleves.value).length;
+
+      if (modeActif === "parNombre") {
+        const taille = parseInt(sliderNombre.value);
+        const nbGroupes = Math.ceil(nbreEleves / taille);
+        estimGroupesNombre.textContent = nbGroupes || "0";
+      } else {
+        const nbGroupes = parseInt(sliderGroupe.value);
+        const tailleEstimee = Math.ceil(nbreEleves / nbGroupes);
+        estimTailleGroupe.textContent = tailleEstimee || "0";
+      }
+    }
+
+    /**
+     * Afficher les résultats
+     */
+    function afficherResultats(groupes, sujets) {
+      grilleGroupes.innerHTML = "";
+      groupesActuels = groupes;
+      sujetsActuels = sujets;
+
+      groupes.forEach((membres, index) => {
+        const couleur = getCouleurGroupe(index);
+        const { r, g, b } = hexVersRgb(couleur);
+        const luminosite = (r * 299 + g * 587 + b * 114) / 1000;
+        const couleurTexte = luminosite > 170 ? "#494949" : "#ffffff";
+
+        let html = `
+          <div class="groupe-carte" style="border-top-color: ${couleur};">
+            <h3 style="color: ${couleur};">Groupe ${index + 1}</h3>
+        `;
+
+        if (sujets && sujets[index]) {
+          html += `<div class="sujet">📋 ${sujets[index]}</div>`;
+        }
+
+        html += "<ul>";
+        membres.forEach(membre => {
+          html += `<li>${membre}</li>`;
+        });
+        html += "</ul></div>";
+
+        const carte = document.createElement("div");
+        carte.innerHTML = html;
+        grilleGroupes.appendChild(carte);
+      });
+
+      zoneResultats.style.display = "block";
+      zoneResultats.scrollIntoView({ behavior: "smooth", block: "start" });
+      btnTelecharger.style.display = "inline-flex";
+      btnReinitialiser.style.display = "inline-flex";
+    }
+
+    /* =============================================
+       EVENT LISTENERS - MODE
+    ============================================= */
+    onglets.forEach(onglet => {
+      onglet.addEventListener("click", () => {
+        onglets.forEach(o => o.classList.remove("actif"));
+        onglet.classList.add("actif");
+        modeActif = onglet.dataset.mode;
+
+        if (modeActif === "parNombre") {
+          modeParNombre.style.display = "block";
+          modeParGroupe.style.display = "none";
+        } else {
+          modeParNombre.style.display = "none";
+          modeParGroupe.style.display = "block";
+        }
+
+        mettreAJourInfos();
+      });
+    });
+
+    /* =============================================
+       EVENT LISTENERS - SLIDERS
+    ============================================= */
+    sliderNombre.addEventListener("input", () => {
+      valeurSliderNombre.textContent = sliderNombre.value;
+      mettreAJourInfos();
+    });
+
+    sliderGroupe.addEventListener("input", () => {
+      valeurSliderGroupe.textContent = sliderGroupe.value;
+      mettreAJourInfos();
+    });
+
+    /* =============================================
+       EVENT LISTENERS - COMPTEURS
+    ============================================= */
+    inputEleves.addEventListener("input", () => {
+      const nbre = parseListeNoms(inputEleves.value).length;
+      compteurEleves.textContent = nbre;
+      mettreAJourInfos();
+    });
+
+    inputSujets.addEventListener("input", () => {
+      const nbre = parseListeNoms(inputSujets.value).length;
+      compteurSujets.textContent = nbre;
+    });
+
+    /* =============================================
+       EVENT LISTENERS - TOGGLE SUJETS
+    ============================================= */
+    toggleSujets.addEventListener("change", () => {
+      zoneSujets.style.display = toggleSujets.checked ? "block" : "none";
+    });
+
+    /* =============================================
+       EVENT LISTENERS - GÉNÉRER
+    ============================================= */
+    btnGenerer.addEventListener("click", () => {
+      masquerErreur();
+
+      const eleves = parseListeNoms(inputEleves.value);
+      if (eleves.length < 2) {
+        afficherErreur("⚠️ Merci de saisir au moins 2 élèves.");
+        return;
+      }
+
+      let sujets = null;
+      if (toggleSujets.checked) {
+        sujets = parseListeNoms(inputSujets.value);
+        if (sujets.length === 0) {
+          afficherErreur("⚠️ Merci de saisir au moins un sujet, ou désactive l'option sujets.");
+          return;
+        }
+      }
+
+      const groupes = genererGroupes(eleves, modeActif, modeActif === "parNombre" ? parseInt(sliderNombre.value) : parseInt(sliderGroupe.value));
+
+      if (sujets && sujets.length > 0) {
+        melangerTableau(sujets);
+      }
+
+      btnGenerer.disabled = true;
+      lancerAnimation(eleves, () => {
+        afficherResultats(groupes, sujets);
+        btnGenerer.disabled = false;
+      });
+    });
+
+    /* =============================================
+       EVENT LISTENERS - TÉLÉCHARGER PDF
+    ============================================= */
+    btnTelecharger.addEventListener("click", () => {
+      if (!groupesActuels || groupesActuels.length === 0) return;
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+
+      // Mise en page
+      const margeG = 15, margeD = 15, margeH = 25, margeB = 15;
+      const largeurPage = 210, hauteurPage = 297;
+      const largeurUtile = largeurPage - margeG - margeD;
+      const nbColonnes = 2;
+      const espacement = 8;
+      const largeurCarte = (largeurUtile - espacement) / nbColonnes;
+
+      // Titre
+      doc.setFontSize(18);
+      doc.setTextColor(83, 164, 219);
+      doc.setFont("helvetica", "bold");
+      doc.text("Répartition des groupes", largeurPage / 2, 14, { align: "center" });
+
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(73, 73, 73);
+      const date = new Date().toLocaleDateString("fr-FR");
+      doc.text("Généré le " + date, largeurPage / 2, 20, { align: "center" });
+
+      let x = margeG;
+      let y = margeH;
+      let colonne = 0;
+      let hauteurLigne = 0;
+
+      groupesActuels.forEach((membres, index) => {
+        // Couleur directement depuis la palette
+        const hex = getCouleurGroupe(index);
+        const { r, g, b } = hexVersRgb(hex);
+        const luminosite = (r * 299 + g * 587 + b * 114) / 1000;
+        const couleurTexte = luminosite > 170 ? [73, 73, 73] : [255, 255, 255];
+
+        const titre = "Groupe " + (index + 1);
+        const sujet = (sujetsActuels && sujetsActuels[index])
+          ? "📋 " + sujetsActuels[index]
+          : null;
+
+        // Hauteur estimée
+        let hauteurCarte = 10; // titre
+        if (sujet) hauteurCarte += 7;
+        hauteurCarte += membres.length * 6 + 6;
+
+        // Saut de page
+        if (y + hauteurCarte > hauteurPage - margeB) {
+          doc.addPage();
+          y = margeH;
+          x = margeG;
+          colonne = 0;
+          hauteurLigne = 0;
+        }
+
+        // Fond coloré
+        doc.setFillColor(r, g, b);
+        doc.roundedRect(x, y, largeurCarte, hauteurCarte, 3, 3, "F");
+
+        // Titre
+        doc.setTextColor(couleurTexte[0], couleurTexte[1], couleurTexte[2]);
+        doc.setFontSize(13);
+        doc.setFont("helvetica", "bold");
+        doc.text(nettoyerTexte(titre), x + 4, y + 7);
+
+        let yTexte = y + 13;
+
+        // Sujet
+        if (sujet) {
+          doc.setFontSize(10);
+          doc.setFont("helvetica", "italic");
+          const sujetLignes = doc.splitTextToSize(nettoyerTexte(sujet), largeurCarte - 8);
+          doc.text(sujetLignes, x + 4, yTexte);
+          yTexte += sujetLignes.length * 4 + 2;
+        }
+
+        // Membres
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "normal");
+        membres.forEach(membre => {
+          doc.text("• " + nettoyerTexte(membre), x + 4, yTexte);
+          yTexte += 6;
+        });
+
+        // Suivi de la hauteur max de la ligne
+        hauteurLigne = Math.max(hauteurLigne, hauteurCarte);
+
+        // Passage colonne/ligne suivante
+        colonne++;
+        if (colonne >= nbColonnes) {
+          colonne = 0;
+          y += hauteurLigne + espacement;
+          x = margeG;
+          hauteurLigne = 0;
+        } else {
+          x = margeG + largeurCarte + espacement;
+        }
+      });
+
+      doc.save("groupes.pdf");
+    });
+
+    /* =============================================
+       EVENT LISTENERS - RÉINITIALISER
+    ============================================= */
+    btnReinitialiser.addEventListener("click", () => {
+      zoneResultats.style.display = "none";
+      btnTelecharger.style.display = "none";
+      btnReinitialiser.style.display = "none";
+      grilleGroupes.innerHTML = "";
+      groupesActuels = [];
+      sujetsActuels = null;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    /* =============================================
+       INITIALISATION
+    ============================================= */
+    mettreAJourInfos();
+
+    }); // Fin de DOMContentLoaded
+  </script>
+</body>
+</html>
