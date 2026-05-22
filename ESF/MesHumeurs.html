@@ -347,7 +347,7 @@ async function chargerDonnees() {
     donnees = await reponse.json();
     majInfoStock();
   } catch (err) {
-    elResultat.innerHTML = `<p style="color: var(--rouge);">⚠️ Impossible de charger les rôles.<br>Vérifie le fichier <code>assets/json/roles.json</code></p>`;
+    elResultat.innerHTML = `<p style="color: var(--rouge);">⚠️ Impossible de charger les rôles.<br>Vérifie le fichier <code>assets/json/MesHumeurs.json</code></p>`;
     elResultat.classList.add("visible");
     elBtnTirer.disabled = true;
   }
