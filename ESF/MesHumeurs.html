@@ -342,7 +342,7 @@ const elsBtnCat   = document.querySelectorAll(".btn-cat");
 /* ====== Chargement JSON ====== */
 async function chargerDonnees() {
   try {
-    const reponse = await fetch("/assets/json/MesHumeurs.json");
+    const reponse = await fetch("./assets/json/MesHumeurs.json");
     if (!reponse.ok) throw new Error("Fichier introuvable");
     donnees = await reponse.json();
     majInfoStock();
