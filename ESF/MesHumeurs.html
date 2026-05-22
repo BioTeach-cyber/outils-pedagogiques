@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ① Déclarer le nom de l'application -->
+  <script>
+    window.APP_NAME  = "Nom de mon application";
+    window.BASE_PATH = "../../";  // ← chemin relatif vers la racine du projet
+  </script>
+
+  <!-- ② Injection automatique du header (CSS + header + modal + QR) -->
+  <script src="../../assets/js/header.js" defer></script>
+<title>Tirage au sort des rôles</title>
+<style>
+  /* ===== Variables couleurs ===== */
+  :root {
+    --bleu: #53a4db;
+    --vert: #7fbc48;
+    --violet: #a6539b;
+    --orange: #f3912b;
+    --gris: #b7b7b7;
+    --rouge: #e62d32;
+    --rose: #ee7bab;
+    --jaune: #f4d32e;
+    --marron: #a5706c;
+    --noir: #494949;
+    --fond: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+    min-height: 100vh;
+    color: var(--noir);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  /* Le header injecté prend toute la largeur */
+  #app-header {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  /* Conteneur principal du contenu de l'application */
+  main {
+    width: 100%;
+    max-width: 800px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  /* ===== Titre ===== */
+  header h1 {
+    color: var(--violet);
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    text-align: center;
+  }
+
+  /* ===== Options (catégorie + répétition) ===== */
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .categories {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-cat {
+    padding: 0.6rem 1.1rem;
+    border: 2px solid var(--gris);
+    background: var(--fond);
+    color: var(--noir);
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-cat:hover { transform: translateY(-2px); }
+  .btn-cat.actif {
+    color: var(--fond);
+    border-color: transparent;
+  }
+  .btn-cat[data-cat="tout"].actif    { background: var(--violet); }
+  .btn-cat[data-cat="emotions"].actif{ background: var(--bleu); }
+  .btn-cat[data-cat="cognitif"].actif{ background: var(--vert); }
+
+  /* ===== Toggle répétition ===== */
+  .toggle-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .toggle {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background: var(--gris);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .toggle::after {
+    content: "";
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 20px; height: 20px;
+    background: var(--fond);
+    border-radius: 50%;
+    transition: left 0.2s;
+  }
+  .toggle.actif { background: var(--violet); }
+  .toggle.actif::after { left: 27px; }
+
+  /* ===== Roue casino (vue sur l'épaisseur) ===== */
+  .roue-zone {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .roue-container {
+    position: relative;
+    width: 100%;
+    height: 90px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 4px solid var(--violet);
+    background: var(--noir);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15), inset 0 0 30px rgba(0,0,0,0.4);
+  }
+
+  /* Bande défilante */
+  .roue-bande {
+    display: flex;
+    height: 100%;
+    will-change: transform;
+  }
+
+  .segment {
+    flex: 0 0 120px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fond);
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-right: 2px solid rgba(255,255,255,0.25);
+    text-align: center;
+    padding: 0 0.5rem;
+    user-select: none;
+  }
+
+  /* Indicateur central (pointeur) */
+  .pointeur {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 16px solid var(--orange);
+    z-index: 3;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+  }
+  .pointeur-bas {
+    top: auto;
+    bottom: -6px;
+    border-top: none;
+    border-bottom: 16px solid var(--orange);
+  }
+
+  /* Effet de fondu sur les côtés */
+  .roue-container::before,
+  .roue-container::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .roue-container::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.6), transparent);
+  }
+  .roue-container::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
+  }
+
+  /* ===== Bouton tirer ===== */
+  .btn-tirer {
+    padding: 0.9rem 2.2rem;
+    background: var(--orange);
+    color: var(--fond);
+    border: none;
+    border-radius: 999px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(243, 145, 43, 0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-tirer:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(243, 145, 43, 0.5);
+  }
+  .btn-tirer:active:not(:disabled) { transform: translateY(0); }
+  .btn-tirer:disabled {
+    background: var(--gris);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  /* ===== Carte résultat ===== */
+  .resultat {
+    width: 100%;
+    max-width: 700px;
+    background: var(--fond);
+    border: 3px solid var(--violet);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(166, 83, 155, 0.15);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s, transform 0.4s;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .resultat.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .resultat p {
+    font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--noir);
+  }
+  .resultat .placeholder {
+    color: var(--gris);
+    font-style: italic;
+  }
+
+  /* ===== Info épuisement ===== */
+  .info-stock {
+    font-size: 0.85rem;
+    color: var(--gris);
+    text-align: center;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 480px) {
+    .segment { flex-basis: 90px; font-size: 0.75rem; }
+    .roue-container { height: 75px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎲 Tirage au sort des rôles</h1>
+</header>
+
+<!-- Options -->
+<section class="options" aria-label="Options de tirage">
+  <div class="categories" role="group" aria-label="Choix de la catégorie">
+    <button class="btn-cat actif" data-cat="tout">Tout</button>
+    <button class="btn-cat" data-cat="emotions">Émotions</button>
+    <button class="btn-cat" data-cat="cognitif">Troubles cognitifs</button>
+  </div>
+
+  <div class="toggle-wrap">
+    <span>Répétition</span>
+    <div class="toggle actif" id="toggleRepetition" role="switch" aria-checked="true" tabindex="0"></div>
+  </div>
+</section>
+
+<!-- Roue -->
+<section class="roue-zone" aria-label="Roue de tirage">
+  <div class="roue-container">
+    <div class="pointeur" aria-hidden="true"></div>
+    <div class="pointeur pointeur-bas" aria-hidden="true"></div>
+    <div class="roue-bande" id="roueBande"></div>
+  </div>
+
+  <button class="btn-tirer" id="btnTirer">🎰 Tirer un rôle</button>
+  <p class="info-stock" id="infoStock"></p>
+</section>
+
+<!-- Résultat -->
+<section class="resultat" id="resultat" aria-live="polite">
+  <p class="placeholder">Clique sur le bouton pour découvrir ton rôle…</p>
+</section>
+
+<script>
+"use strict";
+
+/* ====== Données ====== */
+let donnees = { emotions: [], cognitif: [] };
+let categorieActive = "tout";
+let repetitionActive = true;
+let rolesDejaTires = []; // pour le mode sans répétition
+let enRotation = false;
+
+const elBande     = document.getElementById("roueBande");
+const elBtnTirer  = document.getElementById("btnTirer");
+const elResultat  = document.getElementById("resultat");
+const elToggle    = document.getElementById("toggleRepetition");
+const elInfoStock = document.getElementById("infoStock");
+const elsBtnCat   = document.querySelectorAll(".btn-cat");
+
+/* ====== Chargement JSON ====== */
+async function chargerDonnees() {
+  try {
+    const reponse = await fetch("/assets/json/MesHumeurs.json");
+    if (!reponse.ok) throw new Error("Fichier introuvable");
+    donnees = await reponse.json();
+    majInfoStock();
+  } catch (err) {
+    elResultat.innerHTML = `<p style="color: var(--rouge);">⚠️ Impossible de charger les rôles.<br>Vérifie le fichier <code>assets/json/roles.json</code></p>`;
+    elResultat.classList.add("visible");
+    elBtnTirer.disabled = true;
+  }
+}
+
+/* ====== Récupère la liste active selon catégorie ====== */
+function getRolesDisponibles() {
+  let liste = [];
+  if (categorieActive === "tout") {
+    liste = [...donnees.emotions, ...donnees.cognitif];
+  } else {
+    liste = [...donnees[categorieActive]];
+  }
+  // Mode sans répétition : on retire les déjà tirés
+  if (!repetitionActive) {
+    liste = liste.filter(r => !rolesDejaTires.includes(r));
+  }
+  return liste;
+}
+
+/* ====== Mise à jour de l'info stock ====== */
+function majInfoStock() {
+  if (!repetitionActive) {
+    const restants = getRolesDisponibles().length;
+    elInfoStock.textContent = `Rôles restants : ${restants}`;
+  } else {
+    elInfoStock.textContent = "";
+  }
+}
+
+/* ====== Construit la bande défilante ====== */
+function construireBande(roleFinal, listePourSegments) {
+  // On crée beaucoup de segments aléatoires + le segment final repéré
+  const nbSegments = 40;
+  elBande.innerHTML = "";
+
+  const couleurs = ["var(--violet)", "var(--bleu)", "var(--vert)", "var(--orange)", "var(--rose)", "var(--marron)"];
+
+  for (let i = 0; i < nbSegments; i++) {
+    const seg = document.createElement("div");
+    seg.className = "segment";
+    const role = listePourSegments[Math.floor(Math.random() * listePourSegments.length)];
+    // Affichage court : 2 ou 3 premiers mots
+    seg.textContent = role.split(" ").slice(0, 3).join(" ") + "…";
+    seg.style.background = couleurs[i % couleurs.length];
+    elBande.appendChild(seg);
+  }
+
+  // On insère le segment final à une position précise (segment n°35)
+  const indexFinal = 35;
+  const segFinal = elBande.children[indexFinal];
+  segFinal.textContent = roleFinal.split(" ").slice(0, 3).join(" ") + "…";
+  segFinal.style.background = "var(--orange)";
+
+  return indexFinal;
+}
+
+/* ====== Animation de la roue ====== */
+function animerRoue(indexFinal) {
+  const largeurSegment = window.innerWidth <= 480 ? 90 : 120;
+  const largeurContainer = elBande.parentElement.offsetWidth;
+  // Décalage pour que le centre du segment final tombe sous le pointeur central
+  const decalage = (indexFinal * largeurSegment) + (largeurSegment / 2) - (largeurContainer / 2);
+
+  // Reset
+  elBande.style.transition = "none";
+  elBande.style.transform = "translateX(0)";
+
+  // Force reflow
+  void elBande.offsetWidth;
+
+  // Lancement animation
+  const duree = 4000; // 4 secondes
+  elBande.style.transition = `transform ${duree}ms cubic-bezier(0.15, 0.85, 0.25, 1)`;
+  elBande.style.transform = `translateX(-${decalage}px)`;
+
+  return duree;
+}
+
+/* ====== Tirage ====== */
+function tirerRole() {
+  if (enRotation) return;
+
+  const liste = getRolesDisponibles();
+  if (liste.length === 0) {
+    elResultat.innerHTML = `<p style="color: var(--rouge);">🎉 Tous les rôles ont été tirés !<br><small>Active la répétition ou change de catégorie.</small></p>`;
+    elResultat.classList.add("visible");
+    return;
+  }
+
+  enRotation = true;
+  elBtnTirer.disabled = true;
+  elResultat.classList.remove("visible");
+
+  // Sélection aléatoire du rôle final
+  const roleFinal = liste[Math.floor(Math.random() * liste.length)];
+
+  // Construction de la bande
+  const indexFinal = construireBande(roleFinal, liste);
+
+  // Animation
+  const duree = animerRoue(indexFinal);
+
+  // Affichage du résultat après l'animation
+  setTimeout(() => {
+    elResultat.innerHTML = `<p>🎭 <strong>${roleFinal}</strong></p>`;
+    elResultat.classList.add("visible");
+
+    if (!repetitionActive) {
+      rolesDejaTires.push(roleFinal);
+      majInfoStock();
+    }
+
+    elBtnTirer.disabled = false;
+    enRotation = false;
+  }, duree + 200);
+}
+
+/* ====== Gestion des catégories ====== */
+elsBtnCat.forEach(btn => {
+  btn.addEventListener("click", () => {
+    elsBtnCat.forEach(b => b.classList.remove("actif"));
+    btn.classList.add("actif");
+    categorieActive = btn.dataset.cat;
+    // Reset des tirages dans le mode sans répétition (changement de catégorie)
+    rolesDejaTires = [];
+    majInfoStock();
+  });
+});
+
+/* ====== Toggle répétition ====== */
+function basculerToggle() {
+  repetitionActive = !repetitionActive;
+  elToggle.classList.toggle("actif", repetitionActive);
+  elToggle.setAttribute("aria-checked", repetitionActive);
+  rolesDejaTires = [];
+  majInfoStock();
+}
+elToggle.addEventListener("click", basculerToggle);
+elToggle.addEventListener("keydown", (e) => {
+  if (e.key === " " || e.key === "Enter") {
+    e.preventDefault();
+    basculerToggle();
+  }
+});
+
+/* ====== Bouton tirer ====== */
+elBtnTirer.addEventListener("click", tirerRole);
+
+/* ====== Init ====== */
+chargerDonnees();
+</script>
+
+</body>
+</html>

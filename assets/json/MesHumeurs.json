@@ -1,0 +1,37 @@
+{
+  "emotions": [
+    "Tu sembles triste aujourd'hui car ton chien a disparu depuis hier. Tu t'es réveillé(e) plusieurs fois.",
+    "Tu parais fatigué(e) car tu as très mal dormi cette nuit.",
+    "Tu sembles inquiet/inquiète car tu attends des résultats médicaux.",
+    "Tu es contrarié(e) car un membre de ta famille n'est pas venu te voir.",
+    "Tu sembles préoccupé(e) car tu n'arrives plus à faire certaines choses seul(e).",
+    "Tu sembles anxieux(se) car ce n'est pas l'intervenant habituel.",
+    "Tu es triste car tu te sens seul(e) aujourd'hui.",
+    "Tu as du mal à te concentrer car tu penses à un problème familial.",
+    "Tu sembles découragé(e) car tu trouves que ta santé se dégrade.",
+    "Tu sembles tendu(e) car tu as peur d'avoir mal pendant le soin.",
+    "Tu es contrarié(e) car tu n'aimes pas demander de l'aide.",
+    "Tu parais triste car tu repenses souvent à ton conjoint décédé.",
+    "Tu sembles anxieux(se) car tu n'aimes pas qu'on te touche sans prévenir.",
+    "Tu sembles contrarié(e) car tu avais prévu autre chose aujourd'hui.",
+    "Tu parais triste car tu t'ennuies beaucoup chez toi.",
+    "Tu sembles inquiet/inquiète car tu oublies certaines choses en ce moment.",
+    "Tu sembles avoir froid et tu n'arrives pas à te détendre.",
+    "Tu sembles sensible aujourd'hui car tu viens de recevoir une mauvaise nouvelle."
+  ],
+  "cognitif": [
+    "Tu poses plusieurs fois la même question pendant le soin.",
+    "Tu oublies ce que l'élève vient de t'expliquer. Tu demandes : « Pourquoi vous êtes là déjà ? »",
+    "Tu appelles l'élève par un autre prénom.",
+    "Tu sembles perdu(e) pendant quelques secondes puis tu redeviens normal(e).",
+    "Tu sembles confondre certains moments de la journée.",
+    "Tu regardes autour de toi comme si tu ne reconnaissais plus bien l'endroit.",
+    "Tu demandes deux fois de suite la même information.",
+    "Tu sembles ne plus savoir ce que tu étais en train de dire.",
+    "Tu tiens brièvement des propos incohérents puis tu repars sur autre chose.",
+    "Tu réponds parfois à côté des questions.",
+    "Tu demandes plusieurs fois quel jour on est.",
+    "Tu répètes une même phrase plusieurs fois.",
+    "Tu crois brièvement que tu dois partir quelque part."
+  ]
+}

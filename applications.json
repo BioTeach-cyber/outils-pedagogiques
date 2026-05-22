@@ -218,5 +218,22 @@
     "statut": "Publié",
     "date_creation": "07/05/2026",
     "auteur": "Vincent APREMONT"
+  },
+      {
+    "id": "application-009",
+    "categorie": "Applications",
+    "titre": "MesHumeurs",
+    "description": "",
+    "discipline": ["Biologie"],
+    "module": ["MP7"],
+    "public": "",
+    "formation": ["Bac Pro SAPAT"],
+    "tags": [],
+    "url": "ESF/MesHumeurs.html",
+    "icone": "assets/icones/MesHumeurs.gif",
+    "image": "assets/images/MesHumeurs.jpg",
+    "statut": "Publié",
+    "date_creation": "22/05/2026",
+    "auteur": "Vincent APREMONT"
   }
 ]
