@@ -240,7 +240,7 @@
     "id": "application-010",
     "categorie": "Applications",
     "titre": "TuTIM",
-    "description": "Un resau de tutoriels en TIM",
+    "description": "Un réseau de tutoriels en TIM.",
     "discipline": ["TIM"],
     "module": ["MG1"],
     "public": "",
