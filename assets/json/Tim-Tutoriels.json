@@ -1,0 +1,24 @@
+{
+  "categories": {
+    "base": { "label": "Notions de base", "couleur": "#53a4db" },
+    "pratique": { "label": "Mise en pratique", "couleur": "#7fbc48" },
+    "approfondi": { "label": "Approfondissement", "couleur": "#a6539b" },
+    "evaluation": { "label": "Évaluation", "couleur": "#f3912b" }
+  },
+  "noeuds": [
+    { "id": 1, "label": "Introduction", "categorie": "base", "url": "https://exemple.com/tuto1" },
+    { "id": 2, "label": "Vocabulaire", "categorie": "base", "url": "https://exemple.com/tuto2" },
+    { "id": 3, "label": "Premier exercice", "categorie": "pratique", "url": "https://exemple.com/tuto3" },
+    { "id": 4, "label": "Cas concret", "categorie": "pratique", "url": "https://exemple.com/tuto4" },
+    { "id": 5, "label": "Aller plus loin", "categorie": "approfondi", "url": "https://exemple.com/tuto5" },
+    { "id": 6, "label": "Quiz final", "categorie": "evaluation", "url": "https://exemple.com/tuto6" }
+  ],
+  "liens": [
+    { "from": 1, "to": 2 },
+    { "from": 2, "to": 3 },
+    { "from": 3, "to": 4 },
+    { "from": 4, "to": 5 },
+    { "from": 5, "to": 6 },
+    { "from": 2, "to": 4 }
+  ]
+}

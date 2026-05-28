@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réseau des tutoriels</title>
+
+  <!-- Bibliothèque vis-network via CDN -->
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+  <style>
+    /* ========= Variables couleurs (charte) ========= */
+    :root {
+      --bleu: #53a4db;
+      --vert: #7fbc48;
+      --violet: #a6539b;
+      --orange: #f3912b;
+      --gris: #b7b7b7;
+      --rouge: #e62d32;
+      --rose: #ee7bab;
+      --jaune: #f4d32e;
+      --marron: #a5706c;
+      --noir: #494949;
+      --fond: #ffffff;
+    }
+
+    /* ========= Réinitialisation ========= */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; }
+
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: var(--fond);
+  color: var(--noir);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ========= Zone du réseau ========= */
+#reseau {
+  width: 100%;
+  height: 85vh;          /* Prend 85% de la hauteur de la fenêtre */
+  min-height: 600px;     /* Garantit une taille mini sur petits écrans */
+  background: var(--fond);
+}
+
+    /* ========= En-tête : titre + recherche ========= */
+    header {
+      padding: 0.6rem 1rem;
+      background: var(--fond);
+      border-bottom: 2px solid var(--bleu);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    h1 {
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      color: var(--bleu);
+      flex: 1 1 auto;
+    }
+
+    .zone-recherche {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    #recherche {
+      padding: 0.4rem 0.7rem;
+      font-size: 0.95rem;
+      border: 2px solid var(--gris);
+      border-radius: 6px;
+      width: clamp(140px, 30vw, 240px);
+      color: var(--noir);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #recherche:focus { border-color: var(--bleu); }
+
+    #btn-reset {
+      padding: 0.4rem 0.7rem;
+      font-size: 0.9rem;
+      background: var(--bleu);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #btn-reset:hover { background: var(--violet); }
+
+    /* ========= Légende des catégories ========= */
+    #legende {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 0.5rem 1rem;
+      background: var(--fond);
+      border-bottom: 1px solid var(--gris);
+    }
+
+    .item-legende {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+      color: var(--noir);
+    }
+
+    .puce {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ========= Zone du réseau ========= */
+    #reseau {
+      flex: 1 1 auto;
+      width: 100%;
+      background: var(--fond);
+    }
+
+    /* ========= Message d'aide ========= */
+    .aide {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
+      font-size: 0.78rem;
+      color: var(--gris);
+      background: rgba(255,255,255,0.85);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    /* ========= Responsive ========= */
+    @media (max-width: 500px) {
+      header { flex-direction: column; align-items: stretch; }
+      .zone-recherche { justify-content: space-between; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========= EN-TÊTE ========= -->
+  <header>
+    <h1>🌐 Réseau des tutoriels</h1>
+    <div class="zone-recherche">
+      <input type="text" id="recherche" placeholder="🔍 Rechercher un tutoriel..." aria-label="Rechercher un tutoriel" />
+      <button id="btn-reset" title="Réinitialiser la vue">Recentrer</button>
+    </div>
+  </header>
+
+  <!-- ========= LÉGENDE (générée en JS) ========= -->
+  <div id="legende" aria-label="Légende des catégories"></div>
+
+  <!-- ========= RÉSEAU ========= -->
+<main style="position: relative; flex: 1 1 auto; width: 100%;">
+  <div id="reseau"></div>
+  <div class="aide">Molette : zoomer · Glisser : déplacer · Clic : ouvrir</div>
+</main>
+
+  <!-- ========= SCRIPT ========= -->
+  <script>
+    "use strict";
+
+    // Variables globales accessibles aux fonctions
+    let reseau = null;
+    let donneesNoeuds = null;
+
+    /**
+     * Charge le fichier JSON puis construit le réseau.
+     */
+    async function chargerDonnees() {
+      try {
+        const reponse = await fetch("../assets/json/Tim-Tutoriels.json");
+        if (!reponse.ok) throw new Error("Fichier JSON introuvable");
+        const donnees = await reponse.json();
+        construireReseau(donnees);
+        construireLegende(donnees.categories);
+      } catch (erreur) {
+        document.getElementById("reseau").innerHTML =
+          "<p style='padding:1rem;color:#e62d32'>❌ Erreur de chargement des données : " + erreur.message + "</p>";
+      }
+    }
+
+    /**
+     * Construit la légende à partir des catégories.
+     */
+    function construireLegende(categories) {
+      const conteneur = document.getElementById("legende");
+      conteneur.innerHTML = "";
+      for (const cle in categories) {
+        const cat = categories[cle];
+        const item = document.createElement("div");
+        item.className = "item-legende";
+        item.innerHTML = `<span class="puce" style="background:${cat.couleur}"></span>${cat.label}`;
+        conteneur.appendChild(item);
+      }
+    }
+
+    /**
+     * Construit le réseau vis-network.
+     */
+    function construireReseau(donnees) {
+      // Préparation des nœuds avec couleur de leur catégorie
+      const noeuds = donnees.noeuds.map(n => {
+        const couleur = donnees.categories[n.categorie]?.couleur || "#b7b7b7";
+        return {
+          id: n.id,
+          label: n.label,
+          url: n.url,
+          color: {
+            background: couleur,
+            border: "#494949",
+            highlight: { background: couleur, border: "#a6539b" }
+          },
+          font: { color: "#494949", size: 16, face: "Segoe UI", bold: true }
+        };
+      });
+
+      donneesNoeuds = new vis.DataSet(noeuds);
+      const donneesLiens = new vis.DataSet(donnees.liens);
+
+      // Options du réseau
+      const options = {
+        nodes: {
+          shape: "dot",
+          size: 22,
+          borderWidth: 2,
+          shadow: true
+        },
+        edges: {
+          color: { color: "#b7b7b7", highlight: "#a6539b" },
+          width: 2,
+          smooth: { type: "continuous" }
+        },
+        physics: {
+          enabled: true,
+          stabilization: { iterations: 200 },
+          barnesHut: {
+            gravitationalConstant: -8000,
+            springLength: 120
+          }
+        },
+        interaction: {
+          hover: true,
+          zoomView: true,
+          dragView: true,
+          tooltipDelay: 150
+        }
+      };
+
+      const conteneur = document.getElementById("reseau");
+      reseau = new vis.Network(conteneur, { nodes: donneesNoeuds, edges: donneesLiens }, options);
+
+      // Curseur main au survol
+      reseau.on("hoverNode", () => conteneur.style.cursor = "pointer");
+      reseau.on("blurNode", () => conteneur.style.cursor = "default");
+
+      // Clic sur un nœud → ouvrir le lien externe
+      reseau.on("click", (params) => {
+        if (params.nodes.length > 0) {
+          const idNoeud = params.nodes[0];
+          const noeud = donneesNoeuds.get(idNoeud);
+          if (noeud && noeud.url) {
+            window.open(noeud.url, "_blank", "noopener,noreferrer");
+          }
+        }
+      });
+    }
+
+    /**
+     * Recherche : met en évidence les nœuds dont le label contient le texte saisi.
+     */
+    function gererRecherche() {
+      const texte = document.getElementById("recherche").value.trim().toLowerCase();
+      if (!donneesNoeuds || !reseau) return;
+
+      if (texte === "") {
+        // Réinitialise l'opacité de tous les nœuds
+        donneesNoeuds.forEach(n => {
+          donneesNoeuds.update({ id: n.id, opacity: 1 });
+        });
+        return;
+      }
+
+      const correspondances = [];
+      donneesNoeuds.forEach(n => {
+        const correspond = n.label.toLowerCase().includes(texte);
+        donneesNoeuds.update({ id: n.id, opacity: correspond ? 1 : 0.2 });
+        if (correspond) correspondances.push(n.id);
+      });
+
+      // Centrer la vue sur les nœuds trouvés
+      if (correspondances.length > 0) {
+        reseau.fit({ nodes: correspondances, animation: { duration: 600 } });
+      }
+    }
+
+    /**
+     * Recentre la vue sur l'ensemble du réseau.
+     */
+    function recentrer() {
+      if (reseau) reseau.fit({ animation: { duration: 600 } });
+      document.getElementById("recherche").value = "";
+      gererRecherche();
+    }
+
+    // ========= Initialisation =========
+    document.getElementById("recherche").addEventListener("input", gererRecherche);
+    document.getElementById("btn-reset").addEventListener("click", recentrer);
+
+    chargerDonnees();
+  </script>
+</body>
+</html>
