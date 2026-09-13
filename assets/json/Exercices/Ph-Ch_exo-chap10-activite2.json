@@ -73,7 +73,7 @@
       "reponse": "1. La balance mesure la masse du casque. Elle vaut 1,5 kg. Une balance de cuisine ne mesure pas le poids, elle mesure la masse.\n2. On applique P = m × g = 1,5 × 10 = 15 N. Le poids du casque est de 15 N."
     },
     {
-      "themeId": "Astronaute",
+      "themeId": "Velo",
       "titre": "Le vélo et la planète Mars",
       "enonce": "Amir a un VTT de 12 kg. Sur Terre, l'intensité de la pesanteur vaut g = 10 N/kg. Sur Mars, elle vaut g = 3,7 N/kg. On calcule le poids avec P = m × g.",
       "question": "Compare le poids du VTT sur Terre et sur Mars.",

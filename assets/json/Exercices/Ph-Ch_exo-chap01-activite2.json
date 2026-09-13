@@ -1,0 +1,97 @@
+{
+  "chapitreId": "chap01",
+  "activiteId": "activite2",
+  "exercices": [
+    {
+      "themeId": "Course à pied",
+      "titre": "Le stade et les planètes",
+      "enonce": "Léa court sur une piste. Elle imagine le Soleil au départ. Elle place Mercure à 6 mètres, Vénus à 11 mètres, la Terre à 15 mètres et Mars à 23 mètres. La vraie distance Terre-Soleil vaut 1 UA (unité astronomique).\nSur la piste, 15 mètres représentent donc 1 UA.",
+      "question": "1. Classe les quatre planètes de la plus proche du Soleil à la plus éloignée.\n2. Calcule la distance de Mars au Soleil en UA.",
+      "reponse": "1. Ordre du plus proche au plus éloigné : Mercure (6 m), Vénus (11 m), Terre (15 m), Mars (23 m).\n2. Sur la piste, 15 m valent 1 UA. Pour Mars : 23 ÷ 15 = 1,5 environ. Mars se trouve donc à environ 1,5 UA du Soleil."
+    },
+    {
+      "themeId": "Flight Simulator",
+      "titre": "Un avion vers le Soleil",
+      "enonce": "Karim joue à Flight Simulator. Son avion vole à 900 kilomètres par heure. Il imagine un vol de la Terre jusqu'au Soleil. Cette distance vaut 1 UA, soit 150 000 000 de kilomètres.",
+      "question": "Calcule la durée du vol en heures, puis explique pourquoi les astronomes utilisent l'UA et non le kilomètre.",
+      "reponse": "Durée = 150 000 000 ÷ 900 = 166 666 heures environ. Cela fait plus de 19 ans de vol.\nLes nombres en kilomètres sont énormes et difficiles à écrire. L'UA donne des nombres courts et simples : la Terre est à 1 UA, Mars à 1,5 UA. L'unité est adaptée aux grandes distances du système solaire."
+    },
+    {
+      "themeId": "Mario Kart",
+      "titre": "Circuit des huit planètes",
+      "enonce": "Un circuit de Mario Kart possède huit virages. Chaque virage porte le nom d'une planète. Le joueur part du Soleil. Les virages sont dans le désordre : Saturne, Terre, Neptune, Mercure, Jupiter, Vénus, Uranus, Mars.",
+      "question": "Classe les huit planètes dans l'ordre, du virage le plus proche du Soleil au plus éloigné.",
+      "reponse": "Ordre correct : 1. Mercure, 2. Vénus, 3. Terre, 4. Mars, 5. Jupiter, 6. Saturne, 7. Uranus, 8. Neptune.\nLes quatre premières sont les planètes rocheuses. Les quatre dernières sont les planètes géantes gazeuses."
+    },
+    {
+      "themeId": "Vélo",
+      "titre": "À vélo jusqu'à Mars",
+      "enonce": "Théo fait 60 kilomètres à vélo par jour. Il compare deux trajets imaginaires. La Terre est à 1 UA du Soleil. Mars est à 1,5 UA du Soleil. Une UA vaut 150 millions de kilomètres.",
+      "question": "1. Calcule la distance entre le Soleil et Mars en kilomètres.\n2. Déduis qui est le plus proche du Soleil, la Terre ou Mars.",
+      "reponse": "1. Mars : 1,5 × 150 000 000 = 225 000 000 km.\n2. La Terre est à 150 millions de km et Mars à 225 millions de km. La Terre est donc plus proche du Soleil que Mars."
+    },
+    {
+      "themeId": "Photographie",
+      "titre": "La photo du ciel étoilé",
+      "enonce": "Chloé photographie le ciel la nuit. Elle voit une étoile brillante. Cette étoile se trouve à 8 années-lumière de la Terre. Une année-lumière est la distance parcourue par la lumière en un an.",
+      "question": "Explique pourquoi Chloé voit sur sa photo une image vieille de 8 ans.",
+      "reponse": "La lumière met 8 ans pour parcourir 8 années-lumière. La lumière captée par l'appareil est donc partie de l'étoile il y a 8 ans. Chloé photographie l'étoile telle qu'elle était il y a 8 ans, pas telle qu'elle est aujourd'hui."
+    },
+    {
+      "themeId": "Musculation",
+      "titre": "Choisir la bonne unité",
+      "enonce": "Noah pèse ses charges en kilogrammes. Il ne les pèse pas en grammes, car les nombres seraient trop grands. En astronomie, c'est pareil pour les distances. On utilise l'UA dans le système solaire. On utilise l'année-lumière pour les étoiles lointaines.",
+      "question": "Choisis l'unité adaptée pour chaque distance et justifie ta réponse : a) Soleil-Jupiter, b) Terre-étoile Proxima, c) Soleil-Vénus.",
+      "reponse": "a) Soleil-Jupiter : l'UA. Jupiter est dans le système solaire, il est à environ 5 UA.\nb) Terre-Proxima : l'année-lumière. C'est une étoile très lointaine, à environ 4 années-lumière.\nc) Soleil-Vénus : l'UA. Vénus est dans le système solaire, à environ 0,7 UA.\nOn choisit l'unité qui donne les nombres les plus simples, comme le kilogramme en musculation."
+    },
+    {
+      "themeId": "Farming Simulator",
+      "titre": "Les parcelles du système solaire",
+      "enonce": "Dans Farming Simulator, Lucas classe ses parcelles selon leur distance à la ferme. Il fait la même chose avec le système solaire. Il note : Jupiter 5 UA, Terre 1 UA, Neptune 30 UA, Mars 1,5 UA, Saturne 10 UA.",
+      "question": "1. Classe ces cinq planètes de la plus proche du Soleil à la plus éloignée.\n2. Calcule combien de fois Neptune est plus loin du Soleil que la Terre.",
+      "reponse": "1. Terre (1 UA), Mars (1,5 UA), Jupiter (5 UA), Saturne (10 UA), Neptune (30 UA).\n2. 30 ÷ 1 = 30. Neptune est 30 fois plus loin du Soleil que la Terre."
+    },
+    {
+      "themeId": "Moto",
+      "titre": "Compteur en panne",
+      "enonce": "Le compteur d'une moto affiche une distance en mètres. Pour un long voyage, il affiche 1 250 000 mètres. Les chiffres sont trop nombreux et difficiles à lire. En astronomie, le même problème arrive avec les kilomètres.",
+      "question": "Déduis pourquoi les scientifiques ont créé l'unité astronomique (UA) et l'année-lumière.",
+      "reponse": "Sur la moto, 1 250 000 mètres s'écrivent plus simplement 1 250 kilomètres. On change d'unité pour réduire le nombre de chiffres.\nEn astronomie, les distances en kilomètres comptent des millions ou des milliards de chiffres inutiles. L'UA sert pour le système solaire. L'année-lumière sert pour les étoiles. Ces unités rendent les nombres courts et faciles à comparer."
+    },
+    {
+      "themeId": "Basket",
+      "titre": "Le terrain des planètes",
+      "enonce": "Un terrain de basket mesure 28 mètres de long. Sarah place le Soleil sous un panier. Elle place Neptune sous l'autre panier, à 28 mètres. Neptune est à 30 UA du Soleil.",
+      "question": "Calcule la distance sur le terrain qui représente 1 UA, puis place la Terre sur ce terrain.",
+      "reponse": "30 UA sont représentées par 28 mètres. Donc 1 UA correspond à 28 ÷ 30 = 0,9 mètre environ.\nLa Terre est à 1 UA du Soleil. Elle se place donc à environ 0,9 mètre du panier du Soleil. Elle est très proche du Soleil sur ce terrain."
+    },
+    {
+      "themeId": "Minecraft",
+      "titre": "Construire le système solaire",
+      "enonce": "Enzo construit le système solaire dans Minecraft. Un bloc représente 1 UA. Il place Mercure à 0,4 bloc, la Terre à 1 bloc, Jupiter à 5 blocs et Neptune à 30 blocs.",
+      "question": "1. Nomme la planète la plus proche du Soleil dans sa construction.\n2. Calcule le nombre de blocs entre Jupiter et Neptune.",
+      "reponse": "1. La planète la plus proche du Soleil est Mercure, à 0,4 bloc soit 0,4 UA.\n2. 30 − 5 = 25. Il y a 25 blocs entre Jupiter et Neptune, soit 25 UA."
+    },
+    {
+      "themeId": "Film",
+      "titre": "Le message venu de l'espace",
+      "enonce": "Dans un film, une équipe reçoit un message radio venu d'une planète lointaine. Le message met 4 ans à arriver sur Terre. Les ondes radio voyagent à la vitesse de la lumière.",
+      "question": "Déduis la distance entre cette planète et la Terre, puis donne l'unité utilisée.",
+      "reponse": "Le message voyage à la vitesse de la lumière pendant 4 ans. Il parcourt donc 4 années-lumière.\nLa planète est à 4 années-lumière de la Terre. L'unité utilisée est l'année-lumière, car la distance est trop grande pour l'UA."
+    },
+    {
+      "themeId": "Camion",
+      "titre": "Le camion et les distances",
+      "enonce": "Un chauffeur de camion roule 800 kilomètres par jour. Il imagine livrer un colis sur Jupiter. Jupiter est à 5 UA du Soleil. La Terre est à 1 UA du Soleil. Une UA vaut 150 millions de kilomètres.",
+      "question": "Calcule la distance Terre-Jupiter en kilomètres quand les deux planètes sont alignées du même côté du Soleil.",
+      "reponse": "Distance en UA : 5 − 1 = 4 UA.\nDistance en kilomètres : 4 × 150 000 000 = 600 000 000 km.\nLa distance Terre-Jupiter vaut donc 600 millions de kilomètres."
+    },
+    {
+      "themeId": "Escalade",
+      "titre": "La voie des planètes",
+      "enonce": "Une voie d'escalade mesure 15 mètres de haut. Maëlle nomme chaque prise avec une planète. La prise du bas est le Soleil. Elle place Mercure à 0,5 mètre, Vénus à 1 mètre, la Terre à 1,5 mètre, Mars à 2 mètres et Jupiter à 7,5 mètres.",
+      "question": "1. Identifie la planète la plus éloignée du Soleil sur cette voie.\n2. Explique pourquoi les quatre premières prises sont très proches les unes des autres.",
+      "reponse": "1. La planète la plus éloignée est Jupiter, placée à 7,5 mètres du bas.\n2. Mercure, Vénus, la Terre et Mars sont les planètes rocheuses. Elles sont toutes situées entre 0,4 et 1,5 UA du Soleil. Leurs distances sont petites et proches, donc leurs prises sont serrées. Jupiter est à 5 UA, bien plus loin."
+    }
+  ]
+}
