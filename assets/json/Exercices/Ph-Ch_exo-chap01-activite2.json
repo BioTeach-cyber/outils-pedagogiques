@@ -27,8 +27,8 @@
       "themeId": "Vélo",
       "titre": "À vélo jusqu'à Mars",
       "enonce": "Théo fait 60 kilomètres à vélo par jour. Il compare deux trajets imaginaires. La Terre est à 1 UA du Soleil. Mars est à 1,5 UA du Soleil. Une UA vaut 150 millions de kilomètres.",
-      "question": "1. Calcule la distance entre le Soleil et Mars en kilomètres.\n2. Déduis qui est le plus proche du Soleil, la Terre ou Mars.",
-      "reponse": "1. Mars : 1,5 × 150 000 000 = 225 000 000 km.\n2. La Terre est à 150 millions de km et Mars à 225 millions de km. La Terre est donc plus proche du Soleil que Mars."
+      "question": "1. Calcule la distance entre le Soleil et Mars en kilomètres.\n 2. Déduis qui est le plus proche du Soleil, la Terre ou Mars.",
+      "reponse": "1. Mars : 1,5 × 150 000 000 = 225 000 000 km.\n 2. La Terre est à 150 millions de km et Mars à 225 millions de km. La Terre est donc plus proche du Soleil que Mars."
     },
     {
       "themeId": "Photographie",
