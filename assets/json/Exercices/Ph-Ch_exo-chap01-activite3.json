@@ -1,0 +1,36 @@
+{
+  "chapitreId": "chap01",
+  "activiteId": "activite3",
+  "exercices": [
+    {
+      "themeId": "football",
+      "titre": "Le ballon tombe sur Mars",
+      "enonce": "Un ballon lâché sur Mars tombe aussi vers le sol, mais son mouvement est différent de celui sur Terre.",
+      "question": "Quelle force attire le ballon vers le sol ? Compare son poids sur Mars et sur Terre."
+    },
+    {
+      "themeId": "fortnite",
+      "titre": "Les mêmes lois dans le jeu",
+      "enonce": "Dans un jeu, un personnage saute. Dans la réalité, les objets sont attirés vers le sol.",
+      "question": "Explique pourquoi on peut dire que la gravité agit partout, même si ses effets peuvent changer."
+    },
+    {
+      "themeId": "manga",
+      "titre": "Un héros sans gravité",
+      "enonce": "Dans une BD, un héros flotte loin d’une planète.",
+      "question": "Que se passe-t-il quand le héros s’éloigne beaucoup de la planète ? Explique avec la gravité."
+    },
+    {
+      "themeId": "musique",
+      "titre": "La note qui voyage",
+      "enonce": "Une note de musique est un son. Dans l’air, le son se propage grâce aux vibrations.",
+      "question": "Le son se propage-t-il dans le vide ? Justifie ta réponse."
+    },
+    {
+      "themeId": "cuisine",
+      "titre": "Le glaçon et la planète",
+      "enonce": "Un glaçon fond sur Terre. Dans un lieu très froid, il fond moins vite.",
+      "question": "Quels éléments peuvent changer la vitesse de fusion du glaçon ?"
+    }
+  ]
+}

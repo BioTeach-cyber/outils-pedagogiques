@@ -1,0 +1,37 @@
+{
+  "chapitreId": "chap01",
+  "activiteId": "activite1",
+  "exercices": [
+    {
+      "themeId": "football",
+      "titre": "Le stade vu du ciel",
+      "enonce": "Un satellite observe un stade. La Terre est une planète. La Lune tourne autour de la Terre.",
+      "question": "Explique ce qui est au centre du système formé par la Terre et la Lune.",
+      "reponse": "Ceci est la réponse."
+    },
+    {
+      "themeId": "fortnite",
+      "titre": "Une île dans l’espace",
+      "enonce": "Dans un jeu, une île est vue depuis l’espace. Les planètes et les étoiles ne sont pas les mêmes objets.",
+      "question": "Explique la différence entre une planète et une étoile avec tes mots."
+    },
+    {
+      "themeId": "manga",
+      "titre": "Dessiner le système solaire",
+      "enonce": "Lina dessine le Soleil, la Terre et la Lune. Le Soleil produit sa propre lumière.",
+      "question": "Pourquoi voit-on la Lune alors qu’elle ne produit pas sa propre lumière ?"
+    },
+    {
+      "themeId": "musique",
+      "titre": "Le son dans l’espace",
+      "enonce": "Un groupe imagine jouer une chanson entre deux astronautes, dans le vide de l’espace.",
+      "question": "Peuvent-ils s’entendre sans radio ? Explique pourquoi."
+    },
+    {
+      "themeId": "cuisine",
+      "titre": "Une recette venue de loin",
+      "enonce": "Une recette parle d’une étoile très chaude et d’une planète rocheuse.",
+      "question": "Quels indices permettent de dire qu’un astre est une étoile ou une planète ?"
+    }
+  ]
+}

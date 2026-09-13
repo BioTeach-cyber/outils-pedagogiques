@@ -1,0 +1,36 @@
+{
+  "chapitreId": "chap02",
+  "activiteId": "activite1",
+  "exercices": [
+    {
+      "themeId": "football",
+      "titre": "L’énergie du joueur",
+      "enonce": "Un joueur court après le ballon. Son corps utilise l’énergie des aliments.",
+      "question": "D’où vient l’énergie utilisée par ses muscles ? Explique le rôle des aliments."
+    },
+    {
+      "themeId": "fortnite",
+      "titre": "La batterie de la console",
+      "enonce": "Une console fonctionne avec une batterie. La batterie se décharge pendant le jeu.",
+      "question": "Quelle transformation d’énergie a lieu dans la console ?"
+    },
+    {
+      "themeId": "manga",
+      "titre": "Le Soleil du dessinateur",
+      "enonce": "Un panneau solaire alimente la lampe de bureau de Noa.",
+      "question": "Pourquoi l’énergie solaire est-elle dite renouvelable ?"
+    },
+    {
+      "themeId": "musique",
+      "titre": "Une enceinte chargée",
+      "enonce": "Une enceinte fonctionne grâce à une batterie rechargeable.",
+      "question": "Pourquoi une batterie rechargeable est-elle pratique, mais pas une source d’énergie infinie ?"
+    },
+    {
+      "themeId": "cuisine",
+      "titre": "Le bois qui brûle",
+      "enonce": "Une cuisinière brûle du bois pour chauffer une casserole.",
+      "question": "Le bois est-il une source renouvelable ? Donne une raison et une limite."
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+[
+  {
+    "id": "chap01",
+    "niveau": "4e",
+    "couleur": "#53a4db",
+    "logo": "../assets/icones/Univers.gif",
+    "titre": "Voyage cosmique : de la Terre aux confins de l’Univers",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. C’est quoi là-haut ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. C’est loin comment ?"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Les mêmes règles partout ?"
+      }
+    ]
+  },
+  {
+    "id": "chap02",
+    "niveau": "4e",
+    "couleur": "#53a4db",
+    "logo": "../assets/icones/Atome.gif",
+    "titre": "Briques invisibles : atomes et molécules, les LEGO de la matière",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Si on zoomait à fond, on verrait quoi ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Atome ou molécule, qui a raison ?"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Construis ce que tu bois et respires !"
+      }
+    ]
+  },
+  {
+    "id": "chap03",
+    "niveau": "4e",
+    "couleur": "#53a4db",
+    "logo": "../assets/icones/Eau.gif",
+    "titre": "Solide, liquide, gaz : la matière change de costume !",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Solide, liquide, gaz : comment les reconnaître ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. La ronde des changements d'état"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Construis ce que tu bois et respires !"
+      }
+    ]
+  },
+  {
+    "id": "chap04",
+    "niveau": "4e",
+    "couleur": "#53a4db",
+    "logo": "../assets/icones/Melange.gif",
+    "titre": "Mélanges et compagnie : quand la matière se mélange les pinceaux",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "Corps pur ou mélange ? "
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Séparer le mélange : décanter, filtrer, évaporer."
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Solubilité et masse volumique."
+      }
+    ]
+  },
+  {
+    "id": "chap05",
+    "niveau": "4e",
+    "couleur": "#7fbc48",
+    "logo": "../assets/icones/Voiture.gif",
+    "titre": "Énergie en fuite : pertes, rendement et dangers de la vitesse",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Où s'échappe l'énergie ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Quelle machine choisir ? Le rendement décide"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Plus vite = plus dangereux"
+      }
+    ]
+  },
+  {
+    "id": "chap06",
+    "niveau": "4e",
+    "couleur": "#7fbc48",
+    "logo": "../assets/icones/Energie_renouvelable.gif",
+    "titre": "Le grand circuit de l'énergie : d'où vient-elle, où va-t-elle ?",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. D'où vient l'énergie ? Renouvelable ou pas ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Comment fabrique-t-on de l'électricité ?"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Quel mix énergétique pour notre ferme ?"
+      }
+    ]
+  },
+  {
+    "id": "chap07",
+    "niveau": "4e",
+    "couleur": "#53a4db",
+    "logo": "../assets/icones/Masque_Gaz.gif",
+    "titre": "Ça réagit ! : quand la matière se transforme",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Ça change… mais est-ce que c'est pareil ? "
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Écrire la recette de la réaction"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Rien ne se perd, rien ne se crée…"
+      }
+    ]
+  },
+  {
+    "id": "chap08",
+    "niveau": "4e",
+    "couleur": "#53a4db",
+    "logo": "../assets/icones/Ph.gif",
+    "titre": "Mission pH : acides et bases, les ennemis-jurés",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. C'est acide, c'est basique… Comment le savoir"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Ions H⁺, ions HO⁻ : les agents secrets du pH"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Quand l'acide rencontre la base"
+      }
+    ]
+  },
+  {
+    "id": "chap09",
+    "niveau": "4e",
+    "couleur": "#a6539b",
+    "logo": "../assets/icones/Lumiere.gif",
+    "titre": "Mission lumière : des couleurs plein les yeux",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Pourquoi on voit plus rien quand on éteint tout ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Pourquoi mon tee-shirt rouge est devenu noir ?"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Pourquoi c'est pas le même résultat en lumière et en peinture ?"
+      }
+    ]
+  },
+  {
+    "id": "chap10",
+    "niveau": "3e",
+    "couleur": "#f3912b",
+    "logo": "../assets/icones/Gravite.gif",
+    "titre": "Forces invisibles : gravité, poids et interactions qui nous gouvernent",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Qu'est-ce qui agit sur quoi ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Peser ou mesurer une force"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Et si le marché avait lieu sur la Lune ?"
+      }
+    ]
+  },
+  {
+    "id": "chap11",
+    "niveau": "3e",
+    "couleur": "#f3912b",
+    "logo": "../assets/icones/Course.gif",
+    "titre": "En mouvement ! : vitesse, trajectoire et point de vue",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Ça bouge… mais par rapport à quoi ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. À quelle vitesse roulait-il ?"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Accélérer, freiner, rouler régulièrement"
+      }
+    ]
+  },
+  {
+    "id": "chap12",
+    "niveau": "3e",
+    "couleur": "#7fbc48",
+    "logo": "../assets/icones/voltmetre.gif",
+    "titre": "Tension, intensité, résistance : le trio électrique",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Dessiner l'invisible : le circuit et la tension"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. L'intensité et les lois du circuit série"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. La résistance : pourquoi la rallonge chauffait ?"
+      }
+    ]
+  },
+  {
+    "id": "chap13",
+    "niveau": "3e",
+    "couleur": "#7fbc48",
+    "logo": "../assets/icones/Prise_electrique.gif",
+    "titre": "Watt is that ? : puissance et énergie au bout du fil",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. La puissance : les watts qui comptent"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. L'énergie : le compteur tourne"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Économiser et protéger : le disjoncteur veille"
+      }
+    ]
+  },
+  {
+    "id": "chap14",
+    "niveau": "3e",
+    "couleur": "#7fbc48",
+    "logo": "../assets/icones/Sinusoide.gif",
+    "titre": "Alternatif ou continu : le courant mène la danse",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Le courant qui hésite : continu ou alternatif ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Période et fréquence : le rythme du courant"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. De la centrale à la prise"
+      }
+    ]
+  },
+  {
+    "id": "chap15",
+    "niveau": "3e",
+    "couleur": "#7fbc48",
+    "logo": "../assets/icones/Prise_ecolo.gif",
+    "titre": "Planète énergie : quel mix pour demain ?",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Le grand inventaire : quelles énergies ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Toutes les centrales se ressemblent"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Le conseil municipal : quel mix pour la ville ?"
+      }
+    ]
+  },
+  {
+    "id": "chap16",
+    "niveau": "3e",
+    "couleur": "#a6539b",
+    "logo": "../assets/icones/Casque.gif",
+    "titre": "Alerte décibels : le son dans tous ses états",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. D'où vient le son ?"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Grave, aigu, fort, faible : comment lire un son ?"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. Quand le son devient dangereux"
+      }
+    ]
+  },
+  {
+    "id": "chap17",
+    "niveau": "3e",
+    "couleur": "#a6539b",
+    "logo": "../assets/icones/Antenne.gif",
+    "titre": "Ondes et connexions : comment communique-t-on à distance ?",
+    "activites": [
+      {
+        "id": "activite1",
+        "titre": "1. Des ondes partout, même sans réseau"
+      },
+      {
+        "id": "activite2",
+        "titre": "2. Capter un signal : encore faut-il un émetteur"
+      },
+      {
+        "id": "activite3",
+        "titre": "3. L'orage approche"
+      }
+    ]
+  }
+]

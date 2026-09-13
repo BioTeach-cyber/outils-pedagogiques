@@ -1,0 +1,36 @@
+{
+  "chapitreId": "chap02",
+  "activiteId": "activite3",
+  "exercices": [
+    {
+      "themeId": "football",
+      "titre": "Éclairer le terrain",
+      "enonce": "Une ferme possède des panneaux solaires et une petite éolienne pour éclairer son terrain.",
+      "question": "Propose un choix de sources pour produire de l’électricité de jour et quand il n’y a pas de soleil."
+    },
+    {
+      "themeId": "fortnite",
+      "titre": "Le mix de la ferme",
+      "enonce": "La ferme veut utiliser plusieurs sources d’énergie. Certaines dépendent de la météo.",
+      "question": "Pourquoi est-il utile de mélanger plusieurs sources d’énergie ?"
+    },
+    {
+      "themeId": "manga",
+      "titre": "Un paysage à protéger",
+      "enonce": "Une ferme choisit le solaire, l’éolien et le bois. Chaque choix a des effets sur l’environnement.",
+      "question": "Quels critères peux-tu utiliser pour choisir un bon mix énergétique ?"
+    },
+    {
+      "themeId": "musique",
+      "titre": "La sono du festival",
+      "enonce": "Une sono doit fonctionner toute la journée. Le vent est variable, mais le réseau électrique est disponible.",
+      "question": "Propose un mix fiable et explique ton choix."
+    },
+    {
+      "themeId": "cuisine",
+      "titre": "Le four de la ferme",
+      "enonce": "Le four consomme beaucoup d’énergie pour cuire le pain. La ferme veut réduire sa consommation.",
+      "question": "Donne deux solutions pour utiliser moins d’énergie et explique-les."
+    }
+  ]
+}
