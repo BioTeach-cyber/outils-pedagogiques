@@ -252,5 +252,22 @@
     "statut": "Publié",
     "date_creation": "22/05/2026",
     "auteur": "Vincent APREMONT"
+  },
+          {
+    "id": "application-011",
+    "categorie": "Applications",
+    "titre": "PhyMie Academy",
+    "description": "Une bibliothèque d'exercices en Physique-Chimie.",
+    "discipline": ["Physique-Chimie"],
+    "module": ["Physique-Chimie"],
+    "public": "",
+    "formation": ["Collège"],
+    "tags": [],
+    "url": "Physique-Chimie/Ph-Ch_exo-index.html",
+    "icone": "assets/icones/reseau-tutoriels.gif",
+    "image": "assets/images/reseau-tutoriels.jpg",
+    "statut": "Publié",
+    "date_creation": "14/09/2026",
+    "auteur": "Vincent APREMONT"
   }
 ]
