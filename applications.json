@@ -264,8 +264,8 @@
     "formation": ["Collège"],
     "tags": [],
     "url": "Physique-Chimie/Ph-Ch_exo-index.html",
-    "icone": "assets/icones/reseau-tutoriels.gif",
-    "image": "assets/images/reseau-tutoriels.jpg",
+    "icone": "assets/icones/PhyMie_Academy.gif",
+    "image": "assets/images/PhyMie_Academy.jpg",
     "statut": "Publié",
     "date_creation": "14/09/2026",
     "auteur": "Vincent APREMONT"
@@ -281,8 +281,8 @@
     "formation": ["Collège, CAPa SAPVER, Bac Pro SAPAT"],
     "tags": [],
     "url": "Outils-Pedagogiques/Generateur-groupes.html",
-    "icone": "assets/icones/reseau-tutoriels.gif",
-    "image": "assets/images/reseau-tutoriels.jpg",
+    "icone": "assets/icones/Generateur_groupe.gif",
+    "image": "assets/images/Generateur_groupe.jpg",
     "statut": "Publié",
     "date_creation": "24/09/2026",
     "auteur": "Vincent APREMONT"
