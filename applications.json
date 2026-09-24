@@ -269,5 +269,22 @@
     "statut": "Publié",
     "date_creation": "14/09/2026",
     "auteur": "Vincent APREMONT"
+  },
+            {
+    "id": "application-012",
+    "categorie": "Outils",
+    "titre": "Générateur de groupe",
+    "description": "Un générateur de groupes aléatoires pour les activités de classe.",
+    "discipline": [""],
+    "module": [""],
+    "public": "",
+    "formation": ["Collège, CAPa SAPVER, Bac Pro SAPAT"],
+    "tags": [],
+    "url": "Outils-Pedagogiques/Generateur-groupes.html",
+    "icone": "assets/icones/reseau-tutoriels.gif",
+    "image": "assets/images/reseau-tutoriels.jpg",
+    "statut": "Publié",
+    "date_creation": "24/09/2026",
+    "auteur": "Vincent APREMONT"
   }
 ]
