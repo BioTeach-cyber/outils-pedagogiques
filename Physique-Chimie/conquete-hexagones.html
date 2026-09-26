@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conquête des Hexagones – Physique-Chimie</title>
+<style>
+/* ==================== VARIABLES DE COULEURS ==================== */
+:root {
+  --bleu: #53a4db;
+  --vert: #7fbc48;
+  --violet: #a6539b;
+  --orange: #f3912b;
+  --gris: #b7b7b7;
+  --rouge: #e62d32;
+  --rose: #ee7bab;
+  --rose-genially: #161213;
+  --jaune: #f4d32e;
+  --marron: #a5706c;
+  --noir: #494949;
+  --fond: #ffffff;
+}
+
+/* ==================== BASE ==================== */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  width: 100%; height: 100%;
+  background: var(--fond);
+  color: var(--noir);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: clamp(14px, 1.6vw, 17px);
+}
+body { display: flex; flex-direction: column; overflow-x: hidden; }
+[hidden] { display: none !important; }
+
+/* ==================== EN-TÊTE ==================== */
+header {
+  background: var(--fond);
+  border-bottom: 4px solid var(--violet);
+  padding: 0.6rem 1rem;
+  text-align: center;
+}
+header h1 { margin: 0; color: var(--violet); font-size: clamp(1.3rem, 3vw, 2rem); }
+header p { margin: 0.2rem 0 0; font-size: 0.95rem; }
+
+main { flex: 1; padding: 1rem; width: 100%; max-width: 1400px; margin: 0 auto; }
+
+/* ==================== BOUTONS ==================== */
+button {
+  font: inherit; cursor: pointer; border: none; border-radius: 0.6rem;
+  padding: 0.6rem 1rem; font-weight: bold;
+}
+.btn-principal { background: var(--violet); color: #fff; }
+.btn-accent { background: var(--orange); color: var(--noir); }
+.btn-secondaire { background: var(--fond); color: var(--violet); border: 2px solid var(--violet); }
+.btn-juste { background: var(--vert); color: var(--noir); font-size: 1.1rem; }
+.btn-faux { background: var(--rouge); color: #fff; font-size: 1.1rem; }
+button:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ==================== ÉCRAN DE CONFIGURATION ==================== */
+.config-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+fieldset {
+  border: 2px solid var(--violet); border-radius: 0.8rem;
+  padding: 0.8rem 1rem; margin: 0; background: var(--fond);
+}
+legend { color: var(--violet); font-weight: bold; padding: 0 0.4rem; font-size: 1.1rem; }
+.bloc-chapitres { grid-column: 1 / -1; }
+.liste-chapitres {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.5rem; margin-top: 0.6rem;
+}
+.chapitre-choix {
+  display: flex; align-items: center; gap: 0.5rem;
+  border: 1px solid var(--gris); border-radius: 0.5rem; padding: 0.5rem; cursor: pointer;
+}
+.chapitre-choix input { width: 1.2rem; height: 1.2rem; accent-color: var(--violet); }
+.logo-chapitre { width: 1.8rem; height: 1.8rem; object-fit: contain; flex-shrink: 0; }
+.badge-niveau {
+  background: var(--jaune); color: var(--noir); border-radius: 0.4rem;
+  padding: 0 0.4rem; font-size: 0.8rem; font-weight: bold;
+}
+.ligne-option { display: flex; align-items: center; gap: 0.5rem; margin: 0.4rem 0; flex-wrap: wrap; }
+.ligne-option input[type="number"], .ligne-option input[type="text"], select {
+  font: inherit; padding: 0.3rem 0.5rem; border: 2px solid var(--gris); border-radius: 0.4rem;
+  max-width: 100%;
+}
+.ligne-option input[type="number"] { width: 5rem; }
+.ligne-option input[type="radio"] { accent-color: var(--violet); width: 1.1rem; height: 1.1rem; }
+.zone-lancement { text-align: center; margin-top: 1rem; }
+.zone-lancement .btn-principal { font-size: 1.3rem; padding: 0.8rem 2rem; }
+.message { color: var(--rouge); font-weight: bold; min-height: 1.4rem; }
+
+/* ==================== ÉCRAN DE JEU ==================== */
+.barre-jeu {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 0.6rem; border: 2px solid var(--violet); border-radius: 0.8rem;
+  padding: 0.5rem 0.8rem; margin-bottom: 0.8rem;
+}
+.equipe-active { font-size: 1.15rem; font-weight: bold; }
+.info-fin { font-weight: bold; color: var(--violet); }
+.jeu-grille {
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr); gap: 1rem;
+}
+@media (max-width: 800px) { .jeu-grille { grid-template-columns: 1fr; } }
+
+.zone-plateau { width: 100%; }
+#plateau { width: 100%; height: auto; max-height: 78vh; display: block; margin: 0 auto; }
+.hexa { cursor: default; }
+.hexa polygon { fill-opacity: 0.7; stroke: var(--fond); stroke-width: 0.8; transition: opacity 0.2s; }
+.hexa.possedee polygon { stroke: var(--noir); stroke-width: 1.6; }
+.hexa.jouable { cursor: pointer; }
+.hexa.jouable polygon { stroke: var(--noir); stroke-width: 1.8; stroke-dasharray: 3 1.5; }
+.hexa.jouable:hover polygon, .hexa.jouable:focus polygon { opacity: 0.75; }
+.hexa:focus { outline: none; }
+.hexa text { pointer-events: none; font-family: Arial, sans-serif; font-weight: bold; }
+
+.panneau { border: 2px solid var(--violet); border-radius: 0.8rem; padding: 0.6rem 0.8rem; margin-bottom: 0.8rem; }
+.panneau h2 { margin: 0 0 0.4rem; font-size: 1.1rem; color: var(--violet); }
+.ligne-score {
+  display: grid; grid-template-columns: 2rem 1fr auto; align-items: center; gap: 0.4rem;
+  padding: 0.3rem; border-radius: 0.4rem;
+}
+.ligne-score.active { background: #fbeee0; outline: 2px solid var(--orange); }
+.symbole {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.8rem; height: 1.8rem; border-radius: 50%; color: #fff; font-weight: bold;
+}
+.detail-score { font-size: 0.8rem; }
+.total-score { font-size: 1.3rem; font-weight: bold; }
+.legende { max-height: 40vh; overflow-y: auto; margin: 0; padding: 0; list-style: none; }
+.legende li { display: flex; gap: 0.5rem; align-items: flex-start; padding: 0.25rem 0; border-bottom: 1px dashed var(--gris); font-size: 0.9rem; }
+.num-legende {
+  flex-shrink: 0; min-width: 1.9rem; height: 1.9rem; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: bold; background: #fff; border: 4px solid;
+}
+.majorites { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.majorite-item { display: flex; align-items: center; gap: 0.3rem; font-size: 0.9rem; }
+
+/* ==================== FENÊTRE QUESTION (superposition, pas de pop-up) ==================== */
+.superposition {
+  position: fixed; inset: 0; background: rgba(73, 73, 73, 0.55);
+  display: flex; align-items: center; justify-content: center; padding: 0.8rem; z-index: 10;
+}
+.fenetre {
+  background: var(--fond); border-radius: 1rem; border-top: 8px solid var(--violet);
+  width: min(760px, 100%); max-height: 92vh; overflow-y: auto; padding: 1rem 1.2rem;
+}
+.fenetre h2 { margin: 0.2rem 0 0.6rem; color: var(--violet); }
+.etiquettes { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.etiquette { border-radius: 0.4rem; padding: 0.1rem 0.5rem; font-size: 0.85rem; font-weight: bold; background: var(--jaune); color: var(--noir); }
+.texte-long { white-space: pre-line; line-height: 1.5; }
+.bloc-question { background: #f6ecf5; border-left: 5px solid var(--violet); padding: 0.6rem 0.8rem; border-radius: 0.4rem; }
+.bloc-correction { background: #eef6e6; border-left: 5px solid var(--vert); padding: 0.6rem 0.8rem; border-radius: 0.4rem; margin-top: 0.8rem; }
+.boutons-fenetre { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-top: 1rem; }
+
+/* ==================== ANNONCE ==================== */
+.annonce {
+  position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+  background: var(--noir); color: #fff; padding: 0.6rem 1.2rem; border-radius: 0.6rem;
+  font-weight: bold; z-index: 20; max-width: 90%; text-align: center;
+}
+
+/* ==================== ÉCRAN DE FIN ==================== */
+.fin { text-align: center; }
+.fin h2 { color: var(--violet); font-size: 1.8rem; }
+table { border-collapse: collapse; margin: 1rem auto; width: min(700px, 100%); }
+th, td { border: 1px solid var(--gris); padding: 0.5rem; }
+th { background: var(--violet); color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⬡ Conquête des Hexagones</h1>
+  <p>Réponds aux questions de Physique-Chimie pour agrandir ton territoire !</p>
+</header>
+
+<main>
+  <!-- ==================== ÉCRAN 1 : CONFIGURATION ==================== -->
+  <section id="ecranConfig" aria-labelledby="titreConfig">
+    <h2 id="titreConfig" hidden>Préparer la partie</h2>
+    <div class="config-grille">
+
+      <fieldset class="bloc-chapitres">
+        <legend>1. Choisis les chapitres</legend>
+        <div class="ligne-option">
+          <button type="button" class="btn-secondaire" id="btnToutCocher">Tout cocher</button>
+          <button type="button" class="btn-secondaire" id="btnToutDecocher">Tout décocher</button>
+        </div>
+        <div id="listeChapitres" class="liste-chapitres">Chargement des chapitres…</div>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Les équipes</legend>
+        <div class="ligne-option">
+          <label for="nbEquipes">Nombre d'équipes :</label>
+          <select id="nbEquipes">
+            <option value="2">2</option><option value="3">3</option><option value="4">4</option>
+          </select>
+        </div>
+        <div id="nomsEquipes"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Le plateau</legend>
+        <div class="ligne-option"><input type="radio" name="taille" id="taillePetit" value="3"><label for="taillePetit">Petit (37 cases)</label></div>
+        <div class="ligne-option"><input type="radio" name="taille" id="tailleMoyen" value="4" checked><label for="tailleMoyen">Moyen (61 cases)</label></div>
+        <div class="ligne-option"><input type="radio" name="taille" id="tailleGrand" value="5"><label for="tailleGrand">Grand (91 cases)</label></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>4. Fin de la partie</legend>
+        <div class="ligne-option">
+          <input type="radio" name="fin" id="finTours" value="tours" checked>
+          <label for="finTours">Après</label>
+          <input type="number" id="nbTours" min="1" max="99" value="10" aria-label="Nombre de tours">
+          <span>tours</span>
+        </div>
+        <div class="ligne-option">
+          <input type="radio" name="fin" id="finToutes" value="toutes">
+          <label for="finToutes">Quand toutes les cases sont prises</label>
+        </div>
+        <div class="ligne-option">
+          <input type="radio" name="fin" id="finChrono" value="chrono">
+          <label for="finChrono">Chronomètre :</label>
+          <input type="number" id="nbMinutes" min="1" max="180" value="20" aria-label="Durée en minutes">
+          <span>minutes</span>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>5. Les bonus</legend>
+        <div class="ligne-option">
+          <label for="ptsMajorite">Majorité d'une couleur :</label>
+          <input type="number" id="ptsMajorite" min="0" max="20" value="3"> <span>points</span>
+        </div>
+        <div class="ligne-option">
+          <label for="seuilSerie">Série de</label>
+          <input type="number" id="seuilSerie" min="2" max="10" value="3">
+          <span>bonnes réponses d'affilée =</span>
+          <input type="number" id="ptsSerie" min="0" max="20" value="2" aria-label="Points du bonus de série"> <span>points</span>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="zone-lancement">
+      <p class="message" id="messageConfig" role="alert"></p>
+      <button type="button" class="btn-principal" id="btnLancer">▶ Lancer la partie</button>
+    </div>
+  </section>
+
+  <!-- ==================== ÉCRAN 2 : JEU ==================== -->
+  <section id="ecranJeu" hidden aria-label="Plateau de jeu">
+    <div class="barre-jeu">
+      <div class="equipe-active" id="equipeActive" aria-live="polite"></div>
+      <div class="info-fin" id="infoFin"></div>
+      <div>
+        <button type="button" class="btn-secondaire" id="btnPasser">⏭ Passer le tour</button>
+        <button type="button" class="btn-accent" id="btnTerminer">🏁 Terminer</button>
+      </div>
+    </div>
+
+    <div class="jeu-grille">
+      <div class="zone-plateau">
+        <svg id="plateau" role="group" aria-label="Plateau hexagonal"></svg>
+      </div>
+      <aside>
+        <div class="panneau">
+          <h2>🏆 Scores</h2>
+          <div id="scores"></div>
+        </div>
+        <div class="panneau">
+          <h2>🎨 Majorités par couleur</h2>
+          <div id="majorites" class="majorites"></div>
+        </div>
+        <div class="panneau">
+          <h2>📋 Objectifs</h2>
+          <ul id="legende" class="legende"></ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ==================== ÉCRAN 3 : FIN ==================== -->
+  <section id="ecranFin" class="fin" hidden aria-labelledby="titreFin">
+    <h2 id="titreFin">🏁 Fin de la partie</h2>
+    <p id="texteVainqueur" class="total-score"></p>
+    <table>
+      <thead><tr><th>Équipe</th><th>Cases</th><th>Bonus majorité</th><th>Bonus série</th><th>Total</th></tr></thead>
+      <tbody id="tableauFinal"></tbody>
+    </table>
+    <button type="button" class="btn-principal" id="btnRejouer">🔄 Nouvelle partie</button>
+  </section>
+</main>
+
+<!-- ==================== FENÊTRE QUESTION ==================== -->
+<div id="fenetreQuestion" class="superposition" hidden>
+  <div class="fenetre" role="dialog" aria-modal="true" aria-labelledby="qTitre">
+    <div class="etiquettes" id="qEtiquettes"></div>
+    <h2 id="qTitre"></h2>
+    <p class="texte-long" id="qEnonce"></p>
+    <div class="bloc-question"><strong>❓ Question</strong><p class="texte-long" id="qQuestion"></p></div>
+    <div class="boutons-fenetre" id="zoneVoirCorrection">
+      <button type="button" class="btn-principal" id="btnCorrection">👀 Voir la correction</button>
+    </div>
+    <div id="zoneCorrection" hidden>
+      <div class="bloc-correction">
+        <strong>✅ Correction</strong>
+        <p class="texte-long" id="qReponse"></p>
+        <p><em>Chapitre : <span id="qChapitre"></span></em></p>
+      </div>
+      <p style="text-align:center;font-weight:bold;">La réponse de l'équipe est-elle juste ?</p>
+      <div class="boutons-fenetre">
+        <button type="button" class="btn-juste" id="btnJuste">✅ Juste</button>
+        <button type="button" class="btn-faux" id="btnFaux">❌ Faux</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="annonce" class="annonce" role="status" aria-live="polite" hidden></div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   CONSTANTES
+   ========================================================= */
+const CHEMIN_CHAPITRES = "../assets/json/Ph-Ch_exo-chapitres.json";
+const DOSSIER_EXERCICES = "../assets/json/Exercices/";
+const EQUIPES_MODELES = [
+  { nom: "Équipe Rouge",  symbole: "●", couleur: "#e62d32" },
+  { nom: "Équipe Violette", symbole: "▲", couleur: "#a6539b" },
+  { nom: "Équipe Marron", symbole: "■", couleur: "#a5706c" },
+  { nom: "Équipe Noire",  symbole: "★", couleur: "#161213" }
+];
+// Directions des 6 voisins (coordonnées axiales)
+const DIRECTIONS = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]];
+const TAILLE_HEXA = 10;
+
+/* =========================================================
+   ÉTAT DU JEU
+   ========================================================= */
+let listeChapitres = [];
+const jeu = {
+  equipes: [], cases: [], objectifs: [], regles: {},
+  equipeActive: 0, tour: 1, caseCible: -1,
+  questionOuverte: false, finDemandee: false, partieFinie: false,
+  secondesRestantes: 0, minuteur: null
+};
+
+/* =========================================================
+   OUTILS
+   ========================================================= */
+const $ = (id) => document.getElementById(id);
+
+function melanger(tableau) {
+  const copie = tableau.slice();
+  for (let i = copie.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copie[i], copie[j]] = [copie[j], copie[i]];
+  }
+  return copie;
+}
+
+function creerElement(balise, classe, texte) {
+  const el = document.createElement(balise);
+  if (classe) el.className = classe;
+  if (texte !== undefined) el.textContent = texte;
+  return el;
+}
+
+function annoncer(texte) {
+  const zone =  $ ("annonce");
+  zone.textContent = texte;
+  zone.hidden = false;
+  clearTimeout(annoncer.delai);
+  annoncer.delai = setTimeout(() => { zone.hidden = true; }, 2800);
+}
+
+function entier(id, min, defaut) {
+  const valeur = parseInt( $ (id).value, 10);
+  return Number.isNaN(valeur) || valeur < min ? defaut : valeur;
+}
+
+/* =========================================================
+   CONFIGURATION : CHARGEMENT DES CHAPITRES
+   ========================================================= */
+async function chargerChapitres() {
+  const zone =  $ ("listeChapitres");
+  try {
+    const reponse = await fetch(CHEMIN_CHAPITRES);
+    if (!reponse.ok) throw new Error(reponse.status);
+    listeChapitres = await reponse.json();
+    zone.textContent = "";
+    listeChapitres.forEach((chapitre) => {
+      const etiquette = creerElement("label", "chapitre-choix");
+      const caseACocher = document.createElement("input");
+      caseACocher.type = "checkbox";
+      caseACocher.value = chapitre.id;
+      caseACocher.className = "choix-chapitre";
+      const logo = document.createElement("img");
+      logo.className = "logo-chapitre";
+      logo.src = chapitre.logo;
+      logo.alt = "";
+      logo.addEventListener("error", () => logo.remove());
+      etiquette.append(caseACocher, logo,
+        creerElement("span", "badge-niveau", chapitre.niveau || ""),
+        creerElement("span", "", chapitre.titre));
+      zone.appendChild(etiquette);
+    });
+  } catch (erreur) {
+    zone.textContent = "⚠️ Impossible de charger la liste des chapitres (" + CHEMIN_CHAPITRES + ").";
+  }
+}
+
+function afficherChampsEquipes() {
+  const nombre = parseInt( $ ("nbEquipes").value, 10);
+  const zone = $("nomsEquipes");
+  const anciensNoms = Array.from(zone.querySelectorAll("input")).map((i) => i.value);
+  zone.textContent = "";
+  for (let i = 0; i < nombre; i++) {
+    const ligne = creerElement("div", "ligne-option");
+    const symbole = creerElement("span", "symbole", EQUIPES_MODELES[i].symbole);
+    symbole.style.background = EQUIPES_MODELES[i].couleur;
+    const champ = document.createElement("input");
+    champ.type = "text";
+    champ.maxLength = 25;
+    champ.value = anciensNoms[i] || EQUIPES_MODELES[i].nom;
+    champ.setAttribute("aria-label", "Nom de l'équipe " + (i + 1));
+    ligne.append(symbole, champ);
+    zone.appendChild(ligne);
+  }
+}
+
+/* =========================================================
+   LANCEMENT : CHARGEMENT DES EXERCICES
+   ========================================================= */
+async function lancerPartie() {
+  const message = $("messageConfig");
+  const idsChoisis = Array.from(document.querySelectorAll(".choix-chapitre:checked")).map((c) => c.value);
+  if (idsChoisis.length === 0) { message.textContent = "Coche au moins un chapitre."; return; }
+
+  message.textContent = "";
+  $("btnLancer").disabled = true;
+  $("btnLancer").textContent = "⏳ Chargement des questions…";
+
+  const chapitresChoisis = listeChapitres.filter((c) => idsChoisis.includes(c.id));
+
+  // Construction des noms de fichiers à partir de la convention
+  const demandes = [];
+  chapitresChoisis.forEach((chapitre) => {
+    (chapitre.activites || []).forEach((activite) => {
+      const url = DOSSIER_EXERCICES + "Ph-Ch_exo-" + chapitre.id + "-" + activite.id + ".json";
+      demandes.push(fetch(url).then((r) => { if (!r.ok) throw new Error(url); return r.json(); }));
+    });
+  });
+  const resultats = await Promise.allSettled(demandes);
+
+  // Regroupement des exercices par chapitre|activité|objectif
+  const exercicesParObjectif = {};
+  resultats.forEach((resultat) => {
+    if (resultat.status !== "fulfilled") return;
+    const fichier = resultat.value;
+    (fichier.exercices || []).forEach((exercice) => {
+      const cle = fichier.chapitreId + "|" + fichier.activiteId + "|" + exercice.objectifId;
+      (exercicesParObjectif[cle] = exercicesParObjectif[cle] || []).push(exercice);
+    });
+  });
+
+  // Liste des objectifs ayant au moins une question (numérotation globale)
+  jeu.objectifs = [];
+  chapitresChoisis.forEach((chapitre) => {
+    (chapitre.activites || []).forEach((activite) => {
+      (activite.objectifs || []).forEach((objectif) => {
+        const exercices = exercicesParObjectif[chapitre.id + "|" + activite.id + "|" + objectif.id];
+        if (!exercices || exercices.length === 0) return;
+        jeu.objectifs.push({
+          numero: jeu.objectifs.length + 1,
+          libelle: objectif.libelle,
+          couleur: chapitre.couleur.toLowerCase(),
+          chapitreTitre: chapitre.titre,
+          activiteTitre: activite.titre,
+          exercices: exercices,
+          pioche: []
+        });
+      });
+    });
+  });
+
+  $("btnLancer").disabled = false;
+   $ ("btnLancer").textContent = "▶ Lancer la partie";
+
+  if (jeu.objectifs.length === 0) {
+    message.textContent = "Aucune question trouvée pour ces chapitres. Vérifie les fichiers d'exercices.";
+    return;
+  }
+  const echecs = resultats.filter((r) => r.status === "rejected").length;
+  if (echecs > 0) console.warn(echecs + " fichier(s) d'exercices introuvable(s) : ignoré(s).");
+
+  initialiserPartie();
+}
+
+/* =========================================================
+   INITIALISATION DE LA PARTIE
+   ========================================================= */
+function initialiserPartie() {
+  // Règles
+  jeu.regles = {
+    rayon: parseInt(document.querySelector("input[name='taille']:checked").value, 10),
+    modeFin: document.querySelector("input[name='fin']:checked").value,
+    nbTours: entier("nbTours", 1, 10),
+    nbMinutes: entier("nbMinutes", 1, 20),
+    ptsMajorite: entier("ptsMajorite", 0, 3),
+    seuilSerie: entier("seuilSerie", 2, 3),
+    ptsSerie: entier("ptsSerie", 0, 2)
+  };
+
+  // Équipes
+  const noms = Array.from( $ ("nomsEquipes").querySelectorAll("input"));
+  jeu.equipes = noms.map((champ, i) => ({
+    nom: champ.value.trim() || EQUIPES_MODELES[i].nom,
+    symbole: EQUIPES_MODELES[i].symbole,
+    couleur: EQUIPES_MODELES[i].couleur,
+    serie: 0,
+    bonusSerie: 0
+  }));
+
+  // Plateau hexagonal (coordonnées axiales)
+  const rayon = jeu.regles.rayon;
+  jeu.cases = [];
+  for (let q = -rayon; q <= rayon; q++) {
+    for (let r = Math.max(-rayon, -q - rayon); r <= Math.min(rayon, -q + rayon); r++) {
+      jeu.cases.push({ q, r, objectif: null, proprietaire: -1 });
+    }
+  }
+
+  // Répartition mélangée des objectifs : chacun apparaît au moins une fois si possible
+  let sac = [];
+  const ordreCases = melanger(jeu.cases.map((_, i) => i));
+  ordreCases.forEach((indice) => {
+    if (sac.length === 0) sac = melanger(jeu.objectifs);
+    jeu.cases[indice].objectif = sac.pop();
+  });
+
+  // Cases de départ : coins du plateau
+  const coinsUtilises = jeu.equipes.length === 2 ? [0, 3] : jeu.equipes.length === 3 ? [0, 2, 4] : [0, 1, 3, 4];
+  coinsUtilises.forEach((numeroCoin, numeroEquipe) => {
+    const [dq, dr] = DIRECTIONS[numeroCoin];
+    const caseDepart = trouverCase(dq * rayon, dr * rayon);
+    if (caseDepart) caseDepart.proprietaire = numeroEquipe;
+  });
+
+  // Remise à zéro
+  jeu.equipeActive = 0;
+  jeu.tour = 1;
+  jeu.finDemandee = false;
+  jeu.partieFinie = false;
+  jeu.questionOuverte = false;
+  clearInterval(jeu.minuteur);
+  if (jeu.regles.modeFin === "chrono") {
+    jeu.secondesRestantes = jeu.regles.nbMinutes * 60;
+    jeu.minuteur = setInterval(tictac, 1000);
+  }
+
+  $("ecranConfig").hidden = true;
+  $("ecranFin").hidden = true;
+  $("ecranJeu").hidden = false;
+  dessinerPlateau();
+  afficherLegende();
+  rafraichir();
+}
+
+/* =========================================================
+   GÉOMÉTRIE DU PLATEAU
+   ========================================================= */
+function trouverCase(q, r) {
+  return jeu.cases.find((c) => c.q === q && c.r === r);
+}
+
+function voisins(caseJeu) {
+  return DIRECTIONS.map(([dq, dr]) => trouverCase(caseJeu.q + dq, caseJeu.r + dr)).filter(Boolean);
+}
+
+function centreHexa(caseJeu) {
+  return {
+    x: TAILLE_HEXA * Math.sqrt(3) * (caseJeu.q + caseJeu.r / 2),
+    y: TAILLE_HEXA * 1.5 * caseJeu.r
+  };
+}
+
+function pointsHexa(cx, cy) {
+  const points = [];
+  for (let i = 0; i < 6; i++) {
+    const angle = Math.PI / 180 * (60 * i - 30);
+    points.push((cx + TAILLE_HEXA * Math.cos(angle)).toFixed(2) + "," + (cy + TAILLE_HEXA * Math.sin(angle)).toFixed(2));
+  }
+  return points.join(" ");
+}
+
+/* =========================================================
+   RÈGLES : CASES JOUABLES
+   ========================================================= */
+function possedeUneCase(numeroEquipe) {
+  return jeu.cases.some((c) => c.proprietaire === numeroEquipe);
+}
+
+function estJouable(caseJeu, numeroEquipe) {
+  if (caseJeu.proprietaire === numeroEquipe) return false;
+  if (!possedeUneCase(numeroEquipe)) return true; // équipe éliminée : elle repart de n'importe où
+  return voisins(caseJeu).some((v) => v.proprietaire === numeroEquipe);
+}
+
+/* =========================================================
+   AFFICHAGE DU PLATEAU (SVG)
+   ========================================================= */
+const NS_SVG = "http://www.w3.org/2000/svg";
+
+// Petit outil : crée un élément SVG avec ses attributs
+function creerSVG(balise, attributs) {
+  const el = document.createElementNS(NS_SVG, balise);
+  Object.entries(attributs || {}).forEach(([nom, valeur]) => el.setAttribute(nom, valeur));
+  return el;
+}
+
+function dessinerPlateau() {
+  const svg = $("plateau");
+  svg.textContent = "";
+  const marge = TAILLE_HEXA * 1.2;
+  const largeur = TAILLE_HEXA * Math.sqrt(3) * (jeu.regles.rayon * 2 + 1) / 2 + marge;
+  const hauteur = TAILLE_HEXA * (1.5 * jeu.regles.rayon + 1) + marge / 2;
+  svg.setAttribute("viewBox", (-largeur) + " " + (-hauteur) + " " + (largeur * 2) + " " + (hauteur * 2));
+
+  jeu.cases.forEach((caseJeu, indice) => {
+    const { x, y } = centreHexa(caseJeu);
+    const groupe = creerSVG("g");
+    groupe.classList.add("hexa");
+    groupe.dataset.indice = indice;
+
+    // Hexagone coloré selon le chapitre
+    const hexagone = creerSVG("polygon", { points: pointsHexa(x, y), fill: caseJeu.objectif.couleur });
+
+    // Numéro de l'objectif dans un disque blanc
+    const disque = creerSVG("circle", { cx: x, cy: y + 1.5, r: 4.2, fill: "#ffffff" });
+    const numero = creerSVG("text", {
+      x: x, y: y + 1.5, "text-anchor": "middle", "dominant-baseline": "central",
+      "font-size": "4.6", fill: "#494949"
+    });
+    numero.textContent = caseJeu.objectif.numero;
+
+    // Pion de l'équipe propriétaire (caché si la case est neutre)
+    const pion = creerSVG("circle", { cx: x, cy: y - 5.2, r: 3, stroke: "#ffffff", "stroke-width": "0.6" });
+    pion.classList.add("pion");
+    const symbole = creerSVG("text", {
+      x: x, y: y - 5.1, "text-anchor": "middle", "dominant-baseline": "central",
+      "font-size": "3.4", fill: "#ffffff"
+    });
+    symbole.classList.add("symbole-pion");
+
+    groupe.append(hexagone, disque, numero, pion, symbole);
+
+    // Clic souris / doigt + clavier (Entrée ou Espace)
+    groupe.addEventListener("click", () => choisirCase(indice));
+    groupe.addEventListener("keydown", (evenement) => {
+      if (evenement.key === "Enter" || evenement.key === " ") {
+        evenement.preventDefault();
+        choisirCase(indice);
+      }
+    });
+    svg.appendChild(groupe);
+  });
+}
+
+/* =========================================================
+   CALCUL DES SCORES
+   ========================================================= */
+// Pour chaque couleur de chapitre : numéro de l'équipe majoritaire, ou -1
+function calculerMajorites() {
+  const couleurs = [...new Set(jeu.objectifs.map((o) => o.couleur))];
+  const resultat = {};
+  couleurs.forEach((couleur) => {
+    const compteur = jeu.equipes.map(() => 0);
+    jeu.cases.forEach((c) => {
+      if (c.proprietaire >= 0 && c.objectif.couleur === couleur) compteur[c.proprietaire]++;
+    });
+    const maximum = Math.max(...compteur);
+    const equipesAuMaximum = compteur.filter((n) => n === maximum).length;
+    resultat[couleur] = (maximum > 0 && equipesAuMaximum === 1) ? compteur.indexOf(maximum) : -1;
+  });
+  return resultat;
+}
+
+function calculerScores() {
+  const majorites = calculerMajorites();
+  return jeu.equipes.map((equipe, numero) => {
+    const nbCases = jeu.cases.filter((c) => c.proprietaire === numero).length;
+    const nbMajorites = Object.values(majorites).filter((m) => m === numero).length;
+    const bonusMajorite = nbMajorites * jeu.regles.ptsMajorite;
+    return {
+      numero: numero,
+      cases: nbCases,
+      majorite: bonusMajorite,
+      serie: equipe.bonusSerie,
+      total: nbCases + bonusMajorite + equipe.bonusSerie
+    };
+  });
+}
+
+/* =========================================================
+   RAFRAÎCHISSEMENT DE L'AFFICHAGE
+   ========================================================= */
+function rafraichir() {
+  // --- Plateau ---
+  document.querySelectorAll("#plateau .hexa").forEach((groupe) => {
+    const caseJeu = jeu.cases[parseInt(groupe.dataset.indice, 10)];
+    const pion = groupe.querySelector(".pion");
+    const symbole = groupe.querySelector(".symbole-pion");
+    const possedee = caseJeu.proprietaire >= 0;
+
+    groupe.classList.toggle("possedee", possedee);
+    pion.style.display = possedee ? "" : "none";
+    symbole.style.display = possedee ? "" : "none";
+    if (possedee) {
+      const equipe = jeu.equipes[caseJeu.proprietaire];
+      pion.setAttribute("fill", equipe.couleur);
+      symbole.textContent = equipe.symbole;
+    }
+
+    const jouable = !jeu.questionOuverte && !jeu.partieFinie && estJouable(caseJeu, jeu.equipeActive);
+    groupe.classList.toggle("jouable", jouable);
+    const texteProprietaire = possedee ? "appartient à " + jeu.equipes[caseJeu.proprietaire].nom : "neutre";
+    groupe.setAttribute("aria-label", "Case objectif " + caseJeu.objectif.numero + ", " + texteProprietaire);
+    if (jouable) {
+      groupe.setAttribute("tabindex", "0");
+      groupe.setAttribute("role", "button");
+    } else {
+      groupe.removeAttribute("tabindex");
+      groupe.removeAttribute("role");
+    }
+  });
+
+  // --- Équipe qui joue ---
+  const equipe = jeu.equipes[jeu.equipeActive];
+  const zoneEquipe = $("equipeActive");
+  zoneEquipe.textContent = "";
+  const pastilleEquipe = creerElement("span", "symbole", equipe.symbole);
+  pastilleEquipe.style.background = equipe.couleur;
+  zoneEquipe.append(pastilleEquipe, " À toi de jouer : " + equipe.nom);
+
+  afficherInfoFin();
+  afficherScores();
+  afficherMajorites();
+}
+
+function afficherInfoFin() {
+  const zone = $("infoFin");
+  if (jeu.regles.modeFin === "tours") {
+    zone.textContent = "🔁 Tour " + jeu.tour + " / " + jeu.regles.nbTours;
+  } else if (jeu.regles.modeFin === "toutes") {
+    const libres = jeu.cases.filter((c) => c.proprietaire < 0).length;
+    zone.textContent = "⬡ Cases libres : " + libres;
+  } else {
+    const secondes = Math.max(0, jeu.secondesRestantes);
+    const mm = String(Math.floor(secondes / 60)).padStart(2, "0");
+    const ss = String(secondes % 60).padStart(2, "0");
+    zone.textContent = "⏱ " + mm + ":" + ss;
+  }
+}
+
+function afficherScores() {
+  const zone = $("scores");
+  zone.textContent = "";
+  calculerScores().forEach((score) => {
+    const equipe = jeu.equipes[score.numero];
+    const ligne = creerElement("div", "ligne-score" + (score.numero === jeu.equipeActive ? " active" : ""));
+    const symbole = creerElement("span", "symbole", equipe.symbole);
+    symbole.style.background = equipe.couleur;
+    const texte = creerElement("div");
+    texte.append(creerElement("strong", "", equipe.nom), document.createElement("br"),
+      creerElement("span", "detail-score",
+        score.cases + " cases + " + score.majorite + " majorité + " + score.serie + " série" +
+        (equipe.serie > 0 ? " (série en cours : " + equipe.serie + ")" : "")));
+    ligne.append(symbole, texte, creerElement("span", "total-score", score.total));
+    zone.appendChild(ligne);
+  });
+}
+
+function afficherMajorites() {
+  const zone = $("majorites");
+  zone.textContent = "";
+  Object.entries(calculerMajorites()).forEach(([couleur, numeroEquipe]) => {
+    const item = creerElement("div", "majorite-item");
+    const pastille = creerElement("span", "pastille");
+    pastille.style.background = couleur;
+    item.appendChild(pastille);
+    if (numeroEquipe >= 0) {
+      const symbole = creerElement("span", "symbole", jeu.equipes[numeroEquipe].symbole);
+      symbole.style.background = jeu.equipes[numeroEquipe].couleur;
+      item.appendChild(symbole);
+    } else {
+      item.appendChild(creerElement("span", "", "—"));
+    }
+    zone.appendChild(item);
+  });
+}
+
+function afficherLegende() {
+  const zone = $("legende");
+  zone.textContent = "";
+  jeu.objectifs.forEach((objectif) => {
+    const ligne = document.createElement("li");
+    const numero = creerElement("span", "num-legende", objectif.numero);
+    numero.style.borderColor = objectif.couleur;
+    ligne.append(numero, creerElement("span", "", objectif.libelle));
+    zone.appendChild(ligne);
+  });
+}
+
+/* =========================================================
+   DÉROULEMENT D'UN TOUR
+   ========================================================= */
+function choisirCase(indice) {
+  if (jeu.partieFinie || jeu.questionOuverte) return;
+  if (!estJouable(jeu.cases[indice], jeu.equipeActive)) {
+    annoncer("Choisis une case entourée en orange (voisine de ton territoire).");
+    return;
+  }
+  jeu.caseCible = indice;
+  ouvrirQuestion();
+}
+
+function ouvrirQuestion() {
+  const caseJeu = jeu.cases[jeu.caseCible];
+  const objectif = caseJeu.objectif;
+
+  // Pioche : on épuise toutes les questions de l'objectif avant de les répéter
+  if (objectif.pioche.length === 0) objectif.pioche = melanger(objectif.exercices);
+  const exercice = objectif.pioche.pop();
+
+  // Étiquettes
+  const etiquettes = $("qEtiquettes");
+  etiquettes.textContent = "";
+  const equipe = jeu.equipes[jeu.equipeActive];
+  const etiquetteEquipe = creerElement("span", "etiquette", equipe.symbole + " " + equipe.nom);
+  etiquetteEquipe.style.background = equipe.couleur;
+  etiquetteEquipe.style.color = "#ffffff";
+  etiquettes.appendChild(etiquetteEquipe);
+  etiquettes.appendChild(creerElement("span", "etiquette", "Objectif n°" + objectif.numero));
+  if (exercice.themeId) etiquettes.appendChild(creerElement("span", "etiquette", "Thème : " + exercice.themeId));
+  if (caseJeu.proprietaire >= 0) {
+    etiquettes.appendChild(creerElement("span", "etiquette", "⚔️ Attaque contre " + jeu.equipes[caseJeu.proprietaire].nom));
+  }
+
+  // Contenu
+  $("qTitre").textContent = exercice.titre || "Question";
+  $("qEnonce").textContent = exercice.enonce || "";
+  $("qQuestion").textContent = exercice.question || "";
+  $("qReponse").textContent = exercice.reponse || "";
+  $("qChapitre").textContent = objectif.chapitreTitre + " – " + objectif.activiteTitre;
+
+  $("zoneCorrection").hidden = true;
+  $("zoneVoirCorrection").hidden = false;
+  $("fenetreQuestion").hidden = false;
+  jeu.questionOuverte = true;
+  rafraichir();
+  $("btnCorrection").focus();
+}
+
+function montrerCorrection() {
+  $("zoneVoirCorrection").hidden = true;
+  $("zoneCorrection").hidden = false;
+  $("btnJuste").focus();
+}
+
+function validerReponse(estJuste) {
+  const equipe = jeu.equipes[jeu.equipeActive];
+  const caseJeu = jeu.cases[jeu.caseCible];
+  let message;
+
+  if (estJuste) {
+    caseJeu.proprietaire = jeu.equipeActive;
+    equipe.serie++;
+    message = "🎉 Bravo " + equipe.nom + " ! La case est conquise.";
+    if (jeu.regles.ptsSerie > 0 && equipe.serie % jeu.regles.seuilSerie === 0) {
+      equipe.bonusSerie += jeu.regles.ptsSerie;
+      message += " 🔥 Série de " + equipe.serie + " : +" + jeu.regles.ptsSerie + " points !";
+    }
+  } else {
+    equipe.serie = 0;
+    message = "😕 Raté pour " + equipe.nom + ". La case ne change pas.";
+  }
+
+  $("fenetreQuestion").hidden = true;
+  jeu.questionOuverte = false;
+  annoncer(message);
+  tourSuivant();
+}
+
+function passerTour() {
+  if (jeu.partieFinie || jeu.questionOuverte) return;
+  jeu.equipes[jeu.equipeActive].serie = 0;
+  annoncer(jeu.equipes[jeu.equipeActive].nom + " passe son tour.");
+  tourSuivant();
+}
+
+function tourSuivant() {
+  // Fins de partie possibles
+  if (jeu.finDemandee) { terminerPartie(); return; }
+  if (jeu.regles.modeFin === "toutes" && jeu.cases.every((c) => c.proprietaire >= 0)) { terminerPartie(); return; }
+
+  jeu.equipeActive = (jeu.equipeActive + 1) % jeu.equipes.length;
+  if (jeu.equipeActive === 0) jeu.tour++;
+  if (jeu.regles.modeFin === "tours" && jeu.tour > jeu.regles.nbTours) { terminerPartie(); return; }
+
+  // Sécurité : si l'équipe ne peut viser aucune case, on passe à la suivante
+  const peutJouer = jeu.cases.some((c) => estJouable(c, jeu.equipeActive));
+  if (!peutJouer) {
+    annoncer(jeu.equipes[jeu.equipeActive].nom + " ne peut rien conquérir : tour suivant.");
+    tourSuivant();
+    return;
+  }
+  rafraichir();
+}
+
+/* =========================================================
+   CHRONOMÈTRE
+   ========================================================= */
+function tictac() {
+  jeu.secondesRestantes--;
+  afficherInfoFin();
+  if (jeu.secondesRestantes <= 0) {
+    clearInterval(jeu.minuteur);
+    if (jeu.questionOuverte) {
+      jeu.finDemandee = true;
+      annoncer("⏱ Temps écoulé ! On termine cette dernière question.");
+    } else {
+      terminerPartie();
+    }
+  }
+}
+
+/* =========================================================
+   FIN DE PARTIE
+   ========================================================= */
+function terminerPartie() {
+  jeu.partieFinie = true;
+  jeu.questionOuverte = false;
+  clearInterval(jeu.minuteur);
+  $("fenetreQuestion").hidden = true;
+
+  const scores = calculerScores().sort((a, b) => b.total - a.total);
+  const meilleur = scores[0].total;
+  const gagnants = scores.filter((s) => s.total === meilleur).map((s) => jeu.equipes[s.numero].nom);
+  $("texteVainqueur").textContent = gagnants.length === 1
+    ? "🏆 Victoire de " + gagnants[0] + " avec " + meilleur + " points !"
+    : "🤝 Égalité entre " + gagnants.join(" et ") + " (" + meilleur + " points) !";
+
+  const corps = $("tableauFinal");
+  corps.textContent = "";
+  scores.forEach((score) => {
+    const equipe = jeu.equipes[score.numero];
+    const ligne = document.createElement("tr");
+    const celluleNom = document.createElement("td");
+    const symbole = creerElement("span", "symbole", equipe.symbole);
+    symbole.style.background = equipe.couleur;
+    celluleNom.append(symbole, " " + equipe.nom);
+    ligne.appendChild(celluleNom);
+    [score.cases, score.majorite, score.serie].forEach((valeur) => ligne.appendChild(creerElement("td", "", valeur)));
+    ligne.appendChild(creerElement("td", "total-score", score.total));
+    corps.appendChild(ligne);
+  });
+
+  $("ecranJeu").hidden = true;
+  $("ecranFin").hidden = false;
+}
+
+function nouvellePartie() {
+  $("ecranFin").hidden = true;
+  $("ecranJeu").hidden = true;
+  $("ecranConfig").hidden = false;
+}
+
+/* =========================================================
+   ÉCOUTEURS D'ÉVÉNEMENTS ET DÉMARRAGE
+   ========================================================= */
+$("btnToutCocher").addEventListener("click", () => {
+  document.querySelectorAll(".choix-chapitre").forEach((c) => { c.checked = true; });
+});
+$("btnToutDecocher").addEventListener("click", () => {
+  document.querySelectorAll(".choix-chapitre").forEach((c) => { c.checked = false; });
+});
+$("nbEquipes").addEventListener("change", afficherChampsEquipes);
+$("btnLancer").addEventListener("click", lancerPartie);
+$("btnPasser").addEventListener("click", passerTour);
+$("btnTerminer").addEventListener("click", () => { if (!jeu.questionOuverte) terminerPartie(); });
+$("btnCorrection").addEventListener("click", montrerCorrection);
+$("btnJuste").addEventListener("click", () => validerReponse(true));
+$("btnFaux").addEventListener("click", () => validerReponse(false));
+$("btnRejouer").addEventListener("click", nouvellePartie);
+
+afficherChampsEquipes();
+chargerChapitres();
+</script>
+</body>
+</html>

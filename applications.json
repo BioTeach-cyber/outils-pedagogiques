@@ -303,5 +303,22 @@
     "statut": "Publié",
     "date_creation": "26/09/2026",
     "auteur": "Vincent APREMONT"
+  },
+  {
+    "id": "application-014",
+    "categorie": "Applications",
+    "titre": "Conquete hexagonale",
+    "description": "Un plateau de jeu pour réviser les savoirs en Physique-Chimie.",
+    "discipline": ["Physique-Chimie"],
+    "module": ["Physique-Chimie"],
+    "public": "",
+    "formation": ["Collège"],
+    "tags": [],
+    "url": "Outils-Pedagogiques/Physique-Chimie/conquete-hexagones.html",
+    "icone": "assets/icones/Conquete-Hexagonale.gif",
+    "image": "assets/images/Conquete-Hexagonale.jpg",
+    "statut": "Publié",
+    "date_creation": "26/09/2026",
+    "auteur": "Vincent APREMONT"
   }
 ]
