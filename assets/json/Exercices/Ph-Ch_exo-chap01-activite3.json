@@ -5,6 +5,7 @@
     {
       "themeId": "Foot",
       "titre": "Un penalty sur la Lune",
+      "objectifId": "obj1",
       "enonce": "Sur Terre, un ballon de foot tombe toujours vers le sol. Sur la Lune, un astronaute a tapé dans une balle. Elle est aussi retombée vers le sol lunaire. La règle est la même : les objets sont attirés vers le sol de l'astre.",
       "question": "Explique pourquoi le ballon retombe aussi bien sur Terre que sur la Lune.",
       "reponse": "Le ballon retombe dans les deux cas car la même loi physique agit partout : la gravitation (force qui attire les objets vers un astre). Cette loi est universelle. Elle fonctionne sur Terre, sur la Lune et partout dans l'Univers. Seule la force de l'attraction change : elle est plus faible sur la Lune, donc le ballon retombe plus lentement."
@@ -12,6 +13,7 @@
     {
       "themeId": "Flight Simulator",
       "titre": "Un avion pour aller sur la Lune",
+      "objectifId": "obj2",
       "enonce": "Dans Flight Simulator, un avion vole à 900 km par heure. La Terre et la Lune sont séparées par environ 380 000 km. La Terre et le Soleil sont séparés par environ 150 000 000 km.",
       "question": "1. Calcule le nombre d'heures pour aller de la Terre à la Lune à 900 km/h.\n2. Déduis si la distance Terre-Soleil est beaucoup plus grande que la distance Terre-Lune.",
       "reponse": "1. 380 000 ÷ 900 = 422 heures environ. Cela fait environ 18 jours de vol sans arrêt.\n2. Oui. 150 000 000 km divisé par 380 000 km donne environ 395. La distance Terre-Soleil est donc environ 400 fois plus grande que la distance Terre-Lune."
@@ -19,6 +21,7 @@
     {
       "themeId": "Course à pied",
       "titre": "Courir jusqu'au Soleil",
+      "objectifId": "obj2",
       "enonce": "Nadia court 10 km par jour. La distance Terre-Lune est d'environ 380 000 km. La distance Terre-Soleil est d'environ 150 000 000 km.",
       "question": "1. Calcule le nombre de jours pour courir la distance Terre-Lune.\n2. Explique en une phrase ce que ce calcul montre sur la taille de l'Univers.",
       "reponse": "1. 380 000 ÷ 10 = 38 000 jours. Cela fait plus de 100 ans de course.\n2. Ce calcul montre que même la plus petite distance de l'espace est énorme comparée aux distances de la vie quotidienne."
@@ -26,6 +29,7 @@
     {
       "themeId": "Mécanique",
       "titre": "Réparer une sonde spatiale",
+      "objectifId": "obj1",
       "enonce": "Léo apprend la mécanique. Il sait qu'un moteur chauffe quand il frotte. Une sonde envoyée vers Mars a eu un moteur qui a chauffé aussi. Les ingénieurs ont utilisé les mêmes règles physiques que sur Terre pour comprendre la panne.",
       "question": "Explique pourquoi les ingénieurs peuvent utiliser les règles apprises sur Terre pour réparer une machine dans l'espace.",
       "reponse": "Les lois physiques sont les mêmes partout dans l'Univers. Le frottement produit de la chaleur sur Terre, sur Mars et dans l'espace. Donc un mécanicien ou un ingénieur peut appliquer ses connaissances terrestres à une machine qui se trouve très loin. C'est ce qu'on appelle l'universalité des lois physiques."
@@ -33,6 +37,7 @@
     {
       "themeId": "Photographie",
       "titre": "Photographier une étoile lointaine",
+      "objectifId": "obj2",
       "enonce": "Sarah fait de la photo. Elle sait qu'un appareil capte la lumière. Un télescope capte lui aussi la lumière, mais celle des étoiles. La lumière parcourt 300 000 km en 1 seconde. L'étoile la plus proche est à 4,2 années-lumière.",
       "question": "1. Explique ce que signifie « l'étoile est à 4,2 années-lumière ».\n2. Déduis si Sarah photographie l'étoile telle qu'elle est aujourd'hui.",
       "reponse": "1. Cela signifie que la lumière de cette étoile met 4,2 ans pour arriver jusqu'à nous. Une année-lumière est la distance parcourue par la lumière en un an.\n2. Non. Sarah photographie l'étoile telle qu'elle était il y a 4,2 ans. La lumière est partie de l'étoile il y a 4,2 ans. On regarde donc le passé."
@@ -40,6 +45,7 @@
     {
       "themeId": "Voiture",
       "titre": "En voiture vers l'étoile voisine",
+      "objectifId": "obj2",
       "enonce": "Une voiture roule à 100 km par heure sans jamais s'arrêter. La distance Terre-Lune vaut 380 000 km. La distance Terre-Soleil vaut 150 000 000 km. L'étoile la plus proche est 270 000 fois plus loin que le Soleil.",
       "question": "1. Calcule le temps en heures pour aller Terre-Lune en voiture.\n2. Classe les trois distances de la plus petite à la plus grande.",
       "reponse": "1. 380 000 ÷ 100 = 3 800 heures, soit environ 158 jours de route non-stop.\n2. Du plus proche au plus loin : Terre-Lune (380 000 km), puis Terre-Soleil (150 millions de km), puis Terre-étoile la plus proche (environ 40 000 milliards de km)."
@@ -47,6 +53,7 @@
     {
       "themeId": "Minecraft",
       "titre": "Les mêmes règles dans tous les mondes",
+      "objectifId": "obj1",
       "enonce": "Dans Minecraft, le sable tombe toujours quand il n'y a rien dessous. Cette règle marche dans tous les mondes du jeu. Dans l'Univers réel, la gravitation fait tomber les objets partout de la même façon.",
       "question": "Explique par analogie pourquoi les scientifiques disent que les lois physiques sont universelles.",
       "reponse": "Dans Minecraft, le code du jeu est le même dans tous les mondes. Donc le sable tombe partout pareil. Dans l'Univers, les lois physiques jouent le rôle du code. Elles sont identiques partout : sur Terre, sur Mars ou près d'une étoile lointaine. C'est pour cela qu'on les appelle universelles."
@@ -54,6 +61,7 @@
     {
       "themeId": "Animaux",
       "titre": "Un chien dans une fusée",
+      "objectifId": "obj1",
       "enonce": "Laïka était une chienne envoyée dans l'espace en 1957. Elle respirait de l'air, comme sur Terre. Son cœur battait comme sur Terre. Les scientifiques avaient prévu son comportement avec les mêmes lois de la biologie et de la physique.",
       "question": "Explique pourquoi les scientifiques pouvaient prévoir ce qui arriverait à Laïka dans l'espace.",
       "reponse": "Les scientifiques pouvaient prévoir car les lois physiques sont les mêmes partout. La pression, la température et la gravitation obéissent aux mêmes règles sur Terre et dans l'espace. Ils ont donc appliqué leurs connaissances terrestres pour construire la capsule et préparer le voyage."
@@ -61,6 +69,7 @@
     {
       "themeId": "Dessin",
       "titre": "Dessiner l'espace à l'échelle",
+      "objectifId": "obj2",
       "enonce": "Maxime dessine le système solaire. Il choisit de représenter la distance Terre-Lune par 1 millimètre. La distance Terre-Soleil est 400 fois plus grande que la distance Terre-Lune.",
       "question": "1. Calcule la longueur du trait à dessiner pour la distance Terre-Soleil.\n2. Explique pourquoi il est difficile de dessiner l'Univers sur une feuille.",
       "reponse": "1. 400 × 1 mm = 400 mm, soit 40 cm. Le trait mesure 40 cm.\n2. C'est difficile car les distances sont trop différentes. L'étoile la plus proche serait à plus de 100 kilomètres sur ce dessin. Aucune feuille n'est assez grande."
@@ -68,6 +77,7 @@
     {
       "themeId": "Mario Kart",
       "titre": "Des tours de circuit jusqu'à la Lune",
+      "objectifId": "obj2",
       "enonce": "Un circuit de Mario Kart mesure 2 km. La distance Terre-Lune vaut 380 000 km. Théo fait 3 tours par course.",
       "question": "1. Calcule le nombre de tours nécessaires pour parcourir la distance Terre-Lune.\n2. Déduis le nombre de courses complètes que cela représente.",
       "reponse": "1. 380 000 ÷ 2 = 190 000 tours de circuit.\n2. 190 000 ÷ 3 = environ 63 333 courses. Cela montre à quel point la distance Terre-Lune est grande."
@@ -75,6 +85,7 @@
     {
       "themeId": "Musculation",
       "titre": "Soulever une barre sur Mars",
+      "objectifId": "obj1",
       "enonce": "Inès soulève une barre de 40 kg à la salle. Sur Mars, la gravitation est environ 3 fois plus faible que sur Terre. La loi de la gravitation reste la même : elle attire les objets vers le sol.",
       "question": "1. Explique pourquoi la barre semblerait plus légère sur Mars.\n2. Justifie que la loi physique est pourtant la même sur Terre et sur Mars.",
       "reponse": "1. La barre semblerait plus légère car la gravitation de Mars est 3 fois plus faible. La barre garde sa masse de 40 kg, mais son poids diminue.\n2. La loi est la même : tout astre attire les objets vers lui. Seule la valeur de l'attraction change, car Mars est plus petite que la Terre. La règle ne change pas, seuls les nombres changent."
@@ -82,6 +93,7 @@
     {
       "themeId": "Pêche",
       "titre": "Le fil de pêche jusqu'à la Lune",
+      "objectifId": "obj2",
       "enonce": "Hugo utilise une bobine de 200 mètres de fil de pêche. La distance Terre-Lune vaut 380 000 km. On rappelle que 1 km égale 1 000 mètres.",
       "question": "1. Calcule la distance Terre-Lune en mètres.\n2. Calcule le nombre de bobines nécessaires pour relier la Terre à la Lune.",
       "reponse": "1. 380 000 × 1 000 = 380 000 000 mètres, soit 380 millions de mètres.\n2. 380 000 000 ÷ 200 = 1 900 000 bobines. Il faudrait 1,9 million de bobines de fil de pêche."
@@ -89,6 +101,7 @@
     {
       "themeId": "Cuisine",
       "titre": "L'eau qui bout dans l'espace",
+      "objectifId": "obj1",
       "enonce": "Sur Terre, l'eau bout à 100 °C au niveau de la mer. En montagne, la pression est plus faible et l'eau bout vers 90 °C. Dans la Station Spatiale, la pression est réglée comme au niveau de la mer. L'eau y bout donc à 100 °C.",
       "question": "Explique pourquoi l'eau bout à 100 °C dans la Station Spatiale, à 400 km au-dessus de la Terre.",
       "reponse": "La loi physique qui relie la pression et la température d'ébullition est la même partout dans l'Univers. Dans la station, les ingénieurs ont réglé la même pression qu'au niveau de la mer. Donc l'eau bout à la même température : 100 °C. Ce n'est pas le lieu qui compte, mais les conditions."
@@ -96,6 +109,7 @@
     {
       "themeId": "Moto",
       "titre": "À moto vers l'étoile la plus proche",
+      "objectifId": "obj2",
       "enonce": "Une moto roule à 150 km par heure. La distance Terre-Soleil vaut 150 000 000 km. L'étoile la plus proche est 270 000 fois plus loin que le Soleil.",
       "question": "1. Calcule le temps en heures pour parcourir la distance Terre-Soleil à moto.\n2. Explique pourquoi on n'utilise pas les kilomètres pour mesurer la distance des étoiles.",
       "reponse": "1. 150 000 000 ÷ 150 = 1 000 000 heures, soit environ 114 ans de route.\n2. On n'utilise pas les kilomètres car les nombres deviennent trop grands à écrire et à lire. On utilise l'année-lumière : c'est la distance parcourue par la lumière en un an."
@@ -103,6 +117,7 @@
     {
       "themeId": "Film",
       "titre": "Une explosion dans un film spatial",
+      "objectifId": "obj1",
       "enonce": "Dans un film, un vaisseau explose dans l'espace. On entend un énorme bruit. Pourtant, le son a besoin d'air pour se déplacer. Dans l'espace, il n'y a pas d'air : c'est le vide.",
       "question": "Explique pourquoi cette scène de film est fausse du point de vue de la physique.",
       "reponse": "La scène est fausse car la loi physique du son est la même partout : le son a besoin d'un milieu matériel, comme l'air ou l'eau, pour se propager. Dans l'espace, il y a le vide. Donc aucun son ne peut voyager. L'explosion serait totalement silencieuse."
@@ -110,6 +125,7 @@
     {
       "themeId": "Vélo",
       "titre": "Pédaler jusqu'au Soleil",
+      "objectifId": "obj2",
       "enonce": "Camille roule à vélo à 20 km par heure. Elle pédale 2 heures par jour. La distance Terre-Lune vaut 380 000 km.",
       "question": "1. Calcule la distance parcourue par Camille en une journée.\n2. Calcule le nombre de jours pour parcourir la distance Terre-Lune.",
       "reponse": "1. 20 × 2 = 40 km par jour.\n2. 380 000 ÷ 40 = 9 500 jours. Cela fait environ 26 ans de vélo à ce rythme."
@@ -117,6 +133,7 @@
     {
       "themeId": "Légo",
       "titre": "Une tour de Légo jusqu'à la Lune",
+      "objectifId": "obj2",
       "enonce": "Une brique Légo mesure 1 centimètre de haut. La distance Terre-Lune vaut 380 000 km. On rappelle que 1 km égale 100 000 centimètres.",
       "question": "1. Calcule la distance Terre-Lune en centimètres.\n2. Déduis le nombre de briques Légo à empiler pour atteindre la Lune.",
       "reponse": "1. 380 000 × 100 000 = 38 000 000 000 cm, soit 38 milliards de centimètres.\n2. Il faudrait 38 milliards de briques Légo, car chaque brique mesure 1 cm."
@@ -124,6 +141,7 @@
     {
       "themeId": "Natation",
       "titre": "Des longueurs de bassin dans l'espace",
+      "objectifId": "obj2",
       "enonce": "Un bassin de piscine mesure 50 mètres. La distance Terre-Lune vaut 380 000 km, soit 380 000 000 mètres. Yanis nage 40 longueurs par entraînement.",
       "question": "1. Calcule le nombre de longueurs pour parcourir la distance Terre-Lune.\n2. Calcule le nombre d'entraînements que cela représente.",
       "reponse": "1. 380 000 000 ÷ 50 = 7 600 000 longueurs.\n2. 7 600 000 ÷ 40 = 190 000 entraînements. Cela montre l'immensité de la distance Terre-Lune."
@@ -131,6 +149,7 @@
     {
       "themeId": "Escalade",
       "titre": "Grimper jusqu'à la station spatiale",
+      "objectifId": "obj2",
       "enonce": "Un mur d'escalade mesure 15 mètres. La Station Spatiale tourne à 400 km au-dessus de la Terre. La distance Terre-Lune vaut 380 000 km.",
       "question": "1. Calcule le nombre de murs de 15 m empilés pour atteindre 400 km.\n2. Compare l'altitude de la Station Spatiale à la distance Terre-Lune.",
       "reponse": "1. 400 km = 400 000 m. 400 000 ÷ 15 = environ 26 667 murs d'escalade.\n2. 380 000 ÷ 400 = 950. La Lune est 950 fois plus loin que la Station Spatiale. La station reste donc très près de la Terre."
@@ -138,6 +157,7 @@
     {
       "themeId": "Boxe",
       "titre": "Un coup de poing en apesanteur",
+      "objectifId": "obj1",
       "enonce": "Sur le ring, quand un boxeur frappe, il est poussé légèrement en arrière. C'est la loi d'action-réaction. Dans l'espace, un astronaute qui pousse un objet part lui aussi en arrière.",
       "question": "Explique pourquoi le même effet se produit sur le ring et dans l'espace.",
       "reponse": "Le même effet se produit car la loi d'action-réaction est une loi physique universelle. Quand on pousse un objet, cet objet nous repousse avec la même force. Cette loi fonctionne sur Terre comme dans l'espace. Dans l'espace, l'effet est plus visible car rien ne retient l'astronaute."
@@ -145,6 +165,7 @@
     {
       "themeId": "Farming Simulator",
       "titre": "Un tracteur jusqu'à la Lune",
+      "objectifId": "obj2",
       "enonce": "Dans Farming Simulator, un tracteur roule à 40 km par heure. La distance Terre-Lune vaut 380 000 km. La distance Terre-Soleil vaut 150 000 000 km.",
       "question": "1. Calcule le temps en heures pour parcourir la distance Terre-Lune en tracteur.\n2. Déduis si le trajet Terre-Soleil serait réalisable en une vie humaine.",
       "reponse": "1. 380 000 ÷ 40 = 9 500 heures, soit environ 396 jours, un peu plus d'un an.\n2. Pour le Soleil : 150 000 000 ÷ 40 = 3 750 000 heures, soit environ 428 ans. Ce n'est pas réalisable en une vie humaine."
@@ -152,6 +173,7 @@
     {
       "themeId": "Tir à l'arc",
       "titre": "Viser une cible très lointaine",
+      "objectifId": "obj1",
       "enonce": "Anaïs tire à l'arc sur une cible à 20 mètres. La flèche suit une courbe à cause de la gravitation. Sur la Lune, une flèche tirée pareil irait 6 fois plus loin. La gravitation lunaire est 6 fois plus faible.",
       "question": "1. Calcule la distance atteinte par la flèche sur la Lune.\n2. Justifie que la loi de la gravitation reste la même sur la Lune.",
       "reponse": "1. 20 × 6 = 120 mètres. La flèche irait 120 mètres sur la Lune.\n2. La loi est la même : la flèche est toujours attirée vers le sol et suit une courbe. Seule l'intensité de l'attraction change, car la Lune est plus petite. La règle physique ne change pas."
@@ -159,6 +181,7 @@
     {
       "themeId": "Musique (écouter)",
       "titre": "Écouter sa playlist dans l'espace",
+      "objectifId": "obj1",
       "enonce": "Théo écoute de la musique avec des écouteurs. Le son voyage dans l'air à 340 mètres par seconde. La lumière voyage à 300 000 km par seconde. L'étoile la plus proche est à 4,2 années-lumière.",
       "question": "1. Compare la vitesse du son et la vitesse de la lumière.\n2. Explique pourquoi on ne pourra jamais entendre le son d'une étoile.",
       "reponse": "1. La lumière est beaucoup plus rapide. 300 000 km/s égale 300 000 000 m/s. C'est environ 880 000 fois plus rapide que le son.\n2. Entre les étoiles, il y a le vide. Le son a besoin d'air ou de matière pour voyager. Donc aucun son ne peut nous parvenir d'une étoile. Seule la lumière traverse le vide."
@@ -166,6 +189,7 @@
     {
       "themeId": "Karting",
       "titre": "Un kart pour rejoindre le Soleil",
+      "objectifId": "obj2",
       "enonce": "Un kart roule à 60 km par heure. La distance Terre-Lune vaut 380 000 km. La distance Terre-Soleil vaut 150 000 000 km. Une année compte environ 8 760 heures.",
       "question": "1. Calcule le temps en heures pour parcourir la distance Terre-Lune en kart.\n2. Calcule en années le temps pour parcourir la distance Terre-Soleil en kart.",
       "reponse": "1. 380 000 ÷ 60 = environ 6 333 heures, soit environ 264 jours.\n2. 150 000 000 ÷ 60 = 2 500 000 heures. Puis 2 500 000 ÷ 8 760 = environ 285 ans."
@@ -173,6 +197,7 @@
     {
       "themeId": "Camion",
       "titre": "Le camion le plus long du monde",
+      "objectifId": "obj2",
       "enonce": "Un camion mesure 18 mètres de long. La distance Terre-Lune vaut 380 000 km, soit 380 000 000 mètres. Les camions sont mis bout à bout.",
       "question": "1. Calcule le nombre de camions nécessaires pour relier la Terre à la Lune.\n2. Explique en une phrase ce que ce résultat montre.",
       "reponse": "1. 380 000 000 ÷ 18 = environ 21 100 000 camions. Il faudrait plus de 21 millions de camions.\n2. Ce résultat montre que la distance Terre-Lune est gigantesque comparée aux objets de notre quotidien."
@@ -180,6 +205,7 @@
     {
       "themeId": "Dinosaure",
       "titre": "L'astéroïde des dinosaures",
+      "objectifId": "obj1",
       "enonce": "Il y a 66 millions d'années, un astéroïde a frappé la Terre. Les dinosaures ont disparu. Les scientifiques étudient cet astéroïde avec les lois physiques d'aujourd'hui. Ils calculent sa vitesse et l'énergie du choc.",
       "question": "Explique pourquoi les scientifiques peuvent utiliser les lois d'aujourd'hui pour étudier un événement d'il y a 66 millions d'années.",
       "reponse": "Les lois physiques sont les mêmes partout dans l'Univers et à toutes les époques. La gravitation, le mouvement et l'énergie obéissaient aux mêmes règles il y a 66 millions d'années. Les scientifiques peuvent donc appliquer leurs formules actuelles pour reconstituer l'impact de l'astéroïde."
@@ -187,6 +213,7 @@
     {
       "themeId": "Danse",
       "titre": "Une pirouette dans la station spatiale",
+      "objectifId": "obj1",
       "enonce": "Une danseuse tourne sur elle-même. Quand elle ramène ses bras contre son corps, elle tourne plus vite. Dans la Station Spatiale, un astronaute fait pareil : bras repliés, il tourne plus vite.",
       "question": "Explique par analogie pourquoi le même phénomène se produit sur Terre et dans l'espace.",
       "reponse": "C'est la même loi physique qui agit : quand la masse se rapproche de l'axe de rotation, la vitesse de rotation augmente. Cette loi est universelle. Elle s'applique à la danseuse sur Terre, à l'astronaute en orbite et même aux planètes. Le lieu ne change pas la règle."
@@ -194,6 +221,7 @@
     {
       "themeId": "Roblox",
       "titre": "Changer la gravité dans un jeu",
+      "objectifId": "obj1",
       "enonce": "Dans Roblox, un créateur peut régler la gravité de son monde. Il peut la mettre très faible : les personnages sautent très haut. Dans l'Univers réel, personne ne peut régler la gravitation. Elle dépend seulement de la masse des astres.",
       "question": "Explique la différence entre la gravité d'un jeu vidéo et la gravitation dans l'Univers réel.",
       "reponse": "Dans un jeu vidéo, la gravité est un réglage créé par un programmeur. Il peut la modifier comme il veut. Dans l'Univers réel, la gravitation est une loi physique. Elle est la même partout et personne ne peut la changer. Sa valeur dépend uniquement de la masse de l'astre et de la distance."
@@ -201,6 +229,7 @@
     {
       "themeId": "Équitation",
       "titre": "À cheval jusqu'à la Lune",
+      "objectifId": "obj2",
       "enonce": "Un cheval au trot avance à 15 km par heure. Il peut trotter 4 heures par jour. La distance Terre-Lune vaut 380 000 km.",
       "question": "1. Calcule la distance parcourue par le cheval en un jour.\n2. Calcule le nombre de jours pour atteindre la distance Terre-Lune.",
       "reponse": "1. 15 × 4 = 60 km par jour.\n2. 380 000 ÷ 60 = environ 6 333 jours, soit environ 17 ans."
@@ -208,6 +237,7 @@
     {
       "themeId": "Voile",
       "titre": "Le vent solaire et les voiles",
+      "objectifId": "obj1",
       "enonce": "Un voilier avance grâce au vent qui pousse sa voile. Dans l'espace, il existe des voiles solaires. La lumière du Soleil les pousse et fait avancer la sonde. Le principe est le même : une poussée sur une grande surface.",
       "question": "Explique par analogie comment une voile solaire fait avancer une sonde spatiale.",
       "reponse": "Sur Terre, l'air en mouvement pousse la voile et fait avancer le bateau. Dans l'espace, ce sont les particules de lumière du Soleil qui poussent la voile solaire. Le principe physique de la poussée est le même. Cela montre que les lois physiques fonctionnent partout, sur mer comme dans l'espace."
@@ -215,6 +245,7 @@
     {
       "themeId": "Athlétisme",
       "titre": "Le lancer de poids sur la Lune",
+      "objectifId": "obj1",
       "enonce": "Un athlète lance un poids à 18 mètres sur Terre. Sur la Lune, la gravitation est 6 fois plus faible. Le poids irait donc 6 fois plus loin avec le même lancer.",
       "question": "1. Calcule la distance du lancer sur la Lune.\n2. Justifie que la loi physique du lancer reste identique sur la Lune.",
       "reponse": "1. 18 × 6 = 108 mètres. Le poids irait 108 mètres sur la Lune.\n2. La loi reste identique : le poids suit une trajectoire courbe car un astre l'attire vers le sol. Seule l'intensité de la gravitation change. La règle physique, elle, est la même dans tout l'Univers."
@@ -222,6 +253,7 @@
     {
       "themeId": "Temps avec les copains / copines",
       "titre": "Un message vers l'étoile voisine",
+      "objectifId": "obj2",
       "enonce": "Léa envoie un message à ses copines. Le message va presque à la vitesse de la lumière. La Lune est à 1,3 seconde-lumière. Le Soleil est à 8 minutes-lumière. L'étoile la plus proche est à 4,2 années-lumière.",
       "question": "1. Classe ces trois destinations de la plus proche à la plus lointaine.\n2. Explique pourquoi une discussion avec une étoile voisine serait impossible.",
       "reponse": "1. Du plus proche au plus lointain : la Lune (1,3 seconde-lumière), le Soleil (8 minutes-lumière), l'étoile la plus proche (4,2 années-lumière).\n2. Le message mettrait 4,2 ans pour arriver. La réponse mettrait encore 4,2 ans. Il faudrait donc attendre 8,4 ans pour une seule réponse. Une conversation serait impossible."
@@ -229,6 +261,7 @@
     {
       "themeId": "Basket",
       "titre": "Un panier à trois points sur Mars",
+      "objectifId": "obj1",
       "enonce": "Sur Terre, le ballon de basket suit une courbe avant d'entrer dans le panier. Sur Mars, la gravitation est 3 fois plus faible. Le ballon monterait plus haut et retomberait plus loin.",
       "question": "Explique pourquoi le ballon suit quand même une courbe sur Mars.",
       "reponse": "Le ballon suit une courbe car la gravitation de Mars l'attire vers le sol. C'est la même loi physique que sur Terre. Elle agit partout dans l'Univers. Seule l'intensité change : elle est 3 fois plus faible sur Mars. Donc la courbe est plus large, mais elle existe toujours."

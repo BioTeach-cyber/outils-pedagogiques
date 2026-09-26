@@ -8,15 +8,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. C’est quoi là-haut ?"
+        "titre": "1. C’est quoi là-haut ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire la structure de l'Univers en identifiant ses différents niveaux d'organisation (étoiles, planètes, galaxies...)" },
+          { "id": "obj2", "libelle": "Distinguer les planètes telluriques des planètes gazeuses dans le système solaire" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. C’est loin comment ?"
+        "titre": "2. C’est loin comment ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Classer les objets du système solaire selon leur distance au Soleil" },
+          { "id": "obj2", "libelle": "Convertir des distances astronomiques en utilisant l'unité adaptée (UA, année-lumière)" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Les mêmes règles partout ?"
+        "titre": "3. Les mêmes règles partout ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Expliquer pourquoi les lois physiques sont les mêmes partout dans l'Univers" },
+          { "id": "obj2", "libelle": "Relier des ordres de grandeur de distances à des objets célestes concrets (Terre-Lune, Terre-Soleil, étoile la plus proche)" }
+        ]
       }
     ]
   },
@@ -29,15 +41,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Si on zoomait à fond, on verrait quoi ?"
+        "titre": "1. Si on zoomait à fond, on verrait quoi ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire la structure simplifiée d'un atome (noyau, électrons)" },
+          { "id": "obj2", "libelle": "Repérer un atome dans le tableau périodique à partir de son symbole chimique" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Atome ou molécule, qui a raison ?"
+        "titre": "2. Atome ou molécule, qui a raison ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Différencier un atome, une molécule et un ion à l'aide d'exemples du quotidien" },
+          { "id": "obj2", "libelle": "Interpréter une formule chimique brute en nommant les atomes présents et leur nombre" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Construis ce que tu bois et respires !"
+        "titre": "3. Construis ce que tu bois et respires !",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Associer des molécules courantes (eau, dioxygène, dioxyde de carbone) à leur formule chimique" },
+          { "id": "obj2", "libelle": "Construire un modèle moléculaire simple à partir d'une formule chimique donnée" }
+        ]
       }
     ]
   },
@@ -50,15 +74,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Solide, liquide, gaz : comment les reconnaître ?"
+        "titre": "1. Solide, liquide, gaz : comment les reconnaître ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Identifier les trois états de la matière à partir de leurs propriétés macroscopiques (forme, volume, compressibilité)" },
+          { "id": "obj2", "libelle": "Classer des exemples du quotidien selon leur état physique" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. La ronde des changements d'état"
+        "titre": "2. La ronde des changements d'état",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Nommer les six changements d'état et les associer à des situations concrètes (buée, fonte de glace, rosée…)" },
+          { "id": "obj2", "libelle": "Repérer sur un graphique de changement d'état les paliers de température correspondant aux transformations" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Construis ce que tu bois et respires !"
+        "titre": "3. Construis ce que tu bois et respires !",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire l'organisation des molécules dans chaque état de la matière (modèle microscopique)" },
+          { "id": "obj2", "libelle": "Expliquer un changement d'état en utilisant le modèle particulaire (agitation, rapprochement, éloignement)" }
+        ]
       }
     ]
   },
@@ -71,15 +107,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "Corps pur ou mélange ? "
+        "titre": "Corps pur ou mélange ? ",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Distinguer un corps pur d'un mélange à partir d'observations expérimentales simples" },
+          { "id": "obj2", "libelle": "Différencier un mélange homogène d'un mélange hétérogène en s'appuyant sur des exemples courants" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Séparer le mélange : décanter, filtrer, évaporer."
+        "titre": "2. Séparer le mélange : décanter, filtrer, évaporer.",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire les étapes d'une technique de séparation (décantation, filtration, évaporation) en lien avec une situation donnée" },
+          { "id": "obj2", "libelle": "Définir la dissolution en identifiant soluté, solvant et solution" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Solubilité et masse volumique."
+        "titre": "3. Solubilité et masse volumique.",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Expliquer la notion de solubilité à partir d'une expérience simple (limite de dissolution du sucre dans l'eau)" },
+          { "id": "obj2", "libelle": "Calculer une masse volumique et l'utiliser pour identifier un matériau ou prévoir s'il flotte ou coule" }
+        ]
       }
     ]
   },
@@ -92,15 +140,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Où s'échappe l'énergie ?"
+        "titre": "1. Où s'échappe l'énergie ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Identifier les pertes d'énergie sous forme de chaleur dans une chaîne énergétique" },
+          { "id": "obj2", "libelle": "Définir le rendement énergétique comme le rapport entre énergie utile et énergie totale fournie" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Quelle machine choisir ? Le rendement décide"
+        "titre": "2. Quelle machine choisir ? Le rendement décide",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Calculer un rendement à partir de données simples" },
+          { "id": "obj2", "libelle": "Comparer le rendement de différents dispositifs pour justifier un choix technologique" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Plus vite = plus dangereux"
+        "titre": "3. Plus vite = plus dangereux",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Associer l'énergie cinétique d'un objet à sa masse et à sa vitesse de manière qualitative" },
+          { "id": "obj2", "libelle": "Expliquer le lien entre vitesse, énergie cinétique et distance de freinage dans le contexte de la sécurité routière" }
+        ]
       }
     ]
   },
@@ -113,15 +173,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. D'où vient l'énergie ? Renouvelable ou pas ?"
+        "titre": "1. D'où vient l'énergie ? Renouvelable ou pas ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Identifier les principales sources d'énergie utilisées en France et dans le monde" },
+          { "id": "obj2", "libelle": "Classer ces sources en renouvelables et non renouvelables en justifiant le critère de classement" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Comment fabrique-t-on de l'électricité ?"
+        "titre": "2. Comment fabrique-t-on de l'électricité ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire le principe de fonctionnement simplifié d'une centrale électrique (conversion d'énergie)" },
+          { "id": "obj2", "libelle": "Comparer l'impact environnemental de différentes sources d'énergie (émissions de CO₂, déchets, emprise au sol)" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Quel mix énergétique pour notre ferme ?"
+        "titre": "3. Quel mix énergétique pour notre ferme ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Analyser un mix énergétique à partir de données chiffrées (graphique, tableau) pour en dégager les forces et les faiblesses" },
+          { "id": "obj2", "libelle": "Argumenter en faveur d'un choix énergétique en tenant compte de critères scientifiques, économiques et environnementaux adaptés à un territoire rural" }
+        ]
       }
     ]
   },
@@ -134,15 +206,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Ça change… mais est-ce que c'est pareil ? "
+        "titre": "1. Ça change… mais est-ce que c'est pareil ? ",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Distinguer une transformation physique d'une transformation chimique à l'aide d'exemples observables" },
+          { "id": "obj2", "libelle": "Identifier les réactifs et les produits dans une transformation chimique donnée" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Écrire la recette de la réaction"
+        "titre": "2. Écrire la recette de la réaction",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire une réaction chimique en utilisant une écriture en mots (réactifs → produits)" },
+          { "id": "obj2", "libelle": "Traduire une réaction chimique simple sous forme d'équation avec les formules chimiques" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Rien ne se perd, rien ne se crée…"
+        "titre": "3. Rien ne se perd, rien ne se crée…",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Vérifier la conservation des atomes dans une équation chimique en comptant les atomes de chaque côté" },
+          { "id": "obj2", "libelle": "Appliquer les règles de sécurité au laboratoire en identifiant les pictogrammes de danger associés aux produits chimiques" }
+        ]
       }
     ]
   },
@@ -155,15 +239,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. C'est acide, c'est basique… Comment le savoir"
+        "titre": "1. C'est acide, c'est basique… Comment le savoir",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Mesurer le pH d'une solution à l'aide de papier pH ou d'un pH-mètre" },
+          { "id": "obj2", "libelle": "Classer des solutions du quotidien selon leur caractère acide, neutre ou basique à partir de leur valeur de pH" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Ions H⁺, ions HO⁻ : les agents secrets du pH"
+        "titre": "2. Ions H⁺, ions HO⁻ : les agents secrets du pH",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Associer le caractère acide à la présence d'ions H⁺ et le caractère basique à la présence d'ions HO⁻" },
+          { "id": "obj2", "libelle": "Déduire l'effet d'une dilution sur le pH d'une solution acide ou basique" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Quand l'acide rencontre la base"
+        "titre": "3. Quand l'acide rencontre la base",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire ce qui se passe lors d'une réaction acido-basique simple (mélange acide + base)" },
+          { "id": "obj2", "libelle": "Relier les notions d'acidité et de basicité à des situations concrètes (sol agricole, produits ménagers, alimentation)" }
+        ]
       }
     ]
   },
@@ -176,15 +272,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Pourquoi on voit plus rien quand on éteint tout ?"
+        "titre": "1. Pourquoi on voit plus rien quand on éteint tout ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Distinguer les sources de lumière primaires (qui produisent la lumière) des objets diffusants (qui renvoient la lumière)" },
+          { "id": "obj2", "libelle": "Décrire la propagation rectiligne de la lumière à partir d'une expérience simple" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Pourquoi mon tee-shirt rouge est devenu noir ?"
+        "titre": "2. Pourquoi mon tee-shirt rouge est devenu noir ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Identifier les couleurs composant la lumière blanche à l'aide de la décomposition par un prisme ou un réseau" },
+          { "id": "obj2", "libelle": "Expliquer la couleur perçue d'un objet en fonction de la lumière qu'il absorbe et de celle qu'il diffuse" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Pourquoi c'est pas le même résultat en lumière et en peinture ?"
+        "titre": "3. Pourquoi c'est pas le même résultat en lumière et en peinture ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Différencier la synthèse additive (lumières) de la synthèse soustractive (peintures/filtres) à l'aide d'exemples concrets" },
+          { "id": "obj2", "libelle": "Appliquer les principes de la synthèse des couleurs pour prédire le résultat d'un mélange de lumières ou de filtres" }
+        ]
       }
     ]
   },
@@ -197,15 +305,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Qu'est-ce qui agit sur quoi ?"
+        "titre": "1. Qu'est-ce qui agit sur quoi ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Identifier les interactions (contact et à distance) qui s'exercent sur un objet dans une situation donnée" },
+          { "id": "obj2", "libelle": "Représenter une force par une flèche en précisant son point d'application, sa direction, son sens et sa valeur" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Peser ou mesurer une force"
+        "titre": "2. Peser ou mesurer une force",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Distinguer le poids (force gravitationnelle) de la masse d'un objet" },
+          { "id": "obj2", "libelle": "Calculer le poids d'un objet à partir de sa masse et de l'intensité de la pesanteur (P = m × g)" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Et si le marché avait lieu sur la Lune ?"
+        "titre": "3. Et si le marché avait lieu sur la Lune ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Expliquer pourquoi le poids d'un objet varie selon l'astre sur lequel il se trouve alors que sa masse reste constante" },
+          { "id": "obj2", "libelle": "Relier l'effet d'une force sur le mouvement d'un objet (mise en mouvement, accélération, freinage, déviation)" }
+        ]
       }
     ]
   },
@@ -218,15 +338,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Ça bouge… mais par rapport à quoi ?"
+        "titre": "1. Ça bouge… mais par rapport à quoi ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Identifier les interactions (contact et à distance) qui s'exercent sur un objet dans une situation donnée" },
+          { "id": "obj2", "libelle": "Représenter une force par une flèche en précisant son point d'application, sa direction, son sens et sa valeur" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. À quelle vitesse roulait-il ?"
+        "titre": "2. À quelle vitesse roulait-il ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Distinguer le poids (force gravitationnelle) de la masse d'un objet" },
+          { "id": "obj2", "libelle": "Calculer le poids d'un objet à partir de sa masse et de l'intensité de la pesanteur (P = m × g)" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Accélérer, freiner, rouler régulièrement"
+        "titre": "3. Accélérer, freiner, rouler régulièrement",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Expliquer pourquoi le poids d'un objet varie selon l'astre sur lequel il se trouve alors que sa masse reste constante" },
+          { "id": "obj2", "libelle": "Relier l'effet d'une force sur le mouvement d'un objet (mise en mouvement, accélération, freinage, déviation)" }
+        ]
       }
     ]
   },
@@ -239,15 +371,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Dessiner l'invisible : le circuit et la tension"
+        "titre": "1. Dessiner l'invisible : le circuit et la tension",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Identifier les éléments d'un circuit électrique simple et les représenter à l'aide de symboles normalisés" },
+          { "id": "obj2", "libelle": "Mesurer une tension électrique aux bornes d'un dipôle à l'aide d'un voltmètre correctement branché" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. L'intensité et les lois du circuit série"
+        "titre": "2. L'intensité et les lois du circuit série",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Mesurer l'intensité du courant dans un circuit à l'aide d'un ampèremètre correctement branché" },
+          { "id": "obj2", "libelle": "Appliquer les lois de l'électricité (additivité des tensions en série, unicité de l'intensité en série) dans un circuit simple" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. La résistance : pourquoi la rallonge chauffait ?"
+        "titre": "3. La résistance : pourquoi la rallonge chauffait ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Définir la résistance électrique et préciser son unité (ohm)" },
+          { "id": "obj2", "libelle": "Appliquer la loi d'Ohm (U = R × I) pour calculer une grandeur manquante dans un circuit résistif" }
+        ]
       }
     ]
   },
@@ -260,15 +404,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. La puissance : les watts qui comptent"
+        "titre": "1. La puissance : les watts qui comptent",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Définir la puissance électrique comme le produit de la tension par l'intensité (P = U × I)" },
+          { "id": "obj2", "libelle": "Lire et interpréter les indications de puissance sur des appareils électriques du quotidien" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. L'énergie : le compteur tourne"
+        "titre": "2. L'énergie : le compteur tourne",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Calculer l'énergie électrique consommée par un appareil à partir de sa puissance et de sa durée de fonctionnement (E = P × t)" },
+          { "id": "obj2", "libelle": "Convertir des énergies entre joules et kilowattheures" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Économiser et protéger : le disjoncteur veille"
+        "titre": "3. Économiser et protéger : le disjoncteur veille",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Comparer la consommation énergétique de différents appareils pour justifier des choix d'économie d'énergie" },
+          { "id": "obj2", "libelle": "Expliquer le rôle du disjoncteur et des fusibles dans la protection d'une installation électrique domestique" }
+        ]
       }
     ]
   },
@@ -281,15 +437,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Le courant qui hésite : continu ou alternatif ?"
+        "titre": "1. Le courant qui hésite : continu ou alternatif ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Distinguer un courant continu d'un courant alternatif à partir de l'observation d'un signal sur un oscilloscope ou un graphique" },
+          { "id": "obj2", "libelle": "Identifier la tension du secteur (230 V, 50 Hz) et ses caractéristiques principales" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Période et fréquence : le rythme du courant"
+        "titre": "2. Période et fréquence : le rythme du courant",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Déterminer la période et la fréquence d'un signal alternatif à partir d'un oscillogramme" },
+          { "id": "obj2", "libelle": "Calculer la fréquence à partir de la période et inversement (f = 1/T)" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. De la centrale à la prise"
+        "titre": "3. De la centrale à la prise",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire le rôle d'un transformateur dans le transport de l'électricité" },
+          { "id": "obj2", "libelle": "Expliquer le trajet de l'électricité de la centrale au domicile en identifiant les étapes clés (production, transport, distribution)" }
+        ]
       }
     ]
   },
@@ -302,15 +470,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Le grand inventaire : quelles énergies ?"
+        "titre": "1. Le grand inventaire : quelles énergies ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Identifier les principales sources d'énergie utilisées en France et dans le monde" },
+          { "id": "obj2", "libelle": "Classer ces sources en renouvelables et non renouvelables en justifiant le critère de classement" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Toutes les centrales se ressemblent"
+        "titre": "2. Toutes les centrales se ressemblent",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire le principe de fonctionnement simplifié d'une centrale électrique (conversion d'énergie)" },
+          { "id": "obj2", "libelle": "Comparer l'impact environnemental de différentes sources d'énergie (émissions de CO₂, déchets, emprise au sol)" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Le conseil municipal : quel mix pour la ville ?"
+        "titre": "3. Le conseil municipal : quel mix pour la ville ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Analyser un mix énergétique à partir de données chiffrées (graphique, tableau) pour en dégager les forces et les faiblesses" },
+          { "id": "obj2", "libelle": "Argumenter en faveur d'un choix énergétique en tenant compte de critères scientifiques, économiques et environnementaux adaptés à un territoire rural" }
+        ]
       }
     ]
   },
@@ -323,15 +503,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. D'où vient le son ?"
+        "titre": "1. D'où vient le son ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire la production d'un son comme la vibration d'un objet" },
+          { "id": "obj2", "libelle": "Expliquer que le son a besoin d'un milieu matériel pour se propager (expérience de la cloche à vide)" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Grave, aigu, fort, faible : comment lire un son ?"
+        "titre": "2. Grave, aigu, fort, faible : comment lire un son ?",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Distinguer la hauteur d'un son (grave/aigu) de son intensité (fort/faible) en les reliant aux grandeurs physiques (fréquence, amplitude)" },
+          { "id": "obj2", "libelle": "Mesurer la période d'un son sur un oscillogramme et en déduire sa fréquence" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. Quand le son devient dangereux"
+        "titre": "3. Quand le son devient dangereux",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Associer un niveau sonore en décibels à un risque pour la santé auditive" },
+          { "id": "obj2", "libelle": "Proposer des moyens de protection contre les nuisances sonores dans un contexte professionnel ou quotidien" }
+        ]
       }
     ]
   },
@@ -344,15 +536,27 @@
     "activites": [
       {
         "id": "activite1",
-        "titre": "1. Des ondes partout, même sans réseau"
+        "titre": "1. Des ondes partout, même sans réseau",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Identifier des exemples d'ondes dans la vie quotidienne (lumière, son, ondes radio, Wi-Fi)" },
+          { "id": "obj2", "libelle": "Distinguer une onde mécanique (besoin d'un milieu) d'une onde électromagnétique (se propage dans le vide)" }
+        ]
       },
       {
         "id": "activite2",
-        "titre": "2. Capter un signal : encore faut-il un émetteur"
+        "titre": "2. Capter un signal : encore faut-il un émetteur",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Décrire le principe d'une communication à distance en identifiant émetteur, signal et récepteur" },
+          { "id": "obj2", "libelle": "Classer les ondes électromagnétiques selon leur fréquence ou leur longueur d'onde (spectre électromagnétique simplifié)" }
+        ]
       },
       {
         "id": "activite3",
-        "titre": "3. L'orage approche"
+        "titre": "3. L'orage approche",
+        "objectifs": [
+          { "id": "obj1", "libelle": "Calculer la vitesse de propagation d'une onde à partir de la distance et de la durée (v = d/t)" },
+          { "id": "obj2", "libelle": "Relier l'utilisation des ondes à des applications concrètes (téléphone, GPS, échographie, micro-ondes) en identifiant avantages et risques" }
+        ]
       }
     ]
   }
