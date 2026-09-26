@@ -270,8 +270,8 @@
     "date_creation": "14/09/2026",
     "auteur": "Vincent APREMONT"
   },
-            {
-    "id": "application-012",
+ {
+    "id": "outils-004",
     "categorie": "Outils",
     "titre": "Générateur de groupe",
     "description": "Un générateur de groupes aléatoires pour les activités de classe.",
@@ -285,6 +285,23 @@
     "image": "assets/images/Generateur_groupe.jpg",
     "statut": "Publié",
     "date_creation": "24/09/2026",
+    "auteur": "Vincent APREMONT"
+  },
+  {
+    "id": "application-013",
+    "categorie": "Applications",
+    "titre": "Plateau des Savoirs",
+    "description": "Un plateau de jeu pour réviser les savoirs en Physique-Chimie.",
+    "discipline": ["Physique-Chimie"],
+    "module": ["Physique-Chimie"],
+    "public": "",
+    "formation": ["Collège"],
+    "tags": [],
+    "url": "Outils-Pedagogiques/Physique-Chimie/Monopoly.html",
+    "icone": "assets/icones/Monopoly.gif",
+    "image": "assets/images/Monopoly.jpg",
+    "statut": "Publié",
+    "date_creation": "26/09/2026",
     "auteur": "Vincent APREMONT"
   }
 ]
