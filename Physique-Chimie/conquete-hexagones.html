@@ -412,7 +412,6 @@ async function chargerChapitres() {
       logo.alt = "";
       logo.addEventListener("error", () => logo.remove());
       etiquette.append(caseACocher, logo,
-        creerElement("span", "badge-niveau", chapitre.niveau || ""),
         creerElement("span", "", chapitre.titre));
       zone.appendChild(etiquette);
     });
