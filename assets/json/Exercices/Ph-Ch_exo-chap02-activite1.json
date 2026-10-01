@@ -1,0 +1,90 @@
+{
+  "chapitreId": "chap02",
+  "activiteId": "activite1",
+  "exercices": [
+    {
+      "themeId": "Légo",
+      "titre": "Légo et briques invisibles",
+      "enonce": "Mila construit une maison avec des briques Légo. La matière est formée de petites parties : les atomes. Chaque atome possède un noyau au centre et des électrons autour.",
+      "question": "Explique la place du noyau et des électrons dans un atome.",
+      "reponse": "Le noyau est au centre de l'atome. Les électrons se trouvent autour du noyau. Les atomes forment la matière, comme les briques Légo forment la maison."
+    },
+    {
+      "themeId": "Vélo",
+      "titre": "Vélo et case aluminium",
+      "enonce": "Le cadre du vélo de Yanis contient de l'aluminium. Son symbole est Al. Voici un extrait du tableau périodique.\nColonnes : 13 | 14 | 15 | 16\nLigne 2 : B | C | N | O\nLigne 3 : Al | Si | P | S",
+      "question": "Repère la ligne et la colonne de l'aluminium dans le tableau.",
+      "reponse": "Je cherche le symbole Al dans le tableau. Il est sur la ligne 3, sous la colonne 13."
+    },
+    {
+      "themeId": "Piscine",
+      "titre": "Piscine et dessin inversé",
+      "enonce": "Après la piscine, Inès dessine un atome. Elle place les électrons au centre et le noyau autour. Dans un atome, le noyau est au centre et les électrons sont autour.",
+      "question": "Identifie l'erreur la plus probable dans le dessin d'Inès.",
+      "reponse": "Inès a inversé les places. Elle doit dessiner le noyau au centre et les électrons autour."
+    },
+    {
+      "themeId": "Cuisine",
+      "titre": "Cuisine et case fer",
+      "enonce": "La poêle de Sami contient du fer. Son symbole est Fe. Voici un extrait du tableau périodique.\nColonnes : 8 | 9 | 10 | 11\nLigne 4 : Fe | Co | Ni | Cu\nLigne 5 : Ru | Rh | Pd | Ag",
+      "question": "Repère la ligne et la colonne du fer dans le tableau.",
+      "reponse": "Je cherche Fe, le symbole du fer. Fe est sur la ligne 4, sous la colonne 8."
+    },
+    {
+      "themeId": "Dessin",
+      "titre": "Dessin de plusieurs atomes",
+      "enonce": "Noa observe trois dessins d'atomes. Chaque dessin montre un noyau au centre et des électrons autour. Le nombre d'électrons change selon le dessin.",
+      "question": "Déduis les parties présentes dans tous ces atomes et leur place.",
+      "reponse": "Dans les trois dessins, les atomes possèdent un noyau au centre et des électrons autour. Le nombre d'électrons peut changer."
+    },
+    {
+      "themeId": "Mécanique",
+      "titre": "Mécanique et case cuivre",
+      "enonce": "Lina répare un fil en cuivre. Le symbole du cuivre est Cu. Voici un extrait du tableau périodique.\nColonnes : 8 | 9 | 10 | 11\nLigne 4 : Fe | Co | Ni | Cu\nLigne 5 : Ru | Rh | Pd | Ag",
+      "question": "Repère la ligne et la colonne du cuivre dans le tableau.",
+      "reponse": "Je cherche Cu, le symbole du cuivre. Cu est sur la ligne 4, sous la colonne 11."
+    },
+    {
+      "themeId": "Photographie",
+      "titre": "Photographie et case argent",
+      "enonce": "Amir photographie une bague en argent. Le symbole de l'argent est Ag. Voici un extrait du tableau périodique.\nColonnes : 8 | 9 | 10 | 11\nLigne 4 : Fe | Co | Ni | Cu\nLigne 5 : Ru | Rh | Pd | Ag",
+      "question": "Repère la ligne et la colonne de l'argent dans le tableau.",
+      "reponse": "Je cherche Ag, le symbole de l'argent. Ag est sur la ligne 5, sous la colonne 11."
+    },
+    {
+      "themeId": "Minecraft",
+      "titre": "Minecraft et structure du fer",
+      "enonce": "Adam construit avec des blocs de fer dans Minecraft. Dans la réalité, le fer contient des atomes. Chaque atome possède un noyau au centre et des électrons autour.",
+      "question": "Décris la structure d'un atome de fer.",
+      "reponse": "Un atome de fer possède un noyau au centre. Des électrons se trouvent autour du noyau."
+    },
+    {
+      "themeId": "Animaux",
+      "titre": "Animaux et case calcium",
+      "enonce": "Les os d'un chien contiennent du calcium. Son symbole est Ca. Voici un extrait du tableau périodique.\nColonnes : 1 | 2 | 3\nLigne 3 : Na | Mg | —\nLigne 4 : K | Ca | Sc",
+      "question": "Repère la ligne et la colonne du calcium dans le tableau.",
+      "reponse": "Je cherche Ca, le symbole du calcium. Ca est sur la ligne 4, sous la colonne 2."
+    },
+    {
+      "themeId": "Voiture",
+      "titre": "Voiture et case plomb",
+      "enonce": "La batterie de la voiture de Sara contient du plomb. Son symbole est Pb. Voici un extrait du tableau périodique.\nColonnes : 13 | 14 | 15\nLigne 5 : In | Sn | Sb\nLigne 6 : Tl | Pb | Bi",
+      "question": "Repère la ligne et la colonne du plomb dans le tableau.",
+      "reponse": "Je cherche Pb, le symbole du plomb. Pb est sur la ligne 6, sous la colonne 14."
+    },
+    {
+      "themeId": "Pêche",
+      "titre": "Pêche et atome incomplet",
+      "enonce": "Hugo dessine un atome de fer présent dans son hameçon. Son dessin montre seulement un noyau. Un atome possède un noyau au centre et des électrons autour.",
+      "question": "Identifie la partie manquante dans le dessin d'Hugo.",
+      "reponse": "Les électrons manquent. Hugo doit les dessiner autour du noyau."
+    },
+    {
+      "themeId": "Shopping",
+      "titre": "Shopping et case or",
+      "enonce": "Au magasin, Nour regarde un bijou en or. Le symbole de l'or est Au. Voici un extrait du tableau périodique.\nColonnes : 10 | 11 | 12\nLigne 5 : Pd | Ag | Cd\nLigne 6 : Pt | Au | Hg",
+      "question": "Repère la ligne et la colonne de l'or dans le tableau.",
+      "reponse": "Je cherche Au, le symbole de l'or. Au est sur la ligne 6, sous la colonne 11."
+    }
+  ]
+}
