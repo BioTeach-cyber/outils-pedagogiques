@@ -1,0 +1,150 @@
+{
+  "chapitreId": "chap02",
+  "activiteId": "activite2",
+  "exercices": [
+    {
+      "themeId": "Piscine",
+      "titre": "Respiration dans le bassin",
+      "objectifId": "obj1",
+      "enonce": "Léo nage souvent à la piscine. Il respire un gaz vital. Il souffle ensuite dans l'eau et fait des bulles. Ces bulles contiennent le gaz rejeté par son corps.",
+      "question": "Associe le gaz vital respiré et le gaz rejeté dans les bulles à leurs formules chimiques.",
+      "reponse": "Le gaz vital respiré est le dioxygène, sa formule est O2. Le gaz rejeté dans les bulles est le dioxyde de carbone, sa formule est CO2."
+    },
+    {
+      "themeId": "Légo",
+      "titre": "L'eau en briques",
+      "objectifId": "obj2",
+      "enonce": "Tu utilises des briques Légo. Une brique blanche représente un atome d'hydrogène (H). Une brique rouge représente un atome d'oxygène (O). La formule chimique de l'eau est H2O.",
+      "question": "Déduis le nombre et la couleur des briques pour fabriquer une molécule d'eau.",
+      "reponse": "Il faut prendre 2 briques blanches pour les deux atomes d'hydrogène (H2). Il faut ajouter 1 brique rouge pour l'atome d'oxygène (O)."
+    },
+    {
+      "themeId": "Farming Simulator",
+      "titre": "Les besoins du champ",
+      "objectifId": "obj1",
+      "enonce": "Dans le jeu, tes cultures ont besoin de pluie. Elles absorbent aussi un gaz présent dans l'air. Ce gaz s'appelle le dioxyde de carbone.",
+      "question": "Identifie la formule chimique de la pluie et celle du gaz absorbé par les cultures.",
+      "reponse": "La pluie est composée d'eau, sa formule est H2O. Le gaz absorbé est le dioxyde de carbone, sa formule est CO2."
+    },
+    {
+      "themeId": "Minecraft",
+      "titre": "Crafter du gaz",
+      "objectifId": "obj2",
+      "enonce": "Dans Minecraft, tu assembles des blocs. En chimie, la règle est la même. Le dioxyde de carbone a pour formule CO2. Le carbone (C) est un bloc noir. L'oxygène (O) est un bloc rouge.",
+      "question": "Explique comment construire le modèle moléculaire du dioxyde de carbone avec ces blocs.",
+      "reponse": "Il faut placer 1 bloc noir au centre pour l'atome de carbone (C). Il faut attacher 2 blocs rouges autour pour les deux atomes d'oxygène (O2)."
+    },
+    {
+      "themeId": "Eau libre",
+      "titre": "Nager dans le lac",
+      "objectifId": "obj1",
+      "enonce": "Sofia nage en eau libre. Elle est entourée par un grand volume de liquide. Elle respire un gaz indispensable à sa survie.",
+      "question": "Nomme le liquide et le gaz. Associe ensuite chaque élément à sa formule chimique (H2O ou O2).",
+      "reponse": "Le liquide est l'eau, sa formule est H2O. Le gaz respiré est le dioxygène, sa formule est O2."
+    },
+    {
+      "themeId": "Course à pied",
+      "titre": "Le souffle du coureur",
+      "objectifId": "obj1",
+      "enonce": "Lors d'un sprint, ton corps consomme beaucoup d'énergie. Tu inspires fortement un gaz de l'air. Tu expires ensuite un autre gaz avec l'air chaud.",
+      "question": "Identifie la formule chimique du gaz inspiré et celle du gaz expiré.",
+      "reponse": "Le gaz inspiré est le dioxygène (O2). Le gaz expiré contient beaucoup de dioxyde de carbone (CO2)."
+    },
+    {
+      "themeId": "Dessin",
+      "titre": "Dessiner la matière",
+      "objectifId": "obj2",
+      "enonce": "Tu dessines des molécules. Tu as un crayon noir pour le carbone (C). Tu as un crayon rouge pour l'oxygène (O). Tu veux représenter le dioxyde de carbone (CO2).",
+      "question": "Propose un schéma simple pour dessiner cette molécule de dioxyde de carbone.",
+      "reponse": "Il faut dessiner un cercle noir au milieu. Il faut ensuite dessiner deux cercles rouges collés de chaque côté du cercle noir."
+    },
+    {
+      "themeId": "Mécanique",
+      "titre": "Le pot d'échappement",
+      "objectifId": "obj1",
+      "enonce": "Le moteur d'un scooter brûle de l'essence. Cette combustion produit un gaz polluant. Ce gaz sort par le pot d'échappement. C'est le dioxyde de carbone.",
+      "question": "Choisis la bonne formule chimique pour ce gaz d'échappement parmi H2O, O2 et CO2.",
+      "reponse": "La formule chimique du dioxyde de carbone est CO2."
+    },
+    {
+      "themeId": "Cuisine",
+      "titre": "L'eau qui bout",
+      "objectifId": "obj2",
+      "enonce": "Tu fais chauffer de l'eau pour cuire des pâtes. L'eau s'évapore sous forme de gaz. La formule chimique de l'eau est H2O. L'atome d'hydrogène (H) est modélisé par une boule blanche. L'oxygène (O) est une boule rouge.",
+      "question": "Explique comment construire le modèle moléculaire de la vapeur d'eau.",
+      "reponse": "La vapeur d'eau reste de l'eau (H2O). Il faut assembler une boule rouge avec deux boules blanches."
+    },
+    {
+      "themeId": "Animaux",
+      "titre": "La respiration du chien",
+      "objectifId": "obj1",
+      "enonce": "Ton chien halète après avoir joué. Il rejette de la vapeur d'eau. Il rejette aussi du dioxyde de carbone. Ces molécules sont invisibles.",
+      "question": "Associe chaque molécule rejetée par le chien à sa formule chimique.",
+      "reponse": "La vapeur d'eau a pour formule H2O. Le dioxyde de carbone a pour formule CO2."
+    },
+    {
+      "themeId": "Cabane dans les bois",
+      "titre": "Le feu de camp",
+      "objectifId": "obj1",
+      "enonce": "Tu allumes un feu de bois près de ta cabane. Le feu a besoin d'un gaz de l'air pour brûler. Ce gaz s'appelle le dioxygène.",
+      "question": "Déduis la formule chimique du gaz nécessaire pour allumer ton feu.",
+      "reponse": "Le gaz nécessaire est le dioxygène, sa formule chimique est O2."
+    },
+    {
+      "themeId": "Animal Crossing",
+      "titre": "L'arrosage des plantes",
+      "objectifId": "obj2",
+      "enonce": "Dans le jeu, tu arroses tes fleurs pour les faire pousser. L'eau a pour formule chimique H2O. Tu disposes de billes blanches (hydrogène) et de billes rouges (oxygène).",
+      "question": "Calcule le nombre de billes de chaque couleur nécessaires pour fabriquer 3 molécules d'eau.",
+      "reponse": "Une molécule d'eau (H2O) demande 2 billes blanches et 1 bille rouge. Pour 3 molécules, il faut 6 billes blanches (3x2) et 3 billes rouges (3x1)."
+    },
+    {
+      "themeId": "Pêche",
+      "titre": "Les bulles des poissons",
+      "objectifId": "obj1",
+      "enonce": "Léo pêche au bord d'un étang. Les poissons respirent grâce à un gaz dissous dans l'eau. Ce gaz est vital pour eux.",
+      "question": "Identifie ce gaz vital et donne sa formule chimique.",
+      "reponse": "Le gaz vital respiré par les poissons est le dioxygène. Sa formule chimique est O2."
+    },
+    {
+      "themeId": "Piscine",
+      "titre": "L'odeur de l'eau",
+      "objectifId": "obj2",
+      "enonce": "L'eau de la piscine est nettoyée avec du dichlore. Sa formule chimique est Cl2. L'atome de chlore (Cl) est représenté par une boule verte.",
+      "question": "Déduis le modèle moléculaire du dichlore.",
+      "reponse": "La molécule de dichlore (Cl2) contient deux atomes de chlore. Il faut assembler deux boules vertes."
+    },
+    {
+      "themeId": "Travailler dehors",
+      "titre": "L'engrais dans le champ",
+      "objectifId": "obj2",
+      "enonce": "Tu répands de l'engrais sur tes cultures. Cet engrais contient de l'ammoniac. Sa formule est NH3. L'azote (N) est une boule bleue. L'hydrogène (H) est une boule blanche.",
+      "question": "Explique comment construire cette molécule avec des boules de couleur.",
+      "reponse": "Il faut prendre 1 boule bleue pour l'atome d'azote (N). Il faut ajouter 3 boules blanches pour les atomes d'hydrogène (H3)."
+    },
+    {
+      "themeId": "Dinosaure",
+      "titre": "Les volcans anciens",
+      "objectifId": "obj2",
+      "enonce": "Au temps des dinosaures, les volcans crachaient des gaz toxiques. Un de ces gaz est le dioxyde de soufre. Sa formule est SO2. Le soufre (S) est jaune. L'oxygène (O) est rouge.",
+      "question": "Propose une description du modèle moléculaire de ce gaz.",
+      "reponse": "Il faut placer 1 boule jaune au centre pour le soufre (S). Il faut attacher 2 boules rouges autour pour l'oxygène (O2)."
+    },
+    {
+      "themeId": "Karting",
+      "titre": "Carburant et fumée",
+      "objectifId": "obj1",
+      "enonce": "Le karting de Samia utilise de l'essence. Le moteur rejette un gaz invisible et chaud. Ce gaz participe au réchauffement climatique.",
+      "question": "Nomme ce gaz rejeté par le moteur et donne sa formule chimique.",
+      "reponse": "Ce gaz rejeté par le moteur est le dioxyde de carbone. Sa formule chimique est CO2."
+    },
+    {
+      "themeId": "Cuisine",
+      "titre": "Le gaz de la gazinière",
+      "objectifId": "obj2",
+      "enonce": "Tu allumes la gazinière pour cuire un œuf. Le gaz brûlé est du méthane. Sa formule est CH4. Le carbone (C) est noir. L'hydrogène (H) est blanc.",
+      "question": "Schématise mentalement cette molécule et décris sa composition en couleurs.",
+      "reponse": "La molécule a 1 atome de carbone et 4 atomes d'hydrogène. Il faut donc 1 boule noire entourée de 4 boules blanches."
+    }
+  ]
+}
