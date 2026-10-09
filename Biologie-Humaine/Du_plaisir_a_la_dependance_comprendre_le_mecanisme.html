@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document 6 - Cartes-situations à classer</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+    color: #222;
+  }
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 1.4em;
+  }
+  p.intro {
+    max-width: 800px;
+    margin: 10px auto 25px auto;
+    text-align: center;
+    font-size: 0.95em;
+    color: #444;
+  }
+  #cartes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .carte {
+    background: white;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 260px;
+    padding: 15px;
+    cursor: grab;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 0.9em;
+    transition: transform 0.2s;
+  }
+  .carte:active { cursor: grabbing; }
+  .carte h3 {
+    margin: 0 0 8px 0;
+    font-size: 1em;
+    color: #2c3e50;
+  }
+  .carte.placee {
+    opacity: 0.5;
+  }
+  #zones {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .zone {
+    flex: 1;
+    min-width: 250px;
+    min-height: 320px;
+    background: white;
+    border: 3px dashed #999;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .zone h2 {
+    text-align: center;
+    font-size: 1em;
+    margin-top: 0;
+    padding: 8px;
+    border-radius: 6px;
+    color: white;
+  }
+  #zone-occasionnel h2 { background: #27ae60; }
+  #zone-risque h2 { background: #e67e22; }
+  #zone-dependance h2 { background: #c0392b; }
+
+  .zone.survol {
+    background: #eef7ff;
+    border-color: #3498db;
+  }
+  .carte-placee {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+    font-size: 0.85em;
+  }
+  #boutons {
+    text-align: center;
+    margin-top: 20px;
+  }
+  button {
+    background: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin: 5px;
+  }
+  button:hover { background: #1a252f; }
+  #resultat {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    display: none;
+  }
+  .correct { color: #27ae60; font-weight: bold; }
+  .incorrect { color: #c0392b; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Document 6 – Les six cartes-situations</h1>
+<p class="intro">
+  Fais glisser chaque carte-situation dans la catégorie qui te semble correcte :
+  usage occasionnel, usage à risque, ou dépendance. Justifie ensuite ton choix à l'oral avec au moins deux indices repérés dans la situation.
+</p>
+
+<div id="cartes-container"></div>
+
+<div id="zones">
+  <div class="zone" id="zone-occasionnel" ondrop="deposer(event)" ondragover="autoriser(event)" ondragleave="quitter(event)">
+    <h2>Usage occasionnel</h2>
+    <div class="contenu-zone"></div>
+  </div>
+  <div class="zone" id="zone-risque" ondrop="deposer(event)" ondragover="autoriser(event)" ondragleave="quitter(event)">
+    <h2>Usage à risque</h2>
+    <div class="contenu-zone"></div>
+  </div>
+  <div class="zone" id="zone-dependance" ondrop="deposer(event)" ondragover="autoriser(event)" ondragleave="quitter(event)">
+    <h2>Dépendance</h2>
+    <div class="contenu-zone"></div>
+  </div>
+</div>
+
+<div id="boutons">
+  <button onclick="verifier()">Vérifier mon classement</button>
+  <button onclick="reinitialiser()">Recommencer</button>
+</div>
+
+<div id="resultat"></div>
+
+<script>
+const cartes = [
+  {
+    id: 1,
+    titre: "Carte A – Lucas",
+    texte: "Lucas, 17 ans, boit une bière ou deux lors des soirées entre amis, environ une fois par mois. Il ne boit jamais seul. Le lendemain, il va normalement à son stage. Il dit qu'il pourrait arrêter facilement, ça ne lui manquerait pas.",
+    categorie: "occasionnel"
+  },
+  {
+    id: 2,
+    titre: "Carte B – Sarah",
+    texte: "Sarah, 19 ans, fume du cannabis presque tous les soirs après le travail pour 'décompresser'. Elle a eu deux avertissements pour retard ce mois-ci. Elle dit que ça l'aide à dormir, mais reconnaît qu'elle a du mal à passer une soirée sans en fumer.",
+    categorie: "risque"
+  },
+  {
+    id: 3,
+    titre: "Carte C – Karim",
+    texte: "Karim, 18 ans, boit de l'alcool tous les jours, y compris le matin avant d'aller en stage. Il a déjà été mis à la porte de son stage pour ce motif. Il a essayé d'arrêter deux fois, avec des tremblements et une grande anxiété, et a repris rapidement à chaque fois.",
+    categorie: "dependance"
+  },
+  {
+    id: 4,
+    titre: "Carte D – Manon",
+    texte: "Manon, 16 ans, a testé une cigarette électronique avec des amis lors d'une fête, une seule fois il y a trois mois. Elle n'a pas cherché à recommencer depuis. Elle dit ne pas comprendre pourquoi certains ont du mal à s'arrêter.",
+    categorie: "occasionnel"
+  },
+  {
+    id: 5,
+    titre: "Carte E – Yanis",
+    texte: "Yanis, 20 ans, joue aux jeux d'argent en ligne plusieurs fois par semaine, surtout quand il est stressé ou seul le soir. Il a accumulé des dettes qu'il cache à son entourage. Il a tenté d'arrêter une semaine mais s'y est remis après une dispute avec sa copine.",
+    categorie: "risque"
+  },
+  {
+    id: 6,
+    titre: "Carte F – Chloé",
+    texte: "Chloé, 18 ans, consomme de la cocaïne presque quotidiennement depuis six mois. Elle s'est isolée de ses amis d'enfance, a des conflits fréquents avec l'équipe éducative, et a emprunté de l'argent à plusieurs résidents. Elle a exprimé vouloir arrêter mais dit 'ne plus pouvoir s'en passer'.",
+    categorie: "dependance"
+  }
+];
+
+const container = document.getElementById('cartes-container');
+
+function creerCartes() {
+  container.innerHTML = '';
+  cartes.forEach(carte => {
+    const div = document.createElement('div');
+    div.className = 'carte';
+    div.id = 'carte-' + carte.id;
+    div.draggable = true;
+    div.setAttribute('data-categorie', carte.categorie);
+    div.ondragstart = glisser;
+    div.innerHTML = `<h3>${carte.titre}</h3><p>${carte.texte}</p>`;
+    container.appendChild(div);
+  });
+}
+
+function glisser(ev) {
+  ev.dataTransfer.setData("id", ev.target.id);
+}
+
+function autoriser(ev) {
+  ev.preventDefault();
+  ev.currentTarget.classList.add('survol');
+}
+
+function quitter(ev) {
+  ev.currentTarget.classList.remove('survol');
+}
+
+function deposer(ev) {
+  ev.preventDefault();
+  ev.currentTarget.classList.remove('survol');
+  const id = ev.dataTransfer.getData("id");
+  const carteOriginale = document.getElementById(id);
+  const zoneCible = ev.currentTarget.querySelector('.contenu-zone');
+
+  const clone = document.createElement('div');
+  clone.className = 'carte-placee';
+  clone.id = 'placee-' + id;
+  clone.setAttribute('data-categorie', carteOriginale.getAttribute('data-categorie'));
+  clone.innerHTML = carteOriginale.innerHTML;
+  zoneCible.appendChild(clone);
+
+  carteOriginale.classList.add('placee');
+  carteOriginale.setAttribute('draggable', 'false');
+}
+
+function verifier() {
+  const zones = {
+    'zone-occasionnel': 'occasionnel',
+    'zone-risque': 'risque',
+    'zone-dependance': 'dependance'
+  };
+
+  let bonnesReponses = 0;
+  let totalPlacees = 0;
+  let detail = '';
+
+  for (const [zoneId, categorieAttendue] of Object.entries(zones)) {
+    const zone = document.getElementById(zoneId);
+    const cartesPlacees = zone.querySelectorAll('.carte-placee');
+    cartesPlacees.forEach(c => {
+      totalPlacees++;
+      const cat = c.getAttribute('data-categorie');
+      const titre = c.querySelector('h3').textContent;
+      if (cat === categorieAttendue) {
+        bonnesReponses++;
+        detail += `<p class="correct">✔ ${titre} : bien classée.</p>`;
+      } else {
+        detail += `<p class="incorrect">✘ ${titre} : mal classée. Réfléchis à la fréquence, aux conséquences et à la capacité à arrêter.</p>`;
+      }
+    });
+  }
+
+  const resultatDiv = document.getElementById('resultat');
+  resultatDiv.style.display = 'block';
+
+  if (totalPlacees < 6) {
+    resultatDiv.innerHTML = `<p>Il reste des cartes à placer avant de vérifier (${totalPlacees}/6 placées).</p>`;
+  } else {
+    resultatDiv.innerHTML = `<h3>Résultat : ${bonnesReponses}/6 bonnes réponses</h3>` + detail +
+      `<p><strong>Rappel :</strong> pour chaque carte, tu dois pouvoir citer au moins deux indices (fréquence, contexte, conséquences, tentative d'arrêt) qui justifient ton classement.</p>`;
+  }
+}
+
+function reinitialiser() {
+  document.querySelectorAll('.contenu-zone').forEach(z => z.innerHTML = '');
+  document.getElementById('resultat').style.display = 'none';
+  document.getElementById('resultat').innerHTML = '';
+  creerCartes();
+}
+
+creerCartes();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+{
+  "chapitreId": "chap02",
+  "activiteId": "activite2",
+  "exercices": [
+    {
+      "themeId": "Légo",
+      "titre": "Les briques Légo de Lina",
+      "objectifId": "obj1",
+      "enonce": "Lina construit une petite voiture avec des briques Légo. Une brique seule ressemble à un atome. Plusieurs briques assemblées ressemblent à une molécule. Sa voiture contient 3 briques rouges et 2 briques bleues.",
+      "question": "Explique en t'aidant des Légo :\n1. Que représente une brique seule ?\n2. Que représente la voiture terminée ?\n3. Combien d'« atomes » contient la voiture ?\n4. Combien de sortes d'« atomes » différents contient la voiture ?",
+      "reponse": "1. Une brique seule représente un atome. C'est la plus petite pièce de la construction.\n2. La voiture terminée représente une molécule. C'est un assemblage de plusieurs briques, donc de plusieurs atomes liés.\n3. La voiture contient 3 + 2 = 5 briques. La « molécule » contient donc 5 atomes.\n4. Il y a des briques rouges et des briques bleues. La voiture contient donc 2 sortes d'atomes différents. (Raisonnement par analogie.)"
+    },
+    {
+      "themeId": "Minecraft",
+      "titre": "Fabriquer de l'eau dans Minecraft",
+      "objectifId": "obj2",
+      "enonce": "Hugo joue à Minecraft Education. Il fabrique de l'eau avec le constructeur de composés. La formule de l'eau est H₂O. H est le symbole de l'atome d'hydrogène. O est le symbole de l'atome d'oxygène. Le petit chiffre en bas donne le nombre d'atomes. Sans chiffre, il y a 1 seul atome.",
+      "question": "Calcule :\n1. Le nombre d'atomes d'hydrogène dans une molécule d'eau.\n2. Le nombre d'atomes d'oxygène dans une molécule d'eau.\n3. Le nombre de blocs d'hydrogène et de blocs d'oxygène pour fabriquer 5 molécules d'eau.",
+      "reponse": "1. Le chiffre 2 est écrit après H. Une molécule d'eau contient donc 2 atomes d'hydrogène.\n2. Il n'y a pas de chiffre après O. Une molécule d'eau contient donc 1 atome d'oxygène.\n3. Pour 5 molécules : 5 × 2 = 10 blocs d'hydrogène et 5 × 1 = 5 blocs d'oxygène. (Raisonnement par analogie : un bloc = un atome.)"
+    },
+    {
+      "themeId": "Piscine",
+      "titre": "Ce qui nage dans la piscine",
+      "objectifId": "obj1",
+      "enonce": "Voici trois règles. Un atome s'écrit avec un seul symbole, sans chiffre et sans signe. Une molécule contient plusieurs atomes liés, sans signe + ou −. Un ion porte un signe + ou − en haut à droite. L'eau de la piscine contient de l'eau H₂O, des ions hypochlorite ClO⁻ et du dioxygène O₂.",
+      "question": "Classe H₂O, ClO⁻ et O₂ dans la bonne catégorie : atome, molécule ou ion. Justifie chaque réponse avec une règle.",
+      "reponse": "H₂O est une molécule : elle contient 3 atomes liés et n'a pas de signe + ou −.\nClO⁻ est un ion : il porte le signe − en haut à droite.\nO₂ est une molécule : elle contient 2 atomes d'oxygène liés et n'a pas de signe.\n(Raisonnement déductif : on applique la règle à chaque cas.)"
+    },
+    {
+      "themeId": "Course à pied",
+      "titre": "Traces blanches après la course",
+      "objectifId": "obj1",
+      "enonce": "Yanis court 10 km. Son tee-shirt est trempé de sueur. La sueur contient de l'eau et des ions sodium Na⁺ et chlorure Cl⁻. Le soir, le tee-shirt est sec. L'eau s'est évaporée (elle est partie dans l'air). Yanis voit alors des traces blanches sur le tissu.",
+      "question": "Propose l'explication la plus probable de ces traces blanches. Précise s'il s'agit de molécules d'eau ou d'ions.",
+      "reponse": "L'eau de la sueur est partie dans l'air. Les ions Na⁺ et Cl⁻ ne s'évaporent pas. Ils restent sur le tissu. Ils s'assemblent et forment du sel, qui est blanc. Les traces blanches sont donc faites d'ions, et pas de molécules d'eau. (Raisonnement abductif : on part d'une observation pour trouver la cause.)"
+    },
+    {
+      "themeId": "Manger",
+      "titre": "L'étiquette de la bouteille d'eau",
+      "objectifId": "obj1",
+      "enonce": "Sarah lit l'étiquette de sa bouteille d'eau minérale. Elle trouve ces ions : calcium Ca²⁺, magnésium Mg²⁺, sodium Na⁺, chlorure Cl⁻, sulfate SO₄²⁻. Ces cinq espèces sont toutes des ions.",
+      "question": "Compare les cinq notations.\n1. Quel point commun ont-elles toutes ?\n2. Déduis une règle pour reconnaître un ion.\n3. Un ion peut-il contenir plusieurs atomes ? Justifie avec un exemple.",
+      "reponse": "1. Toutes les notations ont un signe + ou − écrit en haut à droite.\n2. Règle : une espèce chimique avec un signe + ou − en haut à droite est un ion. Un ion porte une charge électrique.\n3. Oui. L'ion sulfate SO₄²⁻ contient 1 atome de soufre et 4 atomes d'oxygène, soit 5 atomes. (Raisonnement inductif : plusieurs observations donnent une règle générale.)"
+    },
+    {
+      "themeId": "Cuisine",
+      "titre": "Le sucre du gâteau",
+      "objectifId": "obj2",
+      "enonce": "Emma prépare un gâteau. Elle utilise du sucre en poudre. La formule de la molécule de sucre est C₁₂H₂₂O₁₁. C est le symbole du carbone. H est le symbole de l'hydrogène. O est le symbole de l'oxygène.",
+      "question": "Nomme les atomes présents dans une molécule de sucre. Donne le nombre de chaque atome, puis calcule le nombre total d'atomes.",
+      "reponse": "La molécule de sucre contient :\n- 12 atomes de carbone (C₁₂) ;\n- 22 atomes d'hydrogène (H₂₂) ;\n- 11 atomes d'oxygène (O₁₁).\nTotal : 12 + 22 + 11 = 45 atomes. (Raisonnement déductif : on applique la règle de lecture d'une formule.)"
+    },
+    {
+      "themeId": "Cabane dans les bois",
+      "titre": "Mal de tête dans la cabane",
+      "objectifId": "obj2",
+      "enonce": "Théo et Inès allument un petit feu dans leur cabane fermée. Il y a peu d'air. Après 20 minutes, ils ont mal à la tête. Un feu avec beaucoup d'air produit du CO₂. Un feu avec peu d'air produit du CO (monoxyde de carbone), un gaz toxique sans odeur.",
+      "question": "Propose une explication à leur mal de tête.\n1. Quel gaz est sûrement présent ?\n2. Nomme les atomes de ce gaz et leur nombre.\n3. Compare avec la formule CO₂.",
+      "reponse": "1. La cabane est fermée et il y a peu d'air. Le feu produit donc du CO, un gaz toxique. Il explique le mal de tête. Il faut sortir et aérer.\n2. CO contient 1 atome de carbone (C) et 1 atome d'oxygène (O).\n3. CO₂ contient 1 atome de carbone et 2 atomes d'oxygène. Il y a un atome d'oxygène en plus. (Raisonnement abductif.)"
+    },
+    {
+      "themeId": "Karting",
+      "titre": "L'essence du karting",
+      "objectifId": "obj2",
+      "enonce": "Le moteur du kart de Malik fonctionne à l'essence. L'essence contient surtout de l'octane. Sa formule est C₈H₁₈. C est le symbole du carbone. H est le symbole de l'hydrogène.",
+      "question": "Nomme les atomes présents dans une molécule d'octane. Donne leur nombre, puis calcule le nombre total d'atomes.",
+      "reponse": "Une molécule d'octane contient :\n- 8 atomes de carbone (C₈) ;\n- 18 atomes d'hydrogène (H₁₈).\nTotal : 8 + 18 = 26 atomes. (Raisonnement déductif.)"
+    },
+    {
+      "themeId": "Vélo",
+      "titre": "L'air dans le pneu de vélo",
+      "objectifId": "obj1",
+      "enonce": "Chloé gonfle le pneu de son vélo avec une pompe. L'air contient du diazote N₂, du dioxygène O₂ et un peu d'argon Ar. Règle : un symbole seul, sans chiffre ni signe, est un atome. Plusieurs atomes liés forment une molécule.",
+      "question": "Classe N₂, O₂ et Ar en atome ou en molécule. Justifie chaque réponse.",
+      "reponse": "N₂ est une molécule : elle contient 2 atomes d'azote liés.\nO₂ est une molécule : elle contient 2 atomes d'oxygène liés.\nAr est un atome : c'est un symbole seul, sans chiffre et sans signe.\n(Raisonnement déductif.)"
+    },
+    {
+      "themeId": "Escalade",
+      "titre": "La magnésie du grimpeur",
+      "objectifId": "obj2",
+      "enonce": "Avant de grimper, Nolan met de la magnésie sur ses mains. Elle évite que ses mains glissent. Sa formule est MgCO₃. Mg est le symbole du magnésium. C est le symbole du carbone. O est le symbole de l'oxygène.",
+      "question": "Nomme les atomes présents dans la formule MgCO₃. Donne le nombre de chaque atome, puis le nombre total.",
+      "reponse": "MgCO₃ contient :\n- 1 atome de magnésium (Mg, pas de chiffre) ;\n- 1 atome de carbone (C, pas de chiffre) ;\n- 3 atomes d'oxygène (O₃).\nTotal : 1 + 1 + 3 = 5 atomes. (Raisonnement déductif.)"
+    },
+    {
+      "themeId": "Farming Simulator",
+      "titre": "Le secret des engrais",
+      "objectifId": "obj2",
+      "enonce": "Dans Farming Simulator, Lucas épand des engrais sur ses champs. Voici deux engrais réels : l'ammoniac NH₃ et l'urée CH₄N₂O. N est le symbole de l'azote. Les plantes ont besoin d'azote pour pousser.",
+      "question": "Compare les deux formules.\n1. Nomme les atomes de chaque engrais et leur nombre.\n2. Identifie l'atome présent dans les deux engrais.\n3. Déduis pourquoi ces produits aident les plantes.",
+      "reponse": "1. NH₃ : 1 atome d'azote et 3 atomes d'hydrogène.\nCH₄N₂O : 1 atome de carbone, 4 atomes d'hydrogène, 2 atomes d'azote et 1 atome d'oxygène.\n2. L'azote (N) est présent dans les deux engrais.\n3. Les deux engrais apportent des atomes d'azote. Or les plantes ont besoin d'azote pour pousser. (Raisonnement inductif.)"
+    },
+    {
+      "themeId": "Camion",
+      "titre": "Le camion moins polluant",
+      "objectifId": "obj2",
+      "enonce": "Le moteur diesel d'un camion rejette un gaz polluant : le dioxyde d'azote NO₂. Le système AdBlue transforme ce gaz en diazote N₂ et en eau H₂O. N est l'azote, O l'oxygène et H l'hydrogène.",
+      "question": "Nomme les atomes et leur nombre dans NO₂, N₂ et H₂O.",
+      "reponse": "NO₂ : 1 atome d'azote et 2 atomes d'oxygène.\nN₂ : 2 atomes d'azote.\nH₂O : 2 atomes d'hydrogène et 1 atome d'oxygène.\nOn lit chaque symbole, puis le petit chiffre qui le suit. Sans chiffre, il y a 1 atome. (Raisonnement déductif.)"
+    },
+    {
+      "themeId": "Pêche",
+      "titre": "Ce que respirent les poissons",
+      "objectifId": "obj1",
+      "enonce": "Léo pêche au bord de l'étang. Les poissons respirent le dioxygène dissous dans l'eau. Sa formule est O₂. Règle : une molécule contient au moins 2 atomes liés et n'a pas de signe + ou −.",
+      "question": "Déduis si le dioxygène O₂ est un atome, une molécule ou un ion. Justifie avec la règle.",
+      "reponse": "O₂ contient 2 atomes d'oxygène liés. Il n'a pas de signe + ou −. D'après la règle, le dioxygène est donc une molécule. (Raisonnement déductif.)"
+    },
+    {
+      "themeId": "Travailler dehors",
+      "titre": "Le sucre fabriqué par l'herbe",
+      "objectifId": "obj2",
+      "enonce": "Jade tond la pelouse chez ses grands-parents. Les feuilles d'herbe fabriquent du glucose (un sucre) grâce à la lumière. La formule du glucose est C₆H₁₂O₆. C est le carbone, H l'hydrogène et O l'oxygène.",
+      "question": "Nomme les atomes du glucose et donne leur nombre. Calcule ensuite le nombre total d'atomes.",
+      "reponse": "Le glucose contient :\n- 6 atomes de carbone (C₆) ;\n- 12 atomes d'hydrogène (H₁₂) ;\n- 6 atomes d'oxygène (O₆).\nTotal : 6 + 12 + 6 = 24 atomes. (Raisonnement déductif.)"
+    },
+    {
+      "themeId": "Mécanique",
+      "titre": "Le vieux moteur rouillé",
+      "objectifId": "obj2",
+      "enonce": "Kevin trouve un vieux moteur laissé dehors pendant un an. Le métal est devenu orange. Le fer seul a pour symbole Fe. La rouille a pour formule Fe₂O₃. L'air contient du dioxygène O₂.",
+      "question": "Propose une explication à l'apparition de la rouille.\n1. Nomme les atomes de la rouille et leur nombre.\n2. Identifie l'atome qui vient de l'air.",
+      "reponse": "1. Fe₂O₃ contient 2 atomes de fer et 3 atomes d'oxygène.\n2. Le métal neuf contient seulement du fer (Fe). La rouille contient aussi de l'oxygène. Cet oxygène vient du dioxygène O₂ de l'air. Le fer s'est lié à l'oxygène de l'air. (Raisonnement abductif.)"
+    },
+    {
+      "themeId": "Moto",
+      "titre": "L'acide de la batterie",
+      "objectifId": "obj2",
+      "enonce": "Ryan change la batterie de sa moto. Elle contient de l'acide sulfurique, un liquide très dangereux. Sa formule est H₂SO₄. H est l'hydrogène, S le soufre et O l'oxygène.",
+      "question": "Nomme les atomes de l'acide sulfurique. Donne le nombre de chaque atome, puis le nombre total.",
+      "reponse": "H₂SO₄ contient :\n- 2 atomes d'hydrogène (H₂) ;\n- 1 atome de soufre (S, pas de chiffre) ;\n- 4 atomes d'oxygène (O₄).\nTotal : 2 + 1 + 4 = 7 atomes. (Raisonnement déductif.)"
+    }
+  ]
+}
