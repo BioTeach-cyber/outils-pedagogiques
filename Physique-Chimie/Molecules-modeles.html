@@ -648,7 +648,7 @@
 
         /* ===== CONFIGURATION GLOBALE ===== */
         const CONFIG = {
-            urlJson: './assets/json/Molecules.json',
+            urlJson: '../assets/json/Molecules.json',
             // Couleurs pédagogiques des atomes
             couleursAtomes: {
                 'C': '#808080',
@@ -837,48 +837,71 @@
                 },
 
                 verifierAssociation(donneesDrag, carte) {
-                    const feedback = document.getElementById('feedback-associer');
+    const feedback = document.getElementById('feedback-associer');
 
-                    if (donneesDrag.type === carte.classList.contains('carte-nom') ? 'nom' : 'formule') {
-                        feedback.className = 'feedback error';
-                        feedback.textContent = '❌ Relie un nom à une formule !';
-                        feedback.style.display = 'block';
-                        setTimeout(() => feedback.style.display = 'none', 2000);
-                        return;
-                    }
+    // ✅ CORRECTION : Vérifier qu'on associe bien un NOM à une FORMULE
+    if (donneesDrag.type === carte.classList.contains('carte-nom') ? 'nom' : 'formule') {
+        // Si on glisse un NOM sur un NOM, ou une FORMULE sur une FORMULE → erreur
+        if (donneesDrag.type === 'nom' && carte.classList.contains('carte-nom')) {
+            feedback.className = 'feedback error';
+            feedback.textContent = '❌ Relie un NOM à une FORMULE !';
+            feedback.style.display = 'block';
+            setTimeout(() => feedback.style.display = 'none', 2000);
+            return;
+        }
+        if (donneesDrag.type === 'formule' && carte.classList.contains('carte-formule')) {
+            feedback.className = 'feedback error';
+            feedback.textContent = '❌ Relie un NOM à une FORMULE !';
+            feedback.style.display = 'block';
+            setTimeout(() => feedback.style.display = 'none', 2000);
+            return;
+        }
+    }
 
-                    const indexNom = parseInt(donneesDrag.type === 'nom' ? donneesDrag.contenu : carte.dataset.index);
-                    const formule = donneesDrag.type === 'formule' ? donneesDrag.contenu : carte.dataset.formule;
+    // Récupérer l'index du nom et la formule
+    const indexNom = donneesDrag.type === 'nom' ? 
+        parseInt(donneesDrag.contenu) : 
+        parseInt(carte.dataset.index);
+    
+    const formule = donneesDrag.type === 'formule' ? 
+        donneesDrag.contenu : 
+        carte.dataset.formule;
 
-                    const pair = this.paires.find(p => p.nom === this.noms[indexNom] && p.formule === formule);
+    // Vérifier si c'est une bonne association
+    const pair = this.paires.find(p => 
+        p.nom === this.noms[indexNom] && 
+        p.formule === formule
+    );
 
-                    if (pair) {
-                        feedback.className = 'feedback success';
-                        feedback.textContent = '✅ Correct !';
-                        feedback.style.display = 'block';
+    if (pair && !this.matchs.has(pair.index)) {
+        // ✅ Bonne réponse !
+        this.matchs.add(pair.index);
+        
+        // Masquer les cartes associées
+        const carteNom = document.querySelector(`.carte-nom[data-index="${indexNom}"]`);
+        const carteFormule = document.querySelector(`.carte-formule[data-formule="${formule}"]`);
+        if (carteNom) carteNom.style.opacity = '0.3';
+        if (carteFormule) carteFormule.style.opacity = '0.3';
 
-                        document.querySelectorAll(`[data-index="${indexNom}"]`).forEach(c => {
-                            c.classList.add('matched');
-                        });
-                        document.querySelectorAll(`[data-formule="${formule}"]`).forEach(c => {
-                            c.classList.add('matched');
-                        });
+        feedback.className = 'feedback success';
+        feedback.textContent = `✅ Correct ! ${this.noms[indexNom]} ↔ ${utils.formaterFormule(formule)}`;
+        feedback.style.display = 'block';
 
-                        this.matchs.add(`${indexNom}-${formule}`);
-
-                        if (this.matchs.size === this.paires.length) {
-                            setTimeout(() => {
-                                feedback.className = 'feedback success';
-                                feedback.textContent = '🎉 Parfait ! Tu as associé toutes les molécules !';
-                            }, 500);
-                        }
-                    } else {
-                        feedback.className = 'feedback error';
-                        feedback.textContent = '❌ Ce n\'est pas la bonne association. Essaie encore !';
-                        feedback.style.display = 'block';
-                        setTimeout(() => feedback.style.display = 'none', 2000);
-                    }
-                },
+        // Vérifier si c'est terminé
+        if (this.matchs.size === this.paires.length) {
+            setTimeout(() => {
+                feedback.textContent = '🎉 Bravo ! Tu as tout associé correctement !';
+                feedback.className = 'feedback success';
+            }, 1000);
+        }
+    } else {
+        // ❌ Mauvaise réponse
+        feedback.className = 'feedback error';
+        feedback.textContent = '❌ Ce n\'est pas la bonne association.';
+        feedback.style.display = 'block';
+        setTimeout(() => feedback.style.display = 'none', 2000);
+    }
+},
 
                 reinitialiser() {
                     this.initialiser();
@@ -1005,6 +1028,7 @@
 
                     this.afficher();
                     this.initCanvas();
+                    this.initDragDrop();
                 },
 
                 afficher() {
@@ -1089,33 +1113,66 @@
                     this.dessiner();
                 },
 
-                initDragDrop() {
-                    const paletteAtomes = document.getElementById('palette-atomes');
-                    paletteAtomes.addEventListener('dragstart', (e) => {
-                        if (e.target.classList.contains('atome-bouton')) {
-                            e.dataTransfer.effectAllowed = 'move';
-                            e.dataTransfer.setData('symbole', e.target.dataset.symbole);
-                            e.dataTransfer.setData('id', e.target.dataset.id);
-                        }
-                    });
+initDragDrop() {
+    const paletteAtomes = document.getElementById('palette-atomes');
+    
+    if (!paletteAtomes) {
+        console.error('❌ Palette d\'atomes non trouvée');
+        return;
+    }
 
-                    this.canvas.addEventListener('dragover', (e) => {
-                        e.preventDefault();
-                        e.dataTransfer.dropEffect = 'move';
-                    });
+    // Événements de glissement depuis la palette
+    paletteAtomes.addEventListener('dragstart', (e) => {
+        if (e.target.classList.contains('atome-bouton')) {
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('symbole', e.target.dataset.symbole);
+            e.dataTransfer.setData('id', e.target.dataset.id);
+            e.target.style.opacity = '0.6'; // Feedback visuel
+        }
+    });
 
-                    this.canvas.addEventListener('drop', (e) => {
-                        e.preventDefault();
-                        const symbole = e.dataTransfer.getData('symbole');
-                        const id = e.dataTransfer.getData('id');
+    paletteAtomes.addEventListener('dragend', (e) => {
+        if (e.target.classList.contains('atome-bouton')) {
+            e.target.style.opacity = '1'; // Réinitialiser
+        }
+    });
 
-                        const rect = this.canvas.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
+    // Événements du canvas
+    if (this.canvas) {
+        this.canvas.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            this.canvas.style.backgroundColor = 'rgba(83, 164, 219, 0.05)'; // Feedback visuel
+        });
 
-                        this.ajouterAtome(symbole, x, y, id);
-                    });
-                },
+        this.canvas.addEventListener('dragleave', () => {
+            this.canvas.style.backgroundColor = '#ffffff';
+        });
+
+        this.canvas.addEventListener('drop', (e) => {
+            e.preventDefault();
+            this.canvas.style.backgroundColor = '#ffffff';
+
+            const symbole = e.dataTransfer.getData('symbole');
+            const id = e.dataTransfer.getData('id');
+
+            if (symbole && this.canvas) {
+                const rect = this.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Vérifier que les coordonnées sont dans le canvas
+                if (x > 0 && x < this.canvas.width && y > 0 && y < this.canvas.height) {
+                    this.ajouterAtome(symbole, x, y, id);
+                } else {
+                    alert('❌ Glisse l\'atome à l\'intérieur du canvas !');
+                }
+            }
+        });
+    } else {
+        console.error('❌ Canvas non trouvé');
+    }
+},
 
                 ajouterAtome(symbole, x, y, id) {
                     // Vérifier qu'on ne dépasse pas le nombre d'atomes disponibles
