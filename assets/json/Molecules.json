@@ -1,0 +1,229 @@
+{
+  "molecules": [
+    {
+      "id": "eau",
+      "nom": "Eau",
+      "formule": "H2O",
+      "cid": 962,
+      "atomes": { "H": 2, "O": 1 },
+      "niveau": 1,
+      "indice": "Essentielle à la vie. Nous la buvons chaque jour."
+    },
+    {
+      "id": "dioxygene",
+      "nom": "Dioxygène",
+      "formule": "O2",
+      "cid": 977,
+      "atomes": { "O": 2 },
+      "niveau": 1,
+      "indice": "Nous le respirons pour vivre. Les plantes le produisent."
+    },
+    {
+      "id": "dioxyde-carbone",
+      "nom": "Dioxyde de carbone",
+      "formule": "CO2",
+      "cid": 280,
+      "atomes": { "C": 1, "O": 2 },
+      "niveau": 1,
+      "indice": "Nous le rejetons en expirant. Les plantes l'absorbent."
+    },
+    {
+      "id": "methane",
+      "nom": "Méthane",
+      "formule": "CH4",
+      "cid": 297,
+      "atomes": { "C": 1, "H": 4 },
+      "niveau": 2,
+      "indice": "Gaz utilisé pour le chauffage. Produit par les vaches."
+    },
+    {
+      "id": "dioxyde-azote",
+      "nom": "Dioxyde d'azote",
+      "formule": "NO2",
+      "cid": 8116,
+      "atomes": { "N": 1, "O": 2 },
+      "niveau": 2,
+      "indice": "Polluant de l'air provenant des voitures."
+    },
+    {
+      "id": "acide-sulfhydrique",
+      "nom": "Acide sulfhydrique (sulfure d'hydrogène)",
+      "formule": "H2S",
+      "cid": 402,
+      "atomes": { "H": 2, "S": 1 },
+      "niveau": 2,
+      "indice": "Sent l'œuf pourri. Produit naturel des marais."
+    },
+    {
+      "id": "acide-chlorhydrique",
+      "nom": "Acide chlorhydrique (chlorure d'hydrogène)",
+      "formule": "HCl",
+      "cid": 313,
+      "atomes": { "H": 1, "Cl": 1 },
+      "niveau": 2,
+      "indice": "Acide utilisé pour nettoyer. Présent dans l'estomac."
+    },
+    {
+      "id": "dihydrogene",
+      "nom": "Dihydrogène",
+      "formule": "H2",
+      "cid": 783,
+      "atomes": { "H": 2 },
+      "niveau": 1,
+      "indice": "Gaz très léger utilisé pour les ballons. Très inflammable."
+    },
+    {
+      "id": "azote",
+      "nom": "Diazote",
+      "formule": "N2",
+      "cid": 948,
+      "atomes": { "N": 2 },
+      "niveau": 1,
+      "indice": "Principal constituant de l'air (78%). Inerte et inodore."
+    },
+    {
+      "id": "ammoniac",
+      "nom": "Ammoniac",
+      "formule": "NH3",
+      "cid": 222,
+      "atomes": { "N": 1, "H": 3 },
+      "niveau": 2,
+      "indice": "Odeur piquante de détergent. Utilisé en agriculture."
+    },
+    {
+      "id": "ethane",
+      "nom": "Éthane",
+      "formule": "C2H6",
+      "cid": 6324,
+      "atomes": { "C": 2, "H": 6 },
+      "niveau": 2,
+      "indice": "Hydrocarbure simple. Composant du gaz naturel."
+    },
+    {
+      "id": "ethene",
+      "nom": "Éthène (éthylène)",
+      "formule": "C2H4",
+      "cid": 6325,
+      "atomes": { "C": 2, "H": 4 },
+      "niveau": 3,
+      "indice": "Hormone végétale. Mûrit les fruits."
+    },
+    {
+      "id": "ethyne",
+      "nom": "Éthyne (acétylène)",
+      "formule": "C2H2",
+      "cid": 6326,
+      "atomes": { "C": 2, "H": 2 },
+      "niveau": 3,
+      "indice": "Gaz utilisé pour souder. Triple liaison entre les carbones."
+    },
+    {
+      "id": "propane",
+      "nom": "Propane",
+      "formule": "C3H8",
+      "cid": 6334,
+      "atomes": { "C": 3, "H": 8 },
+      "niveau": 3,
+      "indice": "Gaz de camping. Utilisé comme combustible."
+    },
+    {
+      "id": "monoxyde-carbone",
+      "nom": "Monoxyde de carbone",
+      "formule": "CO",
+      "cid": 281,
+      "atomes": { "C": 1, "O": 1 },
+      "niveau": 2,
+      "indice": "Gaz toxique issu de la combustion incomplète. Inodore."
+    },
+    {
+      "id": "disulfure-carbone",
+      "nom": "Disulfure de carbone",
+      "formule": "CS2",
+      "cid": 6348,
+      "atomes": { "C": 1, "S": 2 },
+      "niveau": 3,
+      "indice": "Liquide très inflammable. Odeur très désagréable."
+    },
+    {
+      "id": "chlore",
+      "nom": "Dichlore",
+      "formule": "Cl2",
+      "cid": 813,
+      "atomes": { "Cl": 2 },
+      "niveau": 1,
+      "indice": "Gaz verdâtre utilisé pour désinfecter les piscines."
+    },
+    {
+      "id": "phosphine",
+      "nom": "Phosphine",
+      "formule": "PH3",
+      "cid": 15757,
+      "atomes": { "P": 1, "H": 3 },
+      "niveau": 3,
+      "indice": "Gaz toxique. Odeur d'ail pourri. Composé du phosphore."
+    },
+    {
+      "id": "eau-oxygenee",
+      "nom": "Eau oxygénée (peroxyde d'hydrogène)",
+      "formule": "H2O2",
+      "cid": 784,
+      "atomes": { "H": 2, "O": 2 },
+      "niveau": 2,
+      "indice": "Utilisée pour désinfecter les plaies. Décolorante."
+    },
+    {
+      "id": "methanal",
+      "nom": "Méthanal (formaldéhyde)",
+      "formule": "CH2O",
+      "cid": 712,
+      "atomes": { "C": 1, "H": 2, "O": 1 },
+      "niveau": 3,
+      "indice": "Utilisé en conservation. Odeur piquante et irritante."
+    },
+    {
+      "id": "ethanol",
+      "nom": "Éthanol (alcool)",
+      "formule": "C2H6O",
+      "cid": 702,
+      "atomes": { "C": 2, "H": 6, "O": 1 },
+      "niveau": 3,
+      "indice": "Alcool de boisson. Utilisé comme désinfectant."
+    },
+    {
+      "id": "methanol",
+      "nom": "Méthanol",
+      "formule": "CH4O",
+      "cid": 887,
+      "atomes": { "C": 1, "H": 4, "O": 1 },
+      "niveau": 3,
+      "indice": "Poison très toxique. Carburant pour voitures de course."
+    },
+    {
+      "id": "acide-acetic",
+      "nom": "Acide acétique",
+      "formule": "C2H4O2",
+      "cid": 176,
+      "atomes": { "C": 2, "H": 4, "O": 2 },
+      "niveau": 3,
+      "indice": "Principal composant du vinaigre. Pique fortement."
+    },
+    {
+      "id": "tetrachlorure-carbone",
+      "nom": "Tétrachlorure de carbone",
+      "formule": "CCl4",
+      "cid": 5943,
+      "atomes": { "C": 1, "Cl": 4 },
+      "niveau": 3,
+      "indice": "Autrefois utilisé comme solvant. Très toxique."
+    },
+    {
+      "id": "hexafluore-soufre",
+      "nom": "Hexafluorure de soufre",
+      "formule": "SF6",
+      "cid": 412622,
+      "atomes": { "S": 1, "F": 6 },
+      "niveau": 3,
+      "indice": "Gaz très dense. Utilisé en électrotechnique. Gaz à effet de serre."
+    }
+  ]
+}

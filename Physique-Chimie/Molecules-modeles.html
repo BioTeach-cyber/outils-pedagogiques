@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molécules - Formules et Modèles</title>
+    <style>
+        /* ===== VARIABLES CSS ===== */
+        :root {
+            --bleu: #53a4db;
+            --vert: #7fbc48;
+            --orange: #f3912b;
+            --gris: #b7b7b7;
+            --rouge: #e62d32;
+            --noir: #494949;
+            --fond: #ffffff;
+            /* Atomes */
+            --couleur-C: #808080;
+            --couleur-H: #e8e8e8;
+            --couleur-O: #e62d32;
+            --couleur-N: #3a9fd8;
+            --couleur-S: #f4d32e;
+            --couleur-Cl: #7fbc48;
+            /* Espacements */
+            --pad-small: 0.5rem;
+            --pad-medium: 1rem;
+            --pad-large: 1.5rem;
+        }
+
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fond);
+            color: var(--noir);
+            line-height: 1.5;
+            padding: var(--pad-medium);
+        }
+
+        /* ===== LAYOUT PRINCIPAL ===== */
+        #app {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--fond);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: var(--pad-large);
+            border-bottom: 4px solid var(--bleu);
+            padding-bottom: var(--pad-large);
+        }
+
+        header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: var(--bleu);
+            margin-bottom: var(--pad-small);
+        }
+
+        header p {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            color: var(--noir);
+        }
+
+        main {
+            display: flex;
+            gap: var(--pad-large);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ===== NAVIGATION ONGLETS ===== */
+        .onglets {
+            display: flex;
+            gap: var(--pad-small);
+            margin-bottom: var(--pad-large);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-onglet {
+            padding: var(--pad-medium) var(--pad-large);
+            border: none;
+            background-color: var(--gris);
+            color: var(--fond);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-onglet:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-onglet.actif {
+            background-color: var(--bleu);
+            box-shadow: 0 4px 12px rgba(83, 164, 219, 0.3);
+        }
+
+        /* ===== SECTIONS D'ACTIVITÉS ===== */
+        .activite {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--fond);
+            padding: var(--pad-large);
+            border-radius: 1rem;
+            border: 2px solid var(--bleu);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .activite.visible {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .activite h2 {
+            color: var(--bleu);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: var(--pad-medium);
+            text-align: center;
+        }
+
+        .activite p {
+            text-align: center;
+            color: var(--noir);
+            margin-bottom: var(--pad-medium);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* ===== ACTIVITÉ 1 : ASSOCIER ===== */
+        .associer-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--pad-large);
+            margin-bottom: var(--pad-large);
+        }
+
+        @media (max-width: 600px) {
+            .associer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .colonne {
+            display: flex;
+            flex-direction: column;
+            gap: var(--pad-medium);
+        }
+
+        .carte-nom, .carte-formule {
+            padding: var(--pad-medium);
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            cursor: grab;
+            user-select: none;
+            transition: all 0.2s ease;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carte-nom {
+            background-color: #f0f8ff;
+            border: 2px solid var(--bleu);
+            color: var(--bleu);
+        }
+
+        .carte-formule {
+            background-color: #f0fff0;
+            border: 2px solid var(--vert);
+            color: var(--vert);
+        }
+
+        .carte-nom:hover, .carte-formule:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .carte-nom.matched, .carte-formule.matched {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .lien-match {
+            position: absolute;
+            width: 2px;
+            background-color: var(--vert);
+            opacity: 0.5;
+        }
+
+        .feedback {
+            text-align: center;
+            padding: var(--pad-medium);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            margin-top: var(--pad-medium);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+
+        .feedback.success {
+            background-color: #f0fff0;
+            color: var(--vert);
+            border: 2px solid var(--vert);
+        }
+
+        .feedback.error {
+            background-color: #fff5f5;
+            color: var(--rouge);
+            border: 2px solid var(--rouge);
+        }
+
+        /* ===== ACTIVITÉ 2 : RECONNAÎTRE ===== */
+        .reconnaitre-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--pad-large);
+        }
+
+        .molecule-info {
+            background-color: #f0f8ff;
+            padding: var(--pad-large);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--bleu);
+            text-align: center;
+        }
+
+        .molecule-info h3 {
+            color: var(--bleu);
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: var(--pad-small);
+        }
+
+        .molecule-info p {
+            color: var(--noir);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+
+        .indice-btn {
+            background-color: var(--orange);
+            color: var(--fond);
+            padding: var(--pad-medium) var(--pad-large);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            transition: all 0.3s ease;
+            align-self: center;
+        }
+
+        .indice-btn:hover {
+            background-color: #e07e1f;
+            transform: scale(1.05);
+        }
+
+        .indice-texte {
+            background-color: #fff9f0;
+            padding: var(--pad-medium);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--orange);
+            color: var(--noir);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            display: none;
+        }
+
+        .indice-texte.visible {
+            display: block;
+        }
+
+        .molview-container {
+            width: 100%;
+            height: 400px;
+            border: 2px solid var(--bleu);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: var(--pad-medium) 0;
+        }
+
+        .molview-fallback {
+            text-align: center;
+            color: var(--gris);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            padding: var(--pad-large);
+        }
+
+        .formule-display {
+            background-color: #f0f0f0;
+            padding: var(--pad-medium);
+            border-radius: 0.5rem;
+            font-family: "Courier New", monospace;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-weight: bold;
+            color: var(--bleu);
+            text-align: center;
+            margin: var(--pad-medium) 0;
+        }
+
+        .reponses-qcm {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--pad-medium);
+        }
+
+        .btn-reponse {
+            padding: var(--pad-medium);
+            border: 2px solid var(--gris);
+            background-color: var(--fond);
+            color: var(--noir);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            transition: all 0.3s ease;
+        }
+
+        .btn-reponse:hover {
+            border-color: var(--bleu);
+            transform: scale(1.05);
+        }
+
+        .btn-reponse.selected {
+            background-color: var(--bleu);
+            color: var(--fond);
+            border-color: var(--bleu);
+        }
+
+        .btn-reponse.correct {
+            background-color: var(--vert);
+            color: var(--fond);
+            border-color: var(--vert);
+        }
+
+        .btn-reponse.incorrect {
+            background-color: var(--rouge);
+            color: var(--fond);
+            border-color: var(--rouge);
+        }
+
+        /* ===== ACTIVITÉ 3 : CONSTRUIRE ===== */
+        .construire-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--pad-large);
+        }
+
+        .cible-formule {
+            background-color: #fff9f0;
+            padding: var(--pad-large);
+            border: 2px dashed var(--orange);
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .cible-formule h3 {
+            color: var(--noir);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-bottom: var(--pad-small);
+        }
+
+        .formule-cible {
+            font-family: "Courier New", monospace;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-weight: bold;
+            color: var(--orange);
+        }
+
+        .palette-atomes {
+            background-color: #f5f5f5;
+            padding: var(--pad-large);
+            border-radius: 0.5rem;
+            border: 2px solid var(--gris);
+        }
+
+        .palette-atomes h3 {
+            color: var(--noir);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-bottom: var(--pad-medium);
+        }
+
+        .atomes-disponibles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--pad-medium);
+            margin-bottom: var(--pad-medium);
+        }
+
+        .atome-bouton {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--noir);
+            cursor: grab;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .atome-bouton:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .atome-bouton:active {
+            cursor: grabbing;
+        }
+
+        /* Couleurs des atomes */
+        .atome-C { background-color: var(--couleur-C); color: var(--fond); }
+        .atome-H { background-color: var(--couleur-H); color: var(--noir); border-color: var(--noir); }
+        .atome-O { background-color: var(--couleur-O); color: var(--fond); }
+        .atome-N { background-color: var(--couleur-N); color: var(--fond); }
+        .atome-S { background-color: var(--couleur-S); color: var(--noir); border-color: var(--noir); }
+        .atome-Cl { background-color: var(--couleur-Cl); color: var(--fond); }
+
+        .canvas-construction {
+            width: 100%;
+            height: 400px;
+            border: 2px solid var(--bleu);
+            border-radius: 0.5rem;
+            background-color: #f9f9f9;
+            cursor: crosshair;
+            margin: var(--pad-medium) 0;
+        }
+
+        .boutons-construction {
+            display: flex;
+            gap: var(--pad-medium);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-action {
+            padding: var(--pad-medium) var(--pad-large);
+            border: none;
+            background-color: var(--bleu);
+            color: var(--fond);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            transition: all 0.3s ease;
+        }
+
+        .btn-action:hover {
+            background-color: #4494c3;
+            transform: scale(1.05);
+        }
+
+        .btn-action.danger {
+            background-color: var(--rouge);
+        }
+
+        .btn-action.danger:hover {
+            background-color: #d61828;
+        }
+
+        .mode-liaison {
+            text-align: center;
+            padding: var(--pad-medium);
+            background-color: #f0f8ff;
+            border-radius: 0.5rem;
+            border: 2px solid var(--bleu);
+            color: var(--bleu);
+            font-weight: 600;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+
+        .mode-liaison.actif {
+            background-color: var(--bleu);
+            color: var(--fond);
+        }
+
+        .legonde-liaisons {
+            background-color: #f0f0f0;
+            padding: var(--pad-medium);
+            border-radius: 0.5rem;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            margin-top: var(--pad-medium);
+        }
+
+        .legonde-liaisons p {
+            margin-bottom: var(--pad-small);
+        }
+
+        /* ===== BOUTONS GÉNÉRAUX ===== */
+        .btn-nouveau {
+            padding: var(--pad-medium) var(--pad-large);
+            background-color: var(--vert);
+            color: var(--fond);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            transition: all 0.3s ease;
+            align-self: center;
+        }
+
+        .btn-nouveau:hover {
+            background-color: #6fa83b;
+            transform: scale(1.05);
+        }
+
+        /* ===== CHARGEMENT ===== */
+        .chargement {
+            text-align: center;
+            padding: var(--pad-large);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--gris);
+        }
+
+        .spinner {
+            border: 4px solid var(--gris);
+            border-top: 4px solid var(--bleu);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: var(--pad-medium) auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== ERREUR ===== */
+        .erreur {
+            background-color: #fff5f5;
+            border: 2px solid var(--rouge);
+            color: var(--rouge);
+            padding: var(--pad-large);
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            margin: var(--pad-large) 0;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        /* ===== ACCESSIBILITÉ ===== */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- En-tête -->
+        <header>
+            <h1>🧪 Molécules</h1>
+            <p>Formules chimiques et modèles moléculaires</p>
+        </header>
+
+        <!-- Navigation onglets -->
+        <nav class="onglets">
+            <button class="btn-onglet actif" data-onglet="associer">
+                Associer formule et nom
+            </button>
+            <button class="btn-onglet" data-onglet="reconnaitre">
+                Reconnaître un modèle
+            </button>
+            <button class="btn-onglet" data-onglet="construire">
+                Construire un modèle
+            </button>
+        </nav>
+
+        <main>
+            <!-- ACTIVITÉ 1 : ASSOCIER -->
+            <section id="associer" class="activite visible">
+                <h2>Associer formule et nom</h2>
+                <p>Relie chaque nom de molécule à sa formule chimique.</p>
+
+                <div id="associer-contenu" class="associer-container">
+                    <div class="spinner"></div>
+                </div>
+
+                <div id="feedback-associer" class="feedback" style="display: none;"></div>
+
+                <button class="btn-nouveau" onclick="activites.associer.reinitialiser()">
+                    Nouvelle partie
+                </button>
+            </section>
+
+            <!-- ACTIVITÉ 2 : RECONNAÎTRE -->
+            <section id="reconnaitre" class="activite">
+                <h2>Reconnaître un modèle</h2>
+                <p>Observe le modèle 3D et reconnais la molécule.</p>
+
+                <div id="reconnaitre-contenu" class="reconnaitre-container">
+                    <div class="spinner"></div>
+                </div>
+
+                <button class="btn-nouveau" onclick="activites.reconnaitre.suivant()">
+                    Molécule suivante
+                </button>
+            </section>
+
+            <!-- ACTIVITÉ 3 : CONSTRUIRE -->
+            <section id="construire" class="activite">
+                <h2>Construire un modèle</h2>
+                <p>Construis la molécule en utilisant les atomes disponibles et en les reliant.</p>
+
+                <div id="construire-contenu" class="construire-container">
+                    <div class="spinner"></div>
+                </div>
+
+                <button class="btn-nouveau" onclick="activites.construire.reinitialiser()">
+                    Nouvelle molécule
+                </button>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        "use strict";
+
+        /* ===== CONFIGURATION GLOBALE ===== */
+        const CONFIG = {
+            urlJson: './assets/json/Molecules.json',
+            // Couleurs pédagogiques des atomes
+            couleursAtomes: {
+                'C': '#808080',
+                'H': '#e8e8e8',
+                'O': '#e62d32',
+                'N': '#3a9fd8',
+                'S': '#f4d32e',
+                'Cl': '#7fbc48'
+            }
+        };
+
+        /* ===== DONNÉES GLOBALES ===== */
+        let donnees = {
+            molecules: [],
+            indexActuel: 0
+        };
+
+        /* ===== UTILITAIRES ===== */
+        const utils = {
+            // Charger le JSON
+            async chargerMolecules() {
+                try {
+                    const reponse = await fetch(CONFIG.urlJson);
+                    if (!reponse.ok) throw new Error(`Erreur HTTP ${reponse.status}`);
+                    const data = await reponse.json();
+                    donnees.molecules = data.molecules || [];
+                    if (donnees.molecules.length === 0) {
+                        throw new Error('Aucune molécule trouvée dans le JSON');
+                    }
+                    console.log(`✅ ${donnees.molecules.length} molécules chargées`);
+                    return true;
+                } catch (err) {
+                    console.error('❌ Erreur chargement JSON:', err);
+                    afficherErreur(`Erreur: ${err.message}`);
+                    return false;
+                }
+            },
+
+            // Obtenir une molécule aléatoire
+            obtenirMoleculeAleatoire() {
+                return donnees.molecules[Math.floor(Math.random() * donnees.molecules.length)];
+            },
+
+            // Mélanger un tableau
+            melangerTableau(arr) {
+                const copie = [...arr];
+                for (let i = copie.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [copie[i], copie[j]] = [copie[j], copie[i]];
+                }
+                return copie;
+            },
+
+            // Formater une formule avec indices (H2O -> H₂O)
+            formaterFormule(formuleStr) {
+                return formuleStr.replace(/(\d+)/g, (match) => {
+                    const chiffres = ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'];
+                    return match.split('').map(c => chiffres[c]).join('');
+                });
+            },
+
+            // Parser une formule brute (CO2) en objets {atome, nombre}
+            parserFormule(formule) {
+                const regex = /([A-Z][a-z]?)(\d*)/g;
+                const atomes = [];
+                let match;
+                while ((match = regex.exec(formule)) !== null) {
+                    const symbole = match[1];
+                    const nombre = parseInt(match[2]) || 1;
+                    atomes.push({ symbole, nombre });
+                }
+                return atomes;
+            },
+
+            // Créer un bloc HTML pour un atome
+            creerBlocAtome(symbole) {
+                const div = document.createElement('div');
+                div.className = `atome-bouton atome-${symbole}`;
+                div.textContent = symbole;
+                div.draggable = true;
+                div.dataset.symbole = symbole;
+                return div;
+            }
+        };
+
+        /* ===== GESTION ONGLETS ===== */
+        document.querySelectorAll('.btn-onglet').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const onglet = btn.dataset.onglet;
+
+                // Désactiver tous les onglets
+                document.querySelectorAll('.btn-onglet').forEach(b => b.classList.remove('actif'));
+                document.querySelectorAll('.activite').forEach(s => s.classList.remove('visible'));
+
+                // Activer l'onglet sélectionné
+                btn.classList.add('actif');
+                document.getElementById(onglet).classList.add('visible');
+
+                // Initialiser si c'est la première visite
+                if (onglet === 'associer') activites.associer.initialiser();
+                else if (onglet === 'reconnaitre') activites.reconnaitre.initialiser();
+                else if (onglet === 'construire') activites.construire.initialiser();
+            });
+        });
+
+        /* ===== ACTIVITÉS ===== */
+        const activites = {
+            /* --- ACTIVITÉ 1 : ASSOCIER --- */
+            associer: {
+                noms: [],
+                formules: [],
+                paires: [],
+                matchs: new Set(),
+
+                initialiser() {
+                    // Sélectionner 6 molécules aléatoires
+                    const selection = [];
+                    for (let i = 0; i < Math.min(6, donnees.molecules.length); i++) {
+                        let mol;
+                        do {
+                            mol = utils.obtenirMoleculeAleatoire();
+                        } while (selection.some(m => m.id === mol.id));
+                        selection.push(mol);
+                    }
+
+                    this.noms = selection.map(m => m.nom);
+                    this.formules = selection.map(m => m.formule);
+                    this.paires = selection.map((m, i) => ({ nom: m.nom, formule: m.formule, index: i }));
+                    this.matchs.clear();
+
+                    this.afficher();
+                },
+
+                afficher() {
+                    const conteneur = document.getElementById('associer-contenu');
+                    const formulesAlea = utils.melangerTableau(this.formules);
+
+                    conteneur.innerHTML = `
+                        <div class="colonne">
+                            <h3 style="color: var(--bleu); font-size: 1rem;">Noms</h3>
+                            ${this.noms.map((nom, i) => `
+                                <div class="carte-nom" data-index="${i}" draggable="true">
+                                    ${nom}
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="colonne">
+                            <h3 style="color: var(--vert); font-size: 1rem;">Formules</h3>
+                            ${formulesAlea.map(formule => `
+                                <div class="carte-formule" data-formule="${formule}" draggable="true">
+                                    ${utils.formaterFormule(formule)}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+
+                    // Drag & drop
+                    const cartes = document.querySelectorAll('.carte-nom, .carte-formule');
+                    cartes.forEach(carte => {
+                        carte.addEventListener('dragstart', (e) => {
+                            e.dataTransfer.effectAllowed = 'move';
+                            e.dataTransfer.setData('text/plain', JSON.stringify({
+                                type: carte.classList.contains('carte-nom') ? 'nom' : 'formule',
+                                contenu: carte.classList.contains('carte-nom') ? 
+                                    carte.dataset.index : carte.dataset.formule
+                            }));
+                        });
+
+                        carte.addEventListener('dragover', (e) => {
+                            e.preventDefault();
+                            e.dataTransfer.dropEffect = 'move';
+                            carte.style.opacity = '0.7';
+                        });
+
+                        carte.addEventListener('dragleave', () => {
+                            carte.style.opacity = '1';
+                        });
+
+                        carte.addEventListener('drop', (e) => {
+                            e.preventDefault();
+                            carte.style.opacity = '1';
+                            const donneesDrag = JSON.parse(e.dataTransfer.getData('text/plain'));
+                            this.verifierAssociation(donneesDrag, carte);
+                        });
+                    });
+                },
+
+                verifierAssociation(donneesDrag, carte) {
+                    const feedback = document.getElementById('feedback-associer');
+
+                    if (donneesDrag.type === carte.classList.contains('carte-nom') ? 'nom' : 'formule') {
+                        feedback.className = 'feedback error';
+                        feedback.textContent = '❌ Relie un nom à une formule !';
+                        feedback.style.display = 'block';
+                        setTimeout(() => feedback.style.display = 'none', 2000);
+                        return;
+                    }
+
+                    const indexNom = parseInt(donneesDrag.type === 'nom' ? donneesDrag.contenu : carte.dataset.index);
+                    const formule = donneesDrag.type === 'formule' ? donneesDrag.contenu : carte.dataset.formule;
+
+                    const pair = this.paires.find(p => p.nom === this.noms[indexNom] && p.formule === formule);
+
+                    if (pair) {
+                        feedback.className = 'feedback success';
+                        feedback.textContent = '✅ Correct !';
+                        feedback.style.display = 'block';
+
+                        document.querySelectorAll(`[data-index="${indexNom}"]`).forEach(c => {
+                            c.classList.add('matched');
+                        });
+                        document.querySelectorAll(`[data-formule="${formule}"]`).forEach(c => {
+                            c.classList.add('matched');
+                        });
+
+                        this.matchs.add(`${indexNom}-${formule}`);
+
+                        if (this.matchs.size === this.paires.length) {
+                            setTimeout(() => {
+                                feedback.className = 'feedback success';
+                                feedback.textContent = '🎉 Parfait ! Tu as associé toutes les molécules !';
+                            }, 500);
+                        }
+                    } else {
+                        feedback.className = 'feedback error';
+                        feedback.textContent = '❌ Ce n\'est pas la bonne association. Essaie encore !';
+                        feedback.style.display = 'block';
+                        setTimeout(() => feedback.style.display = 'none', 2000);
+                    }
+                },
+
+                reinitialiser() {
+                    this.initialiser();
+                    document.getElementById('feedback-associer').style.display = 'none';
+                }
+            },
+
+            /* --- ACTIVITÉ 2 : RECONNAÎTRE --- */
+            reconnaitre: {
+                moleculeActuelle: null,
+                indexActuel: 0,
+                bonneReponse: false,
+
+                initialiser() {
+                    this.moleculeActuelle = utils.obtenirMoleculeAleatoire();
+                    this.bonneReponse = false;
+                    this.afficher();
+                },
+
+                afficher() {
+                    const mol = this.moleculeActuelle;
+                    const conteneur = document.getElementById('reconnaitre-contenu');
+
+                    // Créer 3 options de réponse (dont la bonne)
+                    const options = [mol.formule];
+                    while (options.length < 3) {
+                        const autre = utils.obtenirMoleculeAleatoire();
+                        if (!options.includes(autre.formule)) {
+                            options.push(autre.formule);
+                        }
+                    }
+                    const optionsAlea = utils.melangerTableau(options);
+
+                    conteneur.innerHTML = `
+                        <div class="molecule-info">
+                            <h3>${mol.nom}</h3>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <button class="indice-btn" onclick="activites.reconnaitre.afficherIndice()">
+                                💡 Afficher l'indice
+                            </button>
+                            <div id="indice-box" class="indice-texte">
+                                ${mol.indice}
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin: var(--pad-medium) 0;">
+                            <h3 style="color: var(--noir); font-size: 1rem; margin-bottom: var(--pad-medium);">
+                                Modèle 3D de la molécule :
+                            </h3>
+                            <div class="molview-container" id="molview-container">
+                                <iframe id="molview-iframe" style="width: 100%; height: 100%; border: none; border-radius: 0.5rem;"
+                                    src="https://embed.molview.org/v1/?mode=balls&cid=${mol.cid}" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <h3 style="color: var(--noir); font-size: 1rem; margin-bottom: var(--pad-medium);">
+                                Quelle est la formule chimique ?
+                            </h3>
+                            <div class="reponses-qcm">
+                                ${optionsAlea.map(f => `
+                                    <button class="btn-reponse" onclick="activites.reconnaitre.verifier('${f}')">
+                                        ${utils.formaterFormule(f)}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                    this.bonneReponse = false;
+                },
+
+                afficherIndice() {
+                    document.getElementById('indice-box').classList.add('visible');
+                },
+
+                verifier(formule) {
+                    if (this.bonneReponse) return; // Empêcher les clics multiples
+
+                    const btns = document.querySelectorAll('.btn-reponse');
+                    btns.forEach(btn => {
+                        if (btn.textContent.trim() === utils.formaterFormule(formule)) {
+                            if (formule === this.moleculeActuelle.formule) {
+                                btn.classList.add('correct');
+                                this.bonneReponse = true;
+                            } else {
+                                btn.classList.add('incorrect');
+                            }
+                        }
+                    });
+
+                    if (formule === this.moleculeActuelle.formule) {
+                        // Marquer les autres boutons comme désactivés
+                        btns.forEach(btn => btn.disabled = true);
+                    }
+                },
+
+                suivant() {
+                    this.initialiser();
+                    document.getElementById('indice-box').classList.remove('visible');
+                }
+            },
+
+            /* --- ACTIVITÉ 3 : CONSTRUIRE --- */
+            construire: {
+                moleculeActuelle: null,
+                canvas: null,
+                ctx: null,
+                atomes: [],
+                liaisons: [],
+                modeConstruction: 'atome', // 'atome' ou 'liaison'
+                liaisonEnCours: null,
+                atomeDragCourant: null,
+
+                initialiser() {
+                    this.moleculeActuelle = utils.obtenirMoleculeAleatoire();
+                    this.atomes = [];
+                    this.liaisons = [];
+                    this.modeConstruction = 'atome';
+                    this.liaisonEnCours = null;
+                    this.atomeDragCourant = null;
+
+                    this.afficher();
+                    this.initCanvas();
+                },
+
+                afficher() {
+                    const mol = this.moleculeActuelle;
+                    const atomesParsees = utils.parserFormule(mol.formule);
+                    const conteneur = document.getElementById('construire-contenu');
+
+                    // Créer la liste des atomes à placer
+                    const listeAtomesAAjouter = [];
+                    atomesParsees.forEach(a => {
+                        for (let i = 0; i < a.nombre; i++) {
+                            listeAtomesAAjouter.push(a.symbole);
+                        }
+                    });
+
+                    conteneur.innerHTML = `
+                        <div class="cible-formule">
+                            <h3>À construire :</h3>
+                            <div class="formule-cible">${utils.formaterFormule(mol.formule)}</div>
+                        </div>
+
+                        <div class="palette-atomes">
+                            <h3>Palette d'atomes</h3>
+                            <p style="font-size: 0.9rem; color: var(--noir); margin-bottom: var(--pad-medium);">
+                                Glisse les atomes sur le canvas ci-dessous.
+                            </p>
+                            <div class="atomes-disponibles" id="palette-atomes">
+                                ${listeAtomesAAjouter.map((sym, i) => `
+                                    <div class="atome-bouton atome-${sym}" 
+                                         draggable="true" 
+                                         data-symbole="${sym}"
+                                         data-id="atome-${i}">
+                                        ${sym}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--gris);">
+                                Nombre total d'atomes à placer: <strong>${listeAtomesAAjouter.length}</strong>
+                            </p>
+                        </div>
+
+                        <canvas id="canvas-construction" class="canvas-construction"></canvas>
+
+                        <div class="mode-liaison" id="mode-liaison-display">
+                            Mode: <strong>Placement d'atomes</strong>
+                        </div>
+
+                        <div class="boutons-construction">
+                            <button class="btn-action" onclick="activites.construire.basculerMode()">
+                                🔗 Passer au mode liaisons
+                            </button>
+                            <button class="btn-action danger" onclick="activites.construire.effacerTout()">
+                                🗑️ Effacer tout
+                            </button>
+                        </div>
+
+                        <div class="legonde-liaisons">
+                            <p><strong>Pour les liaisons :</strong></p>
+                            <p>1️⃣ Clique sur « Passer au mode liaisons »</p>
+                            <p>2️⃣ Clique sur un atome, puis sur un autre pour créer une liaison</p>
+                            <p>3️⃣ Clique sur une liaison pour changer son type (simple → double → triple)</p>
+                        </div>
+                    `;
+
+                    // Drag & drop des atomes
+                    this.initDragDrop();
+                },
+
+                initCanvas() {
+                    this.canvas = document.getElementById('canvas-construction');
+                    this.ctx = this.canvas.getContext('2d');
+
+                    // Redimensionner le canvas
+                    const rect = this.canvas.getBoundingClientRect();
+                    this.canvas.width = rect.width;
+                    this.canvas.height = rect.height;
+
+                    // Évenements souris
+                    this.canvas.addEventListener('click', (e) => this.gererClicCanvas(e));
+                    this.canvas.addEventListener('mousemove', (e) => this.gererSourisCanvas(e));
+
+                    this.dessiner();
+                },
+
+                initDragDrop() {
+                    const paletteAtomes = document.getElementById('palette-atomes');
+                    paletteAtomes.addEventListener('dragstart', (e) => {
+                        if (e.target.classList.contains('atome-bouton')) {
+                            e.dataTransfer.effectAllowed = 'move';
+                            e.dataTransfer.setData('symbole', e.target.dataset.symbole);
+                            e.dataTransfer.setData('id', e.target.dataset.id);
+                        }
+                    });
+
+                    this.canvas.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'move';
+                    });
+
+                    this.canvas.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        const symbole = e.dataTransfer.getData('symbole');
+                        const id = e.dataTransfer.getData('id');
+
+                        const rect = this.canvas.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        this.ajouterAtome(symbole, x, y, id);
+                    });
+                },
+
+                ajouterAtome(symbole, x, y, id) {
+                    // Vérifier qu'on ne dépasse pas le nombre d'atomes disponibles
+                    const mol = this.moleculeActuelle;
+                    const atomesParsees = utils.parserFormule(mol.formule);
+                    const atomesRequis = {};
+                    atomesParsees.forEach(a => {
+                        atomesRequis[a.symbole] = (atomesRequis[a.symbole] || 0) + a.nombre;
+                    });
+
+                    const atomesPlaces = this.atomes.filter(a => a.symbole === symbole).length;
+                    if (atomesPlaces >= atomesRequis[symbole]) {
+                        alert(`❌ Tu as déjà placé ${atomesRequis[symbole]} atome(s) de type ${symbole}.`);
+                        return;
+                    }
+
+                    // Vérifier que c'est pas trop près d'un autre atome
+                    const rayon = 20;
+                    for (let atome of this.atomes) {
+                        const dist = Math.sqrt((x - atome.x) ** 2 + (y - atome.y) ** 2);
+                        if (dist < rayon * 2.5) {
+                            alert('❌ Deux atomes ne peuvent pas être trop proches.');
+                            return;
+                        }
+                    }
+
+                    this.atomes.push({
+                        symbole,
+                        x,
+                        y,
+                        rayon: 20,
+                        id: Date.now() + Math.random()
+                    });
+
+                    this.dessiner();
+                },
+
+                gererClicCanvas(e) {
+                    const rect = this.canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    if (this.modeConstruction === 'atome') {
+                        // Pas de clic en mode placement
+                        return;
+                    }
+
+                    if (this.modeConstruction === 'liaison') {
+                        const atomeClique = this.obtenirAtomeAPosition(x, y);
+
+                        if (atomeClique) {
+                            if (!this.liaisonEnCours) {
+                                // Premier atome de la liaison
+                                this.liaisonEnCours = { atome1: atomeClique };
+                                this.dessiner();
+                            } else if (this.liaisonEnCours.atome1.id !== atomeClique.id) {
+                                // Deuxième atome de la liaison
+                                const existe = this.liaisons.find(l =>
+                                    (l.atome1.id === this.liaisonEnCours.atome1.id && l.atome2.id === atomeClique.id) ||
+                                    (l.atome1.id === atomeClique.id && l.atome2.id === this.liaisonEnCours.atome1.id)
+                                );
+
+                                if (existe) {
+                                    // Augmenter la multiplicité
+                                    existe.multiplicite = (existe.multiplicite % 3) + 1;
+                                } else {
+                                    // Créer la liaison
+                                    this.liaisons.push({
+                                        atome1: this.liaisonEnCours.atome1,
+                                        atome2: atomeClique,
+                                        multiplicite: 1,
+                                        id: Date.now() + Math.random()
+                                    });
+                                }
+
+                                this.liaisonEnCours = null;
+                                this.dessiner();
+                            } else {
+                                // Clic sur le même atome : annuler
+                                this.liaisonEnCours = null;
+                                this.dessiner();
+                            }
+                        } else {
+                            // Clic sur une liaison
+                            const liaisonCliquee = this.obtenirLiaisonAPosition(x, y);
+                            if (liaisonCliquee) {
+                                liaisonCliquee.multiplicite = (liaisonCliquee.multiplicite % 3) + 1;
+                                this.dessiner();
+                            } else {
+                                this.liaisonEnCours = null;
+                                this.dessiner();
+                            }
+                        }
+                    }
+                },
+
+                gererSourisCanvas(e) {
+                    if (this.modeConstruction !== 'liaison' || !this.liaisonEnCours) return;
+
+                    const rect = this.canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    // Redessiner avec la liaison fantôme
+                    this.dessiner();
+
+                    // Tracer une ligne du premier atome à la souris
+                    this.ctx.strokeStyle = 'rgba(83, 164, 219, 0.5)';
+                    this.ctx.lineWidth = 2;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(this.liaisonEnCours.atome1.x, this.liaisonEnCours.atome1.y);
+                    this.ctx.lineTo(x, y);
+                    this.ctx.stroke();
+                },
+
+                obtenirAtomeAPosition(x, y) {
+                    return this.atomes.find(a => {
+                        const dist = Math.sqrt((x - a.x) ** 2 + (y - a.y) ** 2);
+                        return dist <= a.rayon + 5;
+                    });
+                },
+
+                obtenirLiaisonAPosition(x, y) {
+                    for (let liaison of this.liaisons) {
+                        // Vérifier si (x, y) est près d'un segment
+                        const dist = this.distancePointSegment(x, y, liaison.atome1.x, liaison.atome1.y, liaison.atome2.x, liaison.atome2.y);
+                        if (dist <= 10) {
+                            return liaison;
+                        }
+                    }
+                    return null;
+                },
+
+                distancePointSegment(px, py, x1, y1, x2, y2) {
+                    const A = px - x1;
+                    const B = py - y1;
+                    const C = x2 - x1;
+                    const D = y2 - y1;
+
+                    const dot = A * C + B * D;
+                    const lenSq = C * C + D * D;
+                    let param = -1;
+                    if (lenSq !== 0) param = dot / lenSq;
+
+                    let xx, yy;
+                    if (param < 0) {
+                        xx = x1;
+                        yy = y1;
+                    } else if (param > 1) {
+                        xx = x2;
+                        yy = y2;
+                    } else {
+                        xx = x1 + param * C;
+                        yy = y1 + param * D;
+                    }
+
+                    const dx = px - xx;
+                    const dy = py - yy;
+                    return Math.sqrt(dx * dx + dy * dy);
+                },
+
+                dessiner() {
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                    // Tracer les liaisons
+                    this.liaisons.forEach(liaison => {
+                        this.dessinerLiaison(liaison);
+                    });
+
+                    // Tracer les atomes
+                    this.atomes.forEach(atome => {
+                        this.dessinerAtome(atome);
+                    });
+
+                    // Affichage de la liaison en cours
+                    if (this.liaisonEnCours) {
+                        this.ctx.fillStyle = 'rgba(83, 164, 219, 0.3)';
+                        this.ctx.beginPath();
+                        this.ctx.arc(this.liaisonEnCours.atome1.x, this.liaisonEnCours.atome1.y, this.liaisonEnCours.atome1.rayon + 3, 0, Math.PI * 2);
+                        this.ctx.fill();
+                    }
+                },
+
+                dessinerAtome(atome) {
+                    const couleur = CONFIG.couleursAtomes[atome.symbole] || '#999';
+
+                    // Cercle rempli
+                    this.ctx.fillStyle = couleur;
+                    this.ctx.beginPath();
+                    this.ctx.arc(atome.x, atome.y, atome.rayon, 0, Math.PI * 2);
+                    this.ctx.fill();
+
+                    // Bordure
+                    this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+                    this.ctx.lineWidth = 2;
+                    this.ctx.stroke();
+
+                    // Texte (symbole)
+                    this.ctx.fillStyle = atome.symbole === 'H' || atome.symbole === 'S' ? '#000' : '#fff';
+                    this.ctx.font = 'bold 14px Arial';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.textBaseline = 'middle';
+                    this.ctx.fillText(atome.symbole, atome.x, atome.y);
+                },
+
+                dessinerLiaison(liaison) {
+                    const x1 = liaison.atome1.x;
+                    const y1 = liaison.atome1.y;
+                    const x2 = liaison.atome2.x;
+                    const y2 = liaison.atome2.y;
+
+                    // Décalage pour les liaisons multiples
+                    const dx = x2 - x1;
+                    const dy = y2 - y1;
+                    const len = Math.sqrt(dx * dx + dy * dy);
+                    const perpX = -dy / len;
+                    const perpY = dx / len;
+
+                    this.ctx.strokeStyle = '#494949';
+                    this.ctx.lineWidth = 2;
+
+                    if (liaison.multiplicite === 1) {
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(x1, y1);
+                        this.ctx.lineTo(x2, y2);
+                        this.ctx.stroke();
+                    } else if (liaison.multiplicite === 2) {
+                        const offset = 5;
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(x1 + perpX * offset, y1 + perpY * offset);
+                        this.ctx.lineTo(x2 + perpX * offset, y2 + perpY * offset);
+                        this.ctx.stroke();
+
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(x1 - perpX * offset, y1 - perpY * offset);
+                        this.ctx.lineTo(x2 - perpX * offset, y2 - perpY * offset);
+                        this.ctx.stroke();
+                    } else if (liaison.multiplicite === 3) {
+                        const offset = 7;
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(x1, y1);
+                        this.ctx.lineTo(x2, y2);
+                        this.ctx.stroke();
+
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(x1 + perpX * offset, y1 + perpY * offset);
+                        this.ctx.lineTo(x2 + perpX * offset, y2 + perpY * offset);
+                        this.ctx.stroke();
+
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(x1 - perpX * offset, y1 - perpY * offset);
+                        this.ctx.lineTo(x2 - perpX * offset, y2 - perpY * offset);
+                        this.ctx.stroke();
+                    }
+                },
+
+                basculerMode() {
+                    if (this.modeConstruction === 'atome') {
+                        this.modeConstruction = 'liaison';
+                        document.getElementById('mode-liaison-display').classList.add('actif');
+                        document.getElementById('mode-liaison-display').innerHTML = 'Mode: <strong>Création de liaisons</strong>';
+                    } else {
+                        this.modeConstruction = 'atome';
+                        document.getElementById('mode-liaison-display').classList.remove('actif');
+                        document.getElementById('mode-liaison-display').innerHTML = 'Mode: <strong>Placement d\'atomes</strong>';
+                        this.liaisonEnCours = null;
+                    }
+                    this.dessiner();
+                },
+
+                effacerTout() {
+                    if (confirm('Êtes-vous sûr ? Cela effacera tous les atomes et liaisons.')) {
+                        this.atomes = [];
+                        this.liaisons = [];
+                        this.liaisonEnCours = null;
+                        this.modeConstruction = 'atome';
+                        document.getElementById('mode-liaison-display').classList.remove('actif');
+                        document.getElementById('mode-liaison-display').innerHTML = 'Mode: <strong>Placement d\'atomes</strong>';
+                        this.dessiner();
+                    }
+                },
+
+                reinitialiser() {
+                    this.initialiser();
+                }
+            }
+        };
+
+        /* ===== FONCTION AFFICHAGE ERREUR ===== */
+        function afficherErreur(message) {
+            const app = document.getElementById('app');
+            const div = document.createElement('div');
+            div.className = 'erreur';
+            div.textContent = message;
+            app.insertBefore(div, app.querySelector('main'));
+        }
+
+        /* ===== INITIALISATION AU CHARGEMENT ===== */
+        document.addEventListener('DOMContentLoaded', async () => {
+            const success = await utils.chargerMolecules();
+            if (success) {
+                activites.associer.initialiser();
+            }
+        });
+    </script>
+</body>
+</html>
